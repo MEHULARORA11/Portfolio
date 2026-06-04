@@ -6,26 +6,33 @@ import 'dotenv/config'
 
 
 // SMTP transporter — works with Mailtrap, Gmail, SendGrid, or any SMTP provider
+import nodemailer from "nodemailer";
+import 'dotenv/config';
+
+// SMTP transporter — works with Mailtrap, Gmail, SendGrid, or any SMTP provider
 const transporter = nodemailer.createTransport({
-  // 1. Hardcode the host string directly here to force proper DNS resolution
-  host: 'smtp.gmail.com', 
+  // 1. Pass the direct IPv4 address for smtp.gmail.com instead of the domain name
+  host: '74.125.142.108', 
   port: 465,
   secure: true, 
-
-  // 2. This strict custom lookup will now successfully force IPv4
-  lookup: (hostname, options, callback) => {
-    options.family = 4; 
-    return dns.lookup(hostname, options, callback);
-  },
 
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 
-  connectionTimeout: 15000,
-  greetingTimeout: 15000,
-  socketTimeout: 10000,
+  // Tells Nodemailer explicitly that this is an IPv4 string address
+  family: 4, 
+
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
+  socketTimeout: 20000,
+  
+  tls: {
+    // 2. Crucial: Tell the TLS handshake to expect gmail's SSL certificate name
+    servername: 'smtp.gmail.com',
+    rejectUnauthorized: false
+  }
 });
 
 
