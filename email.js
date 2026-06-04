@@ -1,21 +1,28 @@
 import nodemailer from "nodemailer";
+import dns from "node:dns"; // 1. Import the built-in Node DNS module
 import 'dotenv/config' 
 
 // SMTP transporter — works with Mailtrap, Gmail, SendGrid, or any SMTP provider
+
+
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
   port: parseInt(process.env.SMTP_PORT, 10) || 465,
-  secure: true,
+  secure: true, 
+
+  // 2. Add this strict custom lookup to force IPv4
+  lookup: (hostname, options, callback) => {
+    options.family = 4; 
+    return dns.lookup(hostname, options, callback);
+  },
 
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 
-  family: 4,
-
   connectionTimeout: 15000,
-  greetingTimeout:15000,
+  greetingTimeout: 15000,
   socketTimeout: 10000,
 });
 transporter.verify((error, success) => {
