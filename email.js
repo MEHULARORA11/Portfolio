@@ -4,7 +4,7 @@ import 'dotenv/config'
 // SMTP transporter — works with Mailtrap, Gmail, SendGrid, or any SMTP provider
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
+  port: parseInt(process.env.SMTP_PORT, 10) || 465,
   secure: Number(process.env.SMTP_PORT) === 465,
 
   auth: {
