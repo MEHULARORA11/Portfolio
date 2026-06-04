@@ -10,7 +10,6 @@ const transporter = nodemailer.createTransport({
   port: parseInt(process.env.SMTP_PORT, 10) || 465,
   secure: true, 
 
-  // 2. Add this strict custom lookup to force IPv4
   lookup: (hostname, options, callback) => {
     options.family = 4; 
     return dns.lookup(hostname, options, callback);
@@ -21,9 +20,15 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS,
   },
 
-  connectionTimeout: 15000,
-  greetingTimeout: 15000,
-  socketTimeout: 10000,
+  /* ADD THIS BLOCK BELOW */
+  tls: {
+    rejectUnauthorized: false, // Bypasses SSL handshake blocks on hosting containers
+    servername: 'smtp.gmail.com' // Explicitly sets servername to match Gmail's TLS cert
+  },
+
+  connectionTimeout: 20000, // Slightly increase to give the handshake more breathing room
+  greetingTimeout: 20000,
+  socketTimeout: 20000,
 });
 transporter.verify((error, success) => {
   if (error) {
