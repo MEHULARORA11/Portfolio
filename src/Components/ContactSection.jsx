@@ -14,6 +14,7 @@ const ContactSection = () => {
    const email = form.email.value;
    const message = form.message.value;
    if(!name?.trim() || !email?.trim() || !message?.trim()) return
+   console.log(1)
 
    await fetch(`${BASE_URL}/api/post`,{
     method:"POST",
@@ -26,6 +27,7 @@ const ContactSection = () => {
       message
     })
    })
+   console.log(7)
    form.reset()
    alert("Message Sent Successfully !!")
 

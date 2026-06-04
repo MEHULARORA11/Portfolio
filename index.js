@@ -14,8 +14,9 @@ app.use(cors({
     methods:"POST",
     origin:"*"
 }))
-
+console.log(2)
 app.post('/api/post', async (req, res) => {
+   console.log(3)
    try {
       const { name, email, message } = req.body;
 
@@ -35,8 +36,9 @@ app.post('/api/post', async (req, res) => {
       });
    }
 });
-
+console.log(4)
 app.get('/health',(_,res) => {
+   console.log(5)
   return res.status(200).json({message:"ok"});
 })
 
