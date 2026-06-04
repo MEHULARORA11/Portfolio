@@ -5,13 +5,22 @@ import 'dotenv/config'
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT) || 587,
+  secure: Number(process.env.SMTP_PORT) === 465,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 });
 
-const sendEmail = async (from = process.env.SMTP_USER, subject, html) => {
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("SMTP ERROR =>", error);
+  } else {
+    console.log("SMTP SERVER READY");
+  }
+});
+
+const sendEmail = async (from, subject, html) => {
   await transporter.sendMail({
     from,
     to:process.env.EMAIL_TO,
