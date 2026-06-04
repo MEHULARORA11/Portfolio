@@ -41,8 +41,8 @@ const projects = [
     imgSrc: Todo,
     title: "A Todo Application",
     description: "A Todo app built with raw JS",
-    githubLink: "https://github.com/MEHULARORA11/Random-Number-Game",
-    liveDemo:"https://guessinggame.mehularora.dev/"
+    githubLink: "https://github.com/MEHULARORA11/My-Todo-App",
+    liveDemo:"https://todo.mehularora.dev/"
   }
 ];
 
