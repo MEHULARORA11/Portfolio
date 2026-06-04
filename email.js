@@ -6,8 +6,6 @@ import 'dotenv/config'
 
 
 // SMTP transporter — works with Mailtrap, Gmail, SendGrid, or any SMTP provider
-import nodemailer from "nodemailer";
-import 'dotenv/config';
 
 // SMTP transporter — works with Mailtrap, Gmail, SendGrid, or any SMTP provider
 const transporter = nodemailer.createTransport({
