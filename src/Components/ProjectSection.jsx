@@ -11,7 +11,7 @@ import TailwindCSS from "../assets/TailwindCSS.png";
 const projects = [
   {
     imgSrc: Million_Checkboxes,
-    title: "Stack = JS,Redis",
+    title: "1 Million Checkboxes",
     description: "A Full stack App , Scaled smoothly to 1 Million Checkbox",
     githubLink: "https://github.com/MEHULARORA11/1-Million-CheckBoxes",
     liveDemo:"https://checkboxes.mehularora.dev/"
@@ -25,7 +25,7 @@ const projects = [
   },
   {
     imgSrc: Tick_Tac_Toe,
-    title: "Built using raw Css and Js",
+    title: "Tic Tac Toe",
     description: "A Basic Tic Tac Toe built with raw JS",
     githubLink: "https://github.com/MEHULARORA11/Tic-Tac-Toe-Game",
     liveDemo:"https://tic-tac-toe-game-nine-puce.vercel.app/"
