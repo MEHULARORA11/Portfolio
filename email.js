@@ -9,7 +9,7 @@ import 'dotenv/config'
 
 // SMTP transporter — works with Mailtrap, Gmail, SendGrid, or any SMTP provider
 const transporter = nodemailer.createTransport({
-  host: "smtp.example.com", // your email provider's SMTP host
+  host: "smtp.gmail.com", // your email provider's SMTP host
   port: 587,                // Use 587
   secure: false,            // false for 587, true for 465
   auth: {
