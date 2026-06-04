@@ -46,13 +46,11 @@ const ContactSection = () => {
           </h1>
           <div className="flex flex-col gap-2">
             <a
-              href="mailto:pranjalsoni484@gmail.com"
               className="text-white font-mono underline text-lg lg:text-2xl"
             >
               mehularora505@gmail.com
             </a>
             <a
-              href="tel:+918085444188"
               className="text-white font-mono underline text-lg lg:text-2xl"
             >
               +91 7428894788
