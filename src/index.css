@@ -4,50 +4,281 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Emerald Nebula (Dark) ─── */
+:root,
+[data-theme="dark"] {
+  --bg-gradient: radial-gradient(ellipse at 20% 0%, #0a2e1f 0%, #03140e 42%, #010a06 100%);
+  --text-primary: #ecfdf5;
+  --text-secondary: #a7f3d0;
+  --text-muted: #6ee7b7;
+  --text-label: #86efac;
+  --gradient-text-from: #6ee7b7;
+  --gradient-text-to: #10b981;
+  --card-bg: rgba(6, 78, 59, 0.22);
+  --card-border: rgba(16, 185, 129, 0.18);
+  --card-hover-bg: rgba(6, 78, 59, 0.38);
+  --card-hover-border: rgba(52, 211, 153, 0.38);
+  --card-shadow: 0 0 40px rgba(0, 0, 0, 0.45);
+  --card-hover-shadow: 0 0 55px rgba(16, 185, 129, 0.22);
+  --accent: #10b981;
+  --accent-light: #34d399;
+  --accent-dark: #059669;
+  --accent-muted: rgba(16, 185, 129, 0.14);
+  --accent-border: rgba(16, 185, 129, 0.28);
+  --accent-glow: rgba(16, 185, 129, 0.42);
+  --accent-glow-soft: rgba(16, 185, 129, 0.16);
+  --highlight-text: #6ee7b7;
+  --highlight-glow: rgba(52, 211, 153, 0.55);
+  --button-bg: #10b981;
+  --button-hover: #059669;
+  --button-text: #042f1a;
+  --button-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
+  --button-shadow-hover: 0 4px 28px rgba(16, 185, 129, 0.5);
+  --input-bg: rgba(6, 78, 59, 0.18);
+  --input-border: rgba(16, 185, 129, 0.16);
+  --input-focus-border: #34d399;
+  --input-focus-bg: rgba(6, 78, 59, 0.3);
+  --input-focus-shadow: 0 0 18px rgba(16, 185, 129, 0.22);
+  --input-placeholder: rgba(134, 239, 172, 0.38);
+  --overlay: rgba(1, 10, 6, 0.58);
+  --divider: rgba(16, 185, 129, 0.14);
+  --icon-float: rgba(236, 253, 245, 0.07);
+  --scrollbar-thumb: #047857;
+  --shadow-color: rgba(16, 185, 129, 0.3);
+  --toggle-track: rgba(4, 47, 26, 0.55);
+  --toggle-thumb: #10b981;
+  --toggle-text: #86efac;
+  --toggle-text-active: #042f1a;
+  --arrow-color: #34d399;
+  --name-glow: rgba(52, 211, 153, 0.38);
+  --shimmer: rgba(52, 211, 153, 0.08);
+}
+
+/* ─── Sage Mist (Light — soft botanical green, not white) ─── */
+[data-theme="light"] {
+  --bg-gradient: radial-gradient(ellipse at 75% 5%, #eef8f1 0%, #d8ede2 38%, #c2dfd0 100%);
+  --text-primary: #063c2e;
+  --text-secondary: #0b6c53;
+  --text-muted: #1a6b57;
+  --text-label: #2d7a62;
+  --gradient-text-from: #0f9b6e;
+  --gradient-text-to: #064e3b;
+  --card-bg: rgba(255, 255, 255, 0.48);
+  --card-border: rgba(11, 108, 83, 0.2);
+  --card-hover-bg: rgba(255, 255, 255, 0.72);
+  --card-hover-border: rgba(11, 108, 83, 0.38);
+  --card-shadow: 0 8px 32px rgba(6, 60, 46, 0.09);
+  --card-hover-shadow: 0 14px 44px rgba(11, 108, 83, 0.16);
+  --accent: #0b6c53;
+  --accent-light: #10b981;
+  --accent-dark: #064e3b;
+  --accent-muted: rgba(11, 108, 83, 0.1);
+  --accent-border: rgba(11, 108, 83, 0.22);
+  --accent-glow: rgba(11, 108, 83, 0.28);
+  --accent-glow-soft: rgba(11, 108, 83, 0.1);
+  --highlight-text: #0b6c53;
+  --highlight-glow: rgba(11, 108, 83, 0.28);
+  --button-bg: #0b6c53;
+  --button-hover: #064e3b;
+  --button-text: #f0fdf4;
+  --button-shadow: 0 4px 20px rgba(11, 108, 83, 0.22);
+  --button-shadow-hover: 0 4px 28px rgba(11, 108, 83, 0.36);
+  --input-bg: rgba(255, 255, 255, 0.55);
+  --input-border: rgba(11, 108, 83, 0.16);
+  --input-focus-border: #0b6c53;
+  --input-focus-bg: rgba(255, 255, 255, 0.82);
+  --input-focus-shadow: 0 0 18px rgba(11, 108, 83, 0.14);
+  --input-placeholder: rgba(45, 122, 98, 0.42);
+  --overlay: rgba(6, 60, 46, 0.38);
+  --divider: rgba(11, 108, 83, 0.12);
+  --icon-float: rgba(6, 60, 46, 0.055);
+  --scrollbar-thumb: #6ee7b7;
+  --shadow-color: rgba(11, 108, 83, 0.16);
+  --toggle-track: rgba(194, 223, 208, 0.85);
+  --toggle-thumb: #0b6c53;
+  --toggle-text: #2d7a62;
+  --toggle-text-active: #f0fdf4;
+  --arrow-color: #0b6c53;
+  --name-glow: rgba(11, 108, 83, 0.22);
+  --shimmer: rgba(11, 108, 83, 0.06);
+}
+
 * {
   scroll-behavior: smooth;
   font-family: 'Gabarito', sans-serif;
 }
+
+html {
+  transition: background 0.6s ease, color 0.4s ease;
+}
+
 body {
-  background-image: url("assets/bg2.png");
+  background: var(--bg-gradient);
   background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  color: var(--text-primary);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition: background 0.6s ease, color 0.4s ease;
 }
 
-.portfolio-card {
-  background-color: rgba(128, 128, 128, 0.173);
-}
-
+/* ─── Typography ─── */
 .gradient-text {
-  background: linear-gradient(white, rgba(134, 78, 173));
+  background: linear-gradient(to right, var(--gradient-text-from), var(--gradient-text-to));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.progress-bar::-webkit-progress-bar {
-  border-radius: 15px;
-  border: 1px solid gray;
-  background-color: transparent;
+.theme-text {
+  color: var(--text-primary);
 }
 
-.progress-bar::-webkit-progress-value {
-  border-radius: 15px;
-  background: linear-gradient(to right, violet, yellow);
+.theme-text-secondary {
+  color: var(--text-secondary);
 }
 
+.theme-text-muted {
+  color: var(--text-muted);
+}
+
+.theme-text-label {
+  color: var(--text-label);
+}
+
+.theme-highlight {
+  color: var(--highlight-text);
+  filter: drop-shadow(0 0 18px var(--highlight-glow));
+}
+
+/* ─── Glass cards ─── */
+.glass-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.glass-card:hover {
+  background-color: var(--card-hover-bg);
+  border-color: var(--card-hover-border);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.theme-divider {
+  border-color: var(--divider);
+}
+
+/* ─── Form elements ─── */
+.theme-input {
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.theme-input:focus {
+  outline: none;
+  background-color: var(--input-focus-bg);
+  border-color: var(--input-focus-border);
+  box-shadow: var(--input-focus-shadow);
+}
+
+/* ─── Buttons ─── */
+.theme-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  box-shadow: var(--button-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.theme-btn:hover {
+  background-color: var(--button-hover);
+  box-shadow: var(--button-shadow-hover);
+}
+
+.theme-icon-btn {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.theme-icon-btn:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--button-text);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+/* ─── Badges & pills ─── */
+.theme-badge {
+  background-color: var(--accent-muted);
+  color: var(--accent-light);
+  border: 1px solid var(--accent-border);
+}
+
+.theme-pill {
+  background-color: var(--accent-muted);
+  color: var(--highlight-text);
+  border: 1px solid var(--accent-border);
+}
+
+/* ─── Skill / project card shimmer ─── */
+.theme-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, transparent, var(--shimmer), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.theme-shimmer:hover::before {
+  opacity: 1;
+}
+
+/* ─── Scrollbar ─── */
 .scroll-bar::-webkit-scrollbar {
   width: 5px;
   background-color: transparent;
 }
 
 .scroll-bar::-webkit-scrollbar-thumb {
-  background-color: rgba(134, 78, 173);
+  background-color: var(--scrollbar-thumb);
   border-radius: 20px;
 }
 
 .scroll-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* ─── Theme toggle animations ─── */
+@keyframes themePulse {
+  0%, 100% { box-shadow: 0 0 12px var(--shadow-color); }
+  50% { box-shadow: 0 0 22px var(--accent-glow); }
+}
+
+.theme-icon-box {
+  background-color: var(--accent-muted);
+  color: var(--accent-light);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.group:hover .theme-icon-box {
+  background-color: var(--accent);
+  color: var(--button-text);
+  transform: scale(1.05);
+}
+
+.theme-toggle-glow {
+  animation: themePulse 3s ease-in-out infinite;
 }

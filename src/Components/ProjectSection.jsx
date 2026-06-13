@@ -68,7 +68,6 @@ const ProjectSection = () => {
         My Projects
       </h1>
 
-      {/* PROJECTS */}
       <div
         ref={scrollRef}
         className="
@@ -86,22 +85,22 @@ const ProjectSection = () => {
         ))}
       </div>
 
-      {/* ARROWS */}
       <div className="flex justify-center items-center gap-4 mt-6 select-none">
         <HiArrowSmLeft
           onClick={hScrollLeft}
-          className="text-2xl lg:text-3xl cursor-pointer text-yellow-500 hidden md:block animate-[pulse_2s_infinite]"
+          className="text-2xl lg:text-3xl cursor-pointer hidden md:block animate-[pulse_2s_infinite] transition-colors duration-300 hover:opacity-80"
+          style={{ color: "var(--arrow-color)" }}
         />
         <h2 className="gradient-text font-mono text-lg uppercase">
           Slide for more
         </h2>
         <HiArrowSmRight
           onClick={hScrollRight}
-          className="text-2xl lg:text-3xl cursor-pointer text-yellow-500 hidden md:block animate-[pulse_2s_infinite]"
+          className="text-2xl lg:text-3xl cursor-pointer hidden md:block animate-[pulse_2s_infinite] transition-colors duration-300 hover:opacity-80"
+          style={{ color: "var(--arrow-color)" }}
         />
       </div>
 
-      {/* INLINE STYLE FOR SCROLLBAR */}
       <style>{`
         div::-webkit-scrollbar {
           display: none;

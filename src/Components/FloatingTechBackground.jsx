@@ -39,7 +39,8 @@ const FloatingTechBackground = () => {
           <Icon
             key={index}
             size={size}
-            className="absolute text-white/20 drop-shadow-md animate-floatTech"
+            className="absolute drop-shadow-md animate-floatTech"
+            color="var(--icon-float)"
             style={{
               left: `${left}%`,
               top: `${top}%`,

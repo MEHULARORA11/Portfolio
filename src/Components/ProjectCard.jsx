@@ -1,21 +1,21 @@
 import React from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { HiGlobeAlt } from "react-icons/hi";
-import { 
-  FaReact, 
-  FaNodeJs, 
-  FaHtml5, 
-  FaCss3Alt, 
-  FaDatabase, 
-  FaCode 
+import {
+  FaReact,
+  FaNodeJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaDatabase,
+  FaCode,
 } from "react-icons/fa";
-import { 
-  SiMongodb, 
-  SiExpress, 
-  SiJavascript, 
-  SiRedis, 
+import {
+  SiMongodb,
+  SiExpress,
+  SiJavascript,
+  SiRedis,
   SiNpm,
-  SiSocketdotio
+  SiSocketdotio,
 } from "react-icons/si";
 
 const techDetails = {
@@ -29,7 +29,7 @@ const techDetails = {
   },
   express: {
     icon: SiExpress,
-    bg: "hover:bg-white/10 hover:text-white hover:border-white/40 hover:shadow-[0_0_12px_rgba(255,255,255,0.1)]",
+    bg: "hover:bg-[var(--accent-muted)] hover:text-[var(--accent-light)] hover:border-[var(--accent-border)] hover:shadow-[0_0_12px_var(--accent-glow-soft)]",
   },
   redis: {
     icon: SiRedis,
@@ -60,14 +60,12 @@ const techDetails = {
 const ProjectCard = ({ imgSrc, title, description, githubLink, liveDemo, techStack }) => {
   return (
     <div className="p-4 flex-shrink-0">
-      <div className="group h-full w-[280px] sm:w-[300px] md:w-[320px] bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden
-     shadow-lg hover:shadow-[0_0_30px_rgba(168,85,247,0.25)] hover:border-purple-500/30 transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between">
-        
-        {/* Card Header / Image container with Hover zoom */}
-        <a 
-          href={githubLink || liveDemo || "#"} 
-          target="_blank" 
-          rel="noopener noreferrer" 
+      <div className="group h-full w-[280px] sm:w-[300px] md:w-[320px] glass-card rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between">
+
+        <a
+          href={liveDemo || githubLink || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
           className="block overflow-hidden h-44 sm:h-48 relative"
         >
           <img
@@ -75,40 +73,43 @@ const ProjectCard = ({ imgSrc, title, description, githubLink, liveDemo, techSta
             alt={title}
             className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <span className="text-white text-xs font-semibold px-4 py-1.5 rounded-full bg-purple-600/80 border border-purple-400/30 backdrop-blur-sm shadow-md transition-all duration-300 hover:scale-105">
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+            style={{ backgroundColor: "var(--overlay)" }}
+          >
+            <span className="theme-btn text-xs font-semibold px-4 py-1.5 rounded-full border backdrop-blur-sm transition-all duration-300 hover:scale-105"
+              style={{ borderColor: "var(--accent-border)" }}
+            >
               View Project
             </span>
           </div>
         </a>
 
-        {/* Card Body */}
         <div className="p-5 flex flex-col flex-grow gap-2 justify-between">
           <div className="flex flex-col gap-2">
-            <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors duration-300">
+            <h2 className="text-xl sm:text-2xl font-bold theme-text group-hover:text-[var(--accent-light)] transition-colors duration-300">
               {title}
             </h2>
-            <p className="text-sm text-gray-300 leading-relaxed line-clamp-3">
+            <p className="text-sm theme-text-secondary leading-relaxed line-clamp-3">
               {description}
             </p>
           </div>
 
-          {/* Premium & Interactive Tech Stack Badges */}
           {techStack && techStack.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4 select-none group/techs">
               {techStack.map((tech, idx) => {
                 const normTech = tech.trim().toLowerCase();
                 const details = techDetails[normTech] || {
                   icon: FaCode,
-                  bg: "hover:bg-purple-500/10 hover:text-purple-300 hover:border-purple-500/40 hover:shadow-[0_0_12px_rgba(168,85,247,0.2)]",
+                  bg: "hover:bg-[var(--accent-muted)] hover:text-[var(--accent-light)] hover:border-[var(--accent-border)] hover:shadow-[0_0_12px_var(--accent-glow-soft)]",
                 };
-                
+
                 const IconComp = details.icon || FaCode;
-                
+
                 return (
-                  <span 
-                    key={idx} 
-                    className={`inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full border border-white/10 text-gray-300 bg-white/5 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-md cursor-default group-hover/techs:opacity-50 hover:!opacity-100 ${details.bg}`}
+                  <span
+                    key={idx}
+                    className={`inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full border theme-text-muted glass-card transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-md cursor-default group-hover/techs:opacity-50 hover:!opacity-100 ${details.bg}`}
                   >
                     <IconComp className="text-xs sm:text-sm" />
                     <span>{tech}</span>
@@ -118,25 +119,24 @@ const ProjectCard = ({ imgSrc, title, description, githubLink, liveDemo, techSta
             </div>
           )}
 
-          {/* Footer Action Buttons */}
-          <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
+          <div className="flex items-center gap-3 mt-4 pt-4 border-t theme-divider">
             {githubLink && (
-              <a 
-                href={githubLink} 
-                target="_blank" 
+              <a
+                href={githubLink}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white text-xl hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all duration-300 hover:shadow-[0_0_10px_rgba(168,85,247,0.4)]"
+                className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-xl hover:-translate-y-0.5"
                 title="GitHub Repository"
               >
                 <AiFillGithub />
               </a>
             )}
             {liveDemo && (
-              <a 
-                href={liveDemo} 
-                target="_blank" 
+              <a
+                href={liveDemo}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white text-lg hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all duration-300 hover:shadow-[0_0_10px_rgba(168,85,247,0.4)]"
+                className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-lg hover:-translate-y-0.5"
                 title="Live Demo"
               >
                 <HiGlobeAlt />

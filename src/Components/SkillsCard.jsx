@@ -18,8 +18,9 @@ import {
 const skillDetails = {
   redis: {
     icon: SiRedis,
-    color: "text-[#D82C20]",
-    glow: "hover:shadow-[0_0_20px_rgba(216,44,32,0.45)] hover:border-[#D82C20]/40",
+    color: "text-[#DC382D]",
+
+glow: "hover:shadow-[0_0_20px_rgba(220,56,45,0.45)] hover:border-[#DC382D]/40",
   },
   reactjs: {
     icon: FaReact,
@@ -28,8 +29,8 @@ const skillDetails = {
   },
   express: {
     icon: SiExpress,
-    color: "text-white/80",
-    glow: "hover:shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:border-white/40",
+    color: "text-[var(--text-secondary)]",
+    glow: "hover:shadow-[0_0_20px_var(--accent-glow-soft)] hover:border-[var(--accent-border)]",
   },
   nodejs: {
     icon: FaNodeJs,
@@ -77,25 +78,22 @@ const SkillsCard = ({ title }) => {
   const normTitle = title.trim().toLowerCase();
   const detail = skillDetails[normTitle] || {
     icon: FaDatabase,
-    color: "text-[#A855F7]",
-    glow: "hover:shadow-[0_0_20px_rgba(168,85,247,0.45)] hover:border-[#A855F7]/40",
+    color: "text-[var(--accent-light)]",
+    glow: "hover:shadow-[0_0_20px_var(--accent-glow)] hover:border-[var(--accent-border)]",
   };
 
   const IconComponent = detail.icon;
 
   return (
     <div
-      className={`group relative flex items-center gap-4 p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 transition-all duration-300 hover:-translate-y-1.5 ${detail.glow} overflow-hidden`}
+      className={`group theme-shimmer relative flex items-center gap-4 p-4 rounded-2xl glass-card transition-all duration-300 hover:-translate-y-1.5 ${detail.glow} overflow-hidden`}
     >
-      {/* Light ray/glow effect inside card */}
-      <div className="absolute -inset-px bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
-
       <div className="relative z-10 flex-shrink-0">
         <IconComponent className={`text-4xl ${detail.color} transition-transform duration-300 group-hover:scale-110`} />
       </div>
 
       <div className="relative z-10">
-        <h3 className="font-bold text-lg text-white group-hover:text-purple-300 transition-colors duration-300">
+        <h3 className="font-bold text-lg theme-text group-hover:text-[var(--accent-light)] transition-colors duration-300">
           {title}
         </h3>
       </div>
