@@ -1,51 +1,43 @@
 import React from "react";
-import { FiSun, FiMoon, FiFeather } from "react-icons/fi";
+import { FiSun, FiMoon } from "react-icons/fi";
 
 const ThemeToggle = ({ theme, onToggle }) => {
   const isDark = theme === "dark";
 
   return (
-    <div className="fixed top-6 right-6 z-50 flex flex-col items-end gap-2">
+    <div className="fixed top-3 right-3 sm:top-6 sm:right-6 z-50 flex flex-col items-end gap-2">
       <button
         onClick={onToggle}
-        className="theme-toggle-glow relative flex items-center gap-1 p-1.5 rounded-full cursor-pointer select-none"
+        className="theme-toggle-glow relative flex items-center gap-1 p-1 sm:p-1.5 rounded-full cursor-pointer select-none"
         style={{
           backgroundColor: "var(--toggle-track)",
           border: "1px solid var(--card-border)",
           backdropFilter: "blur(14px)",
         }}
       >
-        {/* Sliding thumb */}
         <span
-          className="absolute top-1.5 bottom-1.5 w-[calc(50%-4px)] rounded-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+          className="absolute top-1 bottom-1 sm:top-1.5 sm:bottom-1.5 w-[calc(50%-3px)] sm:w-[calc(50%-4px)] rounded-full transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
           style={{
-            left: isDark ? "6px" : "calc(50% + 2px)",
+            left: isDark ? "4px" : "calc(50% + 1px)",
             backgroundColor: "var(--toggle-thumb)",
             boxShadow: "0 2px 12px var(--accent-glow)",
           }}
         />
 
-        {/* Dark option */}
         <span
-          className="relative z-10 flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-colors duration-400"
+          className="relative z-10 flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors duration-400"
           style={{ color: isDark ? "var(--toggle-text-active)" : "var(--toggle-text)" }}
         >
-          <FiMoon className="text-sm" />
-          <span className="hidden sm:inline">Dark</span>
+          <FiMoon className="text-xs sm:text-sm" />
         </span>
 
-        {/* Light option */}
         <span
-          className="relative z-10 flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-colors duration-400"
+          className="relative z-10 flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors duration-400"
           style={{ color: !isDark ? "var(--toggle-text-active)" : "var(--toggle-text)" }}
         >
-          <FiSun className="text-sm" />
-          <span className="hidden sm:inline">Light</span>
+          <FiSun className="text-xs sm:text-sm" />
         </span>
       </button>
-
-      {/* Theme label */}
-
     </div>
   );
 };

@@ -21,17 +21,16 @@ const techIcons = [
 ];
 
 const FloatingTechBackground = () => {
-  // Generate random positions avoiding overlap at edges
   const generatePosition = () => ({
-    left: Math.random() * 90 + 5, // 5% to 95%
-    top: Math.random() * 90 + 5,  // 5% to 95%
-    size: Math.floor(Math.random() * 25) + 25, // size between 25-50
-    duration: Math.random() * 10 + 15, // 15s to 25s
-    delay: Math.random() * 5, // stagger animation
+    left: Math.random() * 80 + 5, // 5% to 85%, keeps icons off the right edge
+    top: Math.random() * 80 + 5,  // 5% to 85%, keeps icons off the bottom edge
+    size: Math.floor(Math.random() * 25) + 25,
+    duration: Math.random() * 10 + 15,
+    delay: Math.random() * 5,
   });
 
   return (
-    <div className="absolute inset-0 overflow-hidden -z-10">
+    <div className="fixed inset-0 overflow-hidden -z-10 pointer-events-none">
       {techIcons.map((Icon, index) => {
         const { left, top, size, duration, delay } = generatePosition();
 
@@ -51,24 +50,13 @@ const FloatingTechBackground = () => {
         );
       })}
 
-      {/* Animation */}
       <style>{`
         @keyframes floatTech {
-          0% {
-            transform: translateY(0) translateX(0) rotate(0deg);
-          }
-          25% {
-            transform: translateY(-20px) translateX(10px) rotate(15deg);
-          }
-          50% {
-            transform: translateY(-40px) translateX(20px) rotate(0deg);
-          }
-          75% {
-            transform: translateY(-20px) translateX(10px) rotate(-15deg);
-          }
-          100% {
-            transform: translateY(0) translateX(0) rotate(0deg);
-          }
+          0% { transform: translateY(0) translateX(0) rotate(0deg); }
+          25% { transform: translateY(-20px) translateX(10px) rotate(15deg); }
+          50% { transform: translateY(-40px) translateX(20px) rotate(0deg); }
+          75% { transform: translateY(-20px) translateX(10px) rotate(-15deg); }
+          100% { transform: translateY(0) translateX(0) rotate(0deg); }
         }
 
         .animate-floatTech {
@@ -77,7 +65,7 @@ const FloatingTechBackground = () => {
 
         @media (max-width: 768px) {
           .animate-floatTech {
-            transform: scale(0.8); /* scale down icons on smaller screens */
+            opacity: 0.6;
           }
         }
       `}</style>
