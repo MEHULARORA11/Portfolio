@@ -8,6 +8,12 @@ export default function App() {
   });
 
   useEffect(() => {
+  document.body.style.transform = "scale(0.88)";
+  document.body.style.transformOrigin = "top left";
+  document.body.style.width = "113.64%";
+}, []);
+
+  useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("portfolio-theme", theme);
   }, [theme]);
