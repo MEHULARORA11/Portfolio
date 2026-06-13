@@ -14,35 +14,40 @@ const projects = [
     title: "1 Million Checkboxes",
     description: "A Full stack App , Scaled smoothly to 1 Million Checkbox",
     githubLink: "https://github.com/MEHULARORA11/1-Million-CheckBoxes",
-    liveDemo:"https://checkboxes.mehularora.dev/"
+    liveDemo: "https://checkboxes.mehularora.dev/",
+    techStack: ["React", "Node.js", "Express", "Redis", "WebSocket"]
   },
-   {
+  {
     imgSrc: TailwindCSS,
     title: "Custom Tailwind",
     description: "Built My custom Tailwind => 'Talwinder Css'",
     githubLink: "https://github.com/MEHULARORA11/My-Custom-Tailwind",
-    liveDemo:"https://www.npmjs.com/package/talwinder-ji-ki-css"
+    liveDemo: "https://www.npmjs.com/package/talwinder-ji-ki-css",
+    techStack: ["Node.js", "npm", "JavaScript", "CSS"]
   },
   {
     imgSrc: Tick_Tac_Toe,
     title: "Tic Tac Toe",
     description: "A Basic Tic Tac Toe built with raw JS",
     githubLink: "https://github.com/MEHULARORA11/Tic-Tac-Toe-Game",
-    liveDemo:"https://tic-tac-toe-game-nine-puce.vercel.app/"
+    liveDemo: "https://tic-tac-toe-game-nine-puce.vercel.app/",
+    techStack: ["HTML", "CSS", "JavaScript"]
   },
   {
     imgSrc: Guessing_Game,
     title: "Guessing Game",
     description: "A Game which generates random number and asks u to guess it .",
     githubLink: "https://github.com/MEHULARORA11/Random-Number-Game",
-    liveDemo:"https://guessinggame.mehularora.dev/"
+    liveDemo: "https://guessinggame.mehularora.dev/",
+    techStack: ["HTML", "CSS", "JavaScript"]
   },
   {
     imgSrc: Todo,
     title: "A Todo Application",
     description: "A Todo app built with raw JS",
     githubLink: "https://github.com/MEHULARORA11/My-Todo-App",
-    liveDemo:"https://todo.mehularora.dev/"
+    liveDemo: "https://todo.mehularora.dev/",
+    techStack: ["HTML", "CSS", "JavaScript"]
   }
 ];
 
@@ -85,14 +90,14 @@ const ProjectSection = () => {
       <div className="flex justify-center items-center gap-4 mt-6 select-none">
         <HiArrowSmLeft
           onClick={hScrollLeft}
-          className="text-2xl lg:text-3xl cursor-pointer text-yellow-500 hidden md:block"
+          className="text-2xl lg:text-3xl cursor-pointer text-yellow-500 hidden md:block animate-[pulse_2s_infinite]"
         />
         <h2 className="gradient-text font-mono text-lg uppercase">
           Slide for more
         </h2>
         <HiArrowSmRight
           onClick={hScrollRight}
-          className="text-2xl lg:text-3xl cursor-pointer text-yellow-500 hidden md:block"
+          className="text-2xl lg:text-3xl cursor-pointer text-yellow-500 hidden md:block animate-[pulse_2s_infinite]"
         />
       </div>
 
