@@ -224,18 +224,67 @@ export const blogs = [
     date: "Jun 15, 2026",
     readTime: "6 min read",
     description: "An in-depth look at how the React Compiler (React Forget) automatically memoizes hooks, states, and components, optimizing render loops under the hood.",
-    content: `React 19 introduces a revolutionary build-time tool: the React Compiler (previously known as React Forget). For years, React developers have spent hours writing hooks like \`useMemo\` and \`useCallback\` to prevent unnecessary component re-renders. 
+    content: `React 19 introduces a revolutionary build-time tool: the **React Compiler** (previously known as *React Forget*). For years, React developers have spent hours writing hooks like \`useMemo\` and \`useCallback\` to prevent unnecessary component re-renders. 
 
 While manual memoization works, it adds visual clutter, increases code complexity, and is prone to stale dependencies bugs.
 
-### How the React Compiler Works
+## How the React Compiler Works
+
 The compiler operates at the build step (integrating directly with Babel, Vite, or Next.js bundlers). It parses your JavaScript AST (Abstract Syntax Tree) to trace dependency bounds automatically:
+
 1. **Dynamic Dependency Detection**: The compiler determines if values or functions depend on variables in scope.
 2. **Auto-Memoization**: It wraps components and child hierarchies in conditional memo blocks dynamically, injecting code to check values in-memory.
 3. **No Code Overhead**: You write standard JavaScript. No hooks needed.
 
-### Is useMemo Dead?
-In 95% of use-cases, yes. The compiler does a far better job of determining optimal memoization strategies than humans. However, explicit memoization remains useful for heavy computational filters that don't depend on React render cycles directly.`,
+> "The React Compiler changes the mental model from 'opt-in performance' to 'performant by default'."
+> — *React Core Team*
+
+---
+
+### Features Roadmap
+
+- [x] Auto-memoize standard hooks & components
+- [x] Track dependencies dynamically
+- [ ] Support custom hook memoization overrides
+
+---
+
+### React 18 vs. React 19 Comparison
+
+| Metric | React 18 (Manual Memoization) | React 19 (React Compiler) |
+| :--- | :--- | :--- |
+| **Boilerplate** | High (\`useMemo\`, \`useCallback\` + deps) | **Zero** (Automated compile step) |
+| **Render overhead** | Prone to human deps errors | Fully optimized AST-driven |
+| **Bundle footprint** | Standard runtime overhead | Compile-time static analysis |
+
+---
+
+### Code Migration Example
+
+Here is a comparison of how you used to write components versus how the compiler handles them under the hood:
+
+\`\`\`javascript
+// 🛑 React 18: Manual memoization to prevent child re-renders
+const ExpensiveComponent = ({ data, filter }) => {
+  const filteredList = useMemo(() => {
+    return data.filter(item => item.value === filter);
+  }, [data, filter]);
+
+  return <List items={filteredList} />;
+};
+\`\`\`
+
+With React 19, you write simple, native JavaScript:
+
+\`\`\`javascript
+// ✅ React 19: The compiler handles memoization automatically!
+const ExpensiveComponent = ({ data, filter }) => {
+  const filteredList = data.filter(item => item.value === filter);
+  return <List items={filteredList} />;
+};
+\`\`\`
+
+For details, visit the official [React Compiler Docs](https://react.dev/learn/react-compiler).`,
     thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600&auto=format&fit=crop",
     tags: ["React 19", "Compiler", "Web Performance"],
   },

@@ -63,6 +63,7 @@ const ProjectSection = () => {
     hasMore,
     totalCount,
     revealCount,
+    resetReveal,
   } = usePaginatedReveal(projects, 3, 4);
 
   return (
@@ -106,6 +107,7 @@ const ProjectSection = () => {
         revealCount={revealCount}
         showMore={showMore}
         showAll={showAll}
+        onHide={resetReveal}
       />
     </SectionContainer>
   );
