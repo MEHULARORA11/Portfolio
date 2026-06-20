@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Home from "./Pages/Home";
+import React, { useState, useEffect, lazy, Suspense, useRef } from "react";
 import ThemeToggle from "./Components/ThemeToggle";
+import PortfolioLoader from "./Components/Portfolioloader";
+import Navbar from "./Components/Navbar";
+
+const Home = lazy(() => import("./Pages/Home"));
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("portfolio-theme") || "dark";
   });
+  const [showIntro, setShowIntro] = useState(true);
+  const logoRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -17,9 +22,25 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen transition-colors duration-500">
-      <ThemeToggle theme={theme} onToggle={toggleTheme} />
-      <Home />
-    </div>
+    <>
+      <Navbar logoRef={logoRef} theme={theme} />
+
+      {showIntro && (
+        <PortfolioLoader
+          theme={theme}
+          name="Mehul Arora"
+          tagline="Full Stack Engineer"
+          targetRef={logoRef}
+          onFinish={() => setShowIntro(false)}
+        />
+      )}
+
+      <div className="min-h-screen transition-colors duration-500">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Home />
+        </Suspense>
+      </div>
+    </>
   );
 }

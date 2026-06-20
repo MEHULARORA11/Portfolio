@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
-import PortfolioCard from "../Components/PortfolioCard";
-import HomeCard from "../Components/HomeCard";
-import AboutCard from "../Components/AboutCard";
-import SkillsSection from "../Components/SkillsSection";
-import ProjectSection from "../Components/ProjectSection";
-import ContactSection from "../Components/ContactSection";
+import React, { useEffect, lazy, Suspense } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import FloatingTechBackground from "../Components/FloatingTechBackground";
-import AiChatBot from "../Components/AiChatBot";   // add this
+
+const PortfolioCard = lazy(() => import("../Components/PortfolioCard"));
+const HomeCard = lazy(() => import("../Components/HomeCard"));
+const AboutCard = lazy(() => import("../Components/AboutCard"));
+const SkillsSection = lazy(() => import("../Components/SkillsSection"));
+const ProjectSection = lazy(() => import("../Components/ProjectSection"));
+const ContactSection = lazy(() => import("../Components/ContactSection"));
+const FloatingTechBackground = lazy(() => import("../Components/FloatingTechBackground"));
+const AiChatBot = lazy(() => import("../Components/AiChatBot"));
 
 const Home = () => {
   useEffect(() => {
@@ -19,14 +20,14 @@ const Home = () => {
 
   return (
     <div className="w-[92vw] sm:w-[88vw] lg:w-[80vw] mx-auto overflow-x-hidden">
-      <FloatingTechBackground/>
-      <AiChatBot /> 
-      <PortfolioCard />
-      <HomeCard />
-      <AboutCard />
-      <SkillsSection />
-      <ProjectSection />
-      <ContactSection />
+        <FloatingTechBackground />
+        <AiChatBot />
+        <PortfolioCard />
+        <HomeCard />
+        <AboutCard />
+        <SkillsSection />
+        <ProjectSection />
+        <ContactSection />
     </div>
   );
 };
