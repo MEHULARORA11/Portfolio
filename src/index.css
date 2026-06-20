@@ -366,3 +366,9 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+/* 3D Perspective HUD loader style */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
