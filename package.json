@@ -11,6 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@tsparticles/react": "^4.2.1",
+    "@tsparticles/slim": "^4.2.1",
     "aos": "^3.0.0-beta.6",
     "clsx": "^2.1.1",
     "cors": "^2.8.6",
@@ -30,7 +34,8 @@
     "react-parallax-tilt": "^1.7.332",
     "remark-gfm": "^4.0.1",
     "resend": "^6.12.4",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
