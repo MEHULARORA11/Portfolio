@@ -11,6 +11,7 @@ const ProjectSection = lazy(() => import("../Components/ProjectSection"));
 const CertificatesSection = lazy(() => import("../Components/Certificates/CertificatesSection"));
 const YoutubeSection = lazy(() => import("../Components/Youtube/YoutubeSection"));
 const InstagramSection = lazy(() => import("../Components/Instagram/InstagramSection"));
+const BlogsSection = lazy(() => import("../Components/Blogs/BlogsSection"));
 const ContactSection = lazy(() => import("../Components/ContactSection"));
 
 const Home = () => {
@@ -72,6 +73,10 @@ const Home = () => {
 
       <Suspense fallback={<div className="h-[500px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
         <InstagramSection />
+      </Suspense>
+
+      <Suspense fallback={<div className="h-[400px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
+        <BlogsSection />
       </Suspense>
 
       <Suspense fallback={<div className="h-[450px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
