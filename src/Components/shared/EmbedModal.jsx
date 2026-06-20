@@ -17,11 +17,13 @@ export default function EmbedModal({ isOpen, onClose, title, children }) {
 
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      window.lenis?.stop();
       window.addEventListener("keydown", handleKeyDown);
     }
 
     return () => {
       document.body.style.overflow = "unset";
+      window.lenis?.start();
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
@@ -51,6 +53,7 @@ export default function EmbedModal({ isOpen, onClose, title, children }) {
             role="dialog"
             aria-modal="true"
             aria-label={title}
+            data-lenis-prevent
           >
             {/* Header block */}
             <div className="flex items-center justify-between p-5 border-b theme-divider select-none">
