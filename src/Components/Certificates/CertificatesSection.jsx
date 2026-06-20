@@ -114,6 +114,7 @@ export default function CertificatesSection() {
               revealCount={revealCount}
               showMore={showMore}
               showAll={showAll}
+              onHide={resetReveal}
             />
           </motion.div>
         )}

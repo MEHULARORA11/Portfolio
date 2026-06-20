@@ -123,6 +123,7 @@ export default function InstagramSection() {
               revealCount={revealCount}
               showMore={showMore}
               showAll={showAll}
+              onHide={resetReveal}
             />
           </motion.div>
         )}

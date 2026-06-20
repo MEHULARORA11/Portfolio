@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronsDown } from "lucide-react";
+import { ChevronDown, ChevronsDown, ChevronUp } from "lucide-react";
 import GlowButton from "./GlowButton";
 
 /**
@@ -12,6 +12,7 @@ import GlowButton from "./GlowButton";
  * @param {number} props.revealCount - Number of items currently visible.
  * @param {Function} props.showMore - Callback to show next page.
  * @param {Function} props.showAll - Callback to reveal all items.
+ * @param {Function} props.onHide - Callback to reset visible items count.
  */
 export default function ShowMoreControls({
   hasMore,
@@ -19,9 +20,20 @@ export default function ShowMoreControls({
   revealCount,
   showMore,
   showAll,
+  onHide,
 }) {
   // If the total items are <= 3, the buttons are hidden entirely.
   if (totalCount <= 3) return null;
+
+  const handleHide = (e) => {
+    if (onHide) onHide();
+
+    // Smooth scroll to the top of the parent section
+    const sectionElement = e.currentTarget.closest("section");
+    if (sectionElement) {
+      sectionElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="flex justify-center items-center mt-12 mb-6">
@@ -44,6 +56,13 @@ export default function ShowMoreControls({
               Show All
               <ChevronsDown className="w-4 h-4 opacity-80" />
             </GlowButton>
+
+            {revealCount > 3 && (
+              <GlowButton onClick={handleHide} variant="outline">
+                Hide
+                <ChevronUp className="w-4 h-4 opacity-80" />
+              </GlowButton>
+            )}
           </motion.div>
         ) : (
           <motion.div
@@ -51,9 +70,15 @@ export default function ShowMoreControls({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm font-mono text-[var(--text-muted)] opacity-60 flex flex-col items-center select-none"
+            className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6"
           >
-            <span>Showing all {totalCount} items</span>
+            <span className="text-sm font-mono text-[var(--text-muted)] opacity-60 select-none">
+              Showing all {totalCount} items
+            </span>
+            <GlowButton onClick={handleHide} variant="outline">
+              Hide
+              <ChevronUp className="w-4 h-4 opacity-80" />
+            </GlowButton>
           </motion.div>
         )}
       </AnimatePresence>

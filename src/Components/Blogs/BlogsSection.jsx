@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, Calendar, Clock, ArrowRight } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import SectionContainer from "../shared/SectionContainer";
 import SectionHeading from "../shared/SectionHeading";
 import BlogCard from "./BlogCard";
@@ -122,6 +124,7 @@ export default function BlogsSection() {
               revealCount={revealCount}
               showMore={showMore}
               showAll={showAll}
+              onHide={resetReveal}
             />
           </motion.div>
         )}
@@ -176,34 +179,112 @@ export default function BlogsSection() {
             </div>
 
             {/* Markdown styled article contents */}
-            <div className="theme-text text-sm sm:text-base leading-relaxed space-y-4 whitespace-pre-wrap select-text selection:bg-[var(--accent)] selection:text-[var(--button-text)] opacity-90">
-              {activeBlog.content.split("\n\n").map((paragraph, index) => {
-                if (paragraph.startsWith("### ")) {
-                  return (
-                    <h5 key={index} className="text-lg sm:text-xl font-bold gradient-text pt-4 pb-1">
-                      {paragraph.replace("### ", "")}
-                    </h5>
-                  );
-                }
-                if (paragraph.startsWith("* ") || paragraph.startsWith("- ")) {
-                  const items = paragraph.split("\n");
-                  return (
-                    <ul key={index} className="list-disc list-inside pl-4 space-y-1.5 text-sm">
-                      {items.map((item, subIndex) => (
-                        <li key={subIndex}>{item.replace(/^[*-\s]+/, "")}</li>
-                      ))}
-                    </ul>
-                  );
-                }
-                if (paragraph.startsWith("`")) {
-                  return (
-                    <pre key={index} className="bg-black/60 border border-[var(--card-border)] rounded-xl p-4 font-mono text-xs overflow-x-auto text-[var(--accent-light)] my-4">
-                      <code>{paragraph.replace(/`/g, "")}</code>
-                    </pre>
-                  );
-                }
-                return <p key={index}>{paragraph}</p>;
-              })}
+            <div className="theme-text text-sm sm:text-base leading-relaxed select-text selection:bg-[var(--accent)] selection:text-[var(--button-text)] opacity-95">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h1: ({ node, ...props }) => (
+                    <h1 className="text-2xl sm:text-3xl font-extrabold gradient-text mt-8 mb-4 border-b theme-divider pb-2" {...props} />
+                  ),
+                  h2: ({ node, ...props }) => (
+                    <h2 className="text-xl sm:text-2xl font-bold gradient-text mt-6 mb-3 border-b theme-divider pb-1" {...props} />
+                  ),
+                  h3: ({ node, ...props }) => (
+                    <h3 className="text-lg sm:text-xl font-bold text-[var(--accent-light)] mt-5 mb-2" {...props} />
+                  ),
+                  h4: ({ node, ...props }) => (
+                    <h4 className="text-base sm:text-lg font-semibold text-[var(--accent-light)] mt-4 mb-2" {...props} />
+                  ),
+                  h5: ({ node, ...props }) => (
+                    <h5 className="text-sm sm:text-base font-semibold text-[var(--text-primary)] mt-3 mb-1" {...props} />
+                  ),
+                  h6: ({ node, ...props }) => (
+                    <h6 className="text-xs sm:text-sm font-semibold text-[var(--text-muted)] mt-2 mb-1" {...props} />
+                  ),
+                  p: ({ node, ...props }) => (
+                    <p className="mb-4 text-sm sm:text-base leading-relaxed text-[var(--text-primary)] opacity-90" {...props} />
+                  ),
+                  ul: ({ node, ...props }) => (
+                    <ul className="list-disc pl-6 mb-4 space-y-1.5 text-sm sm:text-base" {...props} />
+                  ),
+                  ol: ({ node, ...props }) => (
+                    <ol className="list-decimal pl-6 mb-4 space-y-1.5 text-sm sm:text-base" {...props} />
+                  ),
+                  li: ({ node, ...props }) => (
+                    <li className="leading-relaxed text-[var(--text-primary)] mb-1" {...props} />
+                  ),
+                  blockquote: ({ node, ...props }) => (
+                    <blockquote className="border-l-4 border-[var(--accent)] bg-[var(--accent-muted)] px-4 py-3 rounded-r-2xl my-6 italic text-[var(--text-primary)] opacity-95" {...props} />
+                  ),
+                  code: ({ node, className, children, ...props }) => {
+                    const match = /language-(\w+)/.exec(className || "");
+                    const content = String(children).replace(/\n$/, "");
+                    const hasNewline = content.includes("\n");
+                    if (hasNewline || match) {
+                      return (
+                        <pre className="bg-black/60 border border-[var(--card-border)] rounded-xl p-4 font-mono text-xs overflow-x-auto text-[var(--accent-light)] my-4">
+                          <code className={className} {...props}>
+                            {content}
+                          </code>
+                        </pre>
+                      );
+                    }
+                    return (
+                      <code className="bg-black/40 border border-[var(--card-border)] rounded px-1.5 py-0.5 font-mono text-xs text-[var(--accent-light)]" {...props}>
+                        {children}
+                      </code>
+                    );
+                  },
+                  a: ({ node, ...props }) => (
+                    <a className="text-[var(--accent-light)] hover:underline hover:text-[var(--accent)] transition-colors duration-300 font-medium" target="_blank" rel="noopener noreferrer" {...props} />
+                  ),
+                  table: ({ node, ...props }) => (
+                    <div className="w-full overflow-x-auto my-6 border border-[var(--card-border)] rounded-xl">
+                      <table className="w-full border-collapse text-left text-sm" {...props} />
+                    </div>
+                  ),
+                  thead: ({ node, ...props }) => (
+                    <thead className="bg-[var(--accent-muted)] border-b border-[var(--card-border)]" {...props} />
+                  ),
+                  th: ({ node, ...props }) => (
+                    <th className="px-4 py-3 font-semibold text-[var(--text-primary)] border-r border-[var(--card-border)] last:border-r-0" {...props} />
+                  ),
+                  tbody: ({ node, ...props }) => (
+                    <tbody className="divide-y divide-[var(--divider)]" {...props} />
+                  ),
+                  tr: ({ node, ...props }) => (
+                    <tr className="hover:bg-[var(--card-hover-bg)]/30 transition-colors duration-200" {...props} />
+                  ),
+                  td: ({ node, ...props }) => (
+                    <td className="px-4 py-3 text-[var(--text-secondary)] border-r border-[var(--card-border)] last:border-r-0" {...props} />
+                  ),
+                  hr: ({ node, ...props }) => (
+                    <hr className="my-8 border-t border-[var(--divider)]" {...props} />
+                  ),
+                  del: ({ node, ...props }) => (
+                    <del className="line-through opacity-60" {...props} />
+                  ),
+                  img: ({ node, ...props }) => (
+                    <img className="rounded-2xl border border-[var(--card-border)] max-w-full my-4 shadow-md" {...props} />
+                  ),
+                  input: ({ node, ...props }) => {
+                    if (props.type === "checkbox") {
+                      return (
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 rounded border-[var(--input-border)] bg-[var(--input-bg)] text-[var(--accent)] focus:ring-[var(--accent-glow)] mr-2 accent-[var(--accent)] cursor-not-allowed"
+                          disabled
+                          checked={props.checked}
+                          {...props}
+                        />
+                      );
+                    }
+                    return <input {...props} />;
+                  }
+                }}
+              >
+                {activeBlog.content}
+              </ReactMarkdown>
             </div>
 
             {/* Action Bar */}

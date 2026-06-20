@@ -121,6 +121,7 @@ export default function YoutubeSection() {
               revealCount={revealCount}
               showMore={showMore}
               showAll={showAll}
+              onHide={resetReveal}
             />
           </motion.div>
         )}
