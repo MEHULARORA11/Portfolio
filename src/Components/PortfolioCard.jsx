@@ -61,7 +61,7 @@ const PortfolioCard = () => {
         </h4>
 
         <p className="text-lg sm:text-xl lg:text-2xl mt-4 theme-text-secondary leading-relaxed">
-          Just a Developer <br />
+          I Make Servers Communicate<br />
           Web & App Development
         </p>
       </div>

@@ -402,7 +402,7 @@ const PortfolioLoader = ({
           c: "property",
         },
         {
-          t: `"I Make Servers Talk",`,
+          t: `I Make Servers Communicate`,
           c: "string",
         },
       ],
