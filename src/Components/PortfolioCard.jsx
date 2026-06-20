@@ -53,7 +53,7 @@ const PortfolioCard = () => {
         className="theme-text w-[90vw] sm:w-[65vw] lg:w-[32vw] glass-card rounded-2xl p-7 hover:scale-[1.04] transition-all duration-500"
       >
         <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold py-4 border-b theme-divider drop-shadow-md">
-          Portfolio*
+          Portfolio
         </h3>
 
         <h4 className="text-xl sm:text-2xl lg:text-3xl py-4 border-b theme-divider drop-shadow-sm">

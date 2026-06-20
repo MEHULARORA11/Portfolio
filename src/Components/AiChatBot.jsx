@@ -16,10 +16,8 @@ const getTime = () =>
   new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
 // ════════════════════════════════════════════════
-const AiChatBot = () => {
+const AiChatBot = ({ isOpen, setIsOpen }) => {
   const BASE_URL = import.meta.env.VITE_CLIENT_URL; // reuse your existing env var
-
-  const [isOpen,    setIsOpen]    = useState(false);
   const [messages,  setMessages]  = useState([
     {
       role: "ai",
@@ -41,17 +39,12 @@ const AiChatBot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  // auto-resize textarea
+  // handle input change without auto-resizing textarea to prevent expanding the chatbot
   const handleInputChange = (e) => {
     const val = e.target.value;
     if (val.length > MAX_CHARS) return;
     setInput(val);
     setCharCount(val.length);
-    const ta = textareaRef.current;
-    if (ta) {
-      ta.style.height = "auto";
-      ta.style.height = Math.min(ta.scrollHeight, 120) + "px";
-    }
   };
 
   const handleKeyDown = (e) => {
@@ -73,7 +66,6 @@ const AiChatBot = () => {
     ]);
     setInput("");
     setCharCount(0);
-    if (textareaRef.current) textareaRef.current.style.height = "auto";
     setIsTyping(true);
 
     try {
@@ -135,35 +127,22 @@ const AiChatBot = () => {
   // ════════════════════════════════════════════════
   return (
     <>
-      {/* ── PANEL + MAIN-PAGE SHRINK WRAPPER ── */}
+      {/* ── CHAT PANEL ── */}
       <div
-        className="fixed inset-0 flex pointer-events-none z-40"
-        style={{ transition: "all 0.45s cubic-bezier(0.4,0,0.2,1)" }}
+        className="fixed top-0 bottom-0 right-0 h-full w-[360px] max-w-full flex flex-col z-40"
+        style={{
+          transform: isOpen ? "translateX(0)" : "translateX(100%)",
+          transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+          pointerEvents: isOpen ? "auto" : "none",
+          background: "var(--card-bg)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderLeft: "1px solid var(--card-border)",
+          boxShadow: "-8px 0 40px var(--accent-glow-soft)",
+        }}
       >
-        {/* invisible shrink overlay — gives the "page squishes left" feel */}
-        <div
-          className="flex-1 pointer-events-none"
-          style={{
-            transition: "flex 0.45s cubic-bezier(0.4,0,0.2,1)",
-            flex: isOpen ? "0 0 calc(100% - 360px)" : "1",
-          }}
-        />
-
-        {/* ── CHAT PANEL ── */}
-        <div
-          className="flex flex-col pointer-events-auto"
-          style={{
-            width: isOpen ? "360px" : "0px",
-            minWidth: 0,
-            overflow: "hidden",
-            transition: "width 0.45s cubic-bezier(0.4,0,0.2,1)",
-            background: "var(--card-bg)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            borderLeft: isOpen ? "1px solid var(--card-border)" : "none",
-            boxShadow: isOpen ? "-8px 0 40px var(--accent-glow-soft)" : "none",
-          }}
-        >
+        {/* Inner contents wrapper */}
+        <div className="flex flex-col h-full w-[360px] flex-shrink-0">
           {/* header */}
           <div
             className="flex items-center justify-between px-5 py-4 flex-shrink-0"
@@ -334,8 +313,7 @@ const AiChatBot = () => {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask anything about Mehul..."
                 rows={1}
-                className="flex-1 resize-none rounded-xl px-3 py-2.5 text-sm leading-relaxed theme-input focus:outline-none"
-                style={{ maxHeight: "120px" }}
+                className="flex-1 resize-none rounded-xl px-3 py-2.5 text-sm leading-relaxed theme-input focus:outline-none scroll-hide"
               />
               <button
                 onClick={() => handleSend()}
@@ -374,21 +352,18 @@ const AiChatBot = () => {
         </div>
       </div>
 
-  {/* ── FAB — bottom-right when closed, top-left when open ── */}
+  {/* ── FAB — bottom-right when closed, fades/scales away when open ── */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="fixed z-50 flex items-center gap-2.5 px-4 py-3 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-1 hover:scale-105"
+        className={`fixed z-50 flex items-center gap-2.5 px-4 py-3 rounded-full font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:scale-105 bottom-6 right-6 ${
+          isOpen ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
+        }`}
         style={{
-          bottom: isOpen ? "auto" : "24px",
-          right: isOpen ? "auto" : "24px",
-          top: isOpen ? "16px" : "auto",
-          left: isOpen ? "16px" : "auto",
           background: "var(--accent-muted)",
           border: "1px solid var(--accent-border)",
           color: "var(--accent-light)",
           boxShadow: "0 0 20px var(--accent-glow-soft)",
           backdropFilter: "blur(14px)",
-          transition: "all 0.45s cubic-bezier(0.4,0,0.2,1)",
         }}
       >
         <span
@@ -396,7 +371,7 @@ const AiChatBot = () => {
           style={{ background: "var(--accent)" }}
         />
         <IoChatbubblesOutline className="text-lg" />
-        <span>{isOpen ? "Close Chat" : "Chat with AI"}</span>
+        <span>Chat with AI</span>
       </button>
     </>
   );

@@ -1,6 +1,10 @@
-import React, { useRef } from "react";
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard";
-import { HiArrowSmLeft, HiArrowSmRight } from "react-icons/hi";
+import SectionContainer from "./shared/SectionContainer";
+import SectionHeading from "./shared/SectionHeading";
+import ShowMoreControls from "./shared/ShowMoreControls";
+import { usePaginatedReveal } from "../hooks/usePaginatedReveal";
 
 import Million_Checkboxes from "../assets/1_million_checkboxes.png";
 import Tick_Tac_Toe from "../assets/Tick_Tac_Toe.png";
@@ -52,61 +56,58 @@ const projects = [
 ];
 
 const ProjectSection = () => {
-  const scrollRef = useRef(null);
-
-  const hScrollRight = () => {
-    if (scrollRef.current) scrollRef.current.scrollLeft += 340;
-  };
-
-  const hScrollLeft = () => {
-    if (scrollRef.current) scrollRef.current.scrollLeft -= 340;
-  };
+  const {
+    visibleItems,
+    showMore,
+    showAll,
+    hasMore,
+    totalCount,
+    revealCount,
+  } = usePaginatedReveal(projects, 3, 4);
 
   return (
-    <div className="mb-20 lg:mb-36 relative">
-      <h1 className="text-4xl sm:text-5xl lg:text-6xl gradient-text mb-8 lg:mb-12 font-bold">
-        My Projects
-      </h1>
+    <SectionContainer id="projects">
+      <SectionHeading
+        title="My Projects"
+        subtitle="Selected Engineering Creations"
+      />
 
-      <div
-        ref={scrollRef}
-        className="
-          grid grid-cols-1 sm:grid-cols-2 gap-6
-          md:flex md:overflow-x-auto md:gap-8
-          scroll-smooth px-4 lg:px-0
-        "
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
+      {/* Grid container with position layout animations */}
+      <motion.div
+        layout="position"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
       >
-        {projects.map((project, idx) => (
-          <ProjectCard key={idx} {...project} />
-        ))}
-      </div>
+        <AnimatePresence mode="popLayout">
+          {visibleItems.map((project, index) => (
+            <motion.div
+              key={project.title}
+              layout
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 25,
+                delay: (index % 4) * 0.08,
+              }}
+              className="w-full"
+            >
+              <ProjectCard {...project} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
 
-      <div className="flex justify-center items-center gap-4 mt-6 select-none">
-        <HiArrowSmLeft
-          onClick={hScrollLeft}
-          className="text-2xl lg:text-3xl cursor-pointer hidden md:block animate-[pulse_2s_infinite] transition-colors duration-300 hover:opacity-80"
-          style={{ color: "var(--arrow-color)" }}
-        />
-        <h2 className="gradient-text font-mono text-lg uppercase">
-          Slide for more
-        </h2>
-        <HiArrowSmRight
-          onClick={hScrollRight}
-          className="text-2xl lg:text-3xl cursor-pointer hidden md:block animate-[pulse_2s_infinite] transition-colors duration-300 hover:opacity-80"
-          style={{ color: "var(--arrow-color)" }}
-        />
-      </div>
-
-      <style>{`
-        div::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-    </div>
+      {/* Pagination Controls */}
+      <ShowMoreControls
+        hasMore={hasMore}
+        totalCount={totalCount}
+        revealCount={revealCount}
+        showMore={showMore}
+        showAll={showAll}
+      />
+    </SectionContainer>
   );
 };
 

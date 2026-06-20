@@ -1,11 +1,17 @@
 import React from "react";
 import { FiSun, FiMoon } from "react-icons/fi";
 
-const ThemeToggle = ({ theme, onToggle }) => {
+const ThemeToggle = ({ theme, onToggle, hide }) => {
   const isDark = theme === "dark";
 
   return (
-    <div className="fixed top-3 right-3 sm:top-6 sm:right-6 z-50 flex flex-col items-end gap-2">
+    <div
+      className={`fixed top-3 right-3 sm:top-6 sm:right-6 z-50 flex flex-col items-end gap-2 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+        hide
+          ? "opacity-0 pointer-events-none -translate-y-6 scale-90"
+          : "opacity-100 scale-100"
+      }`}
+    >
       <button
         onClick={onToggle}
         className="theme-toggle-glow relative flex items-center gap-1 p-1 sm:p-1.5 rounded-full cursor-pointer select-none"

@@ -398,11 +398,11 @@ const PortfolioLoader = ({
 
       [
         {
-          t: "what_i_do: ",
+          t: "  what_i_do: ",
           c: "property",
         },
         {
-          t: `I Make Servers Communicate`,
+          t: `"I Make Servers Communicate",`,
           c: "string",
         },
       ],

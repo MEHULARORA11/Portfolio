@@ -2,14 +2,16 @@ import React, { useState, useEffect, lazy, Suspense, useRef } from "react";
 import ThemeToggle from "./Components/ThemeToggle";
 import PortfolioLoader from "./Components/Portfolioloader";
 import Navbar from "./Components/Navbar";
+import Home from "./Pages/Home";
 
-const Home = lazy(() => import("./Pages/Home"));
+const AiChatBot = lazy(() => import("./Components/AiChatBot"));
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("portfolio-theme") || "dark";
   });
   const [showIntro, setShowIntro] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const logoRef = useRef(null);
 
   useEffect(() => {
@@ -36,9 +38,10 @@ export default function App() {
       )}
 
       <div className="min-h-screen transition-colors duration-500">
-        <ThemeToggle theme={theme} onToggle={toggleTheme} />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Home />
+        <ThemeToggle theme={theme} onToggle={toggleTheme} hide={isChatOpen} />
+        <Home />
+        <Suspense fallback={null}>
+          <AiChatBot isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
         </Suspense>
       </div>
     </>

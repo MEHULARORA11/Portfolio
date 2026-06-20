@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
+import Tilt from "react-parallax-tilt";
 import { AiFillGithub } from "react-icons/ai";
 import { HiGlobeAlt } from "react-icons/hi";
+import { motion } from "framer-motion";
 import {
   FaReact,
   FaNodeJs,
   FaHtml5,
   FaCss3Alt,
-  FaDatabase,
   FaCode,
 } from "react-icons/fa";
 import {
-  SiMongodb,
   SiExpress,
   SiJavascript,
   SiRedis,
@@ -57,96 +57,148 @@ const techDetails = {
   },
 };
 
-const ProjectCard = ({ imgSrc, title, description, githubLink, liveDemo, techStack }) => {
+const ProjectCard = ({
+  imgSrc,
+  title,
+  description,
+  githubLink,
+  liveDemo,
+  techStack = [],
+}) => {
+  const cardRef = useRef(null);
+
+  // Spotlights tracking mouse position for premium neon reflection
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
+    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   return (
-    <div className="p-4 flex-shrink-0">
-      <div className="group h-full w-[280px] sm:w-[300px] md:w-[320px] glass-card rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between">
+    <Tilt
+      glareEnable={true}
+      glareMaxOpacity={0.12}
+      glareColor="var(--accent-light)"
+      glarePosition="all"
+      tiltMaxAngleX={8}
+      tiltMaxAngleY={8}
+      scale={1.02}
+      transitionSpeed={1200}
+      className="h-full w-full"
+    >
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md transition-all duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)]"
+        style={{
+          boxShadow: "var(--card-shadow)",
+        }}
+      >
+        {/* Spotlight Follower Layer */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), var(--accent-glow-soft), transparent 80%)`,
+          }}
+        />
 
-        <a
-          href={liveDemo || githubLink || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block overflow-hidden h-44 sm:h-48 relative"
-        >
-          <img
-            src={imgSrc}
-            alt={title}
-            className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-          />
-          <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-            style={{ backgroundColor: "var(--overlay)" }}
+        {/* Thumbnail Layer */}
+        <div>
+          <a
+            href={liveDemo || githubLink || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block overflow-hidden h-44 sm:h-48 relative border-b border-[var(--card-border)] group-hover:border-[var(--card-hover-border)] transition-colors duration-300"
           >
-            <span className="theme-btn text-xs font-semibold px-4 py-1.5 rounded-full border backdrop-blur-sm transition-all duration-300 hover:scale-105"
-              style={{ borderColor: "var(--accent-border)" }}
+            <img
+              src={imgSrc}
+              alt={title}
+              loading="lazy"
+              className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+              style={{ backgroundColor: "var(--overlay)" }}
             >
-              View Project
-            </span>
-          </div>
-        </a>
+              <span
+                className="theme-btn text-xs font-semibold px-4 py-1.5 rounded-full border backdrop-blur-sm transition-all duration-300 hover:scale-105"
+                style={{ borderColor: "var(--accent-border)" }}
+              >
+                View Project
+              </span>
+            </div>
+          </a>
 
-        <div className="p-5 flex flex-col flex-grow gap-2 justify-between">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl sm:text-2xl font-bold theme-text group-hover:text-[var(--accent-light)] transition-colors duration-300">
+          {/* Heading Info */}
+          <div className="p-5 pb-0 flex flex-col gap-2">
+            <h2 className="text-xl sm:text-2xl font-bold theme-text group-hover:text-[var(--accent-light)] transition-colors duration-300 tracking-tight">
               {title}
             </h2>
-            <p className="text-sm theme-text-secondary leading-relaxed line-clamp-3">
+            <p className="text-sm theme-text-secondary leading-relaxed line-clamp-3 opacity-90">
               {description}
             </p>
+
+            {/* Tech Badges */}
+            {techStack && techStack.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mt-3 select-none group/techs">
+                {techStack.map((tech, idx) => {
+                  const normTech = tech.trim().toLowerCase();
+                  const details = techDetails[normTech] || {
+                    icon: FaCode,
+                    bg: "hover:bg-[var(--accent-muted)] hover:text-[var(--accent-light)] hover:border-[var(--accent-border)] hover:shadow-[0_0_12px_var(--accent-glow-soft)]",
+                  };
+
+                  const IconComp = details.icon || FaCode;
+
+                  return (
+                    <span
+                      key={idx}
+                      className={`inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full border theme-text-muted bg-[var(--accent-muted)] border-[var(--accent-border)] transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-md cursor-default group-hover/techs:opacity-50 hover:!opacity-100 ${details.bg}`}
+                    >
+                      <IconComp className="text-xs sm:text-sm" />
+                      <span>{tech}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            )}
           </div>
+        </div>
 
-          {techStack && techStack.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-4 select-none group/techs">
-              {techStack.map((tech, idx) => {
-                const normTech = tech.trim().toLowerCase();
-                const details = techDetails[normTech] || {
-                  icon: FaCode,
-                  bg: "hover:bg-[var(--accent-muted)] hover:text-[var(--accent-light)] hover:border-[var(--accent-border)] hover:shadow-[0_0_12px_var(--accent-glow-soft)]",
-                };
-
-                const IconComp = details.icon || FaCode;
-
-                return (
-                  <span
-                    key={idx}
-                    className={`inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full border theme-text-muted glass-card transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-md cursor-default group-hover/techs:opacity-50 hover:!opacity-100 ${details.bg}`}
-                  >
-                    <IconComp className="text-xs sm:text-sm" />
-                    <span>{tech}</span>
-                  </span>
-                );
-              })}
-            </div>
+        {/* Footer Actions */}
+        <div className="p-5 pt-4 mt-6 border-t theme-divider flex items-center gap-3">
+          {githubLink && (
+            <motion.a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, y: -0.5 }}
+              whileTap={{ scale: 0.98 }}
+              className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-xl"
+              title="GitHub Repository"
+            >
+              <AiFillGithub />
+            </motion.a>
           )}
-
-          <div className="flex items-center gap-3 mt-4 pt-4 border-t theme-divider">
-            {githubLink && (
-              <a
-                href={githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-xl hover:-translate-y-0.5"
-                title="GitHub Repository"
-              >
-                <AiFillGithub />
-              </a>
-            )}
-            {liveDemo && (
-              <a
-                href={liveDemo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-lg hover:-translate-y-0.5"
-                title="Live Demo"
-              >
-                <HiGlobeAlt />
-              </a>
-            )}
-          </div>
-
+          {liveDemo && (
+            <motion.a
+              href={liveDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, y: -0.5 }}
+              whileTap={{ scale: 0.98 }}
+              className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-lg"
+              title="Live Demo"
+            >
+              <HiGlobeAlt />
+            </motion.a>
+          )}
         </div>
       </div>
-    </div>
+    </Tilt>
   );
 };
 
