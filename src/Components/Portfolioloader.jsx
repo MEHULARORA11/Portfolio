@@ -11,7 +11,7 @@ const PortfolioLoader = ({
   theme = "dark",
   name = "MEHUL ARORA",
   tagline = "I Make Servers Talk",
-  duration = 2800,
+  duration = 1200,
   progress: controlledProgress,
   isLoading,
   targetRef,
