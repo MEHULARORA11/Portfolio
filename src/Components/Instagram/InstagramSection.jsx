@@ -13,12 +13,28 @@ import { instagramReels } from "../../data/portfolioData";
 import { useSearch } from "../../hooks/useSearch";
 import InstagramSearchBar from "../search/InstagramSearchBar";
 import EmptyState from "../search/EmptyState";
+import ComingSoon from "../shared/ComingSoon";
 
 /**
  * Instagram Reels showcase section. Leverages responsive grids,
  * custom pagination controls, and mobile device simulator embeds.
  */
 export default function InstagramSection() {
+  if (!instagramReels || instagramReels.length === 0) {
+    return (
+      <SectionContainer id="instagram">
+        <SectionHeading
+          title="Instagram Reels"
+          subtitle="Short Dev Tips & Hacks"
+        />
+        <ComingSoon
+          title="Instagram Reels"
+          subtitle="I am currently filming new short-form dev tips and design hacks. Staging in progress."
+          Icon={FaInstagram}
+        />
+      </SectionContainer>
+    );
+  }
   const [activeReel, setActiveReel] = useState(null);
 
   const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(instagramReels, {

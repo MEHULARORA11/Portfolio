@@ -12,12 +12,28 @@ import { blogs } from "../../data/portfolioData";
 import { useSearch } from "../../hooks/useSearch";
 import BlogSearchBar from "../search/BlogSearchBar";
 import EmptyState from "../search/EmptyState";
+import ComingSoon from "../shared/ComingSoon";
 
 /**
  * Blogs Showcase Section supporting paginated card listings,
  * dynamic post previews, and read progress overlays.
  */
 export default function BlogsSection() {
+  if (!blogs || blogs.length === 0) {
+    return (
+      <SectionContainer id="blogs">
+        <SectionHeading
+          title="Technical Articles"
+          subtitle="Guides, Tutorials & Architectural Deep Dives"
+        />
+        <ComingSoon
+          title="Articles"
+          subtitle="I am currently authoring new editorial technical articles, web architectural studies, and dev tutorials."
+          Icon={BookOpen}
+        />
+      </SectionContainer>
+    );
+  }
   const [activeBlog, setActiveBlog] = useState(null);
 
   const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(blogs, {

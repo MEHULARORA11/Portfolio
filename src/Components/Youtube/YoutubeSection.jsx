@@ -10,12 +10,29 @@ import { youtubeVideos } from "../../data/portfolioData";
 import { useSearch } from "../../hooks/useSearch";
 import YoutubeSearchBar from "../search/YoutubeSearchBar";
 import EmptyState from "../search/EmptyState";
+import ComingSoon from "../shared/ComingSoon";
+import { Video } from "lucide-react";
 
 /**
  * YouTube Showcase Section supporting paginated card listings,
  * dynamic media playbacks, and glassmorphic visual overlays.
  */
 export default function YoutubeSection() {
+  if (!youtubeVideos || youtubeVideos.length === 0) {
+    return (
+      <SectionContainer id="youtube">
+        <SectionHeading
+          title="YouTube Content"
+          subtitle="Cinematic Tech Showcases & Guides"
+        />
+        <ComingSoon
+          title="Videos"
+          subtitle="I am currently producing new high-quality technical video deep dives. New guides will stream shortly."
+          Icon={Video}
+        />
+      </SectionContainer>
+    );
+  }
   const [activeVideo, setActiveVideo] = useState(null);
 
   const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(youtubeVideos, {

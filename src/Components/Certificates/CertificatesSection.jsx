@@ -9,12 +9,29 @@ import { certificates } from "../../data/portfolioData";
 import { useSearch } from "../../hooks/useSearch";
 import CertificatesSearchBar from "../search/CertificatesSearchBar";
 import EmptyState from "../search/EmptyState";
+import ComingSoon from "../shared/ComingSoon";
+import { Award } from "lucide-react";
 
 /**
  * Certificates showcase section with modular grids,
  * dynamic pagination controls, and stagger slide-ups.
  */
 export default function CertificatesSection() {
+  if (!certificates || certificates.length === 0) {
+    return (
+      <SectionContainer id="certificates">
+        <SectionHeading
+          title="Certificates"
+          subtitle="Credentials & Certifications"
+        />
+        <ComingSoon
+          title="Certificates"
+          subtitle="I am currently staging and verifying new industry credentials. This directory will compile shortly."
+          Icon={Award}
+        />
+      </SectionContainer>
+    );
+  }
   const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(certificates, {
     keys: ["title", "issuer", "tags"],
   });
