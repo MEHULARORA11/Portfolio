@@ -6,6 +6,13 @@ import Lenis from "lenis";
 import HomeCard from "../Components/HomeCard";
 import FloatingTechBackground from "../Components/FloatingTechBackground";
 
+// Import Cyberpunk Loaders
+import BlogLoader from "../Components/loaders/BlogLoader";
+import CertificateLoader from "../Components/loaders/CertificateLoader";
+import VideoLoader from "../Components/loaders/VideoLoader";
+import ReelLoader from "../Components/loaders/ReelLoader";
+import ProjectLoader from "../Components/loaders/ProjectLoader";
+
 const SkillsSection = lazy(() => import("../Components/SkillsSection"));
 const ProjectSection = lazy(() => import("../Components/ProjectSection"));
 const CertificatesSection = lazy(() => import("../Components/Certificates/CertificatesSection"));
@@ -62,25 +69,25 @@ const Home = () => {
         <SkillsSection />
       </Suspense>
 
-      <Suspense fallback={<div className="h-[500px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
+      <Suspense fallback={<ProjectLoader />}>
         <ProjectSection />
       </Suspense>
+      
+      {/* <Suspense fallback={<BlogLoader />}>
+        <BlogsSection />
+      </Suspense>
 
-      <Suspense fallback={<div className="h-[400px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
+      <Suspense fallback={<CertificateLoader />}>
         <CertificatesSection />
       </Suspense>
 
-      <Suspense fallback={<div className="h-[500px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
+      <Suspense fallback={<VideoLoader />}>
         <YoutubeSection />
       </Suspense>
 
-      <Suspense fallback={<div className="h-[500px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
+      <Suspense fallback={<ReelLoader />}>
         <InstagramSection />
-      </Suspense>
-
-      <Suspense fallback={<div className="h-[400px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
-        <BlogsSection />
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={<div className="h-[450px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
         <ContactSection />
@@ -89,4 +96,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home;

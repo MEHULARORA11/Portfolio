@@ -433,6 +433,6 @@ export const blogs = [
 // Only split into microservices when team sizes exceed coordination boundaries, or when specific services require vastly different resource scales.`,
 //     thumbnail: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=600&auto=format&fit=crop",
 //     tags: ["Architecture", "Backend", "Microservices"],
-//   }
+  // }
 ];
 
