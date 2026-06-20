@@ -3,6 +3,7 @@ import Tilt from "react-parallax-tilt";
 import { Smartphone, Sparkles } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Highlight from "../search/Highlight";
 
 /**
  * Instagram Reel / Video Card utilizing vertical 9:16 dimensions,
@@ -15,6 +16,7 @@ export default function InstagramCard({
   thumbnail,
   tags = [],
   onClick,
+  searchQuery = "",
 }) {
   return (
     <Tilt
@@ -85,10 +87,10 @@ export default function InstagramCard({
               <span>TRENDING</span>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug line-clamp-2">
-              {title}
+              <Highlight text={title} query={searchQuery} className="!decoration-pink-500" />
             </h3>
             <p className="text-xs text-white/70 line-clamp-2 opacity-80">
-              {description}
+              <Highlight text={description} query={searchQuery} className="!decoration-pink-500" />
             </p>
 
             {/* Tag Badges */}
@@ -99,7 +101,7 @@ export default function InstagramCard({
                     key={idx}
                     className="text-[9px] font-mono font-semibold px-2 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/5"
                   >
-                    #{tag}
+                    #<Highlight text={tag} query={searchQuery} className="!decoration-pink-500" />
                   </span>
                 ))}
               </div>

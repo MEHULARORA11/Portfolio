@@ -9,6 +9,9 @@ import EmbedModal from "../shared/EmbedModal";
 import GlowButton from "../shared/GlowButton";
 import { usePaginatedReveal } from "../../hooks/usePaginatedReveal";
 import { blogs } from "../../data/portfolioData";
+import { useSearch } from "../../hooks/useSearch";
+import BlogSearchBar from "../search/BlogSearchBar";
+import EmptyState from "../search/EmptyState";
 
 /**
  * Blogs Showcase Section supporting paginated card listings,
@@ -17,6 +20,10 @@ import { blogs } from "../../data/portfolioData";
 export default function BlogsSection() {
   const [activeBlog, setActiveBlog] = useState(null);
 
+  const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(blogs, {
+    keys: ["title", "description", "content", "tags"],
+  });
+
   const {
     visibleItems,
     showMore,
@@ -24,7 +31,13 @@ export default function BlogsSection() {
     hasMore,
     totalCount,
     revealCount,
-  } = usePaginatedReveal(blogs, 3, 4);
+    resetReveal,
+  } = usePaginatedReveal(filteredItems, 3, 4);
+
+  // Reset pagination reveal count when search query changes
+  React.useEffect(() => {
+    resetReveal();
+  }, [searchQuery, resetReveal]);
 
   return (
     <SectionContainer id="blogs">
@@ -33,41 +46,70 @@ export default function BlogsSection() {
         subtitle="Guides, Tutorials & Architectural Deep Dives"
       />
 
-      {/* Grid Container with layout animations */}
-      <motion.div
-        layout="position"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-      >
-        <AnimatePresence mode="popLayout">
-          {visibleItems.map((blog, index) => (
-            <motion.div
-              key={blog.id}
-              layout
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 25,
-                delay: (index % 4) * 0.08,
-              }}
-              className="w-full"
-            >
-              <BlogCard {...blog} onClick={() => setActiveBlog(blog)} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
-
-      {/* Show More / Show All Controls */}
-      <ShowMoreControls
-        hasMore={hasMore}
-        totalCount={totalCount}
-        revealCount={revealCount}
-        showMore={showMore}
-        showAll={showAll}
+      <BlogSearchBar
+        value={searchQuery}
+        onChange={setSearchQuery}
+        onClear={clearSearch}
+        onTagClick={setSearchQuery}
       />
+
+      <AnimatePresence mode="wait">
+        {filteredItems.length === 0 ? (
+          <EmptyState
+            key="empty-blogs"
+            onReset={clearSearch}
+            message={`No articles found matching "${searchQuery}".`}
+          />
+        ) : (
+          <motion.div
+            key="blogs-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full flex flex-col items-center"
+          >
+            {/* Grid Container with layout animations */}
+            <motion.div
+              layout="position"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full"
+            >
+              <AnimatePresence mode="popLayout">
+                {visibleItems.map((blog, index) => (
+                  <motion.div
+                    key={blog.id}
+                    layout
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 25,
+                      delay: (index % 4) * 0.08,
+                    }}
+                    className="w-full"
+                  >
+                    <BlogCard
+                      {...blog}
+                      onClick={() => setActiveBlog(blog)}
+                      searchQuery={searchQuery}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Show More / Show All Controls */}
+            <ShowMoreControls
+              hasMore={hasMore}
+              totalCount={totalCount}
+              revealCount={revealCount}
+              showMore={showMore}
+              showAll={showAll}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Cinematic Modal containing Article Reader */}
       <EmbedModal
@@ -180,3 +222,4 @@ export default function BlogsSection() {
     </SectionContainer>
   );
 }
+

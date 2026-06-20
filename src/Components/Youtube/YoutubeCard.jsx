@@ -1,6 +1,7 @@
 import React from "react";
 import { Play, Clock, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Highlight from "../search/Highlight";
 
 /**
  * YouTube Card mimicking a futuristic developer media player interface.
@@ -13,6 +14,7 @@ export default function YoutubeCard({
   thumbnail,
   tags = [],
   onClick,
+  searchQuery = "",
 }) {
   return (
     <div
@@ -63,10 +65,10 @@ export default function YoutubeCard({
         {/* Video Metadata & Info */}
         <div className="p-5 flex flex-col gap-2">
           <h3 className="text-lg sm:text-xl font-bold theme-text leading-tight group-hover:text-[var(--accent-light)] transition-colors duration-300 line-clamp-2">
-            {title}
+            <Highlight text={title} query={searchQuery} className="!decoration-red-500" />
           </h3>
           <p className="text-xs sm:text-sm theme-text-secondary leading-relaxed line-clamp-2 opacity-80 mt-1">
-            {description}
+            <Highlight text={description} query={searchQuery} className="!decoration-red-500" />
           </p>
 
           {/* Tags */}
@@ -77,7 +79,7 @@ export default function YoutubeCard({
                   key={idx}
                   className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md border border-[var(--accent-border)] bg-[var(--accent-muted)] text-[var(--text-muted)]"
                 >
-                  {tag}
+                  <Highlight text={tag} query={searchQuery} className="!decoration-red-500" />
                 </span>
               ))}
             </div>

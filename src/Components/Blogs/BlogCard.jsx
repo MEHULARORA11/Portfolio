@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Tilt from "react-parallax-tilt";
 import { BookOpen, Calendar, Clock } from "lucide-react";
 import { motion } from "framer-motion";
+import Highlight from "../search/Highlight";
 
 /**
  * Blog Card featuring 3D tilt transformations, cursor tracking
@@ -15,6 +16,7 @@ export default function BlogCard({
   thumbnail,
   tags = [],
   onClick,
+  searchQuery = "",
 }) {
   const cardRef = useRef(null);
 
@@ -90,13 +92,13 @@ export default function BlogCard({
               </span>
             </div>
             <h3 className="text-lg sm:text-xl font-bold theme-text tracking-tight group-hover:text-[var(--accent-light)] transition-colors duration-300 line-clamp-2 mt-1">
-              {title}
+              <Highlight text={title} query={searchQuery} />
             </h3>
           </div>
 
           {/* Description */}
           <p className="text-xs sm:text-sm theme-text-secondary leading-relaxed line-clamp-2 opacity-80 mt-2">
-            {description}
+            <Highlight text={description} query={searchQuery} />
           </p>
 
           {/* Skills Badges */}
@@ -107,7 +109,7 @@ export default function BlogCard({
                   key={idx}
                   className="text-[10px] font-mono font-semibold px-2.5 py-0.5 rounded-md border theme-text-muted bg-[var(--accent-muted)] border-[var(--accent-border)] transition-all duration-300 hover:border-[var(--accent-light)]"
                 >
-                  {tag}
+                  <Highlight text={tag} query={searchQuery} />
                 </span>
               ))}
             </div>

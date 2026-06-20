@@ -7,6 +7,9 @@ import ShowMoreControls from "../shared/ShowMoreControls";
 import EmbedModal from "../shared/EmbedModal";
 import { usePaginatedReveal } from "../../hooks/usePaginatedReveal";
 import { youtubeVideos } from "../../data/portfolioData";
+import { useSearch } from "../../hooks/useSearch";
+import YoutubeSearchBar from "../search/YoutubeSearchBar";
+import EmptyState from "../search/EmptyState";
 
 /**
  * YouTube Showcase Section supporting paginated card listings,
@@ -15,6 +18,10 @@ import { youtubeVideos } from "../../data/portfolioData";
 export default function YoutubeSection() {
   const [activeVideo, setActiveVideo] = useState(null);
 
+  const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(youtubeVideos, {
+    keys: ["title", "description", "tags"],
+  });
+
   const {
     visibleItems,
     showMore,
@@ -22,7 +29,13 @@ export default function YoutubeSection() {
     hasMore,
     totalCount,
     revealCount,
-  } = usePaginatedReveal(youtubeVideos, 3, 4);
+    resetReveal,
+  } = usePaginatedReveal(filteredItems, 3, 4);
+
+  // Reset pagination reveal count when search query changes
+  React.useEffect(() => {
+    resetReveal();
+  }, [searchQuery, resetReveal]);
 
   return (
     <SectionContainer id="youtube">
@@ -31,41 +44,70 @@ export default function YoutubeSection() {
         subtitle="Cinematic Tech Showcases & Guides"
       />
 
-      {/* Grid wrapper */}
-      <motion.div
-        layout="position"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-      >
-        <AnimatePresence mode="popLayout">
-          {visibleItems.map((video, index) => (
-            <motion.div
-              key={video.id}
-              layout
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 25,
-                delay: (index % 4) * 0.08,
-              }}
-              className="w-full"
-            >
-              <YoutubeCard {...video} onClick={() => setActiveVideo(video)} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
-
-      {/* Show More / Show All Controls */}
-      <ShowMoreControls
-        hasMore={hasMore}
-        totalCount={totalCount}
-        revealCount={revealCount}
-        showMore={showMore}
-        showAll={showAll}
+      <YoutubeSearchBar
+        value={searchQuery}
+        onChange={setSearchQuery}
+        onClear={clearSearch}
+        onTagClick={setSearchQuery}
       />
+
+      <AnimatePresence mode="wait">
+        {filteredItems.length === 0 ? (
+          <EmptyState
+            key="empty-youtube"
+            onReset={clearSearch}
+            message={`No videos found matching "${searchQuery}".`}
+          />
+        ) : (
+          <motion.div
+            key="youtube-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full flex flex-col items-center"
+          >
+            {/* Grid wrapper */}
+            <motion.div
+              layout="position"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full"
+            >
+              <AnimatePresence mode="popLayout">
+                {visibleItems.map((video, index) => (
+                  <motion.div
+                    key={video.id}
+                    layout
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 25,
+                      delay: (index % 4) * 0.08,
+                    }}
+                    className="w-full"
+                  >
+                    <YoutubeCard
+                      {...video}
+                      onClick={() => setActiveVideo(video)}
+                      searchQuery={searchQuery}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Show More / Show All Controls */}
+            <ShowMoreControls
+              hasMore={hasMore}
+              totalCount={totalCount}
+              revealCount={revealCount}
+              showMore={showMore}
+              showAll={showAll}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Embedded Iframe Modal */}
       <EmbedModal
@@ -89,3 +131,4 @@ export default function YoutubeSection() {
     </SectionContainer>
   );
 }
+

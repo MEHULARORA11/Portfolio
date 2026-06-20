@@ -10,6 +10,9 @@ import EmbedModal from "../shared/EmbedModal";
 import GlowButton from "../shared/GlowButton";
 import { usePaginatedReveal } from "../../hooks/usePaginatedReveal";
 import { instagramReels } from "../../data/portfolioData";
+import { useSearch } from "../../hooks/useSearch";
+import InstagramSearchBar from "../search/InstagramSearchBar";
+import EmptyState from "../search/EmptyState";
 
 /**
  * Instagram Reels showcase section. Leverages responsive grids,
@@ -18,6 +21,10 @@ import { instagramReels } from "../../data/portfolioData";
 export default function InstagramSection() {
   const [activeReel, setActiveReel] = useState(null);
 
+  const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(instagramReels, {
+    keys: ["title", "description", "tags"],
+  });
+
   const {
     visibleItems,
     showMore,
@@ -25,7 +32,13 @@ export default function InstagramSection() {
     hasMore,
     totalCount,
     revealCount,
-  } = usePaginatedReveal(instagramReels, 3, 4);
+    resetReveal,
+  } = usePaginatedReveal(filteredItems, 3, 4);
+
+  // Reset pagination reveal count when search query changes
+  React.useEffect(() => {
+    resetReveal();
+  }, [searchQuery, resetReveal]);
 
   return (
     <SectionContainer id="instagram">
@@ -34,41 +47,70 @@ export default function InstagramSection() {
         subtitle="Short Dev Tips & Hacks"
       />
 
-      {/* Tall aspect grid layout for vertical Reels */}
-      <motion.div
-        layout="position"
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-      >
-        <AnimatePresence mode="popLayout">
-          {visibleItems.map((reel, index) => (
-            <motion.div
-              key={reel.id}
-              layout
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 25,
-                delay: (index % 4) * 0.08,
-              }}
-              className="w-full"
-            >
-              <InstagramCard {...reel} onClick={() => setActiveReel(reel)} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
-
-      {/* Show More / Show All Controls */}
-      <ShowMoreControls
-        hasMore={hasMore}
-        totalCount={totalCount}
-        revealCount={revealCount}
-        showMore={showMore}
-        showAll={showAll}
+      <InstagramSearchBar
+        value={searchQuery}
+        onChange={setSearchQuery}
+        onClear={clearSearch}
+        onTagClick={setSearchQuery}
       />
+
+      <AnimatePresence mode="wait">
+        {filteredItems.length === 0 ? (
+          <EmptyState
+            key="empty-instagram"
+            onReset={clearSearch}
+            message={`No reels found matching "${searchQuery}".`}
+          />
+        ) : (
+          <motion.div
+            key="instagram-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full flex flex-col items-center"
+          >
+            {/* Tall aspect grid layout for vertical Reels */}
+            <motion.div
+              layout="position"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full"
+            >
+              <AnimatePresence mode="popLayout">
+                {visibleItems.map((reel, index) => (
+                  <motion.div
+                    key={reel.id}
+                    layout
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 25,
+                      delay: (index % 4) * 0.08,
+                    }}
+                    className="w-full"
+                  >
+                    <InstagramCard
+                      {...reel}
+                      onClick={() => setActiveReel(reel)}
+                      searchQuery={searchQuery}
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Show More / Show All Controls */}
+            <ShowMoreControls
+              hasMore={hasMore}
+              totalCount={totalCount}
+              revealCount={revealCount}
+              showMore={showMore}
+              showAll={showAll}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Cinematic Modal containing Smartphone mockup player */}
       <EmbedModal
@@ -104,8 +146,8 @@ export default function InstagramSection() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-1 text-[10px] text-pink-400 font-mono">
-                    <Sparkles className="w-3 h-3" />
+                  <div className="flex items-center gap-1.5 text-pink-400 text-xs font-mono font-medium">
+                    <Sparkles className="w-3.5 h-3.5" />
                     <span>POPULAR REEL</span>
                   </div>
                   <h4 className="text-sm font-bold leading-tight">

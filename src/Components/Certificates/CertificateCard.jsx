@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Tilt from "react-parallax-tilt";
 import { ExternalLink, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import Highlight from "../search/Highlight";
 
 /**
  * Certificate Card rendering a high-performance 3D parallax tilt,
@@ -14,6 +15,7 @@ export default function CertificateCard({
   tags = [],
   thumbnail,
   credentialLink,
+  searchQuery = "",
 }) {
   const cardRef = useRef(null);
 
@@ -74,10 +76,10 @@ export default function CertificateCard({
           {/* Heading Metadata */}
           <div className="flex flex-col gap-1.5">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] select-none">
-              {issuer} &bull; {date}
+              <Highlight text={issuer} query={searchQuery} /> &bull; {date}
             </span>
             <h3 className="text-lg sm:text-xl font-bold theme-text tracking-tight group-hover:text-[var(--accent-light)] transition-colors duration-300 line-clamp-2">
-              {title}
+              <Highlight text={title} query={searchQuery} />
             </h3>
           </div>
 
@@ -89,7 +91,7 @@ export default function CertificateCard({
                   key={idx}
                   className="text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full border theme-text-muted bg-[var(--accent-muted)] border-[var(--accent-border)] transition-all duration-300 hover:border-[var(--accent-light)]"
                 >
-                  {tag}
+                  <Highlight text={tag} query={searchQuery} />
                 </span>
               ))}
             </div>
