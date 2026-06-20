@@ -61,7 +61,7 @@ export default function YoutubeSearchBar({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="Search video titles, topics, keywords..."
-          className="w-full h-full bg-transparent border-none outline-none text-sm text-red-50 placeholder-red-300/40 relative z-10 pr-2 font-medium"
+          className="w-full h-full bg-transparent border-none outline-none text-sm text-red-50 placeholder-red-300/75 relative z-10 pr-2 font-medium"
         />
 
         {/* Live Typing Status Dot (Simulated Recording/Streaming Glow) */}

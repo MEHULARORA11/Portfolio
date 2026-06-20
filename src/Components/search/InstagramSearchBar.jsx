@@ -65,7 +65,7 @@ export default function InstagramSearchBar({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder="Search reel captions, tags, dev hacks..."
-            className="w-full h-full bg-transparent border-none outline-none text-sm text-pink-50 placeholder-pink-300/30 relative z-10 pr-2 font-medium"
+            className="w-full h-full bg-transparent border-none outline-none text-sm text-pink-50 placeholder-pink-300/70 relative z-10 pr-2 font-medium"
           />
 
           {/* Sparkle typing indicator */}
