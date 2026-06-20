@@ -1,7 +1,7 @@
 import React from "react";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { FaXTwitter } from "react-icons/fa6";
-import { FiMail, FiPhone, FiMapPin, FiSend } from "react-icons/fi";
+import { FiMail, FiMapPin, FiSend } from "react-icons/fi";
 
 const ContactSection = () => {
   const BASE_URL = import.meta.env.VITE_CLIENT_URL;
@@ -68,17 +68,7 @@ const ContactSection = () => {
                 </div>
               </a>
 
-              <a href="tel:+917428894788" className={contactItemClass}>
-                <div className={iconBoxClass}>
-                  <FiPhone className="text-xl" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xs theme-text-label font-semibold uppercase tracking-wider">Call Me</span>
-                  <span className="theme-text font-mono text-sm lg:text-base group-hover:text-[var(--accent-light)] transition-colors duration-300">
-                    +91 7428894788
-                  </span>
-                </div>
-              </a>
+
 
               <div className={contactItemClass}>
                 <div className={iconBoxClass}>

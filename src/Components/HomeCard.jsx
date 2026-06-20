@@ -79,10 +79,10 @@ const HomeCard = () => {
 
         <div className="flex flex-col gap-4 text-base sm:text-lg lg:text-xl leading-relaxed">
           <p className="theme-text-secondary">
-            I design and develop Full Stack Applications, with a strong commitment to crafting secure and highly performant backend systems. Currently in my first year of B.Tech, I reside in Faridabad, India.
+           I design and develop Full Stack Applications with a strong focus on backend engineering, scalability, security, and performance-driven architectures. I enjoy building reliable systems that combine efficient server-side logic with modern, immersive user experiences.
           </p>
           <p className="theme-text-secondary">
-            My work brings together optimized server logic with sleek, responsive layouts to deliver exceptional, user-focused digital environments. Let's collaborate to build something remarkable.
+            Currently pursuing my first year of B.Tech in Faridabad, India, I continuously explore modern web technologies, APIs, databases, authentication systems, and high-performance application workflows to craft fast, scalable, and production-ready digital solutions.
           </p>
         </div>
 
