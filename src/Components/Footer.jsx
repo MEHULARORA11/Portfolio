@@ -5,15 +5,15 @@ import { FiArrowUp } from "react-icons/fi";
  * Minimalist and professional footer aligned with the portfolio design system.
  * Automatically adapts to light/dark themes.
  */
-export default function Footer() {
-  const scrollToTop = () => {
-    if (window.lenis) {
-      window.lenis.scrollTo(0);
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+const scrollToTop = () => {
+  if (window.lenis) {
+    window.lenis.scrollTo(0);
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
 
+export default function Footer() {
   return (
     <footer className="w-full py-8 mt-10 border-t theme-divider grid grid-cols-1 sm:grid-cols-3 items-center gap-4 text-xs tracking-wider uppercase font-semibold">
       <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2">

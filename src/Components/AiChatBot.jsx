@@ -11,13 +11,229 @@ const QUICK_REPLIES = [
   { label: "💼 Hire him",   text: "Is Mehul available for work?" },
 ];
 
-// ─── helper ───
+// ─── helpers ───
 const getTime = () =>
   new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
+// ─── temporary mock replies (delete once backend is ready) ───
+const getMockReply = (text) => {
+  const t = text.toLowerCase();
+  if (t.includes("project"))
+    return "Mehul's standout project is 1 Million Checkboxes — a real-time app scaled with Redis + WebSockets. He also published a custom CSS framework on npm!";
+  if (t.includes("skill") || t.includes("stack") || t.includes("tech"))
+    return "His core stack is React, Node.js, Express, MongoDB, Redis and WebSockets. He's strongest in backend architecture and performance optimization.";
+  if (t.includes("contact") || t.includes("email"))
+    return "You can reach Mehul at mehularora505@gmail.com or connect on LinkedIn and GitHub. He usually replies within 24 hours!";
+  if (t.includes("hire") || t.includes("available") || t.includes("work"))
+    return "Mehul is in his 1st year of B.Tech and open to freelance projects and internships. Feel free to reach out!";
+  return "Great question! I'd recommend reaching out to Mehul directly via the Contact section below.";
+};
+
+// ─── ChatHeader Component ───
+const ChatHeader = ({ onClear, onClose }) => (
+  <div
+    className="flex items-center justify-between px-5 py-4 flex-shrink-0"
+    style={{ borderBottom: "1px solid var(--divider)" }}
+  >
+    <div className="flex items-center gap-3">
+      <div
+        className="flex items-center justify-center w-9 h-9 rounded-xl text-xl"
+        style={{
+          background: "var(--accent-muted)",
+          border: "1px solid var(--accent-border)",
+          color: "var(--accent-light)",
+        }}
+      >
+        <RiRobot2Line />
+      </div>
+      <div>
+        <p className="font-bold text-sm theme-text leading-tight">Mehul's AI</p>
+        <p className="text-xs flex items-center gap-1.5" style={{ color: "var(--accent-light)" }}>
+          <span
+            className="inline-block w-1.5 h-1.5 rounded-full animate-pulse"
+            style={{ background: "var(--accent)" }}
+          />
+          Online
+        </p>
+      </div>
+    </div>
+
+    <div className="flex items-center gap-2">
+      <button
+        onClick={onClear}
+        title="Clear chat"
+        className="flex items-center justify-center w-8 h-8 rounded-xl theme-icon-btn transition-all duration-200"
+      >
+        <FiTrash2 className="text-sm" />
+      </button>
+      <button
+        onClick={onClose}
+        title="Close"
+        className="flex items-center justify-center w-8 h-8 rounded-xl theme-icon-btn transition-all duration-200"
+      >
+        <FiX className="text-sm" />
+      </button>
+    </div>
+  </div>
+);
+
+// ─── ChatMessage Component ───
+const ChatMessage = ({ msg, onSend }) => {
+  const isUser = msg.role === "user";
+  return (
+    <div
+      className={`flex flex-col gap-1 max-w-[88%] ${
+        isUser ? "self-end items-end" : "self-start items-start"
+      }`}
+    >
+      <span
+        className="text-[10px] uppercase tracking-wide px-1"
+        style={{ color: "var(--text-muted)" }}
+      >
+        {isUser ? "You" : "AI"}
+      </span>
+
+      <div
+        className="px-4 py-2.5 rounded-2xl text-sm leading-relaxed"
+        style={
+          isUser
+            ? {
+                background: "var(--accent-muted)",
+                border: "1px solid var(--accent-border)",
+                color: "var(--text-primary)",
+                borderBottomRightRadius: "4px",
+              }
+            : {
+                background: "var(--card-bg)",
+                border: "1px solid var(--card-border)",
+                color: "var(--text-primary)",
+                borderBottomLeftRadius: "4px",
+              }
+        }
+      >
+        {msg.text}
+      </div>
+
+      <span
+        className="text-[10px] px-1"
+        style={{ color: "var(--text-muted)" }}
+      >
+        {msg.time}
+      </span>
+
+      {msg.quickReplies && (
+        <div className="flex flex-wrap gap-2 mt-1">
+          {msg.quickReplies.map((qr, qi) => (
+            <button
+              key={qi}
+              onClick={() => onSend(qr.text)}
+              className="text-[11px] px-3 py-1.5 rounded-full transition-all duration-200 hover:-translate-y-0.5"
+              style={{
+                background: "transparent",
+                border: "1px solid var(--accent-border)",
+                color: "var(--accent-light)",
+              }}
+            >
+              {qr.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ─── TypingIndicator Component ───
+const TypingIndicator = () => (
+  <div className="self-start flex flex-col gap-1 items-start">
+    <span className="text-[10px] uppercase tracking-wide px-1" style={{ color: "var(--text-muted)" }}>
+      AI
+    </span>
+    <div
+      className="flex items-center gap-1.5 px-4 py-3 rounded-2xl"
+      style={{
+        background: "var(--card-bg)",
+        border: "1px solid var(--card-border)",
+        borderBottomLeftRadius: "4px",
+      }}
+    >
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className="w-1.5 h-1.5 rounded-full animate-bounce"
+          style={{
+            background: "var(--text-muted)",
+            animationDelay: `${i * 0.18}s`,
+          }}
+        />
+      ))}
+    </div>
+  </div>
+);
+
+// ─── ChatInput Component ───
+const ChatInput = ({
+  textareaRef,
+  input,
+  onChange,
+  onKeyDown,
+  onSend,
+  isSendDisabled,
+  charCount,
+  maxChars,
+}) => (
+  <div
+    className="flex flex-col gap-2 px-4 py-3 flex-shrink-0"
+    style={{ borderTop: "1px solid var(--divider)", minWidth: "320px" }}
+  >
+    <div className="flex items-end gap-2">
+      <textarea
+        ref={textareaRef}
+        value={input}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        placeholder="Ask anything about Mehul..."
+        rows={1}
+        className="flex-1 resize-none rounded-xl px-3 py-2.5 text-sm leading-relaxed theme-input focus:outline-none scroll-hide"
+      />
+      <button
+        onClick={() => onSend()}
+        disabled={isSendDisabled}
+        className="flex items-center justify-center w-9 h-9 rounded-xl flex-shrink-0 transition-all duration-200 hover:scale-105 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
+        style={{
+          background: "var(--accent)",
+          color: "var(--button-text)",
+          boxShadow: "var(--button-shadow)",
+        }}
+      >
+        <FiSend className="text-sm" />
+      </button>
+    </div>
+
+    <div className="flex items-center justify-between">
+      <div className="flex gap-1">
+        <button
+          title="Attach file"
+          className="flex items-center justify-center w-7 h-7 rounded-lg theme-icon-btn transition-all duration-200"
+        >
+          <FiPaperclip className="text-xs" />
+        </button>
+        <button
+          title="Voice message"
+          className="flex items-center justify-center w-7 h-7 rounded-lg theme-icon-btn transition-all duration-200"
+        >
+          <FiMic className="text-xs" />
+        </button>
+      </div>
+      <span className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+        {charCount} / {maxChars}
+      </span>
+    </div>
+  </div>
+);
+
 // ════════════════════════════════════════════════
 const AiChatBot = ({ isOpen, setIsOpen }) => {
-  const BASE_URL = import.meta.env.VITE_CLIENT_URL; // reuse your existing env var
   const [messages,  setMessages]  = useState([
     {
       role: "ai",
@@ -39,7 +255,7 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  // handle input change without auto-resizing textarea to prevent expanding the chatbot
+  // handle input change
   const handleInputChange = (e) => {
     const val = e.target.value;
     if (val.length > MAX_CHARS) return;
@@ -54,12 +270,11 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
     }
   };
 
-  // ─── SEND LOGIC — replace the fetch block with your AI API call ───
+  // send message logic
   const handleSend = async (overrideText) => {
     const text = (overrideText ?? input).trim();
     if (!text || isTyping) return;
 
-    // append user message
     setMessages((prev) => [
       ...prev,
       { role: "user", text, time: getTime() },
@@ -69,17 +284,6 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
     setIsTyping(true);
 
     try {
-      // ── REPLACE THIS BLOCK WITH YOUR AI CALL ──────────────────
-      // const res  = await fetch(`${BASE_URL}/api/chat`, {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ message: text }),
-      // });
-      // const data = await res.json();
-      // const reply = data.reply;
-      // ── END REPLACE ────────────────────────────────────────────
-
-      // temporary mock so the UI works before you wire the backend
       await new Promise((r) => setTimeout(r, 1000 + Math.random() * 600));
       const reply = getMockReply(text);
 
@@ -110,86 +314,19 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
       },
     ]);
 
-  // ─── temporary mock replies (delete once backend is ready) ───
-  const getMockReply = (text) => {
-    const t = text.toLowerCase();
-    if (t.includes("project"))
-      return "Mehul's standout project is 1 Million Checkboxes — a real-time app scaled with Redis + WebSockets. He also published a custom CSS framework on npm!";
-    if (t.includes("skill") || t.includes("stack") || t.includes("tech"))
-      return "His core stack is React, Node.js, Express, MongoDB, Redis and WebSockets. He's strongest in backend architecture and performance optimization.";
-    if (t.includes("contact") || t.includes("email"))
-      return "You can reach Mehul at mehularora505@gmail.com or connect on LinkedIn and GitHub. He usually replies within 24 hours!";
-    if (t.includes("hire") || t.includes("available") || t.includes("work"))
-      return "Mehul is in his 1st year of B.Tech and open to freelance projects and internships. Feel free to reach out!";
-    return "Great question! I'd recommend reaching out to Mehul directly via the Contact section below.";
-  };
-
-  // ════════════════════════════════════════════════
   return (
     <>
       {/* ── CHAT PANEL ── */}
       <div
-        className="fixed top-0 bottom-0 right-0 h-full w-[360px] max-w-full flex flex-col z-40"
+        className="fixed top-0 bottom-0 right-0 h-full w-[360px] max-w-full flex flex-col z-40 chatbot-panel"
         style={{
           transform: isOpen ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
           pointerEvents: isOpen ? "auto" : "none",
-          background: "var(--card-bg)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderLeft: "1px solid var(--card-border)",
-          boxShadow: "-8px 0 40px var(--accent-glow-soft)",
         }}
       >
         {/* Inner contents wrapper */}
         <div className="flex flex-col h-full w-[360px] flex-shrink-0">
-          {/* header */}
-          <div
-            className="flex items-center justify-between px-5 py-4 flex-shrink-0"
-            style={{ borderBottom: "1px solid var(--divider)" }}
-          >
-            <div className="flex items-center gap-3">
-              <div
-                className="flex items-center justify-center w-9 h-9 rounded-xl text-xl"
-                style={{
-                  background: "var(--accent-muted)",
-                  border: "1px solid var(--accent-border)",
-                  color: "var(--accent-light)",
-                }}
-              >
-                <RiRobot2Line />
-              </div>
-              <div>
-                <p className="font-bold text-sm theme-text leading-tight">Mehul's AI</p>
-                <p className="text-xs flex items-center gap-1.5" style={{ color: "var(--accent-light)" }}>
-                  <span
-                    className="inline-block w-1.5 h-1.5 rounded-full animate-pulse"
-                    style={{ background: "var(--accent)" }}
-                  />
-                  Online
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              {/* clear */}
-              <button
-                onClick={clearChat}
-                title="Clear chat"
-                className="flex items-center justify-center w-8 h-8 rounded-xl theme-icon-btn transition-all duration-200"
-              >
-                <FiTrash2 className="text-sm" />
-              </button>
-              {/* close */}
-              <button
-                onClick={() => setIsOpen(false)}
-                title="Close"
-                className="flex items-center justify-center w-8 h-8 rounded-xl theme-icon-btn transition-all duration-200"
-              >
-                <FiX className="text-sm" />
-              </button>
-            </div>
-          </div>
+          <ChatHeader onClear={clearChat} onClose={() => setIsOpen(false)} />
 
           {/* messages */}
           <div
@@ -206,153 +343,28 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
             </div>
 
             {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`flex flex-col gap-1 max-w-[88%] ${
-                  msg.role === "user" ? "self-end items-end" : "self-start items-start"
-                }`}
-              >
-                <span
-                  className="text-[10px] uppercase tracking-wide px-1"
-                  style={{ color: "var(--text-muted)" }}
-                >
-                  {msg.role === "user" ? "You" : "AI"}
-                </span>
-
-                <div
-                  className="px-4 py-2.5 rounded-2xl text-sm leading-relaxed"
-                  style={
-                    msg.role === "user"
-                      ? {
-                          background: "var(--accent-muted)",
-                          border: "1px solid var(--accent-border)",
-                          color: "var(--text-primary)",
-                          borderBottomRightRadius: "4px",
-                        }
-                      : {
-                          background: "var(--card-bg)",
-                          border: "1px solid var(--card-border)",
-                          color: "var(--text-primary)",
-                          borderBottomLeftRadius: "4px",
-                        }
-                  }
-                >
-                  {msg.text}
-                </div>
-
-                <span
-                  className="text-[10px] px-1"
-                  style={{ color: "var(--text-muted)" }}
-                >
-                  {msg.time}
-                </span>
-
-                {/* quick reply chips */}
-                {msg.quickReplies && (
-                  <div className="flex flex-wrap gap-2 mt-1">
-                    {msg.quickReplies.map((qr, qi) => (
-                      <button
-                        key={qi}
-                        onClick={() => handleSend(qr.text)}
-                        className="text-[11px] px-3 py-1.5 rounded-full transition-all duration-200 hover:-translate-y-0.5"
-                        style={{
-                          background: "transparent",
-                          border: "1px solid var(--accent-border)",
-                          color: "var(--accent-light)",
-                        }}
-                      >
-                        {qr.label}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <ChatMessage key={i} msg={msg} onSend={handleSend} />
             ))}
 
-            {/* typing indicator */}
-            {isTyping && (
-              <div className="self-start flex flex-col gap-1 items-start">
-                <span className="text-[10px] uppercase tracking-wide px-1" style={{ color: "var(--text-muted)" }}>
-                  AI
-                </span>
-                <div
-                  className="flex items-center gap-1.5 px-4 py-3 rounded-2xl"
-                  style={{
-                    background: "var(--card-bg)",
-                    border: "1px solid var(--card-border)",
-                    borderBottomLeftRadius: "4px",
-                  }}
-                >
-                  {[0, 1, 2].map((i) => (
-                    <span
-                      key={i}
-                      className="w-1.5 h-1.5 rounded-full animate-bounce"
-                      style={{
-                        background: "var(--text-muted)",
-                        animationDelay: `${i * 0.18}s`,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+            {isTyping && <TypingIndicator />}
 
             <div ref={messagesEndRef} />
           </div>
 
-          {/* input area */}
-          <div
-            className="flex flex-col gap-2 px-4 py-3 flex-shrink-0"
-            style={{ borderTop: "1px solid var(--divider)", minWidth: "320px" }}
-          >
-            <div className="flex items-end gap-2">
-              <textarea
-                ref={textareaRef}
-                value={input}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
-                placeholder="Ask anything about Mehul..."
-                rows={1}
-                className="flex-1 resize-none rounded-xl px-3 py-2.5 text-sm leading-relaxed theme-input focus:outline-none scroll-hide"
-              />
-              <button
-                onClick={() => handleSend()}
-                disabled={!input.trim() || isTyping}
-                className="flex items-center justify-center w-9 h-9 rounded-xl flex-shrink-0 transition-all duration-200 hover:scale-105 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100"
-                style={{
-                  background: "var(--accent)",
-                  color: "var(--button-text)",
-                  boxShadow: "var(--button-shadow)",
-                }}
-              >
-                <FiSend className="text-sm" />
-              </button>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex gap-1">
-                <button
-                  title="Attach file"
-                  className="flex items-center justify-center w-7 h-7 rounded-lg theme-icon-btn transition-all duration-200"
-                >
-                  <FiPaperclip className="text-xs" />
-                </button>
-                <button
-                  title="Voice message"
-                  className="flex items-center justify-center w-7 h-7 rounded-lg theme-icon-btn transition-all duration-200"
-                >
-                  <FiMic className="text-xs" />
-                </button>
-              </div>
-              <span className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-                {charCount} / {MAX_CHARS}
-              </span>
-            </div>
-          </div>
+          <ChatInput
+            textareaRef={textareaRef}
+            input={input}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            onSend={handleSend}
+            isSendDisabled={!input.trim() || isTyping}
+            charCount={charCount}
+            maxChars={MAX_CHARS}
+          />
         </div>
       </div>
 
-  {/* ── FAB — bottom-right when closed, fades/scales away when open ── */}
+      {/* ── FAB ── */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className={`fixed z-50 flex items-center gap-2.5 px-4 py-3 rounded-full font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:scale-105 bottom-6 right-6 ${

@@ -372,3 +372,12 @@ body {
   perspective: 1000px;
 }
 
+.chatbot-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid var(--card-border);
+  box-shadow: -8px 0 40px var(--accent-glow-soft);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
