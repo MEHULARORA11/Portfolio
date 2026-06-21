@@ -14,7 +14,7 @@ const navItems = [
   { id: "videos", label: "Videos" },
 ];
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 /**
  * Sticky Glassmorphic Navbar with Active Section highlighting based on React Router location.

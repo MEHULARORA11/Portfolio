@@ -65,7 +65,7 @@ const HomeCard = () => {
           </span>
           <h1 
             className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight theme-text"
-            style={{ filter: "drop-shadow(0 0 22px var(--name-glow))" }}
+            style={{ textShadow: "0 0 22px var(--name-glow)" }}
           >
             Hi, I'm <span className="theme-highlight">Mehul Arora</span>
           </h1>
