@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionContainer from "../shared/SectionContainer";
@@ -18,9 +19,30 @@ import { Video } from "lucide-react";
  * dynamic media playbacks, and glassmorphic visual overlays.
  */
 export default function YoutubeSection() {
+  const [activeVideo, setActiveVideo] = useState(null);
+
+  const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(youtubeVideos || [], {
+    keys: ["title", "description", "tags"],
+  });
+
+  const {
+    visibleItems,
+    showMore,
+    showAll,
+    hasMore,
+    totalCount,
+    revealCount,
+    resetReveal,
+  } = usePaginatedReveal(filteredItems || [], 3, 4);
+
+  // Reset pagination reveal count when search query changes
+  React.useEffect(() => {
+    resetReveal();
+  }, [searchQuery, resetReveal]);
+
   if (!youtubeVideos || youtubeVideos.length === 0) {
     return (
-      <SectionContainer id="youtube">
+      <SectionContainer id="videos">
         <SectionHeading
           title="YouTube Content"
           subtitle="Cinematic Tech Showcases & Guides"
@@ -33,29 +55,9 @@ export default function YoutubeSection() {
       </SectionContainer>
     );
   }
-  const [activeVideo, setActiveVideo] = useState(null);
-
-  const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(youtubeVideos, {
-    keys: ["title", "description", "tags"],
-  });
-
-  const {
-    visibleItems,
-    showMore,
-    showAll,
-    hasMore,
-    totalCount,
-    revealCount,
-    resetReveal,
-  } = usePaginatedReveal(filteredItems, 3, 4);
-
-  // Reset pagination reveal count when search query changes
-  React.useEffect(() => {
-    resetReveal();
-  }, [searchQuery, resetReveal]);
 
   return (
-    <SectionContainer id="youtube">
+    <SectionContainer id="videos">
       <SectionHeading
         title="YouTube Content"
         subtitle="Cinematic Tech Showcases & Guides"

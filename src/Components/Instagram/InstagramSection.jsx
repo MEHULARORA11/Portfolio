@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Sparkles } from "lucide-react";
@@ -20,9 +21,30 @@ import ComingSoon from "../shared/ComingSoon";
  * custom pagination controls, and mobile device simulator embeds.
  */
 export default function InstagramSection() {
+  const [activeReel, setActiveReel] = useState(null);
+
+  const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(instagramReels || [], {
+    keys: ["title", "description", "tags"],
+  });
+
+  const {
+    visibleItems,
+    showMore,
+    showAll,
+    hasMore,
+    totalCount,
+    revealCount,
+    resetReveal,
+  } = usePaginatedReveal(filteredItems || [], 3, 4);
+
+  // Reset pagination reveal count when search query changes
+  React.useEffect(() => {
+    resetReveal();
+  }, [searchQuery, resetReveal]);
+
   if (!instagramReels || instagramReels.length === 0) {
     return (
-      <SectionContainer id="instagram">
+      <SectionContainer id="reels">
         <SectionHeading
           title="Instagram Reels"
           subtitle="Short Dev Tips & Hacks"
@@ -35,29 +57,9 @@ export default function InstagramSection() {
       </SectionContainer>
     );
   }
-  const [activeReel, setActiveReel] = useState(null);
-
-  const { searchQuery, setSearchQuery, filteredItems, clearSearch } = useSearch(instagramReels, {
-    keys: ["title", "description", "tags"],
-  });
-
-  const {
-    visibleItems,
-    showMore,
-    showAll,
-    hasMore,
-    totalCount,
-    revealCount,
-    resetReveal,
-  } = usePaginatedReveal(filteredItems, 3, 4);
-
-  // Reset pagination reveal count when search query changes
-  React.useEffect(() => {
-    resetReveal();
-  }, [searchQuery, resetReveal]);
 
   return (
-    <SectionContainer id="instagram">
+    <SectionContainer id="reels">
       <SectionHeading
         title="Instagram Reels"
         subtitle="Short Dev Tips & Hacks"

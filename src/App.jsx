@@ -1,49 +1,41 @@
-import React, { useState, useEffect, lazy, Suspense, useRef } from "react";
-import ThemeToggle from "./Components/ThemeToggle";
-import PortfolioLoader from "./Components/Portfolioloader";
-import Navbar from "./Components/Navbar";
+import React from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import Layout from "./Components/Layout";
 import Home from "./Pages/Home";
+import Projects from "./Pages/Projects";
+import Certificates from "./Pages/Certificates";
+import Blogs from "./Pages/Blogs";
+import Reels from "./Pages/Reels";
+import Videos from "./Pages/Videos";
 
-const AiChatBot = lazy(() => import("./Components/AiChatBot"));
-
-export default function App() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("portfolio-theme") || "dark";
-  });
-  const [showIntro, setShowIntro] = useState(true);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const logoRef = useRef(null);
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("portfolio-theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+/**
+ * Animated route renderer. Wraps Routes with AnimatePresence, using the current
+ * route's pathname as a key to trigger page transition exit/entry animations.
+ */
+function AnimatedRoutes() {
+  const location = useLocation();
 
   return (
-    <>
-      <Navbar logoRef={logoRef} theme={theme} />
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/certificates" element={<Certificates />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/reels" element={<Reels />} />
+        <Route path="/videos" element={<Videos />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
-      {showIntro && (
-        <PortfolioLoader
-          theme={theme}
-          name="Mehul Arora"
-          tagline="Full Stack Engineer"
-          targetRef={logoRef}
-          onFinish={() => setShowIntro(false)}
-        />
-      )}
-
-      <div className="min-h-screen transition-colors duration-500">
-        <ThemeToggle theme={theme} onToggle={toggleTheme} hide={isChatOpen} />
-        <Home />
-        <Suspense fallback={null}>
-          <AiChatBot isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
-        </Suspense>
-      </div>
-    </>
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Layout>
+        <AnimatedRoutes />
+      </Layout>
+    </BrowserRouter>
   );
 }
