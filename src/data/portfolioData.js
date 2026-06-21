@@ -1,79 +1,18 @@
 export const certificates = [
-  // {
-  //   id: "cert-1",
-  //   title: "AWS Certified Solutions Architect",
-  //   issuer: "Amazon Web Services (AWS)",
-  //   date: "Dec 2025",
-  //   tags: ["Cloud Architecture", "AWS", "Security", "Scalability"],
-  //   thumbnail: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",
-  //   credentialLink: "https://aws.amazon.com/verification",
-  // },
-  // {
-  //   id: "cert-2",
-  //   title: "Advanced React & Frontend Systems",
-  //   issuer: "Frontend Masters",
-  //   date: "Oct 2025",
-  //   tags: ["React 19", "Next.js", "Performance", "State Management"],
-  //   thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=600&auto=format&fit=crop",
-  //   credentialLink: "https://frontendmasters.com",
-  // },
-  // {
-  //   id: "cert-3",
-  //   title: "Google Cloud Professional Cloud Architect",
-  //   issuer: "Google Cloud (GCP)",
-  //   date: "Aug 2025",
-  //   tags: ["GCP", "Kubernetes", "DevOps", "Serverless"],
-  //   thumbnail: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=600&auto=format&fit=crop",
-  //   credentialLink: "https://cloud.google.com",
-  // },
-  // {
-  //   id: "cert-4",
-  //   title: "Meta Front-End Developer Professional",
-  //   issuer: "Meta / Coursera",
-  //   date: "Jun 2025",
-  //   tags: ["React", "JavaScript", "UI/UX", "Web Standards"],
-  //   thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop",
-  //   credentialLink: "https://coursera.org",
-  // },
-  // {
-  //   id: "cert-5",
-  //   title: "Advanced Data Structures & Algorithms",
-  //   issuer: "MITx / edX",
-  //   date: "Mar 2025",
-  //   tags: ["Algorithms", "Complexity", "Optimization", "Graphs"],
-  //   thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
-  //   credentialLink: "https://edx.org",
-  // },
-  // {
-  //   id: "cert-6",
-  //   title: "UI/UX Design Masterclass",
-  //   issuer: "Interaction Design Foundation",
-  //   date: "Jan 2025",
-  //   tags: ["Figma", "Design Systems", "Prototyping", "A11y"],
-  //   thumbnail: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=600&auto=format&fit=crop",
-  //   credentialLink: "https://interaction-design.org",
-  // },
-  // {
-  //   id: "cert-7",
-  //   title: "Certified Kubernetes Administrator (CKA)",
-  //   issuer: "The Linux Foundation",
-  //   date: "Nov 2024",
-  //   tags: ["Kubernetes", "Docker", "Containers", "Orchestration"],
-  //   thumbnail: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=600&auto=format&fit=crop",
-  //   credentialLink: "https://linuxfoundation.org",
-  // },
-  // {
-  //   id: "cert-8",
-  //   title: "Generative AI Developer Certification",
-  //   issuer: "NVIDIA Deep Learning Institute",
-  //   date: "Sep 2024",
-  //   tags: ["LLMs", "LangChain", "Neural Networks", "Python"],
-  //   thumbnail: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=600&auto=format&fit=crop",
-  //   credentialLink: "https://nvidia.com/dli",
-  // }
-];
+  {
+    id: "cert-1",
+    title: "Zenith 5.0",
+    issuer: "unstop.com",
+    date: "May 2026",
+    tags: ["Zenith 5.0", "hackathon", "jcbust"],
+    thumbnail: "https://images.unsplash.com/photo-1782038793351-ee4fed3b14a4?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    credentialLink: "https://unstop.com/certificate-preview/0716ff08-88eb-4294-b510-6e150945774c?utm_campaign=site-emails&utm_medium=d2c-automated&utm_source=wow-look-at-your-certificate-zenith-50",
+  },
+  // below is the dummy certs
+  ];
 
 export const youtubeVideos = [
+  // below is the dummy vidios data
   // {
   //   id: "yt-1",
   //   title: "Building an Award-Winning 3D Developer Portfolio with R3F & GSAP",
@@ -83,72 +22,10 @@ export const youtubeVideos = [
   //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
   //   tags: ["React Three Fiber", "3D Web", "GSAP", "Tutorial"],
   // },
-  // {
-  //   id: "yt-2",
-  //   title: "Advanced Framer Motion: Mastering Custom Springs & Layout Animations",
-  //   description: "Ditch the default transitions. We dive deep into custom spring physics configurations, shared layout animations with layoutId, and layout orchestration.",
-  //   duration: "18:40",
-  //   thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  //   tags: ["Framer Motion", "Animations", "UI/UX", "Micro-interactions"],
-  // },
-  // {
-  //   id: "yt-3",
-  //   title: "Next.js 16 Server Components & RSC Payload Architecture Deep Dive",
-  //   description: "An architectural guide to React Server Components. Understand the RSC wire format, chunked HTML streaming, and how to avoid client-boundary leaks.",
-  //   duration: "32:10",
-  //   thumbnail: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  //   tags: ["Next.js", "React Server Components", "Performance", "Web Architecture"],
-  // },
-  // {
-  //   id: "yt-4",
-  //   title: "We Scaled a Real-Time App to 1M Connected WebSockets. Here's How.",
-  //   description: "A look under the hood of scaling websocket systems. We explore Redis pub/sub adapters, Node.js cluster load balancing, and memory leaks troubleshooting.",
-  //   duration: "21:05",
-  //   thumbnail: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  //   tags: ["WebSockets", "Node.js", "Redis", "System Design"],
-  // },
-  // {
-  //   id: "yt-5",
-  //   title: "Tailwind CSS v4.0: Complete Migration Guide & Benchmark Performance",
-  //   description: "Is the new Rust-based engine really 10x faster? We migrate a medium enterprise app to Tailwind CSS v4, comparing compilation times and CSS bundles.",
-  //   duration: "14:50",
-  //   thumbnail: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  //   tags: ["Tailwind CSS", "Vite", "Build Tools", "Frontend"],
-  // },
-  // {
-  //   id: "yt-6",
-  //   title: "60fps Scroll Animations: Stopping Layout Thrashing & Jank",
-  //   description: "How browser reflows kill your scroll performance. Learn to profile rendering bottlenecks in Chrome DevTools and implement window.requestAnimationFrame cleanups.",
-  //   duration: "27:30",
-  //   thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  //   tags: ["Performance", "Chrome DevTools", "CSS", "Optimization"],
-  // },
-  // {
-  //   id: "yt-7",
-  //   title: "Building My Own Styling Engine: Behind 'Talwinder CSS'",
-  //   description: "A fun deep-dive into creating a lightweight, utility-first CSS preprocessor from scratch. Parsing rules, generating stylesheet maps, and publishing to npm.",
-  //   duration: "19:15",
-  //   thumbnail: "https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  //   tags: ["npm", "JavaScript", "CSS Engine", "OSS"],
-  // },
-  // {
-  //   id: "yt-8",
-  //   title: "Redis vs Memcached: Selecting the Right Caching Layer in 2026",
-  //   description: "Comparing data types, clustering, persistence options, and memory utilization for caching layers. When to choose what for microservice communication.",
-  //   duration: "16:20",
-  //   thumbnail: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-  //   tags: ["Redis", "Caching", "Databases", "Backend"],
-  // }
 ];
 
 export const instagramReels = [
+  // below is the dummy video data
   // {
   //   id: "ig-1",
   //   title: "3 UI Hacks to Make Your Site Feel Apple-Level Premium",
@@ -158,63 +35,10 @@ export const instagramReels = [
   //   videoUrl: "https://www.instagram.com/reels/videos",
   //   tags: ["UI Hacks", "Web Design", "CSS"],
   // },
-  // {
-  //   id: "ig-2",
-  //   title: "Why scroll listeners crash mobile devices & how to fix it",
-  //   description: "Explaining why updating React state on window scroll triggers layout thrashing. Switch to useScroll and CSS scroll-driven animations today.",
-  //   duration: "0:55",
-  //   thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.instagram.com/reels/videos",
-  //   tags: ["Performance", "Mobile", "React Hooks"],
-  // },
-  // {
-  //   id: "ig-3",
-  //   title: "GSAP ScrollTrigger in 45 Seconds: Pinning & Scrubbing",
-  //   description: "Quick breakdown of ScrollTrigger's start, end, pin, and scrub parameters. The canonical setup for vertical-scroll stack effects.",
-  //   duration: "0:45",
-  //   thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.instagram.com/reels/videos",
-  //   tags: ["GSAP", "ScrollTrigger", "Animation"],
-  // },
-  // {
-  //   id: "ig-4",
-  //   title: "Designing Bento Grids without empty space bugs",
-  //   description: "Stop using random flex-basis. Use CSS Grid auto-fit and span coordinates for bulletproof bento grid responsiveness.",
-  //   duration: "0:58",
-  //   thumbnail: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.instagram.com/reels/videos",
-  //   tags: ["CSS Grid", "Bento Grid", "Responsive Design"],
-  // },
-  // {
-  //   id: "ig-5",
-  //   title: "The Lila Rule: Calibrating your accent glow strengths",
-  //   description: "Stop glowing everything. Limit accent glow to 14% opacity for standard borders and keep high contrast tags still. Less is more.",
-  //   duration: "0:50",
-  //   thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.instagram.com/reels/videos",
-  //   tags: ["Color Design", "Aesthetics", "Web Design"],
-  // },
-  // {
-  //   id: "ig-6",
-  //   title: "Vite build speed optimization using bundle splitters",
-  //   description: "Using manualChunks in vite.config to isolate heavy packages like Three.js and Framer Motion into separate async chunks.",
-  //   duration: "0:52",
-  //   thumbnail: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.instagram.com/reels/videos",
-  //   tags: ["Vite", "Web Performance", "Bundling"],
-  // },
-  // {
-  //   id: "ig-7",
-  //   title: "Keyboard Focus States: The outlines you shouldn't hide",
-  //   description: "Never set outline: none without fallback :focus-visible selectors. Designing custom high-contrast focus rings that look premium.",
-  //   duration: "0:57",
-  //   thumbnail: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?q=80&w=600&auto=format&fit=crop",
-  //   videoUrl: "https://www.instagram.com/reels/videos",
-  //   tags: ["Accessibility", "A11y", "HTML & CSS"],
-  // }
 ];
 
 export const blogs = [
+  // below is the dummy blog data
 //   {
 //     id: "blog-1",
 //     title: "Deep Diving into React 19 Compiler: The Death of useMemo?",

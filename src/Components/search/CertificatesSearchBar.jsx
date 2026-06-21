@@ -18,7 +18,7 @@ export default function CertificatesSearchBar({
     containerRef.current.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
   };
 
-  const popularTags = ["AWS", "GCP", "Kubernetes", "React", "Cloud", "UI/UX"];
+  const popularTags = ["hackathon"];
 
   return (
     <div className="w-full max-w-2xl mx-auto mb-10 select-none">

@@ -75,17 +75,17 @@ const Home = () => {
       
       {/* <Suspense fallback={<BlogLoader />}>
         <BlogsSection />
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={<CertificateLoader />}>
         <CertificatesSection />
       </Suspense>
 
-      <Suspense fallback={<VideoLoader />}>
+      {/* <Suspense fallback={<VideoLoader />}>
         <YoutubeSection />
-      </Suspense>
+      </Suspense> */}
 
-      <Suspense fallback={<ReelLoader />}>
+      {/* <Suspense fallback={<ReelLoader />}>
         <InstagramSection />
       </Suspense> */}
 
