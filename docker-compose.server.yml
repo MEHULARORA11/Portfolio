@@ -1,5 +1,3 @@
-name: server-application-a
-
 services:
   api-service:
     build:
