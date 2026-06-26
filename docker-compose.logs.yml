@@ -6,7 +6,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      - internal-b
+      - internal-a
 
   nginx:
     image: nginx:latest
@@ -19,18 +19,18 @@ services:
       - 80
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.logs-svc2.rule=Host(`log.mehularora.dev`)'
-      - 'traefik.http.services.logs-svc2.loadbalancer.server.port=80'
-      - 'traefik.http.routers.logs-svc2.entrypoints=websecure'
-      - 'traefik.docker.network=traefik-dozzle-b'
-      - 'traefik.http.routers.logs-svc2.tls=true'
-      - 'traefik.http.routers.logs-svc2.tls.certresolver=cert-resolver'
+      - 'traefik.http.routers.logs-svc.rule=Host(`logs.mehularora.dev`)'
+      - 'traefik.http.services.logs-svc.loadbalancer.server.port=80'
+      - 'traefik.http.routers.logs-svc.entrypoints=websecure'
+      - 'traefik.docker.network=traefik-dozzle-a'
+      - 'traefik.http.routers.logs-svc.tls=true'
+      - 'traefik.http.routers.logs-svc.tls.certresolver=cert-resolver'
     networks:
-      - internal-b
-      - traefik-dozzle-b
+      - internal-a
+      - traefik-dozzle-a
 
 networks:
-  internal-b:
+  internal-a:
     driver: bridge
-  traefik-dozzle-b:
+  traefik-dozzle-a:
     external: true

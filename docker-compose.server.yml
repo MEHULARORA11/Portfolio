@@ -1,7 +1,7 @@
-name: server-application-b
+name: server-application-a
 
 services:
-  api-service2:
+  api-service:
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,7 +9,7 @@ services:
     deploy:
       replicas: 5
     networks:
-      - internal-b
+      - internal-a
 
   caddy:
     image: caddy:latest
@@ -18,18 +18,18 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.my-router2.rule=Host(`ex.mehularora.dev`)'
-      - 'traefik.http.services.my-router2.loadbalancer.server.port=80'
-      - 'traefik.http.routers.my-router2.entrypoints=websecure'
-      - 'traefik.docker.network=project-b-network'
-      - 'traefik.http.routers.my-router2.tls=true'
-      - 'traefik.http.routers.my-router2.tls.certresolver=cert-resolver'
+      - 'traefik.http.routers.my-router.rule=Host(`excloud.mehularora.dev`)'
+      - 'traefik.http.services.my-router.loadbalancer.server.port=80'
+      - 'traefik.http.routers.my-router.entrypoints=websecure'
+      - 'traefik.docker.network=project-a-network'
+      - 'traefik.http.routers.my-router.tls=true'
+      - 'traefik.http.routers.my-router.tls.certresolver=cert-resolver'
     networks:
-      - project-b-network
-      - internal-b
+      - project-a-network
+      - internal-a
 
 networks:
-  internal-b:
+  internal-a:
     driver: bridge
-  project-b-network:
+  project-a-network:
     external: true
