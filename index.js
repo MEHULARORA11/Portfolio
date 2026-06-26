@@ -1,10 +1,10 @@
+import 'dotenv/config'
 import express from 'express'
 import {sendEmailToMehul} from './email.js'
-import 'dotenv/config'
 import cors from 'cors'
 
 const app = express();
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 80
 const BASE_URL = process.env.CLIENT_URL
 
 app.use(express.json());
@@ -14,6 +14,10 @@ app.use(cors({
     methods:"POST",
     origin:"*"
 }))
+
+app.get('/', (_, res) => {
+  return res.status(200).json({ message: 'Portfolio API is running' })
+})
 
 app.post('/api/post', async (req, res) => {
    try {
