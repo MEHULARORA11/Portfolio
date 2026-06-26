@@ -18,7 +18,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.my-router.rule=Host(`excloud.mehularora.dev`)'
+      - 'traefik.http.routers.my-router.rule=Host(`mehularora.dev`)'
       - 'traefik.http.services.my-router.loadbalancer.server.port=80'
       - 'traefik.http.routers.my-router.entrypoints=websecure'
       - 'traefik.docker.network=project-a-network'
