@@ -1,0 +1,36 @@
+services:
+  dozzle:
+    image: amir20/dozzle:latest
+    expose:
+      - 8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - internal-b
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      dozzle:
+        condition: service_started
+    expose:
+      - 80
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.logs-svc2.rule=Host(`log.mehularora.dev`)'
+      - 'traefik.http.services.logs-svc2.loadbalancer.server.port=80'
+      - 'traefik.http.routers.logs-svc2.entrypoints=websecure'
+      - 'traefik.docker.network=traefik-dozzle-b'
+      - 'traefik.http.routers.logs-svc2.tls=true'
+      - 'traefik.http.routers.logs-svc2.tls.certresolver=cert-resolver'
+    networks:
+      - internal-b
+      - traefik-dozzle-b
+
+networks:
+  internal-b:
+    driver: bridge
+  traefik-dozzle-b:
+    external: true
