@@ -8,14 +8,8 @@ services:
     restart: always
     deploy:
       replicas: 5
-    networks:
-      - internal-a
-
-  caddy:
-    image: caddy:latest
-    restart: always
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    environment:
+      - PORT=80
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.my-router.rule=Host(`excloud.mehularora.dev`)'
@@ -24,6 +18,15 @@ services:
       - 'traefik.docker.network=project-a-network'
       - 'traefik.http.routers.my-router.tls=true'
       - 'traefik.http.routers.my-router.tls.certresolver=cert-resolver'
+    networks:
+      - internal-a
+      - project-a-network
+
+  caddy:
+    image: caddy:latest
+    restart: always
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
     networks:
       - project-a-network
       - internal-a

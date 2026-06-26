@@ -34,18 +34,13 @@ services:
     networks:
       - traefik
       - project-a-network
-      - project-b-network
       - traefik-dozzle-a
-      - traefik-dozzle-b
 
 networks:
   traefik:
     name: traefik
   project-a-network:
     name: project-a-network
-  project-b-network:
-    name: project-b-network
   traefik-dozzle-a:
     name: traefik-dozzle-a
-  traefik-dozzle-b:
-    name: traefik-dozzle-b
+

@@ -25,5 +25,5 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/index.js ./index.js
 COPY --from=builder /app/email.js ./email.js
 
-EXPOSE 4000
+EXPOSE 80
 CMD ["node", "index.js"]
