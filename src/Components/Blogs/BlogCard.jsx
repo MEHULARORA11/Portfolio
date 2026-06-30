@@ -49,7 +49,7 @@ export default function BlogCard({
         onKeyDown={(e) => e.key === "Enter" && onClick()}
         role="button"
         tabIndex={0}
-        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 transition-all duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 transition-all duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:shadow-[0_0_30px_var(--accent-glow-soft)] cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
         style={{
           boxShadow: "var(--card-shadow)",
         }}

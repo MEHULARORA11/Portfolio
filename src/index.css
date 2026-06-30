@@ -1,111 +1,115 @@
-@import url('https://fonts.googleapis.com/css2?family=Gabarito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Emerald Nebula (Dark) ─── */
+/* ─── Emerald Cyber Nebula (Dark) ─── */
 :root,
 [data-theme="dark"] {
-  --bg-gradient: radial-gradient(ellipse at 20% 0%, #0a2e1f 0%, #03140e 42%, #010a06 100%);
-  --text-primary: #ecfdf5;
-  --text-secondary: #a7f3d0;
-  --text-muted: #6ee7b7;
-  --text-label: #86efac;
-  --gradient-text-from: #6ee7b7;
-  --gradient-text-to: #10b981;
-  --card-bg: rgba(6, 78, 59, 0.22);
-  --card-border: rgba(16, 185, 129, 0.18);
-  --card-hover-bg: rgba(6, 78, 59, 0.38);
-  --card-hover-border: rgba(52, 211, 153, 0.38);
-  --card-shadow: 0 0 40px rgba(0, 0, 0, 0.45);
-  --card-hover-shadow: 0 0 55px rgba(16, 185, 129, 0.22);
+  --bg-gradient: radial-gradient(circle at 50% 50%, #060608 0%, #020203 60%, #000000 100%);
+  --text-primary: #f0fdf4;
+  --text-secondary: #adbac7;
+  --text-muted: #10b981;
+  --text-label: #34d399;
+  --gradient-text-from: #10b981;
+  --gradient-text-to: #00ff66;
+  --card-bg: rgba(10, 10, 12, 0.7);
+  --card-border: rgba(16, 185, 129, 0.12);
+  --card-hover-bg: rgba(14, 14, 17, 0.85);
+  --card-hover-border: rgba(0, 255, 102, 0.35);
+  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
+  --card-hover-shadow: 0 15px 45px rgba(0, 255, 102, 0.15);
   --accent: #10b981;
-  --accent-light: #34d399;
+  --accent-light: #00ff66;
   --accent-dark: #059669;
-  --accent-muted: rgba(16, 185, 129, 0.14);
-  --accent-border: rgba(16, 185, 129, 0.28);
-  --accent-glow: rgba(16, 185, 129, 0.42);
-  --accent-glow-soft: rgba(16, 185, 129, 0.16);
-  --highlight-text: #6ee7b7;
-  --highlight-glow: rgba(52, 211, 153, 0.55);
+  --accent-muted: rgba(16, 185, 129, 0.08);
+  --accent-border: rgba(16, 185, 129, 0.22);
+  --accent-glow: rgba(0, 255, 102, 0.35);
+  --accent-glow-soft: rgba(16, 185, 129, 0.12);
+  --highlight-text: #00ff66;
+  --highlight-glow: rgba(0, 255, 102, 0.45);
   --button-bg: #10b981;
-  --button-hover: #059669;
-  --button-text: #042f1a;
-  --button-shadow: 0 4px 20px rgba(16, 185, 129, 0.35);
-  --button-shadow-hover: 0 4px 28px rgba(16, 185, 129, 0.5);
-  --input-bg: rgba(6, 78, 59, 0.18);
-  --input-border: rgba(16, 185, 129, 0.16);
-  --input-focus-border: #34d399;
-  --input-focus-bg: rgba(6, 78, 59, 0.3);
-  --input-focus-shadow: 0 0 18px rgba(16, 185, 129, 0.22);
-  --input-placeholder: rgba(134, 239, 172, 0.65);
-  --overlay: rgba(1, 10, 6, 0.58);
-  --divider: rgba(16, 185, 129, 0.14);
-  --icon-float: rgba(236, 253, 245, 0.07);
-  --scrollbar-thumb: #047857;
-  --shadow-color: rgba(16, 185, 129, 0.3);
-  --toggle-track: rgba(4, 47, 26, 0.55);
+  --button-hover: #00ff66;
+  --button-text: #04120a;
+  --button-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
+  --button-shadow-hover: 0 4px 28px rgba(0, 255, 102, 0.4);
+  --input-bg: rgba(12, 12, 14, 0.6);
+  --input-border: rgba(16, 185, 129, 0.14);
+  --input-focus-border: #00ff66;
+  --input-focus-bg: rgba(16, 16, 20, 0.8);
+  --input-focus-shadow: 0 0 18px rgba(0, 255, 102, 0.18);
+  --input-placeholder: rgba(16, 185, 129, 0.5);
+  --overlay: rgba(0, 0, 0, 0.8);
+  --divider: rgba(16, 185, 129, 0.1);
+  --icon-float: rgba(16, 185, 129, 0.05);
+  --scrollbar-thumb: #059669;
+  --shadow-color: rgba(16, 185, 129, 0.25);
+  --toggle-track: rgba(10, 10, 12, 0.8);
   --toggle-thumb: #10b981;
-  --toggle-text: #86efac;
-  --toggle-text-active: #042f1a;
-  --arrow-color: #34d399;
-  --name-glow: rgba(52, 211, 153, 0.38);
-  --shimmer: rgba(52, 211, 153, 0.08);
+  --toggle-text: #34d399;
+  --toggle-text-active: #04120a;
+  --arrow-color: #00ff66;
+  --name-glow: rgba(0, 255, 102, 0.25);
+  --shimmer: rgba(0, 255, 102, 0.06);
 }
 
 /* ─── Sage Mist (Light — soft botanical green, not white) ─── */
 [data-theme="light"] {
-  --bg-gradient: radial-gradient(ellipse at 75% 5%, #eef8f1 0%, #d8ede2 38%, #c2dfd0 100%);
-  --text-primary: #063c2e;
+  --bg-gradient: radial-gradient(ellipse at 75% 5%, #f4faf6 0%, #e2eee6 45%, #d0e2d6 100%);
+  --text-primary: #042f1a;
   --text-secondary: #0b6c53;
   --text-muted: #1a6b57;
   --text-label: #2d7a62;
   --gradient-text-from: #0f9b6e;
   --gradient-text-to: #064e3b;
-  --card-bg: rgba(255, 255, 255, 0.48);
-  --card-border: rgba(11, 108, 83, 0.2);
-  --card-hover-bg: rgba(255, 255, 255, 0.72);
-  --card-hover-border: rgba(11, 108, 83, 0.38);
-  --card-shadow: 0 8px 32px rgba(6, 60, 46, 0.09);
-  --card-hover-shadow: 0 14px 44px rgba(11, 108, 83, 0.16);
+  --card-bg: rgba(255, 255, 255, 0.65);
+  --card-border: rgba(11, 108, 83, 0.15);
+  --card-hover-bg: rgba(255, 255, 255, 0.9);
+  --card-hover-border: rgba(11, 108, 83, 0.35);
+  --card-shadow: 0 8px 32px rgba(6, 60, 46, 0.06);
+  --card-hover-shadow: 0 14px 44px rgba(11, 108, 83, 0.12);
   --accent: #0b6c53;
   --accent-light: #10b981;
   --accent-dark: #064e3b;
-  --accent-muted: rgba(11, 108, 83, 0.1);
-  --accent-border: rgba(11, 108, 83, 0.22);
-  --accent-glow: rgba(11, 108, 83, 0.28);
-  --accent-glow-soft: rgba(11, 108, 83, 0.1);
+  --accent-muted: rgba(11, 108, 83, 0.06);
+  --accent-border: rgba(11, 108, 83, 0.16);
+  --accent-glow: rgba(11, 108, 83, 0.2);
+  --accent-glow-soft: rgba(11, 108, 83, 0.06);
   --highlight-text: #0b6c53;
-  --highlight-glow: rgba(11, 108, 83, 0.28);
+  --highlight-glow: rgba(11, 108, 83, 0.2);
   --button-bg: #0b6c53;
   --button-hover: #064e3b;
   --button-text: #f0fdf4;
-  --button-shadow: 0 4px 20px rgba(11, 108, 83, 0.22);
-  --button-shadow-hover: 0 4px 28px rgba(11, 108, 83, 0.36);
-  --input-bg: rgba(255, 255, 255, 0.55);
-  --input-border: rgba(11, 108, 83, 0.16);
+  --button-shadow: 0 4px 20px rgba(11, 108, 83, 0.15);
+  --button-shadow-hover: 0 4px 28px rgba(11, 108, 83, 0.25);
+  --input-bg: rgba(255, 255, 255, 0.7);
+  --input-border: rgba(11, 108, 83, 0.14);
   --input-focus-border: #0b6c53;
-  --input-focus-bg: rgba(255, 255, 255, 0.82);
-  --input-focus-shadow: 0 0 18px rgba(11, 108, 83, 0.14);
-  --input-placeholder: rgba(45, 122, 98, 0.7);
-  --overlay: rgba(6, 60, 46, 0.38);
-  --divider: rgba(11, 108, 83, 0.12);
-  --icon-float: rgba(6, 60, 46, 0.055);
-  --scrollbar-thumb: #6ee7b7;
-  --shadow-color: rgba(11, 108, 83, 0.16);
-  --toggle-track: rgba(194, 223, 208, 0.85);
+  --input-focus-bg: rgba(255, 255, 255, 0.95);
+  --input-focus-shadow: 0 0 18px rgba(11, 108, 83, 0.1);
+  --input-placeholder: rgba(45, 122, 98, 0.6);
+  --overlay: rgba(6, 60, 46, 0.25);
+  --divider: rgba(11, 108, 83, 0.1);
+  --icon-float: rgba(6, 60, 46, 0.04);
+  --scrollbar-thumb: #10b981;
+  --shadow-color: rgba(11, 108, 83, 0.1);
+  --toggle-track: rgba(200, 225, 212, 0.8);
   --toggle-thumb: #0b6c53;
   --toggle-text: #2d7a62;
   --toggle-text-active: #f0fdf4;
   --arrow-color: #0b6c53;
-  --name-glow: rgba(11, 108, 83, 0.22);
-  --shimmer: rgba(11, 108, 83, 0.06);
+  --name-glow: rgba(11, 108, 83, 0.15);
+  --shimmer: rgba(11, 108, 83, 0.04);
 }
 
 * {
   scroll-behavior: smooth;
-  font-family: 'Gabarito', sans-serif;
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-mono, code, pre, .theme-text-label, .tech-tag {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 html {
@@ -380,4 +384,14 @@ body {
   box-shadow: -8px 0 40px var(--accent-glow-soft);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.grid-overlay {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 100%);
+}
+
 

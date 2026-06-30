@@ -173,43 +173,43 @@ const useProgress = (duration, isControlled, controlledProgress) => {
 // ─── pure theme generator helper ───
 const getThemeStyles = (isDark) => {
   const fb = {
-    bg1: isDark ? "#08080c" : "#f6f6fa",
-    bg2: isDark ? "#13131c" : "#ebebf2",
-    border: isDark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.10)",
-    accent: isDark ? "#22c55e" : "#16a34a",
-    glow: isDark ? "rgba(34,197,94,0.35)" : "rgba(22,163,74,0.25)",
+    bg1: isDark ? "#030303" : "#f4f9f5",
+    bg2: isDark ? "#08080a" : "#e2ede6",
+    border: isDark ? "rgba(16, 185, 129, 0.15)" : "rgba(11, 108, 83, 0.12)",
+    accent: isDark ? "#00ff66" : "#0b6c53",
+    glow: isDark ? "rgba(0, 255, 102, 0.3)" : "rgba(11, 108, 83, 0.15)",
   };
 
   const editor = isDark
     ? {
-        panel: "#0d1117",
+        panel: "#08080a",
         gutter: "rgba(0,0,0,0.22)",
-        tabActive: "#161b22",
-        chromeText: "#7d8590",
+        tabActive: "#0f0f13",
+        chromeText: "#52525b",
       }
     : {
         panel: "#ffffff",
         gutter: "rgba(0,0,0,0.035)",
-        tabActive: "#f6f8fa",
+        tabActive: "#f4f9f5",
         chromeText: "#6e7781",
       };
 
   const syn = isDark
     ? {
-        comment: "#6e7681",
-        keyword: "#c792ea",
-        variable: "#79c0ff",
-        property: "#7ee787",
-        string: "var(--accent, #7ee787)",
-        punct: "#9aa5b1",
-        func: "#ffcb6b",
-        tag: "#f07178",
-        plain: "#e6edf3",
-        success: "#7ee787",
+        comment: "#52525b",
+        keyword: "#00ff66",
+        variable: "#a1a1aa",
+        property: "#34d399",
+        string: "#10b981",
+        punct: "#71717a",
+        func: "#6ee7b7",
+        tag: "#34d399",
+        plain: "#e4e4e7",
+        success: "#00ff66",
       }
     : {
         comment: "#8b949e",
-        keyword: "#9333ea",
+        keyword: "#0b6c53",
         variable: "#1f6feb",
         property: "#0d9488",
         string: "var(--accent, #0d9488)",

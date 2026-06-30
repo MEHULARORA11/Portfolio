@@ -92,7 +92,7 @@ const ProjectCard = ({
       <div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md transition-all duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)]"
+        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md transition-all duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:shadow-[0_0_30px_var(--accent-glow-soft)]"
         style={{
           boxShadow: "var(--card-shadow)",
         }}
@@ -156,7 +156,7 @@ const ProjectCard = ({
                   return (
                     <span
                       key={idx}
-                      className={`inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full border theme-text-muted bg-[var(--accent-muted)] border-[var(--accent-border)] transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-md cursor-default group-hover/techs:opacity-50 hover:!opacity-100 ${details.bg}`}
+                      className={`inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-mono font-semibold px-3 py-1 rounded-full border theme-text-muted bg-[var(--accent-muted)] border-[var(--accent-border)] transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-md cursor-default group-hover/techs:opacity-50 hover:!opacity-100 ${details.bg}`}
                     >
                       <IconComp className="text-xs sm:text-sm" />
                       <span>{tech}</span>

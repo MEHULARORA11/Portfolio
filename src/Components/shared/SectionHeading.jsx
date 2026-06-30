@@ -18,7 +18,7 @@ export default function SectionHeading({ title, subtitle }) {
       <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold gradient-text pb-2">
         {title}
       </h2>
-      <div className="h-[2px] w-full max-w-[200px] bg-gradient-to-right from-[var(--accent)] to-transparent mt-3 overflow-hidden rounded-full">
+      <div className="h-[2px] w-full max-w-[200px] bg-gradient-to-r from-[var(--accent)] to-transparent mt-3 overflow-hidden rounded-full">
         {!shouldReduceMotion && (
           <motion.div
             initial={{ x: "-100%" }}

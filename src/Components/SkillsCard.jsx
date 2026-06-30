@@ -93,7 +93,7 @@ const SkillsCard = ({ title }) => {
       </div>
 
       <div className="relative z-10">
-        <h3 className="font-bold text-lg theme-text group-hover:text-[var(--accent-light)] transition-colors duration-300">
+        <h3 className="font-semibold text-base theme-text group-hover:text-[var(--accent-light)] transition-colors duration-300">
           {title}
         </h3>
       </div>

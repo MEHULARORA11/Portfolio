@@ -75,9 +75,9 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
   return (
     <nav ref={navRef} className="fixed top-4 inset-x-0 z-40 transition-all duration-300">
       <div
-        className={`w-[92vw] sm:w-[88vw] lg:w-[80vw] mx-auto flex items-center justify-between px-4 sm:px-6 py-3 rounded-2xl transition-all duration-300 ${
+        className={`w-[92vw] sm:w-[88vw] lg:w-[80vw] mx-auto flex items-center justify-between px-4 sm:px-6 py-2.5 rounded-2xl transition-all duration-300 ${
           showGlassBg
-            ? "glass-card shadow-lg border-[var(--card-border)] bg-[var(--card-bg)]"
+            ? "glass-card shadow-[0_8px_32px_rgba(0,0,0,0.5)] border-[var(--card-border)] bg-[var(--card-bg)]"
             : "bg-transparent border-transparent border"
         }`}
       >
@@ -85,7 +85,7 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
         <Link
           ref={logoRef}
           to="/"
-          className="w-10 h-10 rounded-xl flex items-center justify-center font-bold cursor-pointer select-none shrink-0"
+          className="w-10 h-10 rounded-xl flex items-center justify-center font-bold font-mono cursor-pointer select-none shrink-0 border border-[var(--card-border)] shadow-[0_0_12px_var(--accent-glow-soft)] transition-all duration-300 hover:shadow-[0_0_18px_var(--accent-glow)]"
           style={{ background: "var(--accent)", color: "var(--button-text)" }}
           onClick={(e) => handleNavClick("home", e)}
         >
@@ -99,15 +99,15 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
               key={item.id}
               to={item.id === "home" ? "/" : `/${item.id}`}
               onClick={(e) => handleNavClick(item.id, e)}
-              className={`relative py-1.5 px-4 rounded-lg transition-colors duration-300 hover:text-[var(--accent)] ${
-                activeSection === item.id ? "text-[var(--accent)]" : "theme-text-secondary"
+              className={`relative py-2 px-4 rounded-xl transition-colors duration-300 z-10 ${
+                activeSection === item.id ? "text-[var(--button-text)]" : "theme-text-secondary hover:text-[var(--accent-light)]"
               }`}
             >
               {item.label}
               {activeSection === item.id && (
                 <motion.span
                   layoutId="activeNavTab"
-                  className="absolute bottom-0 left-4 right-4 h-[2px] rounded-full"
+                  className="absolute inset-0 rounded-xl -z-10 shadow-[0_0_15px_var(--accent-glow)]"
                   style={{ backgroundColor: "var(--accent)" }}
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />

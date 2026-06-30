@@ -82,8 +82,21 @@ export default function ComingSoon({
         {subtitle}
       </p>
 
-      {/* Ornamental footer line */}
-      <div className="h-[1px] w-1/3 bg-gradient-to-r from-transparent via-[var(--accent-border)] to-transparent mx-auto mt-8 opacity-50" />
+      {/* Mini Cyberpunk Log Terminal */}
+      <div className="mt-8 mx-auto w-full max-w-md bg-black/50 border border-[var(--card-border)] rounded-xl p-4 text-left font-mono text-[10.5px] text-emerald-400/90 shadow-[inset_0_1px_8px_rgba(0,0,0,0.6)]">
+        <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-[var(--card-border)] text-zinc-500">
+          <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
+          <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
+          <span className="w-2 h-2 rounded-full bg-[#28c840]" />
+          <span className="ml-1 text-[9px] uppercase tracking-wider font-semibold">CONSOLE // logs</span>
+        </div>
+        <div className="space-y-1 select-none font-medium">
+          <div><span className="text-zinc-600 font-bold">[info]</span> Initializing category loader for '{title}'</div>
+          <div><span className="text-zinc-600 font-bold">[status]</span> Syncing verification nodes...</div>
+          <div><span className="text-[var(--accent-light)] animate-pulse font-bold">[staging]</span> Compiling content artifacts...</div>
+          <div className="text-zinc-500 animate-pulse">&gt; _</div>
+        </div>
+      </div>
     </motion.div>
   );
 }

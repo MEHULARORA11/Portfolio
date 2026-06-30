@@ -44,7 +44,7 @@ export default function CertificateCard({
       <div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 transition-colors duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)]"
+        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 transition-all duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:shadow-[0_0_30px_var(--accent-glow-soft)]"
         style={{
           boxShadow: "var(--card-shadow)",
         }}
@@ -89,7 +89,7 @@ export default function CertificateCard({
               {tags.map((tag, idx) => (
                 <span
                   key={idx}
-                  className="text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full border theme-text-muted bg-[var(--accent-muted)] border-[var(--accent-border)] transition-all duration-300 hover:border-[var(--accent-light)]"
+                  className="text-[10px] sm:text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full border theme-text-muted bg-[var(--accent-muted)] border-[var(--accent-border)] transition-all duration-300 hover:border-[var(--accent-light)]"
                 >
                   <Highlight text={tag} query={searchQuery} />
                 </span>

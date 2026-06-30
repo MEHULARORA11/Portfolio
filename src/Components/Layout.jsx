@@ -97,7 +97,8 @@ export default function Layout({ children }) {
         />
       )}
 
-      <div className="w-[92vw] sm:w-[88vw] lg:w-[80vw] mx-auto overflow-x-hidden relative min-h-screen flex flex-col transition-colors duration-500">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden relative min-h-screen flex flex-col transition-colors duration-500">
+        <div className="absolute inset-0 grid-overlay pointer-events-none -z-10" />
         <FloatingTechBackground />
         
         <Navbar 
