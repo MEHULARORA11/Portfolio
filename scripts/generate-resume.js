@@ -39,16 +39,47 @@ doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_ACCENT).text('SOFTWARE
 doc.moveDown(0.35);
 
 // Contact Info Line
-doc.fontSize(9).font('Helvetica').fillColor(COLOR_MUTED);
-const contactInfo = [
-  'Faridabad, India',
-  'mehularora505@gmail.com',
-  'github.com/MEHULARORA11',
-  'linkedin.com/in/mehul-arora-32674b238',
-  'mehularora.dev'
+doc.fontSize(9).font('Helvetica');
+
+const parts = [
+  { text: 'Faridabad, India', color: COLOR_MUTED },
+  { text: 'mehularora505@gmail.com', color: COLOR_LINK, link: 'mailto:mehularora505@gmail.com' },
+  { text: 'GitHub', color: COLOR_LINK, link: 'https://github.com/MEHULARORA11' },
+  { text: 'LinkedIn', color: COLOR_LINK, link: 'https://www.linkedin.com/in/mehul-arora-32674b238/' },
+  { text: 'mehularora.dev', color: COLOR_LINK, link: 'https://mehularora.dev' }
 ];
 
-doc.text(contactInfo.join('  |  '), { align: 'center' });
+const separator = '  |  ';
+let totalWidth = 0;
+parts.forEach((part, index) => {
+  totalWidth += doc.widthOfString(part.text);
+  if (index < parts.length - 1) {
+    totalWidth += doc.widthOfString(separator);
+  }
+});
+
+const startX = (595.28 - totalWidth) / 2;
+
+parts.forEach((part, index) => {
+  doc.fillColor(part.color);
+  const options = { continued: index < parts.length - 1 };
+  if (part.link) {
+    options.link = part.link;
+    options.underline = true;
+  }
+  
+  if (index === 0) {
+    doc.text(part.text, startX, doc.y, options);
+  } else {
+    doc.text(part.text, options);
+  }
+  
+  if (index < parts.length - 1) {
+    doc.fillColor(COLOR_MUTED).text(separator, { continued: true, link: null, underline: false });
+  }
+});
+
+doc.x = 45; // Reset X position to default margin
 doc.moveDown(0.6);
 
 // Top Divider Line

@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import PageWrapper from "../Components/shared/PageWrapper";
 
 const Resume = () => {
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
     <PageWrapper>
       <div className="w-full flex flex-col items-center pt-24 pb-16 min-h-screen print:pt-0 print:pb-0 print:min-h-0">
@@ -22,16 +18,12 @@ const Resume = () => {
           </Link>
           
           <div className="flex items-center gap-3">
-            <button
-              onClick={handlePrint}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold theme-icon-btn hover:shadow-[0_0_15px_var(--accent-glow-soft)] active:scale-95"
-            >
-              <FiPrinter className="text-base" /> Print / Save as PDF
-            </button>
             <a
               href="/resume/Mehul_Arora_Resume.pdf"
               download="Mehul_Arora_Resume.pdf"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold theme-btn active:scale-95"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold theme-btn active:scale-95 hover:shadow-[0_0_20px_var(--accent-glow)]"
             >
               <FiDownload className="text-base" /> Download PDF
             </a>
@@ -106,9 +98,9 @@ const Resume = () => {
               <a href="https://www.linkedin.com/in/mehul-arora-32674b238/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[var(--accent-light)] transition-colors print:no-underline">
                 <FiLinkedin className="text-[var(--accent)] print:text-black" /> linkedin.com/in/mehul-arora-32674b238
               </a>
-              <span className="flex items-center gap-1.5">
+              <a href="https://mehularora.dev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[var(--accent-light)] transition-colors print:no-underline">
                 <FiGlobe className="text-[var(--accent)] print:text-black" /> mehularora.dev
-              </span>
+              </a>
             </div>
           </div>
 

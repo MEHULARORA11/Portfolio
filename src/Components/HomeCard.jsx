@@ -111,6 +111,8 @@ const HomeCard = () => {
           <a
             href="/resume/Mehul_Arora_Resume.pdf"
             download="Mehul_Arora_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="theme-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 hover:shadow-[0_0_20px_var(--accent-glow)]"
           >
             <FiDownload className="text-lg animate-bounce" style={{ animationDuration: '2s' }} /> Download Resume
