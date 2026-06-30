@@ -10,7 +10,7 @@ const Resume = () => {
 
   return (
     <PageWrapper>
-      <div className="w-full flex flex-col items-center pt-24 pb-16 min-h-screen">
+      <div className="w-full flex flex-col items-center pt-24 pb-16 min-h-screen print:pt-0 print:pb-0 print:min-h-0">
         
         {/* Navigation & Action Controls (Hidden when printing) */}
         <div className="w-full max-w-4xl flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 print:hidden">
@@ -44,6 +44,10 @@ const Resume = () => {
           {/* Print specific CSS stylesheet injection */}
           <style dangerouslySetInnerHTML={{__html: `
             @media print {
+              @page {
+                size: A4;
+                margin: 0.6in !important;
+              }
               body, html {
                 background: white !important;
                 color: black !important;
@@ -52,7 +56,7 @@ const Resume = () => {
                 padding: 0 !important;
               }
               /* Hide everything else */
-              nav, footer, .floating-tech, .grid-overlay, .print\\:hidden, #chatbot-container, .chatbot-panel {
+              nav, footer, .floating-tech, .grid-overlay, .print\\:hidden, #chatbot-container, .chatbot-panel, .chatbot-fab, button, a[href^="/resume/"] {
                 display: none !important;
               }
               /* Remove all containers' padding & background shadow */
@@ -71,7 +75,7 @@ const Resume = () => {
                 border-color: #d1d5db !important;
               }
               .print-divider {
-                border-color: #059669 !important;
+                border-color: #9ca3af !important;
               }
               a {
                 text-decoration: underline !important;
@@ -81,14 +85,11 @@ const Resume = () => {
 
           {/* HEADER */}
           <div className="flex flex-col items-center text-center pb-6 border-b theme-divider">
-            <h1 
-              className="text-4xl sm:text-5xl font-black tracking-tight theme-text"
-              style={{ textShadow: "0 0 15px var(--name-glow)" }}
-            >
+            <h1 className="text-4xl sm:text-5xl font-black tracking-tight theme-text">
               MEHUL ARORA
             </h1>
-            <p className="text-sm sm:text-base font-mono uppercase tracking-[0.2em] gradient-text font-bold mt-2">
-              Full Stack Developer // Backend Engineer
+            <p className="text-sm sm:text-base font-mono uppercase tracking-[0.15em] theme-text-secondary mt-2">
+              Software Engineer
             </p>
             
             {/* Contact Information */}
@@ -103,7 +104,7 @@ const Resume = () => {
                 <FiGithub className="text-[var(--accent)] print:text-black" /> github.com/MEHULARORA11
               </a>
               <a href="https://www.linkedin.com/in/mehul-arora-32674b238/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[var(--accent-light)] transition-colors print:no-underline">
-                <FiLinkedin className="text-[var(--accent)] print:text-black" /> linkedin/mehul-arora
+                <FiLinkedin className="text-[var(--accent)] print:text-black" /> linkedin.com/in/mehul-arora-32674b238
               </a>
               <span className="flex items-center gap-1.5">
                 <FiGlobe className="text-[var(--accent)] print:text-black" /> mehularora.dev
@@ -116,37 +117,37 @@ const Resume = () => {
             
             {/* 1. PROFESSIONAL SUMMARY */}
             <div>
-              <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-emerald-800 flex items-center gap-2 mb-2">
-                // Professional Summary
+              <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-black flex items-center gap-2 mb-1">
+                Professional Summary
               </h2>
               <div className="border-b print-divider border-[var(--accent-border)] mb-3" />
               <p className="text-base leading-relaxed theme-text-secondary">
-                Highly focused and detail-oriented Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets. Passionate about solving complex system-design problems, optimizing database queries, and creating modern, responsive user interfaces.
+                Detail-oriented Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets. Passionate about solving complex system-design problems, optimizing database queries, and creating modern, responsive user interfaces.
               </p>
             </div>
 
             {/* 2. TECHNICAL SKILLS */}
             <div>
-              <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-emerald-800 flex items-center gap-2 mb-2">
-                // Technical Skills
+              <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-black flex items-center gap-2 mb-1">
+                Technical Skills
               </h2>
               <div className="border-b print-divider border-[var(--accent-border)] mb-3" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-base">
                 <div className="flex flex-col gap-1.5">
-                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-emerald-800">Languages:</strong> JavaScript (ES6+), SQL, HTML5, CSS3</p>
-                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-emerald-800">Backend & APIs:</strong> Node.js, Express, Redis, WebSockets, REST APIs</p>
+                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Languages:</strong> JavaScript (ES6+), SQL, HTML5, CSS3</p>
+                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Backend & Tools:</strong> Node.js, Express, Redis, WebSockets, REST APIs, Git, npm</p>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-emerald-800">Frontend:</strong> React.js, Tailwind CSS, Framer Motion, HTML, CSS</p>
-                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-emerald-800">Databases & Tools:</strong> PostgreSQL, MongoDB, SQL, Git, npm</p>
+                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Frontend:</strong> React.js, Tailwind CSS, Framer Motion, HTML, CSS</p>
+                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Databases:</strong> PostgreSQL, MongoDB, SQL</p>
                 </div>
               </div>
             </div>
 
             {/* 3. PROJECTS */}
             <div>
-              <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-emerald-800 flex items-center gap-2 mb-2">
-                // Selected Projects
+              <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-black flex items-center gap-2 mb-1">
+                Projects
               </h2>
               <div className="border-b print-divider border-[var(--accent-border)] mb-4" />
               
@@ -157,15 +158,15 @@ const Resume = () => {
                     <h3 className="text-base font-bold theme-text">
                       1 Million Checkboxes <span className="text-xs font-mono font-normal theme-text-secondary">| React, Node, Express, Redis, WebSockets</span>
                     </h3>
-                    <div className="flex gap-3 text-xs font-mono print:hidden">
-                      <a href="https://github.com/MEHULARORA11/1-Million-CheckBoxes" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline">GitHub</a>
-                      <a href="https://checkboxes.mehularora.dev/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline">Demo</a>
+                    <div className="flex gap-3 text-xs font-mono">
+                      <a href="https://github.com/MEHULARORA11/1-Million-CheckBoxes" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">GitHub</a>
+                      <a href="https://checkboxes.mehularora.dev/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">Demo</a>
                     </div>
                   </div>
                   <ul className="list-disc pl-5 text-sm theme-text-secondary flex flex-col gap-1">
-                    <li>Scaled a collaborative real-time grid application to support 1 million checkboxes concurrently with sub-millisecond updates.</li>
-                    <li>Integrated Redis for memory-efficient state management, state caching, and rapid atomic key-value operations.</li>
-                    <li>Architected WebSockets connection pooling to handle thousands of concurrent client updates with low connection overhead.</li>
+                    <li>Scaled a collaborative real-time grid application supporting 1 million checkboxes concurrently with sub-millisecond updates.</li>
+                    <li>Integrated Redis for memory-efficient state management, pub-sub messaging, and rapid atomic key-value operations.</li>
+                    <li>Architected WebSockets connection pooling and broadcast pipelines to manage thousands of concurrent client updates with minimal latency.</li>
                   </ul>
                 </div>
 
@@ -173,16 +174,17 @@ const Resume = () => {
                 <div className="flex flex-col gap-1.5">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
                     <h3 className="text-base font-bold theme-text">
-                      Custom Tailwind (Talwinder CSS) <span className="text-xs font-mono font-normal theme-text-secondary">| Node.js, npm, JavaScript, CSS</span>
+                      Custom Tailwind Compiler <span className="text-xs font-mono font-normal theme-text-secondary">| Node.js, npm, JavaScript, CSS</span>
                     </h3>
-                    <div className="flex gap-3 text-xs font-mono print:hidden">
-                      <a href="https://www.npmjs.com/package/talwinder-ji-ki-css" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline">npm</a>
-                      <a href="https://github.com/MEHULARORA11/My-Custom-Tailwind" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline">GitHub</a>
+                    <div className="flex gap-3 text-xs font-mono">
+                      <a href="https://www.npmjs.com/package/talwinder-ji-ki-css" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">npm</a>
+                      <a href="https://github.com/MEHULARORA11/My-Custom-Tailwind" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">GitHub</a>
                     </div>
                   </div>
                   <ul className="list-disc pl-5 text-sm theme-text-secondary flex flex-col gap-1">
-                    <li>Developed and published talwinder-ji-ki-css on npm, a lightweight, utility-first CSS preprocessor.</li>
+                    <li>Developed and published `talwinder-ji-ki-css` on npm, a lightweight, utility-first CSS preprocessor.</li>
                     <li>Engineered an AST-like parser to compile dynamic utility classes into highly optimized static stylesheet maps.</li>
+                    <li>Optimized asset sizes by purging unused classes, reducing compiled CSS bundles by over 40%.</li>
                   </ul>
                 </div>
 
@@ -190,48 +192,65 @@ const Resume = () => {
                 <div className="flex flex-col gap-1.5">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
                     <h3 className="text-base font-bold theme-text">
-                      Tic Tac Toe & Web Games <span className="text-xs font-mono font-normal theme-text-secondary">| HTML, CSS, JavaScript</span>
+                      Tic Tac Toe & Web Games <span className="text-xs font-mono font-normal theme-text-secondary">| HTML5, CSS3, JavaScript (ES6)</span>
                     </h3>
-                    <div className="flex gap-3 text-xs font-mono print:hidden">
-                      <a href="https://tic-tac-toe-game-nine-puce.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline">Tic-Tac-Toe</a>
-                      <a href="https://guessinggame.mehularora.dev/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline">Guessing Game</a>
+                    <div className="flex gap-3 text-xs font-mono">
+                      <a href="https://tic-tac-toe-game-nine-puce.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">Tic-Tac-Toe</a>
+                      <a href="https://guessinggame.mehularora.dev/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">Guessing Game</a>
                     </div>
                   </div>
                   <ul className="list-disc pl-5 text-sm theme-text-secondary flex flex-col gap-1">
-                    <li>Built responsive interactive web games in raw JavaScript, implementing custom logic for winning-path validation and optimized state flow.</li>
-                    <li>Designed clean UI layouts utilizing vanilla CSS responsive grids, CSS variables, and modern visual states.</li>
+                    <li>Built responsive interactive web games in vanilla JavaScript, implementing custom logic for winning-path validation and optimized state flow.</li>
+                    <li>Designed clean UI layouts utilizing CSS variables and modern responsive grids for seamless mobile and desktop cross-compatibility.</li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            {/* 4. EDUCATION & CERTIFICATIONS */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Education */}
-              <div>
-                <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-emerald-800 flex items-center gap-2 mb-2">
-                  // Education
-                </h2>
-                <div className="border-b print-divider border-[var(--accent-border)] mb-3" />
-                <div className="flex flex-col gap-1">
-                  <h4 className="text-base font-bold theme-text">Bachelor of Technology (B.Tech)</h4>
-                  <p className="text-sm font-mono text-[var(--accent)] print:text-emerald-800 font-semibold">First Year</p>
-                  <p className="text-sm theme-text-secondary">JC Bose UST (YMCA), Faridabad, India</p>
-                  <p className="text-xs theme-text-muted mt-1">Focusing on Computer Science foundations, database engineering, and structures.</p>
+            {/* 4. EDUCATION */}
+            <div>
+              <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-black flex items-center gap-2 mb-1">
+                Education
+              </h2>
+              <div className="border-b print-divider border-[var(--accent-border)] mb-3" />
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                <div>
+                  <h4 className="text-base font-bold theme-text">JC Bose UST (YMCA)</h4>
+                  <p className="text-sm theme-text-secondary">Bachelor of Technology (B.Tech) in Computer Science & Engineering</p>
+                </div>
+                <div className="sm:text-right font-mono text-sm">
+                  <p className="text-[var(--accent)] print:text-black font-semibold">Expected Graduation: June 2029</p>
+                  <p className="theme-text-muted">Faridabad, India</p>
                 </div>
               </div>
+              <p className="text-sm theme-text-secondary mt-2">
+                First-year coursework focuses on Computer Science foundations, database engineering, and algorithms.
+              </p>
+            </div>
 
-              {/* Certifications */}
-              <div>
-                <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-emerald-800 flex items-center gap-2 mb-2">
-                  // Certifications
-                </h2>
-                <div className="border-b print-divider border-[var(--accent-border)] mb-3" />
-                <div className="flex flex-col gap-1">
-                  <h4 className="text-base font-bold theme-text">Zenith 5.0 Hackathon</h4>
-                  <p className="text-sm font-mono text-[var(--accent)] print:text-emerald-800 font-semibold">unstop.com</p>
-                  <p className="text-xs theme-text-secondary">Participated in Zenith 5.0 hackathon at JC Bose UST, building real-time collaboration tools.</p>
-                  <a href="https://unstop.com/certificate-preview/0716ff08-88eb-4294-b510-6e150945774c?utm_campaign=site-emails&utm_medium=d2c-automated&utm_source=wow-look-at-your-certificate-zenith-50" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-[var(--accent-light)] hover:underline mt-1.5 print:hidden">Verify Certificate</a>
+            {/* 5. CERTIFICATIONS & ACHIEVEMENTS */}
+            <div>
+              <h2 className="text-lg font-bold font-mono uppercase tracking-wider text-[var(--accent-light)] print:text-black flex items-center gap-2 mb-1">
+                Certifications & Achievements
+              </h2>
+              <div className="border-b print-divider border-[var(--accent-border)] mb-3" />
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                  <div>
+                    <h4 className="text-base font-bold theme-text">Zenith 5.0 Hackathon Certificate</h4>
+                    <p className="text-sm theme-text-secondary">Participated in Zenith 5.0 hackathon at JC Bose UST, building real-time collaboration tools.</p>
+                  </div>
+                  <div className="sm:text-right font-mono text-sm">
+                    <p className="text-[var(--accent)] print:text-black font-semibold">unstop.com</p>
+                    <a 
+                      href="https://unstop.com/certificate-preview/0716ff08-88eb-4294-b510-6e150945774c?utm_campaign=site-emails&utm_medium=d2c-automated&utm_source=wow-look-at-your-certificate-zenith-50" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-xs text-[var(--accent-light)] hover:underline mt-1 block print:hidden"
+                    >
+                      Verify Certificate
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

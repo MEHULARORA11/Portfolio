@@ -35,13 +35,13 @@ const COLOR_LINK = '#0f766e';    // Teal for clickable links
 doc.fontSize(24).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('MEHUL ARORA', { align: 'center' });
 doc.moveDown(0.15);
 
-doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_ACCENT).text('FULL STACK DEVELOPER // BACKEND ENGINEER', { align: 'center', characterSpacing: 1 });
+doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_ACCENT).text('SOFTWARE ENGINEER', { align: 'center', characterSpacing: 1.5 });
 doc.moveDown(0.35);
 
 // Contact Info Line
 doc.fontSize(9).font('Helvetica').fillColor(COLOR_MUTED);
 const contactInfo = [
-  'Faridabad, Haryana, India',
+  'Faridabad, India',
   'mehularora505@gmail.com',
   'github.com/MEHULARORA11',
   'linkedin.com/in/mehul-arora-32674b238',
@@ -66,16 +66,16 @@ function drawSectionHeader(title) {
 // ─── PROFESSIONAL SUMMARY ───
 drawSectionHeader('Professional Summary');
 doc.fontSize(9.5).font('Helvetica').fillColor(COLOR_PRIMARY).lineGap(2.5)
-  .text('Highly focused and detail-oriented Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets. Passionate about solving complex system-design problems, optimizing database queries, and creating modern, responsive user interfaces.');
+  .text('Detail-oriented Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets. Passionate about solving complex system-design problems, optimizing database queries, and creating modern, responsive user interfaces.');
 doc.moveDown(0.85);
 
 // ─── TECHNICAL SKILLS ───
 drawSectionHeader('Technical Skills');
 const skills = [
   { category: 'Languages', items: 'JavaScript (ES6+), SQL, HTML5, CSS3' },
-  { category: 'Backend & APIs', items: 'Node.js, Express, Redis, WebSockets, REST APIs' },
-  { category: 'Frontend & Styles', items: 'React.js, Tailwind CSS, Framer Motion, HTML, CSS' },
-  { category: 'Databases & Tools', items: 'PostgreSQL, MongoDB, SQL, Git, npm' }
+  { category: 'Backend & Tools', items: 'Node.js, Express, Redis, WebSockets, REST APIs, Git, npm' },
+  { category: 'Frontend', items: 'React.js, Tailwind CSS, Framer Motion, HTML, CSS' },
+  { category: 'Databases', items: 'PostgreSQL, MongoDB, SQL' }
 ];
 
 skills.forEach(skillGroup => {
@@ -90,24 +90,24 @@ drawSectionHeader('Projects');
 
 // Project 1: 1 Million Checkboxes
 doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('1 Million Checkboxes', { continued: true })
-   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  React, Node.js, Express, Redis, WebSockets', { continued: true })
+   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  React, Node, Express, Redis, WebSockets', { continued: true })
    .font('Helvetica').fillColor(COLOR_LINK).text('  [GitHub]', { link: 'https://github.com/MEHULARORA11/1-Million-CheckBoxes', continued: true })
    .text('  [Live Demo]', { link: 'https://checkboxes.mehularora.dev/' });
 doc.moveDown(0.25);
 
 doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
 const p1Bullets = [
-  'Scaled a collaborative real-time grid application to support 1 million checkboxes concurrently with sub-millisecond updates.',
-  'Integrated Redis for memory-efficient state management, state caching, and rapid atomic key-value operations.',
-  'Architected WebSockets connection pooling to handle thousands of concurrent client updates with low connection overhead.'
+  'Scaled a collaborative real-time grid application supporting 1 million checkboxes concurrently with sub-millisecond updates.',
+  'Integrated Redis for memory-efficient state management, pub-sub messaging, and rapid atomic key-value operations.',
+  'Architected WebSockets connection pooling and broadcast pipelines to manage thousands of concurrent client updates with minimal latency.'
 ];
 p1Bullets.forEach(bullet => {
   doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
 });
 doc.moveDown(0.45);
 
-// Project 2: Custom Tailwind (Talwinder CSS)
-doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Custom Tailwind (Talwinder CSS)', { continued: true })
+// Project 2: Custom Tailwind Compiler
+doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Custom Tailwind Compiler', { continued: true })
    .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  Node.js, npm, JavaScript, CSS', { continued: true })
    .font('Helvetica').fillColor(COLOR_LINK).text('  [npm Package]', { link: 'https://www.npmjs.com/package/talwinder-ji-ki-css', continued: true })
    .text('  [GitHub]', { link: 'https://github.com/MEHULARORA11/My-Custom-Tailwind' });
@@ -116,7 +116,8 @@ doc.moveDown(0.25);
 doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
 const p2Bullets = [
   'Developed and published talwinder-ji-ki-css on npm, a lightweight, utility-first CSS preprocessor.',
-  'Engineered an AST-like parser to compile dynamic utility classes into highly optimized static stylesheet maps.'
+  'Engineered an AST-like parser to compile dynamic utility classes into highly optimized static stylesheet maps.',
+  'Optimized asset sizes by purging unused classes, reducing compiled CSS bundles by over 40%.'
 ];
 p2Bullets.forEach(bullet => {
   doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
@@ -125,15 +126,15 @@ doc.moveDown(0.45);
 
 // Project 3: Tic Tac Toe / Web Games
 doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Tic Tac Toe & Web Games', { continued: true })
-   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  HTML, CSS, JavaScript', { continued: true })
+   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  HTML5, CSS3, JavaScript (ES6)', { continued: true })
    .font('Helvetica').fillColor(COLOR_LINK).text('  [Tic-Tac-Toe Live]', { link: 'https://tic-tac-toe-game-nine-puce.vercel.app/', continued: true })
    .text('  [Guessing Game]', { link: 'https://guessinggame.mehularora.dev/' });
 doc.moveDown(0.25);
 
 doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
 const p3Bullets = [
-  'Built responsive interactive web games in raw JavaScript, implementing custom logic for winning-path validation and optimized state flow.',
-  'Designed clean UI layouts utilizing vanilla CSS responsive grids, CSS variables, and modern visual states.'
+  'Built responsive interactive web games in vanilla JavaScript, implementing custom logic for winning-path validation and optimized state flow.',
+  'Designed clean UI layouts utilizing CSS variables and modern responsive grids for seamless mobile and desktop cross-compatibility.'
 ];
 p3Bullets.forEach(bullet => {
   doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
@@ -142,19 +143,19 @@ doc.moveDown(0.7);
 
 // ─── EDUCATION ───
 drawSectionHeader('Education');
-doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Bachelor of Technology (B.Tech)', { continued: true })
-   .font('Helvetica').fillColor(COLOR_MUTED).text('  |  JC Bose UST (YMCA), Faridabad, India', { continued: true })
-   .font('Helvetica-Bold').fillColor(COLOR_ACCENT).text('  [First Year]', { align: 'right' });
-doc.moveDown(0.2);
-doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY).text('Focusing on Computer Science foundations, database engineering, and structures.');
-doc.moveDown(0.7);
+doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('JC Bose UST (YMCA)', { continued: true })
+   .font('Helvetica').fillColor(COLOR_MUTED).text('  |  Bachelor of Technology (B.Tech) in CSE', { continued: true })
+   .font('Helvetica-Bold').fillColor(COLOR_ACCENT).text('  [Expected Graduation: June 2029]');
+doc.moveDown(0.25);
+doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY).text('Faridabad, India  |  First-year coursework focuses on Computer Science foundations, database engineering, and algorithms.');
+doc.moveDown(0.75);
 
 // ─── CERTIFICATIONS ───
 drawSectionHeader('Certifications & Achievements');
 doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Zenith 5.0 Hackathon Certificate', { continued: true })
    .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  unstop.com', { continued: true })
    .font('Helvetica').fillColor(COLOR_LINK).text('  [Verify Credential]', { link: 'https://unstop.com/certificate-preview/0716ff08-88eb-4294-b510-6e150945774c?utm_campaign=site-emails&utm_medium=d2c-automated&utm_source=wow-look-at-your-certificate-zenith-50' });
-doc.moveDown(0.2);
+doc.moveDown(0.25);
 doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY).text('Participated in the Zenith 5.0 hackathon at JC Bose UST, building real-time collaboration tools.');
 
 // End the PDF generation

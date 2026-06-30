@@ -318,7 +318,7 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
     <>
       {/* ── CHAT PANEL ── */}
       <div
-        className="fixed top-0 bottom-0 right-0 h-full w-[360px] max-w-full flex flex-col z-40 chatbot-panel"
+        className="fixed top-0 bottom-0 right-0 h-full w-[360px] max-w-full flex flex-col z-40 chatbot-panel print:hidden"
         style={{
           transform: isOpen ? "translateX(0)" : "translateX(100%)",
           pointerEvents: isOpen ? "auto" : "none",
@@ -367,7 +367,7 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
       {/* ── FAB ── */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`fixed z-50 flex items-center gap-2.5 px-4 py-3 rounded-full font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:scale-105 bottom-6 right-6 ${
+        className={`fixed z-50 flex items-center gap-2.5 px-4 py-3 rounded-full font-semibold text-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:scale-105 bottom-6 right-6 print:hidden ${
           isOpen ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
         }`}
         style={{
