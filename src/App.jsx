@@ -8,6 +8,7 @@ import Certificates from "./Pages/Certificates";
 import Blogs from "./Pages/Blogs";
 import Reels from "./Pages/Reels";
 import Videos from "./Pages/Videos";
+import Resume from "./Pages/Resume";
 
 /**
  * Animated route renderer. Wraps Routes with AnimatePresence, using the current
@@ -27,6 +28,7 @@ function AnimatedRoutes() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/reels" element={<Reels />} />
         <Route path="/videos" element={<Videos />} />
+        <Route path="/resume" element={<Resume />} />
       </Routes>
     </AnimatePresence>
   );

@@ -12,6 +12,7 @@ const navItems = [
   { id: "blogs", label: "Blogs" },
   { id: "reels", label: "Reels" },
   { id: "videos", label: "Videos" },
+  { id: "resume", label: "Resume" },
 ];
 
 const MotionLink = motion.create(Link);

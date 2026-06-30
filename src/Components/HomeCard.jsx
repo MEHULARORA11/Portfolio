@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import myImg from "../assets/personal.png";
-import { FiBookOpen, FiCpu, FiMapPin } from "react-icons/fi";
+import { FiBookOpen, FiCpu, FiMapPin, FiDownload, FiFileText } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const roles = [
   "Full Stack Developer",
@@ -103,6 +104,23 @@ const HomeCard = () => {
           <p className="theme-text-secondary">
             Currently pursuing my first year of B.Tech in Faridabad, India, I continuously explore modern web technologies, APIs, databases, authentication systems, and high-performance application workflows to craft fast, scalable, and production-ready digital solutions.
           </p>
+        </div>
+
+        {/* Resume CTAs */}
+        <div className="flex flex-wrap gap-4 mt-2">
+          <a
+            href="/resume/Mehul_Arora_Resume.pdf"
+            download="Mehul_Arora_Resume.pdf"
+            className="theme-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 hover:shadow-[0_0_20px_var(--accent-glow)]"
+          >
+            <FiDownload className="text-lg animate-bounce" style={{ animationDuration: '2s' }} /> Download Resume
+          </a>
+          <Link
+            to="/resume"
+            className="theme-icon-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 hover:shadow-[0_0_15px_var(--accent-glow-soft)]"
+          >
+            <FiFileText className="text-lg" /> View Resume
+          </Link>
         </div>
 
         {/* Bento Stats Grid */}
