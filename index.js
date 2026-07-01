@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cors({
     credentials:true,
     methods:"POST",
-    origin:"*"
+    origin:BASE_URL
 }))
 
 app.get('/', (_, res) => {
