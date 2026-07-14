@@ -22,16 +22,24 @@ app.get('/', async (_, res) => {
 
 let localViewsFallback = 1;
 
-app.get('/api/views', async (_, res) => {
+app.get('/api/views', async (req, res) => {
   try {
-   const existingViews = await redis.get('viewer')
-   if(!existingViews){
-      redis.set('viewer',1)
-   }
-     const views = await redis.incr('viewer');
+     const shouldIncrement = req.query.incr !== 'false';
+     let views;
+     if (shouldIncrement) {
+        views = await redis.incr('viewer');
+     } else {
+        views = await redis.get('viewer');
+        if (views === null) {
+           views = await redis.incr('viewer');
+        }
+     }
      return res.status(200).json({ views: Number(views) });
   } catch (err) {
-     console.error("Redis increment error, using in-memory fallback:", err);
+     console.error("Redis views error, using in-memory fallback:", err);
+     if (req.query.incr !== 'false') {
+        localViewsFallback += 1;
+     }
      return res.status(200).json({ views: localViewsFallback });
   }
 })

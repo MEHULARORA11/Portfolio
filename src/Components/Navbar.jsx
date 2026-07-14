@@ -18,6 +18,8 @@ const navItems = [
 
 const MotionLink = motion.create(Link);
 
+let hasIncrementedThisSession = false;
+
 /**
  * Sticky Glassmorphic Navbar with Active Section highlighting based on React Router location.
  * Adapts to mobile devices using a clean dropdown hamburger layout.
@@ -39,12 +41,15 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
     async function fetchViews() {
       try {
         let res;
+        const incrParam = hasIncrementedThisSession ? "false" : "true";
+        hasIncrementedThisSession = true;
+
         try {
-          res = await fetch(`${BASE_URL}/api/views`);
+          res = await fetch(`${BASE_URL}/api/views?incr=${incrParam}`);
           if (!res.ok) throw new Error("Primary URL failed");
         } catch (primaryErr) {
           console.warn("Primary URL fetch failed, trying fallback localhost:", primaryErr.message);
-          res = await fetch(`${BASE_URL}/api/views`);
+          res = await fetch(`http://localhost/api/views?incr=${incrParam}`);
           if (!res.ok) throw new Error("Fallback URL failed");
         }
         const data = await res.json();
