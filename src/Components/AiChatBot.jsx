@@ -183,8 +183,8 @@ const ChatInput = ({
   maxChars,
 }) => (
   <div
-    className="flex flex-col gap-2 px-4 py-3 flex-shrink-0"
-    style={{ borderTop: "1px solid var(--divider)", minWidth: "320px" }}
+    className="flex flex-col gap-2 px-4 py-3 flex-shrink-0 w-full min-w-0"
+    style={{ borderTop: "1px solid var(--divider)" }}
   >
     <div className="flex items-end gap-2">
       <textarea
@@ -325,13 +325,12 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
         }}
       >
         {/* Inner contents wrapper */}
-        <div className="flex flex-col h-full w-[360px] flex-shrink-0">
+        <div className="flex flex-col h-full w-full max-w-full flex-shrink-0">
           <ChatHeader onClear={clearChat} onClose={() => setIsOpen(false)} />
 
           {/* messages */}
           <div
-            className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 scroll-bar"
-            style={{ minWidth: "320px" }}
+            className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 scroll-bar w-full min-w-0"
           >
             {/* date divider */}
             <div className="flex items-center gap-2 my-1">

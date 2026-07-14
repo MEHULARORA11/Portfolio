@@ -1,45 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 
 /**
  * EyeViewCounter
  * ---------------
- * A cursor-tracking eye with a live "visitor" readout beneath it.
- * Built to sit on a dark, blueprint / systems-engineering style page.
- *
- * CONTROLLING THE COUNT
- * ----------------------
- * The number is fully controlled from the outside — this component never
- * invents data. Three ways to drive it:
- *
- * 1) Static, you manage the number yourself:
- *      <EyeViewCounter count={1287} />
- *
- * 2) Local state, for a quick demo / prototype:
- *      const [count, setCount] = useState(1287);
- *      <EyeViewCounter count={count} onRequestIncrement={() => setCount(c => c + 1)} />
- *
- * 3) Real backend (recommended for production):
- *      useEffect(() => {
- *        fetch("/api/views", { method: "POST" })
- *          .then(r => r.json())
- *          .then(data => setCount(data.total));
- *      }, []);
- *      <EyeViewCounter count={count} loading={count === null} />
+ * A cursor-tracking eye with a live "visitor" readout.
+ * Adapts to both vertical and horizontal layouts, and uses theme CSS variables.
  *
  * PROPS
  * -----
  * count               number | null   the value to display (null/undefined -> shows "···")
- * label               string          small caption under the number, default "VISITORS"
+ * label               string          small caption under/beside the number, default "VISITORS"
  * loading             boolean         shows a pulsing placeholder instead of the number
- * size                number          eye diameter in px, default 160
+ * size                number          eye diameter in px, default 40
+ * layout              "vertical" | "horizontal"
  */
 export default function EyeViewCounter({
   count = null,
   label = "VISITORS",
   loading = false,
-  size = 160,
+  size = 40,
+  layout = "horizontal",
 }) {
   const eyeRef = useRef(null);
+  const id = useId();
   const [pupil, setPupil] = useState({ x: 0, y: 0 });
   const [blink, setBlink] = useState(false);
   const [displayCount, setDisplayCount] = useState(count ?? 0);
@@ -124,20 +107,17 @@ export default function EyeViewCounter({
       ? "···"
       : displayCount.toLocaleString("en-US");
 
+  const isHorizontal = layout === "horizontal";
+
+  // Sanitize React dynamic IDs for HTML selector compatibility
+  const safeId = id.replace(/:/g, "-");
+
   return (
     <div
+      className={`glass-card flex ${
+        isHorizontal ? "flex-row items-center gap-2.5 px-3 py-1.5" : "flex-col items-center gap-2 p-3 pb-3.5"
+      } rounded-xl transition-all duration-300 w-fit shrink-0`}
       style={{
-        display: "inline-flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 18,
-        padding: "28px 34px",
-        borderRadius: 20,
-        background:
-          "radial-gradient(120% 140% at 50% 0%, #0b1220 0%, #05070d 60%, #030509 100%)",
-        border: "1px solid rgba(84, 138, 255, 0.16)",
-        boxShadow:
-          "0 0 0 1px rgba(0,0,0,0.4), 0 20px 60px -20px rgba(0, 60, 160, 0.35)",
         fontFamily:
           "'JetBrains Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace",
       }}
@@ -157,29 +137,29 @@ export default function EyeViewCounter({
           style={{ display: "block", overflow: "visible" }}
         >
           <defs>
-            <radialGradient id="scleraGrad" cx="50%" cy="42%" r="65%">
-              <stop offset="0%" stopColor="#eef3ff" />
-              <stop offset="70%" stopColor="#d7e2f7" />
-              <stop offset="100%" stopColor="#aebedd" />
+            <radialGradient id={`scleraGrad-${safeId}`} cx="50%" cy="42%" r="65%">
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="70%" stopColor="#f3f6f4" />
+              <stop offset="100%" stopColor="#cfdad4" />
             </radialGradient>
-            <radialGradient id="irisGrad" cx="50%" cy="45%" r="60%">
-              <stop offset="0%" stopColor="#7fc4ff" />
-              <stop offset="45%" stopColor="#2f7fe0" />
-              <stop offset="100%" stopColor="#0b2145" />
+            <radialGradient id={`irisGrad-${safeId}`} cx="50%" cy="45%" r="60%">
+              <stop offset="0%" stopColor="var(--accent-light)" />
+              <stop offset="45%" stopColor="var(--accent)" />
+              <stop offset="100%" stopColor="var(--accent-dark)" />
             </radialGradient>
-            <radialGradient id="irisGrad2" cx="50%" cy="45%" r="60%">
-              <stop offset="0%" stopColor="#8fd0ff" />
-              <stop offset="45%" stopColor="#2b6fd1" />
-              <stop offset="100%" stopColor="#0a1e3d" />
+            <radialGradient id={`irisGrad2-${safeId}`} cx="50%" cy="45%" r="60%">
+              <stop offset="0%" stopColor="var(--accent-light)" />
+              <stop offset="45%" stopColor="var(--accent)" />
+              <stop offset="100%" stopColor="var(--accent-dark)" />
             </radialGradient>
-            <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+            <filter id={`glow-${safeId}`} x="-60%" y="-60%" width="220%" height="220%">
               <feGaussianBlur stdDeviation="4.2" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <clipPath id="eyeClip">
+            <clipPath id={`eyeClip-${safeId}`}>
               <path d="M 8 100 Q 100 30 192 100 Q 100 170 8 100 Z" />
             </clipPath>
           </defs>
@@ -188,10 +168,10 @@ export default function EyeViewCounter({
           <path
             d="M 4 100 Q 100 24 196 100 Q 100 176 4 100 Z"
             fill="none"
-            stroke="#3b82f6"
-            strokeOpacity="0.22"
+            stroke="var(--accent)"
+            strokeOpacity="0.25"
             strokeWidth="10"
-            filter="url(#glow)"
+            filter={`url(#glow-${safeId})`}
           />
 
           {/* Eyelids open/close via vertical scale for blink */}
@@ -205,12 +185,12 @@ export default function EyeViewCounter({
             {/* Eye shape (sclera) */}
             <path
               d="M 8 100 Q 100 30 192 100 Q 100 170 8 100 Z"
-              fill="url(#scleraGrad)"
-              stroke="#4c6ea8"
+              fill={`url(#scleraGrad-${safeId})`}
+              stroke="var(--card-border)"
               strokeWidth="2"
             />
 
-            <g clipPath="url(#eyeClip)">
+            <g clipPath={`url(#eyeClip-${safeId})`}>
               {/* Iris + pupil, offset toward cursor */}
               <g
                 style={{
@@ -218,21 +198,21 @@ export default function EyeViewCounter({
                   transition: "transform 60ms linear",
                 }}
               >
-                <circle cx="100" cy="100" r="38" fill="url(#irisGrad2)" />
+                <circle cx="100" cy="100" r="38" fill={`url(#irisGrad2-${safeId})`} />
                 <circle
                   cx="100"
                   cy="100"
                   r="38"
                   fill="none"
-                  stroke="#9fdcff"
+                  stroke="var(--accent-light)"
                   strokeOpacity="0.5"
                   strokeWidth="1.5"
                 />
-                <circle cx="100" cy="100" r="17" fill="#020814" />
-                <circle cx="100" cy="100" r="17" fill="#040d1c" fillOpacity="0.9" />
+                <circle cx="100" cy="100" r="17" fill="#000000" />
+                <circle cx="100" cy="100" r="17" fill="#050806" fillOpacity="0.9" />
                 {/* light glint */}
                 <circle cx="90" cy="88" r="6" fill="#ffffff" fillOpacity="0.85" />
-                <circle cx="112" cy="108" r="2.4" fill="#bfe4ff" fillOpacity="0.6" />
+                <circle cx="112" cy="108" r="2.4" fill="var(--accent-light)" fillOpacity="0.6" />
               </g>
             </g>
 
@@ -240,7 +220,7 @@ export default function EyeViewCounter({
             <path
               d="M 8 100 Q 100 30 192 100"
               fill="none"
-              stroke="#5a7dbd"
+              stroke="var(--accent-dark)"
               strokeWidth="2.5"
               strokeLinecap="round"
             />
@@ -248,17 +228,17 @@ export default function EyeViewCounter({
         </svg>
       </div>
 
-      <div style={{ textAlign: "center" }}>
+      <div className={`flex flex-col ${isHorizontal ? "items-start" : "items-center text-center"}`}>
         <div
           style={{
-            fontSize: size * 0.24,
+            fontSize: isHorizontal ? size * 0.32 : size * 0.24,
             lineHeight: 1,
             fontWeight: 600,
             letterSpacing: "0.02em",
-            color: loading ? "#5a7db0" : "#bfe4ff",
+            color: loading ? "var(--text-muted)" : "var(--accent-light)",
             textShadow: loading
               ? "none"
-              : "0 0 18px rgba(90, 170, 255, 0.55), 0 0 2px rgba(190, 228, 255, 0.9)",
+              : "0 0 18px var(--accent-glow), 0 0 2px var(--accent-light)",
             animation: loading ? "evc-pulse 1.4s ease-in-out infinite" : "none",
           }}
         >
@@ -266,23 +246,16 @@ export default function EyeViewCounter({
         </div>
         <div
           style={{
-            marginTop: 8,
-            fontSize: 11,
-            letterSpacing: "0.32em",
-            color: "#5a7db0",
+            marginTop: isHorizontal ? 2 : 4,
+            fontSize: isHorizontal ? size * 0.20 : 9,
+            letterSpacing: "0.18em",
+            color: "var(--text-label)",
             fontWeight: 500,
           }}
         >
           {label}
         </div>
       </div>
-
-      <style>{`
-        @keyframes evc-pulse {
-          0%, 100% { opacity: 0.4; }
-          50% { opacity: 1; }
-        }
-      `}</style>
     </div>
   );
 }

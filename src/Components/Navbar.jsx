@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import ThemeToggle from "./ThemeToggle";
+import EyeViewCounter from "./eye";
 
 const navItems = [
   { id: "home", label: "Home" },
@@ -26,6 +27,46 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef(null);
   const location = useLocation();
+
+  const [viewsCount, setViewsCount] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch live visitor count from backend
+  useEffect(() => {
+    let isMounted = true;
+    const BASE_URL = import.meta.env.VITE_CLIENT_URL;
+
+    async function fetchViews() {
+      try {
+        let res;
+        try {
+          res = await fetch(`${BASE_URL}/api/views`);
+          if (!res.ok) throw new Error("Primary URL failed");
+        } catch (primaryErr) {
+          console.warn("Primary URL fetch failed, trying fallback localhost:", primaryErr.message);
+          res = await fetch(`${BASE_URL}/api/views`);
+          if (!res.ok) throw new Error("Fallback URL failed");
+        }
+        const data = await res.json();
+        if (isMounted) {
+          setViewsCount(data.views);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Error fetching visitor counter (both URLs failed):", err);
+        if (isMounted) {
+          // If everything fails, show at least a baseline visitor count of 1 so it's never stuck at '...'
+          setViewsCount(1);
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchViews();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const { scrollY } = useScroll();
 
@@ -118,7 +159,8 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
         </div>
 
         {/* Desktop Theme Toggle Integration */}
-        <div className="hidden lg:flex items-center">
+        <div className="hidden lg:flex items-center gap-4">
+          <EyeViewCounter count={viewsCount} loading={loading} size={36} layout="horizontal" />
           <ThemeToggle
             theme={theme}
             onToggle={toggleTheme}
@@ -129,6 +171,7 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
 
         {/* Mobile Navigation Interface (Theme Toggle + Hamburger) */}
         <div className="flex lg:hidden items-center gap-3">
+          <EyeViewCounter count={viewsCount} loading={loading} size={32} layout="horizontal" />
           <ThemeToggle
             theme={theme}
             onToggle={toggleTheme}
