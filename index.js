@@ -6,7 +6,7 @@ import {redis} from './redis.js'
 
 const app = express();
 const PORT = process.env.PORT || 80
-const BASE_URL = process.env.VITE_CLIENT_URL
+const BASE_URL = process.env.CLIENT_URL
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
