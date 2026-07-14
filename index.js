@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import {sendEmailToMehul} from './email.js'
 import cors from 'cors'
+import {redis} from './redis.js'
 
 const app = express();
 const PORT = process.env.PORT || 80
@@ -15,7 +16,14 @@ app.use(cors({
     origin:BASE_URL
 }))
 
-app.get('/', (_, res) => {
+app.get('/', async (_, res) => {
+
+   const viewer = await redis.get('viewer')
+   if(!viewer){
+      await redis.set('viewer',1)
+   }
+
+
   return res.status(200).json({ message: 'Portfolio API is running' })
 })
 
