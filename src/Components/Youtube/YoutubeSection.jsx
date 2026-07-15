@@ -15,6 +15,44 @@ import ComingSoon from "../shared/ComingSoon";
 import { Video } from "lucide-react";
 
 /**
+ * Helper to convert various YouTube URL formats to standard embed URLs
+ * to prevent "YouTube refused to connect" errors inside iframes.
+ */
+function getYoutubeEmbedUrl(url) {
+  if (!url) return "";
+  try {
+    if (url.includes("/embed/")) {
+      return url;
+    }
+    
+    let videoId = "";
+    if (url.includes("youtu.be/")) {
+      const parts = url.split("youtu.be/");
+      if (parts[1]) {
+        videoId = parts[1].split(/[?#]/)[0];
+      }
+    } else if (url.includes("watch?v=")) {
+      const parts = url.split("watch?v=");
+      if (parts[1]) {
+        videoId = parts[1].split("&")[0].split(/[?#]/)[0];
+      }
+    } else if (url.includes("/shorts/")) {
+      const parts = url.split("/shorts/");
+      if (parts[1]) {
+        videoId = parts[1].split(/[?#]/)[0];
+      }
+    }
+    
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+  } catch (error) {
+    console.error("Error formatting YouTube embed URL:", error);
+  }
+  return url;
+}
+
+/**
  * YouTube Showcase Section supporting paginated card listings,
  * dynamic media playbacks, and glassmorphic visual overlays.
  */
@@ -138,7 +176,7 @@ export default function YoutubeSection() {
         {activeVideo && (
           <div className="w-full h-full relative aspect-video rounded-2xl overflow-hidden border border-[var(--card-border)] bg-black shadow-2xl">
             <iframe
-              src={activeVideo.videoUrl}
+              src={getYoutubeEmbedUrl(activeVideo.videoUrl)}
               title={activeVideo.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

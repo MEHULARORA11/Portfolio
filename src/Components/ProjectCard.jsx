@@ -16,6 +16,8 @@ import {
   SiRedis,
   SiNpm,
   SiSocketdotio,
+  SiNextdotjs,
+  SiOpenai
 } from "react-icons/si";
 
 const techDetails = {
@@ -26,6 +28,10 @@ const techDetails = {
   "node.js": {
     icon: FaNodeJs,
     bg: "hover:bg-[#68A063]/10 hover:text-[#68A063] hover:border-[#68A063]/40 hover:shadow-[0_0_12px_rgba(104,160,99,0.2)]",
+  },
+  "next.js": {
+    icon: SiNextdotjs,
+    bg: "hover:bg-white/10 hover:text-white hover:border-white/40 hover:shadow-[0_0_12px_rgba(255,255,255,0.2)]",
   },
   express: {
     icon: SiExpress,
@@ -38,6 +44,10 @@ const techDetails = {
   websocket: {
     icon: SiSocketdotio,
     bg: "hover:bg-[#3B82F6]/10 hover:text-[#3B82F6] hover:border-[#3B82F6]/40 hover:shadow-[0_0_12px_rgba(59,130,246,0.2)]",
+  },
+  openai: {
+    icon: SiOpenai,
+    bg: "hover:bg-[#10A37F]/10 hover:text-[#10A37F] hover:border-[#10A37F]/40 hover:shadow-[0_0_12px_rgba(16,163,127,0.2)]",
   },
   npm: {
     icon: SiNpm,

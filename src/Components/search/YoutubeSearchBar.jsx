@@ -18,7 +18,7 @@ export default function YoutubeSearchBar({
     containerRef.current.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
   };
 
-  const popularTags = ["3D Web", "Next.js", "Framer Motion", "GSAP", "WebSockets", "Performance"];
+  const popularTags = ["ChatBot","AI"];
 
   return (
     <div className="w-full max-w-2xl mx-auto mb-10 select-none">

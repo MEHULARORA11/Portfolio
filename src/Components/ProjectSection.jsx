@@ -6,13 +6,36 @@ import SectionHeading from "./shared/SectionHeading";
 import ShowMoreControls from "./shared/ShowMoreControls";
 import { usePaginatedReveal } from "../hooks/usePaginatedReveal";
 
-import Million_Checkboxes from "../assets/1_million_checkboxes.png";
-import Tick_Tac_Toe from "../assets/Tick_Tac_Toe.png";
-import Guessing_Game from "../assets/guessinggame.png";
-import Todo from "../assets/Todo.png";
-import TailwindCSS from "../assets/TailwindCSS.png";
+import Million_Checkboxes from "../assets/1_million_checkboxes.png"
+import Personic from "../assets/Personic.png";
+import Arbiter from "../assets/Arbiter.png";
+import TalwinderCSS from "../assets/TalwinderCSS.png";
 
 const projects = [
+  {
+    imgSrc: Arbiter,
+    title: "Arbiter",
+    description: "A self Consistency Agent",
+    githubLink: "https://github.com/MEHULARORA11/Arbiter",
+    liveDemo: "https://arbiter.mehularora.dev/",
+    techStack: ['postgres','openAI,claude,gemini SDK','NextJS','JS',"Node.js"]
+  },
+  {
+    imgSrc: Personic,
+    title: "Personic",
+    description: "An Agent That talks exactly like Hitesh Sir and Piyush Sir",
+    githubLink: "https://github.com/MEHULARORA11/PersonicAi",
+    liveDemo: "https://personic.mehularora.dev/",
+    techStack: ["OpenAI SDK", "NodeJS", "JavaScript"]
+  },
+  {
+    imgSrc: TalwinderCSS,
+    title: "TalwinderCSS",
+    description: "A Custom Tailwind , Inspired by tailwind css , with some fun classes",
+    githubLink: "https://github.com/MEHULARORA11/TalwinderCSS",
+    liveDemo: "https://talwinder.mehularora.dev/",
+    techStack: ["HTML", "CSS", "JavaScript"]
+  },
   {
     imgSrc: Million_Checkboxes,
     title: "1 Million Checkboxes",
@@ -21,38 +44,6 @@ const projects = [
     liveDemo: "https://checkboxes.mehularora.dev/",
     techStack: ["React", "Node.js", "Express", "Redis", "WebSocket"]
   },
-  {
-    imgSrc: TailwindCSS,
-    title: "Custom Tailwind",
-    description: "Built My custom Tailwind => 'Talwinder Css'",
-    githubLink: "https://github.com/MEHULARORA11/My-Custom-Tailwind",
-    liveDemo: "https://www.npmjs.com/package/talwinder-ji-ki-css",
-    techStack: ["Node.js", "npm", "JavaScript", "CSS"]
-  },
-  {
-    imgSrc: Tick_Tac_Toe,
-    title: "Tic Tac Toe",
-    description: "A Basic Tic Tac Toe built with raw JS",
-    githubLink: "https://github.com/MEHULARORA11/Tic-Tac-Toe-Game",
-    liveDemo: "https://tic-tac-toe-game-nine-puce.vercel.app/",
-    techStack: ["HTML", "CSS", "JavaScript"]
-  },
-  {
-    imgSrc: Guessing_Game,
-    title: "Guessing Game",
-    description: "A Game which generates random number and asks u to guess it .",
-    githubLink: "https://github.com/MEHULARORA11/Random-Number-Game",
-    liveDemo: "https://guessinggame.mehularora.dev/",
-    techStack: ["HTML", "CSS", "JavaScript"]
-  },
-  {
-    imgSrc: Todo,
-    title: "A Todo Application",
-    description: "A Todo app built with raw JS",
-    githubLink: "https://github.com/MEHULARORA11/My-Todo-App",
-    liveDemo: "https://todo.mehularora.dev/",
-    techStack: ["HTML", "CSS", "JavaScript"]
-  }
 ];
 
 const ProjectSection = () => {
