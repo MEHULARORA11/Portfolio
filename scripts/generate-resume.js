@@ -38,14 +38,16 @@ doc.moveDown(0.15);
 doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_ACCENT).text('SOFTWARE ENGINEER', { align: 'center', characterSpacing: 1.5 });
 doc.moveDown(0.35);
 
-// Contact Info Line
+// Contact Info Line (With YouTube added)
 doc.fontSize(9).font('Helvetica');
 
 const parts = [
   { text: 'Faridabad, India', color: COLOR_MUTED },
   { text: 'mehularora505@gmail.com', color: COLOR_LINK, link: 'mailto:mehularora505@gmail.com' },
   { text: 'GitHub', color: COLOR_LINK, link: 'https://github.com/MEHULARORA11' },
+  { text: 'Twitter', color: COLOR_LINK, link: 'https://x.com/MehulArora121' },
   { text: 'LinkedIn', color: COLOR_LINK, link: 'https://www.linkedin.com/in/mehul-arora-32674b238/' },
+  { text: 'YouTube', color: COLOR_LINK, link: 'https://youtube.com/@Mehul_Arora' }, // <-- Added YouTube Channel
   { text: 'mehularora.dev', color: COLOR_LINK, link: 'https://mehularora.dev' }
 ];
 
@@ -97,7 +99,7 @@ function drawSectionHeader(title) {
 // ─── PROFESSIONAL SUMMARY ───
 drawSectionHeader('Professional Summary');
 doc.fontSize(9.5).font('Helvetica').fillColor(COLOR_PRIMARY).lineGap(2.5)
-  .text('Detail-oriented Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets. Passionate about solving complex system-design problems, optimizing database queries, and creating modern, responsive user interfaces.');
+  .text('Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets while optimizing database queries for high efficiency.');
 doc.moveDown(0.85);
 
 // ─── TECHNICAL SKILLS ───
@@ -105,8 +107,8 @@ drawSectionHeader('Technical Skills');
 const skills = [
   { category: 'Languages', items: 'JavaScript (ES6+), SQL, HTML5, CSS3' },
   { category: 'Backend & Tools', items: 'Node.js, Express, Redis, WebSockets, REST APIs, Git, npm' },
-  { category: 'Frontend', items: 'React.js, Tailwind CSS, Framer Motion, HTML, CSS' },
-  { category: 'Databases', items: 'PostgreSQL, MongoDB, SQL' }
+  { category: 'Frontend', items: 'React.js, Tailwind CSS, HTML, CSS' },
+  { category: 'Databases', items: 'PostgreSQL, MongoDB' }
 ];
 
 skills.forEach(skillGroup => {
@@ -119,7 +121,60 @@ doc.moveDown(0.6);
 // ─── PROJECTS ───
 drawSectionHeader('Projects');
 
-// Project 1: 1 Million Checkboxes
+// Project 1: Arbiter
+doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Arbiter', { continued: true })
+   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  PostgreSQL, Node.js, NextJS, OAuth, OpenAI, Gemini SDK', { continued: true })
+   .font('Helvetica').fillColor(COLOR_LINK).text('  [GitHub]', { link: 'https://github.com/MEHULARORA11/Arbiter.git', continued: true })
+   .text('  [Live]', { link: 'https://arbiter.mehularora.dev/' });
+doc.moveDown(0.25);
+
+doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
+const p1Bullets = [
+  'Architected a multi-model Self-Consistency LLM Agent that evaluates responses across diverse AI engines to generate optimized user answers.',
+  'Implemented completely isolated contextual conversational history threads, ensuring distinct memory boundaries per active session.'
+];
+p1Bullets.forEach(bullet => {
+  doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
+});
+doc.moveDown(0.45);
+
+// Project 2: Personic 
+doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Personic', { continued: true })
+   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  OpenAI Agent SDK, HTML5, CSS3, JavaScript', { continued: true })
+   .font('Helvetica').fillColor(COLOR_LINK).text('  [Live]', { link: 'https://personic.mehularora.dev/', continued: true })
+   .text('  [GitHub]', { link: 'https://github.com/MEHULARORA11/PersonicAi.git' });
+doc.moveDown(0.25);
+
+doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
+const p2Bullets = [
+  'Built responsive, interactive web games using vanilla JavaScript, engineering localized algorithms for win-path validation and optimized engine loops.',
+  'Designed UI architecture leveraging dynamic CSS custom properties and flexible grids for multi-platform device alignment.'
+];
+p2Bullets.forEach(bullet => {
+  doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
+});
+doc.moveDown(0.45);
+
+
+// Project 3: TalwinderCSS - Custom Tailwind (Fixed duplicate p3Bullets bug)
+doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('TalwinderCSS', { continued: true })
+   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  NPM Engine, HTML5, CSS3, JavaScript', { continued: true })
+   .font('Helvetica').fillColor(COLOR_LINK).text('  [Live]', { link: 'https://talwinder.mehularora.dev/', continued: true })
+   .font('Helvetica').fillColor(COLOR_LINK).text('  [GitHub]', { link: 'https://github.com/MEHULARORA11/TalwinderCSS', continued: true })
+   .text('  [NPM]', { link: 'https://www.npmjs.com/package/talwinder-ji-ki-css' });
+doc.moveDown(0.25);
+
+doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
+const p3Bullets = [
+  'Engineered a highly customized, humor-infused open-source functional utility CSS tool published directly onto the public NPM dependency registry.',
+  'Mapped customized utility structures using explicit alias classes targeting cross-browser style components.'
+];
+p3Bullets.forEach(bullet => {
+  doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
+});
+doc.moveDown(0.45);
+
+// Project 4: 1 Million Checkboxes
 doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('1 Million Checkboxes', { continued: true })
    .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  React, Node, Express, Redis, WebSockets', { continued: true })
    .font('Helvetica').fillColor(COLOR_LINK).text('  [GitHub]', { link: 'https://github.com/MEHULARORA11/1-Million-CheckBoxes', continued: true })
@@ -127,50 +182,16 @@ doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('1 Milli
 doc.moveDown(0.25);
 
 doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
-const p1Bullets = [
+const p4Bullets = [
   'Scaled a collaborative real-time grid application supporting 1 million checkboxes concurrently with sub-millisecond updates.',
   'Integrated Redis for memory-efficient state management, pub-sub messaging, and rapid atomic key-value operations.',
   'Architected WebSockets connection pooling and broadcast pipelines to manage thousands of concurrent client updates with minimal latency.'
 ];
-p1Bullets.forEach(bullet => {
-  doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
-});
-doc.moveDown(0.45);
-
-// Project 2: Custom Tailwind Compiler
-doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Custom Tailwind Compiler', { continued: true })
-   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  Node.js, npm, JavaScript, CSS', { continued: true })
-   .font('Helvetica').fillColor(COLOR_LINK).text('  [npm Package]', { link: 'https://www.npmjs.com/package/talwinder-ji-ki-css', continued: true })
-   .text('  [GitHub]', { link: 'https://github.com/MEHULARORA11/My-Custom-Tailwind' });
-doc.moveDown(0.25);
-
-doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
-const p2Bullets = [
-  'Developed and published talwinder-ji-ki-css on npm, a lightweight, utility-first CSS preprocessor.',
-  'Engineered an AST-like parser to compile dynamic utility classes into highly optimized static stylesheet maps.',
-  'Optimized asset sizes by purging unused classes, reducing compiled CSS bundles by over 40%.'
-];
-p2Bullets.forEach(bullet => {
-  doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
-});
-doc.moveDown(0.45);
-
-// Project 3: Tic Tac Toe / Web Games
-doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('Tic Tac Toe & Web Games', { continued: true })
-   .font('Helvetica-Oblique').fillColor(COLOR_MUTED).text('  |  HTML5, CSS3, JavaScript (ES6)', { continued: true })
-   .font('Helvetica').fillColor(COLOR_LINK).text('  [Tic-Tac-Toe Live]', { link: 'https://tic-tac-toe-game-nine-puce.vercel.app/', continued: true })
-   .text('  [Guessing Game]', { link: 'https://guessinggame.mehularora.dev/' });
-doc.moveDown(0.25);
-
-doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY);
-const p3Bullets = [
-  'Built responsive interactive web games in vanilla JavaScript, implementing custom logic for winning-path validation and optimized state flow.',
-  'Designed clean UI layouts utilizing CSS variables and modern responsive grids for seamless mobile and desktop cross-compatibility.'
-];
-p3Bullets.forEach(bullet => {
+p4Bullets.forEach(bullet => {
   doc.text(`   -  ${bullet}`, { lineGap: 1.5 });
 });
 doc.moveDown(0.7);
+
 
 // ─── EDUCATION ───
 drawSectionHeader('Education');
