@@ -21,6 +21,30 @@ const doc = new PDFDocument({
   margins: { top: 40, bottom: 40, left: 45, right: 45 }
 });
 
+// ─── PATCH: force every link annotation to open in a new tab/window ───
+// PDFKit's built-in `link()` (used internally whenever `doc.text(str, { link })`
+// is called) builds a bare `{ S: 'URI', URI: url }` action. Most viewers/browsers
+// will still respect a `NewWindow` flag on that action dictionary, so we override
+// `doc.link` once, on this instance, to inject it automatically. Because `text()`
+// calls `this.link(...)` internally, every existing call site below (which just
+// passes `{ link: url }`) picks this up for free — no other code changes needed.
+const _originalLink = doc.link.bind(doc);
+doc.link = function (x, y, width, height, url, options = {}) {
+  if (typeof url === 'string') {
+    options.Subtype = 'Link';
+    const action = this.ref({
+      S: 'URI',
+      URI: new String(url),
+      NewWindow: true
+    });
+    action.end();
+    options.A = action;
+    return this.annotate(x, y, width, height, options);
+  }
+  // Fall back to default behavior for non-URL links (e.g. internal page/goTo links)
+  return _originalLink(x, y, width, height, url, options);
+};
+
 const writeStream = fs.createWriteStream(outputPath);
 doc.pipe(writeStream);
 
@@ -199,7 +223,7 @@ doc.fontSize(10.5).font('Helvetica-Bold').fillColor(COLOR_PRIMARY).text('JC Bose
    .font('Helvetica').fillColor(COLOR_MUTED).text('  |  Bachelor of Technology (B.Tech) in CSE', { continued: true })
    .font('Helvetica-Bold').fillColor(COLOR_ACCENT).text('  [Expected Graduation: June 2029]');
 doc.moveDown(0.25);
-doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY).text('Faridabad, India  |  First-year coursework focuses on Computer Science foundations, database engineering, and algorithms.');
+doc.fontSize(9).font('Helvetica').fillColor(COLOR_PRIMARY).text('Faridabad, India  |  Second-year coursework focuses on Computer Science foundations, database engineering, and algorithms.');
 doc.moveDown(0.75);
 
 // ─── CERTIFICATIONS ───

@@ -1,5 +1,5 @@
 import React from "react";
-import { FiDownload, FiPrinter, FiArrowLeft, FiGithub, FiLinkedin, FiMail, FiMapPin, FiGlobe } from "react-icons/fi";
+import { FiDownload, FiPrinter, FiArrowLeft, FiGithub, FiLinkedin, FiMail, FiMapPin, FiGlobe, FiTwitter, FiYoutube } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import PageWrapper from "../Components/shared/PageWrapper";
 
@@ -98,6 +98,12 @@ const Resume = () => {
               <a href="https://www.linkedin.com/in/mehul-arora-32674b238/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[var(--accent-light)] transition-colors print:no-underline">
                 <FiLinkedin className="text-[var(--accent)] print:text-black" /> linkedin.com/in/mehul-arora-32674b238
               </a>
+              <a href="https://x.com/MehulArora121" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[var(--accent-light)] transition-colors print:no-underline">
+                <FiTwitter className="text-[var(--accent)] print:text-black" /> x.com/MehulArora121
+              </a>
+              <a href="https://youtube.com/@Mehul_Arora" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[var(--accent-light)] transition-colors print:no-underline">
+                <FiYoutube className="text-[var(--accent)] print:text-black" /> youtube.com/@Mehul_Arora
+              </a>
               <a href="https://mehularora.dev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-[var(--accent-light)] transition-colors print:no-underline">
                 <FiGlobe className="text-[var(--accent)] print:text-black" /> mehularora.dev
               </a>
@@ -114,7 +120,7 @@ const Resume = () => {
               </h2>
               <div className="border-b print-divider border-[var(--accent-border)] mb-3" />
               <p className="text-base leading-relaxed theme-text-secondary">
-                Detail-oriented Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets. Passionate about solving complex system-design problems, optimizing database queries, and creating modern, responsive user interfaces.
+                Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets while optimizing database queries for high efficiency.
               </p>
             </div>
 
@@ -130,8 +136,8 @@ const Resume = () => {
                   <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Backend & Tools:</strong> Node.js, Express, Redis, WebSockets, REST APIs, Git, npm</p>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Frontend:</strong> React.js, Tailwind CSS, Framer Motion, HTML, CSS</p>
-                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Databases:</strong> PostgreSQL, MongoDB, SQL</p>
+                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Frontend:</strong> React.js, Tailwind CSS, HTML, CSS</p>
+                  <p className="theme-text"><strong className="font-mono text-xs uppercase tracking-wider text-[var(--accent)] print:text-black">Databases:</strong> PostgreSQL, MongoDB</p>
                 </div>
               </div>
             </div>
@@ -148,6 +154,58 @@ const Resume = () => {
                 <div className="flex flex-col gap-1.5">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
                     <h3 className="text-base font-bold theme-text">
+                      Arbiter <span className="text-xs font-mono font-normal theme-text-secondary">| PostgreSQL, Node.js, NextJS, OAuth, OpenAI, Gemini SDK</span>
+                    </h3>
+                    <div className="flex gap-3 text-xs font-mono">
+                      <a href="https://github.com/MEHULARORA11/Arbiter.git" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">GitHub</a>
+                      <a href="https://arbiter.mehularora.dev/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">Live</a>
+                    </div>
+                  </div>
+                  <ul className="list-disc pl-5 text-sm theme-text-secondary flex flex-col gap-1">
+                    <li>Architected a multi-model Self-Consistency LLM Agent that evaluates responses across diverse AI engines to generate optimized user answers.</li>
+                    <li>Implemented completely isolated contextual conversational history threads, ensuring distinct memory boundaries per active session.</li>
+                  </ul>
+                </div>
+
+                {/* Project 2 */}
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
+                    <h3 className="text-base font-bold theme-text">
+                      Personic <span className="text-xs font-mono font-normal theme-text-secondary">| OpenAI Agent SDK, HTML5, CSS3, JavaScript</span>
+                    </h3>
+                    <div className="flex gap-3 text-xs font-mono">
+                      <a href="https://personic.mehularora.dev/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">Live</a>
+                      <a href="https://github.com/MEHULARORA11/PersonicAi.git" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">GitHub</a>
+                    </div>
+                  </div>
+                  <ul className="list-disc pl-5 text-sm theme-text-secondary flex flex-col gap-1">
+                    <li>Built responsive, interactive web games using vanilla JavaScript, engineering localized algorithms for win-path validation and optimized engine loops.</li>
+                    <li>Designed UI architecture leveraging dynamic CSS custom properties and flexible grids for multi-platform device alignment.</li>
+                  </ul>
+                </div>
+
+                {/* Project 3 */}
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
+                    <h3 className="text-base font-bold theme-text">
+                      TalwinderCSS <span className="text-xs font-mono font-normal theme-text-secondary">| NPM Engine, HTML5, CSS3, JavaScript</span>
+                    </h3>
+                    <div className="flex gap-3 text-xs font-mono">
+                      <a href="https://talwinder.mehularora.dev/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">Live</a>
+                      <a href="https://github.com/MEHULARORA11/TalwinderCSS" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">GitHub</a>
+                      <a href="https://www.npmjs.com/package/talwinder-ji-ki-css" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">npm</a>
+                    </div>
+                  </div>
+                  <ul className="list-disc pl-5 text-sm theme-text-secondary flex flex-col gap-1">
+                    <li>Engineered a highly customized, humor-infused open-source functional utility CSS tool published directly onto the public NPM dependency registry.</li>
+                    <li>Mapped customized utility structures using explicit alias classes targeting cross-browser style components.</li>
+                  </ul>
+                </div>
+
+                {/* Project 4 */}
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
+                    <h3 className="text-base font-bold theme-text">
                       1 Million Checkboxes <span className="text-xs font-mono font-normal theme-text-secondary">| React, Node, Express, Redis, WebSockets</span>
                     </h3>
                     <div className="flex gap-3 text-xs font-mono">
@@ -159,41 +217,6 @@ const Resume = () => {
                     <li>Scaled a collaborative real-time grid application supporting 1 million checkboxes concurrently with sub-millisecond updates.</li>
                     <li>Integrated Redis for memory-efficient state management, pub-sub messaging, and rapid atomic key-value operations.</li>
                     <li>Architected WebSockets connection pooling and broadcast pipelines to manage thousands of concurrent client updates with minimal latency.</li>
-                  </ul>
-                </div>
-
-                {/* Project 2 */}
-                <div className="flex flex-col gap-1.5">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
-                    <h3 className="text-base font-bold theme-text">
-                      Custom Tailwind Compiler <span className="text-xs font-mono font-normal theme-text-secondary">| Node.js, npm, JavaScript, CSS</span>
-                    </h3>
-                    <div className="flex gap-3 text-xs font-mono">
-                      <a href="https://www.npmjs.com/package/talwinder-ji-ki-css" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">npm</a>
-                      <a href="https://github.com/MEHULARORA11/My-Custom-Tailwind" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">GitHub</a>
-                    </div>
-                  </div>
-                  <ul className="list-disc pl-5 text-sm theme-text-secondary flex flex-col gap-1">
-                    <li>Developed and published `talwinder-ji-ki-css` on npm, a lightweight, utility-first CSS preprocessor.</li>
-                    <li>Engineered an AST-like parser to compile dynamic utility classes into highly optimized static stylesheet maps.</li>
-                    <li>Optimized asset sizes by purging unused classes, reducing compiled CSS bundles by over 40%.</li>
-                  </ul>
-                </div>
-
-                {/* Project 3 */}
-                <div className="flex flex-col gap-1.5">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1">
-                    <h3 className="text-base font-bold theme-text">
-                      Tic Tac Toe & Web Games <span className="text-xs font-mono font-normal theme-text-secondary">| HTML5, CSS3, JavaScript (ES6)</span>
-                    </h3>
-                    <div className="flex gap-3 text-xs font-mono">
-                      <a href="https://tic-tac-toe-game-nine-puce.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">Tic-Tac-Toe</a>
-                      <a href="https://guessinggame.mehularora.dev/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-light)] hover:underline print:text-black">Guessing Game</a>
-                    </div>
-                  </div>
-                  <ul className="list-disc pl-5 text-sm theme-text-secondary flex flex-col gap-1">
-                    <li>Built responsive interactive web games in vanilla JavaScript, implementing custom logic for winning-path validation and optimized state flow.</li>
-                    <li>Designed clean UI layouts utilizing CSS variables and modern responsive grids for seamless mobile and desktop cross-compatibility.</li>
                   </ul>
                 </div>
               </div>
@@ -216,7 +239,7 @@ const Resume = () => {
                 </div>
               </div>
               <p className="text-sm theme-text-secondary mt-2">
-                First-year coursework focuses on Computer Science foundations, database engineering, and algorithms.
+                Second-year coursework focuses on Computer Science foundations, database engineering, and algorithms.
               </p>
             </div>
 
