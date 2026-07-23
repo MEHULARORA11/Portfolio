@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { AiFillGithub } from "react-icons/ai";
-import { FiExternalLink } from "react-icons/fi";
-import AOS from "aos";
+import { FiExternalLink, FiGitCommit } from "react-icons/fi";
 import SectionHeading from "./shared/SectionHeading";
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const WEEKDAY_SHORT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+// Cell size and gap constants — adjust here to resize the whole grid uniformly
+const CELL_SIZE = 16;
+const CELL_GAP = 3;
+const CELL_RADIUS = 4;
 
 /**
  * Real-Time GitHub Contribution Graph Component
- * Fetches contribution activity from backend /api/github-contributions and renders
- * a theme-matched heatmap grid driven by CSS custom properties.
+ * Fetches contribution data from backend /api/github-contributions.
+ * Colors driven entirely by CSS custom properties — works in both themes.
  */
 const GithubContributionsSection = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [hoveredDay, setHoveredDay] = useState(null);
+  const [tooltip, setTooltip] = useState(null);
   const shouldReduceMotion = useReducedMotion();
 
   const BASE_URL = import.meta.env.VITE_CLIENT_URL;
@@ -37,7 +41,7 @@ const GithubContributionsSection = () => {
 
       for (const endpoint of endpoints) {
         try {
-          const res = await fetch(endpoint, { cache: 'no-store' });
+          const res = await fetch(endpoint, { cache: "no-store" });
           if (res.ok) {
             const json = await res.json();
             if (!json.error) {
@@ -51,227 +55,303 @@ const GithubContributionsSection = () => {
       }
 
       if (isMounted) {
-        if (successData) {
-          setData(successData);
-        } else {
-          setError(true);
-        }
+        if (successData) setData(successData);
+        else setError(true);
         setLoading(false);
-        setTimeout(() => {
-          AOS.refresh();
-        }, 150);
       }
     }
 
     fetchContributions();
-    return () => {
-      isMounted = false;
-    };
+    return () => { isMounted = false; };
   }, [BASE_URL]);
 
-  // Compute Month Labels header row based on dates in weeks
-  const monthHeaders = [];
-  let lastMonth = -1;
+  // --- Derived stats ---
+  const currentStreak = React.useMemo(() => {
+    if (!data?.weeks) return 0;
+    const allDays = data.weeks.flatMap(w => w.days).reverse();
+    let streak = 0;
+    for (const day of allDays) {
+      if (day.count > 0) streak++;
+      else break;
+    }
+    return streak;
+  }, [data]);
 
-  if (data && data.weeks) {
-    data.weeks.forEach((week, weekIdx) => {
-      const firstDay = week.days && week.days[0];
-      if (firstDay && firstDay.date) {
-        const dateObj = new Date(firstDay.date);
-        const monthIdx = dateObj.getMonth();
+  const mostActiveDay = React.useMemo(() => {
+    if (!data?.weeks) return null;
+    return data.weeks
+      .flatMap(w => w.days)
+      .reduce((best, d) => (!best || d.count > best.count ? d : best), null);
+  }, [data]);
+
+  // --- Month label positions ---
+  const monthHeaders = React.useMemo(() => {
+    const headers = [];
+    let lastMonth = -1;
+    data?.weeks?.forEach((week, weekIdx) => {
+      const firstDay = week.days?.[0];
+      if (firstDay?.date) {
+        const monthIdx = new Date(firstDay.date).getMonth();
         if (monthIdx !== lastMonth) {
-          monthHeaders.push({ weekIdx, monthName: MONTH_NAMES[monthIdx] });
+          headers.push({ weekIdx, monthName: MONTH_NAMES[monthIdx] });
           lastMonth = monthIdx;
         }
       }
     });
-  }
+    return headers;
+  }, [data]);
 
-  // Level intensity CSS class mappings driven by CSS variables
-  const getLevelStyle = (level) => {
+  // --- Level → inline style ---
+  const getCellStyle = (level) => {
     switch (level) {
-      case 1:
-        return "bg-[var(--accent-muted)] border border-[var(--accent-border)]/40";
-      case 2:
-        return "bg-[var(--accent)]/35 border border-[var(--accent-border)]";
-      case 3:
-        return "bg-[var(--accent)] border border-[var(--accent-light)]/40 shadow-[0_0_5px_var(--accent-glow-soft)]";
-      case 4:
-        return "bg-[var(--accent-light)] border border-[var(--accent-light)] shadow-[0_0_9px_var(--accent-glow)]";
       case 0:
+        return { background: "var(--cell-empty)", border: "1px solid var(--cell-empty-border)" };
+      case 1:
+        return { background: "var(--accent-muted)", border: "1px solid var(--accent-border)" };
+      case 2:
+        return { background: "var(--cell-l2)", border: "1px solid var(--accent-border)" };
+      case 3:
+        return { background: "var(--accent)", border: "1px solid var(--accent-light)", opacity: 0.85 };
+      case 4:
+        return { background: "var(--accent-light)", border: "1px solid var(--accent-light)", boxShadow: "0 0 7px var(--accent-glow)" };
       default:
-        return "bg-[var(--card-border)]/50 border border-transparent";
+        return {};
     }
   };
 
   const formatDate = (dateStr) => {
     if (!dateStr) return "";
-    const dateObj = new Date(dateStr);
-    return dateObj.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
+    return new Date(dateStr).toLocaleDateString("en-US", {
+      weekday: "short", month: "short", day: "numeric",
     });
   };
 
+  // Day-label column width: text width + right padding
+  const DAY_COL_WIDTH = 30;
+
   return (
     <div data-aos="fade-right" className="mb-20 lg:mb-36 w-full text-left">
-      <SectionHeading title="Live Contribution Activity" subtitle="Straight From GitHub" />
+      {/* Scoped CSS vars for cell colors */}
+      <style>{`
+        .gh-graph-root {
+          --cell-empty: rgba(255,255,255,0.05);
+          --cell-empty-border: rgba(16,185,129,0.14);
+          --cell-l2: rgba(16,185,129,0.42);
+        }
+        [data-theme="light"] .gh-graph-root {
+          --cell-empty: rgba(11,108,83,0.07);
+          --cell-empty-border: rgba(11,108,83,0.18);
+          --cell-l2: rgba(11,108,83,0.38);
+        }
+      `}</style>
+
+      <SectionHeading title="GitHub Activity" subtitle="Live Contribution Stream" />
 
       {loading ? (
-        <div className="h-64 w-full glass-card rounded-[32px] animate-pulse bg-[var(--card-bg)] border-[var(--card-border)]" />
-      ) : error || !data || !data.weeks ? (
-        <div className="glass-card p-8 lg:p-10 rounded-[32px] border-[var(--card-border)] bg-[var(--card-bg)] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="flex items-center gap-5">
-            <div className="w-14 h-14 rounded-2xl theme-icon-box flex items-center justify-center text-3xl shrink-0">
-              <AiFillGithub />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold theme-text">GitHub Activity Stream</h3>
-              <p className="theme-text-muted text-sm mt-1">
-                Contribution data temporarily unavailable.
-              </p>
-            </div>
+        <div className="w-full glass-card rounded-[32px] animate-pulse bg-[var(--card-bg)] border-[var(--card-border)] h-72" />
+      ) : error || !data?.weeks ? (
+        <div className="glass-card p-8 lg:p-10 rounded-[32px] border-[var(--card-border)] bg-[var(--card-bg)] flex flex-col sm:flex-row items-center gap-6">
+          <div className="w-12 h-12 rounded-2xl theme-icon-box flex items-center justify-center text-2xl shrink-0">
+            <AiFillGithub />
           </div>
-
+          <div className="flex-1">
+            <p className="font-semibold theme-text">Contribution data temporarily unavailable</p>
+            <p className="text-sm theme-text-muted mt-1">The GitHub token may not be configured yet.</p>
+          </div>
           <a
             href="https://github.com/MEHULARORA11"
             target="_blank"
             rel="noopener noreferrer"
-            className="theme-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm shrink-0 active:scale-95 hover:shadow-[0_0_20px_var(--accent-glow)]"
+            className="theme-icon-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm active:scale-95"
           >
-            <span>Visit GitHub Profile</span>
-            <FiExternalLink className="text-base" />
+            View on GitHub <FiExternalLink />
           </a>
         </div>
       ) : (
-        <div className="glass-card p-6 sm:p-8 lg:p-10 rounded-[32px] border-[var(--card-border)] bg-[var(--card-bg)] shadow-xl relative overflow-hidden group">
-          
-          {/* Top-Right Micro-Label */}
-          <div className="absolute top-6 right-8 font-mono text-[9.5px] sm:text-[10.5px] text-[var(--accent-light)] opacity-60 group-hover:opacity-100 transition-opacity duration-300 uppercase tracking-[0.2em] font-semibold hidden sm:block">
+        <div className="gh-graph-root glass-card p-6 sm:p-8 lg:p-10 rounded-[32px] border-[var(--card-border)] bg-[var(--card-bg)] relative overflow-hidden group">
+
+          {/* Corner micro-label */}
+          <div className="absolute top-5 right-7 font-mono text-[9px] text-[var(--accent-light)] opacity-40 group-hover:opacity-80 transition-opacity duration-500 uppercase tracking-[0.25em] hidden sm:block select-none">
             GH // CONTRIB_STREAM
           </div>
 
-          {/* Card Header: Total Contributions & Stat Badge */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-6 border-b theme-divider">
-            <div>
-              <div className="flex items-baseline gap-3">
-                <span className="text-4xl sm:text-5xl lg:text-6xl font-extrabold gradient-text leading-none">
-                  {data.totalContributions}
-                </span>
-                <span className="text-sm sm:text-base font-bold theme-text-secondary">
-                  contributions
+          {/* ── Stats row ── */}
+          <div className="flex flex-wrap items-start gap-6 mb-8 pb-7 border-b theme-divider">
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-baseline gap-2">
+                <span className="text-5xl sm:text-6xl font-black gradient-text leading-none tabular-nums">
+                  {data.totalContributions.toLocaleString()}
                 </span>
               </div>
-              <p className="theme-text-label font-mono text-xs uppercase tracking-wider font-semibold mt-2">
-                Contributions Past Year
-              </p>
+              <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-[var(--accent-light)] mt-1">
+                contributions · past year
+              </span>
             </div>
 
-            {/* Intensity Legend */}
-            <div className="flex items-center gap-2 text-xs theme-text-muted font-mono self-start sm:self-end">
+            <div className="hidden sm:block w-px self-stretch bg-[var(--divider)]" />
+
+            <div className="flex flex-col gap-0.5">
+              <span className="text-3xl font-black theme-text tabular-nums">{currentStreak}</span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.18em] theme-text-muted">day streak</span>
+            </div>
+
+            {mostActiveDay && mostActiveDay.count > 0 && (
+              <>
+                <div className="hidden sm:block w-px self-stretch bg-[var(--divider)]" />
+                <div className="flex flex-col gap-0.5">
+                  <div className="flex items-center gap-1.5">
+                    <FiGitCommit className="text-[var(--accent)] text-sm" />
+                    <span className="text-2xl font-black theme-text tabular-nums">{mostActiveDay.count}</span>
+                  </div>
+                  <span className="text-[10px] font-mono uppercase tracking-[0.18em] theme-text-muted">
+                    best · {formatDate(mostActiveDay.date)}
+                  </span>
+                </div>
+              </>
+            )}
+
+            {/* Legend */}
+            <div className="flex items-center gap-2 text-[10px] font-mono theme-text-muted ml-auto self-end pb-0.5">
               <span>Less</span>
-              <div className="flex gap-1 items-center">
+              <div className="flex gap-[3px] items-center">
                 {[0, 1, 2, 3, 4].map((lvl) => (
-                  <div
-                    key={lvl}
-                    className={`w-3 h-3 rounded-[3px] ${getLevelStyle(lvl)}`}
-                  />
+                  <div key={lvl} style={{ ...getCellStyle(lvl), width: 11, height: 11, borderRadius: 3 }} />
                 ))}
               </div>
               <span>More</span>
             </div>
           </div>
 
-          {/* Floating Tooltip Display */}
-          <div className="h-7 mb-3 flex items-center">
-            {hoveredDay ? (
-              <motion.div
-                initial={{ opacity: 0, y: 3 }}
+          {/* ── Tooltip bar ── */}
+          <div className="h-6 mb-4 flex items-center">
+            {tooltip?.day ? (
+              <motion.span
+                key={tooltip.day.date}
+                initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.15 }}
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-xl font-mono text-xs font-semibold theme-badge shadow-md"
+                transition={{ duration: 0.12 }}
+                className="inline-flex items-center gap-2 theme-badge px-3 py-0.5 rounded-lg text-[11px] font-mono"
               >
-                <span className="text-[var(--accent-light)] font-bold">
-                  {hoveredDay.count} contribution{hoveredDay.count === 1 ? "" : "s"}
+                <span className="font-bold text-[var(--accent-light)]">
+                  {tooltip.day.count === 0 ? "No contributions" : `${tooltip.day.count} contribution${tooltip.day.count === 1 ? "" : "s"}`}
                 </span>
-                <span className="opacity-50">•</span>
-                <span className="theme-text-secondary">{formatDate(hoveredDay.date)}</span>
-              </motion.div>
+                <span className="opacity-40">·</span>
+                <span className="theme-text-secondary">{formatDate(tooltip.day.date)}</span>
+              </motion.span>
             ) : (
-              <span className="text-xs font-mono theme-text-muted opacity-50 select-none">
-                Hover over squares for details
+              <span className="text-[10px] font-mono theme-text-muted opacity-40 select-none">
+                Hover a square to inspect
               </span>
             )}
           </div>
 
-          {/* Grid Scroll Container */}
-          <div className="w-full overflow-x-auto scroll-hide pb-2 pt-1 select-none">
-            <div className="min-w-max flex flex-col gap-1.5">
+          {/* ── Heatmap grid — centred, scrollable on small screens ── */}
+          <div className="w-full overflow-x-auto scroll-hide py-2">
+            <div className="flex justify-center">
+              <div>
 
-              {/* Month Labels Header Row */}
-              <div className="flex text-[10px] font-mono text-[var(--text-muted)] h-4 relative mb-1">
-                <div className="w-8 shrink-0" /> {/* Spacer for day labels column */}
-                <div className="flex gap-1.5 relative">
+                {/* Month labels row */}
+                <div className="flex mb-[5px]" style={{ paddingLeft: DAY_COL_WIDTH + CELL_GAP }}>
                   {data.weeks.map((_, weekIdx) => {
-                    const header = monthHeaders.find((h) => h.weekIdx === weekIdx);
+                    const header = monthHeaders.find(h => h.weekIdx === weekIdx);
                     return (
-                      <div key={weekIdx} className="w-3.5 sm:w-4 shrink-0 text-left">
-                        {header ? (
-                          <span className="font-semibold text-[var(--accent-light)]">
-                            {header.monthName}
-                          </span>
-                        ) : null}
+                      <div
+                        key={weekIdx}
+                        style={{ width: CELL_SIZE, marginRight: CELL_GAP, flexShrink: 0 }}
+                        className="text-[9px] font-mono text-[var(--accent-light)] font-semibold overflow-visible whitespace-nowrap"
+                      >
+                        {header ? header.monthName : ""}
                       </div>
                     );
                   })}
                 </div>
-              </div>
 
-              {/* Main Calendar Matrix: Day Labels + Week Columns */}
-              <div className="flex gap-2 items-start">
+                {/* Day labels + week columns */}
+                <div className="flex items-start" style={{ gap: CELL_GAP }}>
 
-                {/* Day Labels Column (Mon, Wed, Fri) */}
-                <div className="flex flex-col gap-1.5 text-[9px] sm:text-[10px] font-mono text-[var(--text-muted)] shrink-0 pt-[2px]">
-                  {DAY_LABELS.map((dayLabel, idx) => (
-                    <div key={dayLabel} className="h-3.5 sm:h-4 flex items-center justify-end pr-1 w-7">
-                      {idx % 2 === 1 ? dayLabel : ""}
-                    </div>
-                  ))}
-                </div>
+                  {/* Day-of-week label column */}
+                  <div
+                    className="flex flex-col shrink-0"
+                    style={{ gap: CELL_GAP, paddingTop: 1, width: DAY_COL_WIDTH }}
+                  >
+                    {WEEKDAY_SHORT.map((label, idx) => (
+                      <div
+                        key={label}
+                        className="font-mono text-[9px] theme-text-muted flex items-center justify-end"
+                        style={{ height: CELL_SIZE, paddingRight: 5, opacity: idx % 2 === 1 ? 1 : 0 }}
+                      >
+                        {label}
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Week Columns */}
-                <div className="flex gap-1.5">
+                  {/* Week columns */}
                   {data.weeks.map((week, weekIdx) => (
                     <motion.div
                       key={weekIdx}
-                      initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      className="flex flex-col"
+                      style={{ gap: CELL_GAP }}
+                      initial={shouldReduceMotion ? false : { opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{
-                        duration: 0.25,
-                        delay: shouldReduceMotion ? 0 : Math.min(weekIdx * 0.012, 0.5),
-                        ease: "easeOut",
+                        duration: 0.3,
+                        delay: shouldReduceMotion ? 0 : Math.min(weekIdx * 0.008, 0.35),
                       }}
-                      className="flex flex-col gap-1.5"
                     >
                       {week.days.map((day) => (
                         <div
                           key={day.date}
-                          onMouseEnter={() => setHoveredDay(day)}
-                          onMouseLeave={() => setHoveredDay(null)}
-                          className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-[3px] sm:rounded-[4px] ${getLevelStyle(
-                            day.level
-                          )} transition-all duration-150 hover:scale-125 hover:z-20 cursor-pointer`}
+                          style={{
+                            ...getCellStyle(day.level),
+                            width: CELL_SIZE,
+                            height: CELL_SIZE,
+                            borderRadius: CELL_RADIUS,
+                            cursor: "pointer",
+                            flexShrink: 0,
+                            transition: "transform 0.1s ease, box-shadow 0.15s ease",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "scale(1.4)";
+                            e.currentTarget.style.zIndex = "10";
+                            if (day.level === 4) {
+                              e.currentTarget.style.boxShadow = "0 0 10px var(--accent-glow)";
+                            }
+                            setTooltip({ day });
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "scale(1)";
+                            e.currentTarget.style.zIndex = "auto";
+                            e.currentTarget.style.boxShadow = getCellStyle(day.level).boxShadow || "none";
+                            setTooltip(null);
+                          }}
                         />
                       ))}
                     </motion.div>
                   ))}
+
                 </div>
-
               </div>
-
             </div>
+          </div>
+
+          {/* ── Footer ── */}
+          <div className="mt-6 pt-5 border-t theme-divider flex items-center justify-between gap-4">
+            <span className="text-[10px] font-mono theme-text-muted opacity-60 uppercase tracking-[0.18em]">
+              Refreshes every 30s · Cached by Redis
+            </span>
+            <a
+              href="https://github.com/MEHULARORA11"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[11px] font-mono font-semibold text-[var(--accent-light)] hover:text-[var(--highlight-text)] transition-colors duration-200 group/link"
+            >
+              <AiFillGithub className="text-base" />
+              <span className="underline underline-offset-4 decoration-[var(--accent-border)] group-hover/link:decoration-[var(--accent-light)]">
+                MEHULARORA11
+              </span>
+              <FiExternalLink className="text-xs opacity-60" />
+            </a>
           </div>
 
         </div>
