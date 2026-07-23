@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import HomeCard from "../Components/HomeCard";
 
 const SkillsSection = lazy(() => import("../Components/SkillsSection"));
+const GithubContributionsSection = lazy(() => import("../Components/GithubContributionsSection"));
 const ContactSection = lazy(() => import("../Components/ContactSection"));
 
 const Home = () => {
@@ -33,6 +34,10 @@ const Home = () => {
       
       <Suspense fallback={<div className="h-48 w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
         <SkillsSection />
+      </Suspense>
+
+      <Suspense fallback={<div className="h-64 w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
+        <GithubContributionsSection />
       </Suspense>
 
       <Suspense fallback={<div className="h-[450px] w-full glass-card rounded-[32px] animate-pulse mb-20 lg:mb-36 bg-[var(--card-bg)]" />}>
