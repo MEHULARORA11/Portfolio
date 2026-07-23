@@ -3,6 +3,7 @@ import express from 'express'
 import {sendEmailToMehul} from './email.js'
 import cors from 'cors'
 import {redis} from './redis.js'
+import rateLimit from 'express-rate-limit'
 
 const app = express();
 const PORT = process.env.PORT || 80
@@ -44,6 +45,14 @@ app.get('/api/views', async (req, res) => {
   }
 })
 
+const githubContribLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 20, // max 20 requests per IP per minute
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: true, message: 'Too many requests, please try again later.' }
+});
+
 let localGithubFallback = null;
 
 const getContributionLevel = (count) => {
@@ -54,12 +63,16 @@ const getContributionLevel = (count) => {
   return 4;
 };
 
-app.get('/api/github-contributions', async (req, res) => {
+app.get('/api/github-contributions', githubContribLimiter, async (req, res) => {
+  // Prevent HTTP response caching across browsers, proxies, and Caddy
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+
   const username = process.env.GITHUB_USERNAME || 'MEHULARORA11';
   const token = process.env.GITHUB_TOKEN;
   const cacheKey = `github:contributions:${username}`;
+  const fallbackCacheKey = `github:contributions:${username}:fallback`;
 
-  // 1. Check Redis cache first
+  // 1. Check Redis short-lived freshness cache (30-second window)
   try {
     const cached = await redis.get(cacheKey);
     if (cached) {
@@ -69,15 +82,28 @@ app.get('/api/github-contributions', async (req, res) => {
     console.error("Redis error checking GitHub contribution cache:", err.message);
   }
 
-  // 2. Degrade gracefully if token missing
+  // Helper function to fetch persistent fallback cache
+  const getFallbackData = async () => {
+    try {
+      const storedFallback = await redis.get(fallbackCacheKey);
+      if (storedFallback) return JSON.parse(storedFallback);
+    } catch (e) {
+      console.error("Redis error reading fallback cache:", e.message);
+    }
+    return localGithubFallback;
+  };
+
+  // 2. Degrade gracefully if token missing, serving fallback if available
   if (!token) {
+    const fallback = await getFallbackData();
+    if (fallback) return res.status(200).json(fallback);
     return res.status(200).json({
       error: true,
       message: "GITHUB_TOKEN environment variable is not configured."
     });
   }
 
-  // 3. Fetch from GitHub GraphQL API v4
+  // 3. Fetch fresh data from GitHub GraphQL API v4
   try {
     const query = `
       query($username: String!) {
@@ -133,20 +159,21 @@ app.get('/api/github-contributions', async (req, res) => {
       }))
     };
 
-    // 4. Cache shaped result in Redis with TTL of 1 hour (3600 seconds).
-    // Tradeoff: 1 hour TTL keeps graph updated while respecting GitHub GraphQL API rate limits.
+    // 4. Update short-lived cache (30s TTL) & persistent fallback cache (no TTL) in Redis
     try {
-      await redis.set(cacheKey, JSON.stringify(shapedData), 'EX', 3600);
+      await redis.set(cacheKey, JSON.stringify(shapedData), 'EX', 30);
+      await redis.set(fallbackCacheKey, JSON.stringify(shapedData));
     } catch (redisErr) {
       console.error("Redis set error for GitHub contributions:", redisErr.message);
-      localGithubFallback = shapedData;
     }
+    localGithubFallback = shapedData;
 
     return res.status(200).json(shapedData);
   } catch (err) {
     console.error("GitHub contributions fetch error:", err.message);
-    if (localGithubFallback) {
-      return res.status(200).json(localGithubFallback);
+    const fallback = await getFallbackData();
+    if (fallback) {
+      return res.status(200).json(fallback);
     }
     return res.status(200).json({
       error: true,
