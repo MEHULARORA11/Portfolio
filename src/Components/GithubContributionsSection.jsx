@@ -77,6 +77,22 @@ const GithubContributionsSection = () => {
     return streak;
   }, [data]);
 
+  const bestStreak = React.useMemo(() => {
+    if (!data?.weeks) return 0;
+    const allDays = data.weeks.flatMap(w => w.days);
+    let best = 0;
+    let current = 0;
+    for (const day of allDays) {
+      if (day.count > 0) {
+        current++;
+        if (current > best) best = current;
+      } else {
+        current = 0;
+      }
+    }
+    return best;
+  }, [data]);
+
   const mostActiveDay = React.useMemo(() => {
     if (!data?.weeks) return null;
     return data.weeks
@@ -145,7 +161,7 @@ const GithubContributionsSection = () => {
         }
       `}</style>
 
-      <SectionHeading title="GitHub Activity" subtitle="Live Contribution Stream" />
+      <SectionHeading title="GitHub Activity" />
 
       {loading ? (
         <div className="w-full glass-card rounded-[32px] animate-pulse bg-[var(--card-bg)] border-[var(--card-border)] h-72" />
@@ -170,10 +186,6 @@ const GithubContributionsSection = () => {
       ) : (
         <div className="gh-graph-root glass-card p-6 sm:p-8 lg:p-10 rounded-[32px] border-[var(--card-border)] bg-[var(--card-bg)] relative overflow-hidden group">
 
-          {/* Corner micro-label */}
-          <div className="absolute top-5 right-7 font-mono text-[9px] text-[var(--accent-light)] opacity-40 group-hover:opacity-80 transition-opacity duration-500 uppercase tracking-[0.25em] hidden sm:block select-none">
-            GH // CONTRIB_STREAM
-          </div>
 
           {/* ── Stats row ── */}
           <div className="flex flex-wrap items-start gap-6 mb-8 pb-7 border-b theme-divider">
@@ -192,7 +204,14 @@ const GithubContributionsSection = () => {
 
             <div className="flex flex-col gap-0.5">
               <span className="text-3xl font-black theme-text tabular-nums">{currentStreak}</span>
-              <span className="text-[10px] font-mono uppercase tracking-[0.18em] theme-text-muted">day streak</span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.18em] theme-text-muted">current streak</span>
+            </div>
+
+            <div className="hidden sm:block w-px self-stretch bg-[var(--divider)]" />
+
+            <div className="flex flex-col gap-0.5">
+              <span className="text-3xl font-black theme-text tabular-nums">{bestStreak}</span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.18em] theme-text-muted">best streak</span>
             </div>
 
             {mostActiveDay && mostActiveDay.count > 0 && (
@@ -336,10 +355,7 @@ const GithubContributionsSection = () => {
           </div>
 
           {/* ── Footer ── */}
-          <div className="mt-6 pt-5 border-t theme-divider flex items-center justify-between gap-4">
-            <span className="text-[10px] font-mono theme-text-muted opacity-60 uppercase tracking-[0.18em]">
-              Refreshes every 30s · Cached by Redis
-            </span>
+          <div className="mt-6 pt-5 border-t theme-divider flex items-center justify-end gap-4">
             <a
               href="https://github.com/MEHULARORA11"
               target="_blank"

@@ -64,13 +64,13 @@ const HomeCard = () => {
         className="flex flex-col gap-6 lg:w-[55%] w-full"
       >
         <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2.5 mb-2 w-fit">
+          <div className="flex items-center gap-2 mb-2 w-fit">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-light)] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]"></span>
             </span>
-            <span className="text-[10.5px] font-mono uppercase tracking-[0.22em] text-[var(--accent-light)] font-semibold">
-              SYS // ACTIVE_PORTFOLIO
+            <span className="text-sm text-[var(--accent-light)] font-semibold">
+              Available for work
             </span>
           </div>
 
@@ -129,9 +129,6 @@ const HomeCard = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
           
           <div className="glass-card p-5 rounded-2xl flex flex-col gap-3 hover:-translate-y-1 hover:shadow-[0_0_15px_var(--accent-glow-soft)] transition-all duration-300 relative group overflow-hidden border-[var(--card-border)] bg-[var(--card-bg)]">
-            <div className="absolute top-0 right-0 p-2.5 font-mono text-[9px] text-[var(--accent-light)] opacity-40 group-hover:opacity-100 transition-opacity duration-300">
-              EDU // BTECH
-            </div>
             <div className="flex items-center justify-center w-10 h-10 rounded-xl theme-icon-box">
               <FiBookOpen className="text-lg" />
             </div>
@@ -142,9 +139,6 @@ const HomeCard = () => {
           </div>
 
           <div className="glass-card p-5 rounded-2xl flex flex-col gap-3 hover:-translate-y-1 hover:shadow-[0_0_15px_var(--accent-glow-soft)] transition-all duration-300 relative group overflow-hidden border-[var(--card-border)] bg-[var(--card-bg)]">
-            <div className="absolute top-0 right-0 p-2.5 font-mono text-[9px] text-[var(--accent-light)] opacity-40 group-hover:opacity-100 transition-opacity duration-300">
-              SPEC // ARCH
-            </div>
             <div className="flex items-center justify-center w-10 h-10 rounded-xl theme-icon-box">
               <FiCpu className="text-lg" />
             </div>
@@ -155,9 +149,6 @@ const HomeCard = () => {
           </div>
 
           <div className="glass-card p-5 rounded-2xl flex flex-col gap-3 hover:-translate-y-1 hover:shadow-[0_0_15px_var(--accent-glow-soft)] transition-all duration-300 relative group overflow-hidden border-[var(--card-border)] bg-[var(--card-bg)]">
-            <div className="absolute top-0 right-0 p-2.5 font-mono text-[9px] text-[var(--accent-light)] opacity-40 group-hover:opacity-100 transition-opacity duration-300">
-              LOC // BASE
-            </div>
             <div className="flex items-center justify-center w-10 h-10 rounded-xl theme-icon-box">
               <FiMapPin className="text-lg" />
             </div>
