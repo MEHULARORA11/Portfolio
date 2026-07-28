@@ -117,8 +117,8 @@ export async function* streamChatResponse(query, history = []) {
   const stream = await mistral.chat.stream({
     model: 'mistral-large-latest',
     messages,
-    maxTokens: 1024,
-    temperature: 0.65,
+    maxTokens: 600,
+    temperature: 0.4,
     safePrompt: true, // Mistral's built-in safety layer (defence in depth)
   });
 
