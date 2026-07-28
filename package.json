@@ -12,6 +12,7 @@
     "generate-resume": "node scripts/generate-resume.js"
   },
   "dependencies": {
+    "@mistralai/mistralai": "^2.5.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "@tsparticles/react": "^4.2.1",
