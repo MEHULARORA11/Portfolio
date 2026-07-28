@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { OpenAI } from 'openai'
+import { Mistral } from '@mistralai/mistralai'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 dotenv.config({ path: resolve(__dirname, '../../../.env') })
@@ -166,7 +166,7 @@ function normalizeText(text) {
     .replace(/[$5]/g, "s")
     .replace(/[7]/g, "t")
     .replace(/[^a-z0-9\s]/gi, " ") // Keep spaces to prevent word merging!
-    .replace(/\s+/g, " ")         // Collapse multiple spaces into one
+    .replace(/\s+/g, " ")          // Collapse multiple spaces into one
     .trim()
 }
 
@@ -178,28 +178,60 @@ function containsNonEnglish(text) {
   return /[^\x00-\x7F]/.test(text)
 }
 
-async function isSafe(message, apiKey) {
-  const effectiveKey = (apiKey || process.env.OPENAI_API_KEY || '').trim()
-  if (!effectiveKey) {
-    return true
+// ─── Mistral-based moderation fallback ───────────────────────────────────────
+// Replaces OpenAI's moderations.create() for non-English content that regex
+// cannot reliably catch. Sends a tight classification prompt to Mistral and
+// parses a single-word YES/NO verdict. Fails open (returns safe) on any error
+// so a transient API hiccup never blocks a legitimate user.
+let _mistralClient = null
+function getMistralClient() {
+  if (!_mistralClient) {
+    const apiKey = (process.env.MISTRALAI_API_KEY || '').trim()
+    if (!apiKey) return null
+    _mistralClient = new Mistral({ apiKey })
   }
+  return _mistralClient
+}
+
+async function isSafeViaMistral(message) {
+  const client = getMistralClient()
+  if (!client) return true  // No key configured — fail open
+
   try {
-    const client = new OpenAI({ apiKey: effectiveKey })
-    const moderation = await client.moderations.create({
-      model: "omni-moderation-latest",
-      input: message,
+    const response = await client.chat.complete({
+      model: 'mistral-small-latest',   // Cheapest model — fast classification only
+      messages: [
+        {
+          role: 'system',
+          content: `You are a strict content moderation classifier.
+Your ONLY job is to decide if a message contains harmful, abusive, hateful, sexual, violent, or otherwise inappropriate content.
+
+Respond with EXACTLY one word:
+- YES  → if the message IS harmful/abusive/inappropriate
+- NO   → if the message is safe and appropriate
+
+Do not explain. Do not add punctuation. Do not say anything else.`
+        },
+        {
+          role: 'user',
+          content: message
+        }
+      ],
+      maxTokens: 5,
+      temperature: 0,
     })
-    return !moderation?.results[0]?.flagged
+
+    const verdict = response?.choices?.[0]?.message?.content?.trim().toUpperCase()
+    return verdict !== 'YES'  // true = safe, false = abusive
   } catch (err) {
-    console.warn("Moderation API check skipped due to error:", err?.message || err)
-    return true
+    console.warn('Mistral moderation check skipped due to error:', err?.message || err)
+    return true  // Fail open — don't block users on API errors
   }
 }
 
 // Strip email addresses before all checks to prevent false positives.
 // Email addresses (e.g. user@gmail.com) contain '@', digits, and domain parts
-// that can accidentally match abusive regex patterns after normalisation, and can
-// also confuse the OpenAI moderation API into producing false positives.
+// that can accidentally match abusive regex patterns after normalisation.
 function stripEmails(text) {
   return text.replace(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g, '')
 }
@@ -212,29 +244,30 @@ function removeDuplicateLetters(text) {
     .join(" ")
 }
 
-export async function isAbusive(userPrompt, apiKey) {
+export async function isAbusive(userPrompt) {
   // Step 1: Strip emails
   const promptWithoutEmails = stripEmails(userPrompt)
   const sanitizedPrompt = promptWithoutEmails.replace(/\bgarg\b/gi, '')
-  
+
   // Step 2: Normalize while maintaining word separation
   const normalizedWithSpaces = normalizeText(sanitizedPrompt)
   const normalizedDeduplicated = removeDuplicateLetters(normalizedWithSpaces)
 
   // Step 3: Check regex patterns on space-preserved versions
   if (
-    containsAbuse(sanitizedPrompt) || 
-    containsAbuse(normalizedWithSpaces) || 
+    containsAbuse(sanitizedPrompt) ||
+    containsAbuse(normalizedWithSpaces) ||
     containsAbuse(normalizedDeduplicated)
   ) {
     return true
   }
 
-  // Step 4: Fallback to moderation API for non-English content
+  // Step 4: Fallback to Mistral classification for non-English content
+  // that regex cannot reliably catch (e.g. Hindi/Urdu in Unicode script)
   const isNonEnglish = containsNonEnglish(promptWithoutEmails)
   if (isNonEnglish) {
-    const isSafeMessage = await isSafe(promptWithoutEmails, apiKey)
-    if (!isSafeMessage) return true
+    const safe = await isSafeViaMistral(promptWithoutEmails)
+    if (!safe) return true
   }
 
   return false
