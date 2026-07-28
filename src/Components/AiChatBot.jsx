@@ -391,7 +391,7 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
   const [messages, setMessages] = useState([
     {
       role: "ai",
-      text: "Hi! I'm Mehul's AI assistant, powered by Mistral. Ask me about his projects, skills, or how to get in touch. Or click one of the project cards below!",
+      text: "Hi! I'm Mehul's Portfolio Assistant. What would you like to know?",
       time: getTime(),
       quickReplies: PROJECT_CHIPS,
     },
@@ -565,7 +565,7 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
     setMessages([
       {
         role: "ai",
-        text: "Chat cleared! Ask me anything about Mehul — projects, skills, how to hire him.",
+        text: "Hi! I'm Mehul's Portfolio Assistant. What would you like to know?",
         time: getTime(),
         quickReplies: PROJECT_CHIPS,
       },
@@ -575,6 +575,33 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
   // ─── Cleanup on unmount ───────────────────────────────────────────────────
   useEffect(() => {
     return () => { if (abortRef.current) abortRef.current.abort(); };
+  }, []);
+
+  // ─── Lenis scroll isolation ───────────────────────────────────────────────
+  // When pointer is inside the chat panel, pause Lenis so the panel's own
+  // overflow scroll works normally and the portfolio page does not scroll.
+  const chatPanelRef = useRef(null);
+
+  useEffect(() => {
+    const el = chatPanelRef.current;
+    if (!el) return;
+
+    const pauseLenis = () => {
+      if (window.lenis) window.lenis.stop();
+    };
+    const resumeLenis = () => {
+      if (window.lenis) window.lenis.start();
+    };
+
+    el.addEventListener("mouseenter", pauseLenis);
+    el.addEventListener("mouseleave", resumeLenis);
+
+    return () => {
+      el.removeEventListener("mouseenter", pauseLenis);
+      el.removeEventListener("mouseleave", resumeLenis);
+      // Always resume on unmount so we don't leave Lenis paused
+      if (window.lenis) window.lenis.start();
+    };
   }, []);
 
   // ─── Render ───────────────────────────────────────────────────────────────
@@ -590,6 +617,7 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
 
       {/* ── CHAT PANEL ── */}
       <div
+        ref={chatPanelRef}
         className="fixed top-0 bottom-0 right-0 h-full w-[380px] max-w-full flex flex-col z-40 chatbot-panel print:hidden"
         style={{
           transform: isOpen ? "translateX(0)" : "translateX(100%)",
