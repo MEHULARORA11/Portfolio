@@ -4,6 +4,8 @@ import {sendEmailToMehul} from './email.js'
 import cors from 'cors'
 import {redis} from './redis.js'
 import rateLimit from 'express-rate-limit'
+import { streamChatResponse } from './src/chatBot/mistralClient.js'
+import { isAbusive } from './src/chatBot/slang.js'
 
 const app = express();
 const PORT = process.env.PORT || 80
@@ -16,6 +18,73 @@ app.use(cors({
     methods:["GET", "POST"],
     origin:BASE_URL
 }))
+
+// ─── Chat rate limiter: max 20 requests per IP per minute ───────────────────
+const chatLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: true, message: 'Too many messages. Please wait a moment before trying again.' }
+});
+
+// ─── /api/chat — streaming SSE endpoint ─────────────────────────────────────
+app.post('/api/chat', chatLimiter, async (req, res) => {
+  try {
+    const { query, history } = req.body;
+
+    // 1. Input validation
+    if (!query || typeof query !== 'string') {
+      return res.status(400).json({ error: true, message: 'Invalid query.' });
+    }
+    const sanitizedQuery = query.trim().slice(0, 800); // hard cap at 800 chars
+    if (!sanitizedQuery) {
+      return res.status(400).json({ error: true, message: 'Empty query.' });
+    }
+
+    // 2. Abuse / slang check
+    const abusive = await isAbusive(sanitizedQuery);
+    if (abusive) {
+      // Return as SSE so frontend handles it uniformly
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+      res.setHeader('X-Accel-Buffering', 'no');
+      res.write(`data: ${JSON.stringify({ chunk: "Let's keep things professional! I'm here to help you explore Mehul's portfolio. What would you like to know about his projects or skills?" })}\n\n`);
+      res.write('data: [DONE]\n\n');
+      return res.end();
+    }
+
+    // 3. Set SSE headers
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('X-Accel-Buffering', 'no');
+    res.flushHeaders();
+
+    // 4. Stream Mistral response chunks
+    const historyArray = Array.isArray(history) ? history : [];
+    for await (const chunk of streamChatResponse(sanitizedQuery, historyArray)) {
+      if (res.writableEnded) break;
+      res.write(`data: ${JSON.stringify({ chunk })}\n\n`);
+    }
+
+    if (!res.writableEnded) {
+      res.write('data: [DONE]\n\n');
+      res.end();
+    }
+  } catch (err) {
+    console.error('Chat streaming error:', err.message);
+    if (!res.headersSent) {
+      return res.status(500).json({ error: true, message: 'Failed to get chat response.' });
+    }
+    if (!res.writableEnded) {
+      res.write(`data: ${JSON.stringify({ error: 'Something went wrong. Please try again.' })}\n\n`);
+      res.write('data: [DONE]\n\n');
+      res.end();
+    }
+  }
+});
 
 app.get('/', async (_, res) => {
   return res.status(200).json({ message: 'Portfolio API is running' })
