@@ -578,29 +578,41 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
   }, []);
 
   // ─── Lenis scroll isolation ───────────────────────────────────────────────
-  // When pointer is inside the chat panel, pause Lenis so the panel's own
-  // overflow scroll works normally and the portfolio page does not scroll.
+  // Lenis intercepts ALL wheel events at the window level and smooth-scrolls
+  // the page — even when the pointer is over a scrollable overlay panel.
+  // Fix: stop wheel event propagation on the panel so Lenis never sees the
+  // event, letting the panel's own overflow-y scroll handle it natively.
   const chatPanelRef = useRef(null);
 
   useEffect(() => {
     const el = chatPanelRef.current;
     if (!el) return;
 
-    const pauseLenis = () => {
-      if (window.lenis) window.lenis.stop();
-    };
-    const resumeLenis = () => {
-      if (window.lenis) window.lenis.start();
+    const stopWheel = (e) => {
+      // Only intercept when the panel actually has scrollable content —
+      // i.e. when the inner messages container can still scroll in that direction.
+      const messagesEl = el.querySelector(".chat-messages-scroll");
+      if (!messagesEl) return;
+
+      const { scrollTop, scrollHeight, clientHeight } = messagesEl;
+      const atTop = scrollTop === 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+      // If scrolling up at the top or down at the bottom, let the page scroll.
+      // Otherwise stop propagation so the panel scrolls instead.
+      const scrollingUp = e.deltaY < 0;
+      const scrollingDown = e.deltaY > 0;
+
+      if ((scrollingUp && atTop) || (scrollingDown && atBottom)) return;
+
+      e.stopPropagation();
     };
 
-    el.addEventListener("mouseenter", pauseLenis);
-    el.addEventListener("mouseleave", resumeLenis);
+    // Use capture:true so this runs before Lenis's listener on window
+    el.addEventListener("wheel", stopWheel, { passive: true, capture: true });
 
     return () => {
-      el.removeEventListener("mouseenter", pauseLenis);
-      el.removeEventListener("mouseleave", resumeLenis);
-      // Always resume on unmount so we don't leave Lenis paused
-      if (window.lenis) window.lenis.start();
+      el.removeEventListener("wheel", stopWheel, { capture: true });
     };
   }, []);
 
@@ -629,7 +641,7 @@ const AiChatBot = ({ isOpen, setIsOpen }) => {
           <ChatHeader onClear={clearChat} onClose={() => setIsOpen(false)} />
 
           {/* Messages area */}
-          <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 scroll-bar w-full min-w-0">
+          <div className="chat-messages-scroll flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 scroll-bar w-full min-w-0">
             {/* Date divider */}
             <div className="flex items-center gap-2 my-1">
               <div className="flex-1 h-px" style={{ background: "var(--divider)" }} />
