@@ -6,6 +6,7 @@ import {redis} from './redis.js'
 import rateLimit from 'express-rate-limit'
 import { streamChatResponse } from './src/chatBot/mistralClient.js'
 import { isAbusive } from './src/chatBot/slang.js'
+import {emailQueue} from './emailQueue/queue.js'
 
 const app = express();
 const PORT = process.env.PORT || 80
@@ -26,6 +27,23 @@ const chatLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: true, message: 'Too many messages. Please wait a moment before trying again.' }
+});
+
+app.post('/chat', async (req, res) => {
+  const {to, subject, body} = req.body;
+  if(!to || !subject || !body) {
+    return res.status(400).json({ error: true, message: 'Missing required fields: to, subject, body.' });
+  }
+  const emailJob = await emailQueue.add('email-job', req.body,
+    {
+      attempts: 3, // Retry up to 3 times on failure
+      backoff: {
+        type: 'exponential',
+        delay: 2000 // Start with a 2-second delay before retrying
+      }
+    }
+  );
+  res.status(200).json({ message: 'Chat endpoint is active. Use /api/chat for streaming responses.' });
 });
 
 // ─── /api/chat — streaming SSE endpoint ─────────────────────────────────────
@@ -253,9 +271,24 @@ app.get('/api/github-contributions', githubContribLimiter, async (req, res) => {
 
 app.post('/api/post', async (req, res) => {
    try {
-      const { name, email, message } = req.body;
+    const { name, email, message } = req.body;
+    if(!name || !email || !message) {
+      return res.status(400).json({
+         success: false,
+         message: "Missing required fields: name, email, message"
+      });
+    }
+     const emailJob = await emailQueue.add('email-job', req.body,
+    {
+      attempts: 3, // Retry up to 3 times on failure
+      backoff: {
+        type: 'exponential',
+        delay: 5000 // Start with a 5-second delay before retrying
+      }
+    }
+  );
 
-      await sendEmailToMehul(name, email, message);
+
 
       return res.status(200).json({
          success: true,

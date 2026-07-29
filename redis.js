@@ -2,10 +2,15 @@ import Redis from 'ioredis'
 import 'dotenv/config'
 
 const REDIS_CONNECTION_STRING = process.env.REDIS_CONNECTION_STRING
-const REDIS_PASSWORD = (process.env.REDIS_PASSWORD || process.env['REDIS_PASSWORD '])?.trim()
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD?.trim()
 
 function createRedisClient(){
-    const options = {};
+    const options = {
+        // avoid throwing on transient failures during commands
+        maxRetriesPerRequest: null,
+        // helpful for debugging connection problems
+        enableReadyCheck: true,
+    };
     if (REDIS_PASSWORD) {
         options.password = REDIS_PASSWORD;
     }
@@ -14,9 +19,19 @@ function createRedisClient(){
         ? new Redis(REDIS_CONNECTION_STRING, options)
         : new Redis(options);
 
-    client.on('error', (err) => {
-        console.error('Redis Client Error:', err.message);
+    client.on('connect', () => {
+        console.log('Redis: connecting...');
     });
+    client.on('ready', () => {
+        console.log('Redis: ready');
+    });
+    client.on('end', () => {
+        console.log('Redis: connection closed');
+    });
+    client.on('error', (err) => {
+        console.error('Redis Client Error:', err.message || err);
+    });
+
     return client;
 }
 
