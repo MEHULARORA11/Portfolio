@@ -1,6 +1,5 @@
 import 'dotenv/config'
 import express from 'express'
-import {sendEmailToMehul} from './email.js'
 import cors from 'cors'
 import {redis} from './redis.js'
 import rateLimit from 'express-rate-limit'
