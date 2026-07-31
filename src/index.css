@@ -399,4 +399,188 @@ body {
   50% { opacity: 1; }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   SOCIAL ICON ORBIT SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Layout math (must be consistent across .orbit-stage, .orbit-ring-deco,
+   .orbit-icon-arm, .orbit-profile-card):
+
+     --card-sz   : profile picture card side length
+     --orbit-r   : radius of the orbit circle (card edge → icon centre)
+     --stage-sz  : total container = --card-sz + (--orbit-r * 2) + icon pad
+     --icon-sz   : icon bubble diameter
+     --icon-r    : icon bubble border-radius (50% → circle)
+
+   Each .orbit-icon-arm is centred on the stage with `inset: 50%` trick,
+   then pushed to the ring with: rotate(var(--start-deg)) translateY(-var(--orbit-r)).
+   The .orbit-icon-bubble counter-rotates so it always faces the viewer.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Keyframes ── */
+/*
+  The arm sits at the top of the orbit circle (translateY(-r)).
+  socialOrbit rotates it 360deg clockwise around the stage centre.
+  The 3 icons are spread 120deg apart via negative animation-delay stagger
+  (each gets -duration/3 * index seconds), so they start evenly distributed.
+*/
+@keyframes socialOrbit {
+  from { transform: rotate(0deg)   translateY(calc(-1 * var(--orbit-r))); }
+  to   { transform: rotate(360deg) translateY(calc(-1 * var(--orbit-r))); }
+}
+
+@keyframes socialOrbitReverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+/* ── Orbit Stage (the outer container) ── */
+/* Mobile-first sizing
+   Math: stage-sz must be >= orbit-r * 2 + icon-sz
+   Mobile : 130*2 + 38 = 298 → use 310px
+   sm     : 152*2 + 42 = 346 → use 360px
+   lg     : 185*2 + 48 = 418 → use 432px
+*/
+.orbit-stage {
+  --card-sz:  200px;
+  --orbit-r:  130px;   /* distance from stage centre to icon centre */
+  --stage-sz: 310px;   /* = orbit-r * 2 + icon-sz + padding */
+  --icon-sz:   38px;
+
+  position:        relative;
+  width:           var(--stage-sz);
+  height:          var(--stage-sz);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  /* overflow visible — icons must not be clipped */
+  overflow:        visible;
+}
+
+/* sm: 640px+ */
+@media (min-width: 640px) {
+  .orbit-stage {
+    --card-sz:  240px;
+    --orbit-r:  152px;
+    --stage-sz: 360px;
+    --icon-sz:   42px;
+  }
+}
+
+/* lg: 1024px+ */
+@media (min-width: 1024px) {
+  .orbit-stage {
+    --card-sz:  290px;
+    --orbit-r:  185px;
+    --stage-sz: 432px;
+    --icon-sz:   48px;
+  }
+}
+
+/* ── Decorative dashed orbit ring ── */
+.orbit-ring-deco {
+  position:      absolute;
+  /* ring diameter = orbit-r * 2 (the circle the icons travel on) */
+  width:         calc(var(--orbit-r) * 2);
+  height:        calc(var(--orbit-r) * 2);
+  border-radius: 50%;
+  border:        1.5px dashed var(--accent-border);
+  opacity:       0.45;
+  pointer-events: none;
+  /* subtle pulsing glow on the ring itself */
+  box-shadow:    0 0 16px var(--accent-glow-soft);
+}
+
+/* ── Arm: positions each icon on the ring ──────────────────────────────────
+   .orbit-icon-arm is an absolutely-centred 0×0 element.
+   It first applies the static `rotate(--start-deg) translateY(-orbit-r)` to
+   place the icon at the correct angle, then the socialOrbit animation adds
+   another full 360° rotation on top — making it orbit.
+   Because the element is 0×0, rotating it about its own centre IS rotating
+   about the stage centre.
+   ────────────────────────────────────────────────────────────────────────── */
+.orbit-icon-arm {
+  /* Centre the arm exactly on the stage */
+  position:        absolute;
+  top:             50%;
+  left:            50%;
+  width:           0;
+  height:          0;
+
+  /*
+    Base transform: push icon to the top of the orbit ring.
+    The animation takes over from here and adds +360deg.
+    transform-origin: 0 0 means rotation happens around the stage centre
+    (which is the element's own 0,0 after top:50% left:50%).
+  */
+  transform:       rotate(0deg) translateY(calc(-1 * var(--orbit-r)));
+  transform-origin: 0 0;
+
+  animation:       socialOrbit 14s linear infinite;
+  /* animationDelay & animationPlayState set inline per-icon */
+
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  pointer-events:  none;
+}
+
+/* ── Icon bubble ── */
+.orbit-icon-bubble {
+  /* Pull the bubble back so it is centred on the arm tip */
+  position:    absolute;
+  top:         calc(-1 * var(--icon-sz) / 2);
+  left:        calc(-1 * var(--icon-sz) / 2);
+  width:       var(--icon-sz);
+  height:      var(--icon-sz);
+
+  /* Counter-rotate to stay upright */
+  animation:   socialOrbitReverse 14s linear infinite;
+
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  border-radius:   50%;
+
+  /* Glass-card style matching the site theme */
+  background:      var(--card-bg);
+  border:          1.5px solid var(--accent-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color:           var(--accent-light);
+  box-shadow:      0 0 12px var(--accent-glow-soft), 0 2px 8px rgba(0,0,0,0.35);
+  cursor:          pointer;
+  pointer-events:  all;   /* re-enable on the bubble */
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.orbit-icon-bubble:hover {
+  transform:    scale(1.28);
+  box-shadow:   0 0 28px var(--accent-glow), 0 4px 16px rgba(0,0,0,0.5);
+  border-color: var(--accent);
+  color:        var(--accent);
+}
+
+/* ── Icon SVG size ── */
+.orbit-icon-svg {
+  width:  calc(var(--icon-sz) * 0.43);
+  height: calc(var(--icon-sz) * 0.43);
+  stroke-width: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Profile card sizing ── */
+.orbit-profile-card {
+  width:  var(--card-sz);
+  height: var(--card-sz);
+}
+
+/* ── Reduced motion: freeze everything ── */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-icon-arm,
+  .orbit-icon-bubble {
+    animation: none !important;
+  }
+}
 
