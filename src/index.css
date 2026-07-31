@@ -435,17 +435,19 @@ body {
 }
 
 /* ── Orbit Stage (the outer container) ── */
-/* Mobile-first sizing
-   Math: stage-sz must be >= orbit-r * 2 + icon-sz
-   Mobile : 130*2 + 38 = 298 → use 310px
-   sm     : 152*2 + 42 = 346 → use 360px
-   lg     : 185*2 + 48 = 418 → use 432px
+/*
+   Gap formula: orbit-r = card-sz/2 + desired_gap
+   stage-sz    = orbit-r * 2 + icon-sz + 4px breathing room
+
+   Mobile : card=200 → half=100, gap=65 → orbit-r=165, stage=165*2+42+4=376
+   sm     : card=240 → half=120, gap=70 → orbit-r=190, stage=190*2+46+4=430
+   lg     : card=290 → half=145, gap=75 → orbit-r=220, stage=220*2+50+4=494
 */
 .orbit-stage {
   --card-sz:  200px;
-  --orbit-r:  130px;   /* distance from stage centre to icon centre */
-  --stage-sz: 310px;   /* = orbit-r * 2 + icon-sz + padding */
-  --icon-sz:   38px;
+  --orbit-r:  165px;   /* half-card(100) + 65px gap outside card edge */
+  --stage-sz: 376px;
+  --icon-sz:   42px;
 
   position:        relative;
   width:           var(--stage-sz);
@@ -461,9 +463,9 @@ body {
 @media (min-width: 640px) {
   .orbit-stage {
     --card-sz:  240px;
-    --orbit-r:  152px;
-    --stage-sz: 360px;
-    --icon-sz:   42px;
+    --orbit-r:  190px;
+    --stage-sz: 430px;
+    --icon-sz:   46px;
   }
 }
 
@@ -471,9 +473,9 @@ body {
 @media (min-width: 1024px) {
   .orbit-stage {
     --card-sz:  290px;
-    --orbit-r:  185px;
-    --stage-sz: 432px;
-    --icon-sz:   48px;
+    --orbit-r:  220px;
+    --stage-sz: 494px;
+    --icon-sz:   50px;
   }
 }
 
