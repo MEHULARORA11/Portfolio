@@ -1,7 +1,7 @@
 // ============================================================
 // mistralClient.js  –  Streaming Mistral AI chat client
 // Loads all markdown knowledge files at startup,
-// streams responses via SSE, enforces guardrails.
+// streams responses via SSE, enforces guardrails..
 // ============================================================
 
 import { Mistral } from '@mistralai/mistralai';
