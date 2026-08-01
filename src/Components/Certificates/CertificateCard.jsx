@@ -1,5 +1,5 @@
 import React from "react";
-import { ExternalLink, Award } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import Highlight from "../search/Highlight";
 
@@ -33,9 +33,7 @@ export default function CertificateCard({
             />
             {/* Visual Glass Tint */}
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-gradient)]/80 via-transparent to-transparent opacity-60" />
-            <div className="absolute top-3 left-3 bg-black/60 border border-[var(--card-border)] backdrop-blur-md rounded-xl p-2 text-[var(--accent-light)] flex items-center justify-center">
-              <Award className="w-5 h-5" />
-            </div>
+
           </div>
 
           {/* Heading Metadata */}
