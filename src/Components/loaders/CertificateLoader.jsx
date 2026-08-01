@@ -56,7 +56,7 @@ export default function CertificateLoader() {
       ctx.clearRect(0, 0, w, h);
 
       // Draw static radar rings
-      ctx.strokeStyle = "rgba(16, 185, 129, 0.12)";
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.arc(cx, cy, radius, 0, Math.PI * 2);
@@ -85,9 +85,9 @@ export default function CertificateLoader() {
         ctx.rotate(angle);
 
         const sweepGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
-        sweepGrad.addColorStop(0, "rgba(16, 185, 129, 0.25)");
-        sweepGrad.addColorStop(0.8, "rgba(16, 185, 129, 0.05)");
-        sweepGrad.addColorStop(1, "rgba(16, 185, 129, 0)");
+        sweepGrad.addColorStop(0, "rgba(99, 102, 241, 0.25)");
+        sweepGrad.addColorStop(0.8, "rgba(99, 102, 241, 0.05)");
+        sweepGrad.addColorStop(1, "rgba(99, 102, 241, 0)");
 
         ctx.fillStyle = sweepGrad;
         ctx.beginPath();
@@ -149,7 +149,7 @@ export default function CertificateLoader() {
               ease: "easeInOut",
             }}
             style={{ transformStyle: "preserve-3d" }}
-            className="w-full h-full rounded-2xl border border-[var(--accent-border)] bg-[var(--card-bg)] backdrop-blur-md p-4 flex flex-col justify-between shadow-[0_0_30px_rgba(16,185,129,0.2)] relative overflow-hidden"
+            className="w-full h-full rounded-2xl border border-[var(--accent-border)] bg-[var(--card-bg)] backdrop-blur-md p-4 flex flex-col justify-between relative overflow-hidden"
           >
             {/* Laser scanning bar */}
             <motion.div

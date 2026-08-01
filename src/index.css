@@ -4,103 +4,103 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Emerald Cyber Nebula (Dark) ─── */
+/* ─── Monochrome Dark (Near-Black + Indigo Accent) ─── */
 :root,
 [data-theme="dark"] {
-  --bg-gradient: radial-gradient(circle at 50% 50%, #060608 0%, #020203 60%, #000000 100%);
-  --text-primary: #f0fdf4;
-  --text-secondary: #adbac7;
-  --text-muted: #10b981;
-  --text-label: #34d399;
-  --gradient-text-from: #10b981;
-  --gradient-text-to: #00ff66;
-  --card-bg: rgba(10, 10, 12, 0.7);
-  --card-border: rgba(16, 185, 129, 0.12);
-  --card-hover-bg: rgba(14, 14, 17, 0.85);
-  --card-hover-border: rgba(0, 255, 102, 0.35);
-  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.85);
-  --card-hover-shadow: 0 15px 45px rgba(0, 255, 102, 0.15);
-  --accent: #10b981;
-  --accent-light: #00ff66;
-  --accent-dark: #059669;
-  --accent-muted: rgba(16, 185, 129, 0.08);
-  --accent-border: rgba(16, 185, 129, 0.22);
-  --accent-glow: rgba(0, 255, 102, 0.35);
-  --accent-glow-soft: rgba(16, 185, 129, 0.12);
-  --highlight-text: #00ff66;
-  --highlight-glow: rgba(0, 255, 102, 0.45);
-  --button-bg: #10b981;
-  --button-hover: #00ff66;
-  --button-text: #04120a;
-  --button-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
-  --button-shadow-hover: 0 4px 28px rgba(0, 255, 102, 0.4);
-  --input-bg: rgba(12, 12, 14, 0.6);
-  --input-border: rgba(16, 185, 129, 0.14);
-  --input-focus-border: #00ff66;
-  --input-focus-bg: rgba(16, 16, 20, 0.8);
-  --input-focus-shadow: 0 0 18px rgba(0, 255, 102, 0.18);
-  --input-placeholder: rgba(16, 185, 129, 0.5);
-  --overlay: rgba(0, 0, 0, 0.8);
-  --divider: rgba(16, 185, 129, 0.1);
-  --icon-float: rgba(16, 185, 129, 0.05);
-  --scrollbar-thumb: #059669;
-  --shadow-color: rgba(16, 185, 129, 0.25);
-  --toggle-track: rgba(10, 10, 12, 0.8);
-  --toggle-thumb: #10b981;
-  --toggle-text: #34d399;
-  --toggle-text-active: #04120a;
-  --arrow-color: #00ff66;
-  --name-glow: rgba(0, 255, 102, 0.25);
-  --shimmer: rgba(0, 255, 102, 0.06);
+  --bg-gradient: #0a0a0a;
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-label: #a5b4fc;
+  --gradient-text-from: #a5b4fc;
+  --gradient-text-to: #6366f1;
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-hover-bg: rgba(255, 255, 255, 0.07);
+  --card-hover-border: rgba(255, 255, 255, 0.16);
+  --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+  --card-hover-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --accent: #6366f1;
+  --accent-light: #a5b4fc;
+  --accent-dark: #4f46e5;
+  --accent-muted: rgba(99, 102, 241, 0.08);
+  --accent-border: rgba(99, 102, 241, 0.2);
+  --accent-glow: rgba(99, 102, 241, 0.12);
+  --accent-glow-soft: rgba(99, 102, 241, 0.06);
+  --highlight-text: #a5b4fc;
+  --highlight-glow: rgba(99, 102, 241, 0.0);
+  --button-bg: #6366f1;
+  --button-hover: #4f46e5;
+  --button-text: #ffffff;
+  --button-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  --button-shadow-hover: 0 4px 16px rgba(99, 102, 241, 0.4);
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-focus-border: #6366f1;
+  --input-focus-bg: rgba(255, 255, 255, 0.06);
+  --input-focus-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+  --input-placeholder: rgba(161, 161, 170, 0.5);
+  --overlay: rgba(0, 0, 0, 0.7);
+  --divider: rgba(255, 255, 255, 0.08);
+  --icon-float: rgba(255, 255, 255, 0.04);
+  --scrollbar-thumb: #3f3f46;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --toggle-track: rgba(255, 255, 255, 0.08);
+  --toggle-thumb: #6366f1;
+  --toggle-text: #a5b4fc;
+  --toggle-text-active: #ffffff;
+  --arrow-color: #a5b4fc;
+  --name-glow: rgba(0, 0, 0, 0);
+  --shimmer: rgba(255, 255, 255, 0.04);
 }
 
-/* ─── Sage Mist (Light — soft botanical green, not white) ─── */
+/* ─── Monochrome Light (Near-White + Indigo Accent) ─── */
 [data-theme="light"] {
-  --bg-gradient: radial-gradient(ellipse at 75% 5%, #f4faf6 0%, #e2eee6 45%, #d0e2d6 100%);
-  --text-primary: #042f1a;
-  --text-secondary: #0b6c53;
-  --text-muted: #1a6b57;
-  --text-label: #2d7a62;
-  --gradient-text-from: #0f9b6e;
-  --gradient-text-to: #064e3b;
-  --card-bg: rgba(255, 255, 255, 0.65);
-  --card-border: rgba(11, 108, 83, 0.15);
-  --card-hover-bg: rgba(255, 255, 255, 0.9);
-  --card-hover-border: rgba(11, 108, 83, 0.35);
-  --card-shadow: 0 8px 32px rgba(6, 60, 46, 0.06);
-  --card-hover-shadow: 0 14px 44px rgba(11, 108, 83, 0.12);
-  --accent: #0b6c53;
-  --accent-light: #10b981;
-  --accent-dark: #064e3b;
-  --accent-muted: rgba(11, 108, 83, 0.06);
-  --accent-border: rgba(11, 108, 83, 0.16);
-  --accent-glow: rgba(11, 108, 83, 0.2);
-  --accent-glow-soft: rgba(11, 108, 83, 0.06);
-  --highlight-text: #0b6c53;
-  --highlight-glow: rgba(11, 108, 83, 0.2);
-  --button-bg: #0b6c53;
-  --button-hover: #064e3b;
-  --button-text: #f0fdf4;
-  --button-shadow: 0 4px 20px rgba(11, 108, 83, 0.15);
-  --button-shadow-hover: 0 4px 28px rgba(11, 108, 83, 0.25);
-  --input-bg: rgba(255, 255, 255, 0.7);
-  --input-border: rgba(11, 108, 83, 0.14);
-  --input-focus-border: #0b6c53;
-  --input-focus-bg: rgba(255, 255, 255, 0.95);
-  --input-focus-shadow: 0 0 18px rgba(11, 108, 83, 0.1);
-  --input-placeholder: rgba(45, 122, 98, 0.6);
-  --overlay: rgba(6, 60, 46, 0.25);
-  --divider: rgba(11, 108, 83, 0.1);
-  --icon-float: rgba(6, 60, 46, 0.04);
-  --scrollbar-thumb: #10b981;
-  --shadow-color: rgba(11, 108, 83, 0.1);
-  --toggle-track: rgba(200, 225, 212, 0.8);
-  --toggle-thumb: #0b6c53;
-  --toggle-text: #2d7a62;
-  --toggle-text-active: #f0fdf4;
-  --arrow-color: #0b6c53;
-  --name-glow: rgba(11, 108, 83, 0.15);
-  --shimmer: rgba(11, 108, 83, 0.04);
+  --bg-gradient: #fafafa;
+  --text-primary: #111111;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+  --text-label: #4f46e5;
+  --gradient-text-from: #6366f1;
+  --gradient-text-to: #4f46e5;
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-hover-bg: rgba(0, 0, 0, 0.05);
+  --card-hover-border: rgba(0, 0, 0, 0.14);
+  --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --card-hover-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --accent: #6366f1;
+  --accent-light: #4f46e5;
+  --accent-dark: #4338ca;
+  --accent-muted: rgba(99, 102, 241, 0.06);
+  --accent-border: rgba(99, 102, 241, 0.18);
+  --accent-glow: rgba(99, 102, 241, 0.10);
+  --accent-glow-soft: rgba(99, 102, 241, 0.05);
+  --highlight-text: #4f46e5;
+  --highlight-glow: rgba(99, 102, 241, 0.0);
+  --button-bg: #6366f1;
+  --button-hover: #4f46e5;
+  --button-text: #ffffff;
+  --button-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+  --button-shadow-hover: 0 4px 16px rgba(99, 102, 241, 0.35);
+  --input-bg: rgba(255, 255, 255, 0.8);
+  --input-border: rgba(0, 0, 0, 0.1);
+  --input-focus-border: #6366f1;
+  --input-focus-bg: #ffffff;
+  --input-focus-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+  --input-placeholder: rgba(82, 82, 91, 0.5);
+  --overlay: rgba(0, 0, 0, 0.3);
+  --divider: rgba(0, 0, 0, 0.08);
+  --icon-float: rgba(0, 0, 0, 0.03);
+  --scrollbar-thumb: #d4d4d8;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --toggle-track: rgba(0, 0, 0, 0.06);
+  --toggle-thumb: #6366f1;
+  --toggle-text: #4f46e5;
+  --toggle-text-active: #ffffff;
+  --arrow-color: #6366f1;
+  --name-glow: rgba(0, 0, 0, 0);
+  --shimmer: rgba(0, 0, 0, 0.03);
 }
 
 * {
@@ -113,7 +113,7 @@
 }
 
 html {
-  transition: background 0.6s ease, color 0.4s ease;
+  transition: background 0.5s ease, color 0.3s ease;
 }
 
 body {
@@ -123,7 +123,7 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  transition: background 0.6s ease, color 0.4s ease;
+  transition: background 0.5s ease, color 0.3s ease;
 }
 
 /* ─── Typography ─── */
@@ -152,17 +152,16 @@ body {
 
 .theme-highlight {
   color: var(--highlight-text);
-  filter: drop-shadow(0 0 18px var(--highlight-glow));
 }
 
 /* ─── Glass cards ─── */
 .glass-card {
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--card-shadow);
-  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
 }
 
 .glass-card:hover {
@@ -199,7 +198,7 @@ body {
   background-color: var(--button-bg);
   color: var(--button-text);
   box-shadow: var(--button-shadow);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
 
 .theme-btn:hover {
@@ -210,15 +209,14 @@ body {
 .theme-icon-btn {
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  color: var(--text-secondary);
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
 }
 
 .theme-icon-btn:hover {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: var(--button-text);
-  box-shadow: 0 0 14px var(--accent-glow);
+  background-color: var(--card-hover-bg);
+  border-color: var(--card-hover-border);
+  color: var(--text-primary);
 }
 
 /* ─── Badges & pills ─── */
@@ -241,13 +239,77 @@ body {
   inset: -1px;
   background: linear-gradient(90deg, transparent, var(--shimmer), transparent);
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.4s ease;
   border-radius: inherit;
   pointer-events: none;
 }
 
 .theme-shimmer:hover::before {
   opacity: 1;
+}
+
+/* ─── Inset depth shadows (replaces outward glow) ─── */
+/* Used on buttons, skill cards, tech tags instead of neon box-shadow */
+.btn-inner-shadow {
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.12),
+    inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease;
+}
+
+.btn-inner-shadow:hover {
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.18),
+    inset 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .btn-inner-shadow {
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .btn-inner-shadow:hover {
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.08),
+    inset 0 2px 6px rgba(255, 255, 255, 0.05);
+}
+
+.skill-inner-shadow {
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.08),
+    inset 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .skill-inner-shadow {
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.05),
+    inset 0 1px 4px rgba(255, 255, 255, 0.03);
+}
+
+.tag-inner-shadow {
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+
+.tag-inner-shadow:hover {
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .tag-inner-shadow {
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.04),
+    inset 0 1px 3px rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .tag-inner-shadow:hover {
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.07),
+    inset 0 2px 6px rgba(255, 255, 255, 0.04);
 }
 
 /* ─── Scrollbar ─── */
@@ -270,12 +332,7 @@ body {
   display: none;
 }
 
-/* ─── Theme toggle animations ─── */
-@keyframes themePulse {
-  0%, 100% { box-shadow: 0 0 12px var(--shadow-color); }
-  50% { box-shadow: 0 0 22px var(--accent-glow); }
-}
-
+/* ─── Theme toggle ─── */
 .theme-icon-box {
   background-color: var(--accent-muted);
   color: var(--accent-light);
@@ -288,11 +345,7 @@ body {
   transform: scale(1.05);
 }
 
-.theme-toggle-glow {
-  animation: themePulse 3s ease-in-out infinite;
-}
-
-/* ─── Global Animation & Layout Helpers (Moved from React render loops) ─── */
+/* ─── Global Animation Helpers ─── */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -301,24 +354,6 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes floatTech {
-  0% { transform: translateY(0) translateX(0) rotate(0deg); }
-  25% { transform: translateY(-20px) translateX(10px) rotate(15deg); }
-  50% { transform: translateY(-40px) translateX(20px) rotate(0deg); }
-  75% { transform: translateY(-20px) translateX(10px) rotate(-15deg); }
-  100% { transform: translateY(0) translateX(0) rotate(0deg); }
-}
-
-.animate-floatTech {
-  animation: floatTech linear infinite;
-}
-
-@media (max-width: 768px) {
-  .animate-floatTech {
-    opacity: 0.6;
   }
 }
 
@@ -376,213 +411,28 @@ body {
   perspective: 1000px;
 }
 
+/* ─── Chatbot panel ─── */
 .chatbot-panel {
   background: var(--card-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-left: 1px solid var(--card-border);
-  box-shadow: -8px 0 40px var(--accent-glow-soft);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ─── Subtle neutral grid overlay (replaces emerald tinted grid) ─── */
 .grid-overlay {
   background-size: 50px 50px;
-  background-image: 
-    linear-gradient(to right, rgba(16, 185, 129, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 100%);
 }
 
-@keyframes evc-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+[data-theme="light"] .grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   SOCIAL ICON ORBIT SYSTEM
-   ═══════════════════════════════════════════════════════════════════════════
-
-   Layout math (must be consistent across .orbit-stage, .orbit-ring-deco,
-   .orbit-icon-arm, .orbit-profile-card):
-
-     --card-sz   : profile picture card side length
-     --orbit-r   : radius of the orbit circle (card edge → icon centre)
-     --stage-sz  : total container = --card-sz + (--orbit-r * 2) + icon pad
-     --icon-sz   : icon bubble diameter
-     --icon-r    : icon bubble border-radius (50% → circle)
-
-   Each .orbit-icon-arm is centred on the stage with `inset: 50%` trick,
-   then pushed to the ring with: rotate(var(--start-deg)) translateY(-var(--orbit-r)).
-   The .orbit-icon-bubble counter-rotates so it always faces the viewer.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* ── Keyframes ── */
-/*
-  The arm sits at the top of the orbit circle (translateY(-r)).
-  socialOrbit rotates it 360deg clockwise around the stage centre.
-  The 3 icons are spread 120deg apart via negative animation-delay stagger
-  (each gets -duration/3 * index seconds), so they start evenly distributed.
-*/
-@keyframes socialOrbit {
-  from { transform: rotate(0deg)   translateY(calc(-1 * var(--orbit-r))); }
-  to   { transform: rotate(360deg) translateY(calc(-1 * var(--orbit-r))); }
-}
-
-@keyframes socialOrbitReverse {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
-}
-
-/* ── Orbit Stage (the outer container) ── */
-/*
-   Gap formula: orbit-r = card-sz/2 + desired_gap
-   stage-sz    = orbit-r * 2 + icon-sz + 4px breathing room
-
-   Mobile : card=200 → half=100, gap=65 → orbit-r=165, stage=165*2+42+4=376
-   sm     : card=240 → half=120, gap=70 → orbit-r=190, stage=190*2+46+4=430
-   lg     : card=290 → half=145, gap=75 → orbit-r=220, stage=220*2+50+4=494
-*/
-.orbit-stage {
-  --card-sz:  200px;
-  --orbit-r:  165px;   /* half-card(100) + 65px gap outside card edge */
-  --stage-sz: 376px;
-  --icon-sz:   42px;
-
-  position:        relative;
-  width:           var(--stage-sz);
-  height:          var(--stage-sz);
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-  /* overflow visible — icons must not be clipped */
-  overflow:        visible;
-}
-
-/* sm: 640px+ */
-@media (min-width: 640px) {
-  .orbit-stage {
-    --card-sz:  240px;
-    --orbit-r:  190px;
-    --stage-sz: 430px;
-    --icon-sz:   46px;
-  }
-}
-
-/* lg: 1024px+ */
-@media (min-width: 1024px) {
-  .orbit-stage {
-    --card-sz:  290px;
-    --orbit-r:  220px;
-    --stage-sz: 494px;
-    --icon-sz:   50px;
-  }
-}
-
-/* ── Decorative dashed orbit ring ── */
-.orbit-ring-deco {
-  position:      absolute;
-  /* ring diameter = orbit-r * 2 (the circle the icons travel on) */
-  width:         calc(var(--orbit-r) * 2);
-  height:        calc(var(--orbit-r) * 2);
-  border-radius: 50%;
-  border:        1.5px dashed var(--accent-border);
-  opacity:       0.45;
-  pointer-events: none;
-  /* subtle pulsing glow on the ring itself */
-  box-shadow:    0 0 16px var(--accent-glow-soft);
-}
-
-/* ── Arm: positions each icon on the ring ──────────────────────────────────
-   .orbit-icon-arm is an absolutely-centred 0×0 element.
-   It first applies the static `rotate(--start-deg) translateY(-orbit-r)` to
-   place the icon at the correct angle, then the socialOrbit animation adds
-   another full 360° rotation on top — making it orbit.
-   Because the element is 0×0, rotating it about its own centre IS rotating
-   about the stage centre.
-   ────────────────────────────────────────────────────────────────────────── */
-.orbit-icon-arm {
-  /* Centre the arm exactly on the stage */
-  position:        absolute;
-  top:             50%;
-  left:            50%;
-  width:           0;
-  height:          0;
-
-  /*
-    Base transform: push icon to the top of the orbit ring.
-    The animation takes over from here and adds +360deg.
-    transform-origin: 0 0 means rotation happens around the stage centre
-    (which is the element's own 0,0 after top:50% left:50%).
-  */
-  transform:       rotate(0deg) translateY(calc(-1 * var(--orbit-r)));
-  transform-origin: 0 0;
-
-  animation:       socialOrbit 14s linear infinite;
-  /* animationDelay & animationPlayState set inline per-icon */
-
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-  pointer-events:  none;
-}
-
-/* ── Icon bubble ── */
-.orbit-icon-bubble {
-  /* Pull the bubble back so it is centred on the arm tip */
-  position:    absolute;
-  top:         calc(-1 * var(--icon-sz) / 2);
-  left:        calc(-1 * var(--icon-sz) / 2);
-  width:       var(--icon-sz);
-  height:      var(--icon-sz);
-
-  /* Counter-rotate to stay upright */
-  animation:   socialOrbitReverse 14s linear infinite;
-
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-  border-radius:   50%;
-
-  /* Glass-card style matching the site theme */
-  background:      var(--card-bg);
-  border:          1.5px solid var(--accent-border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  color:           var(--accent-light);
-  box-shadow:      0 0 12px var(--accent-glow-soft), 0 2px 8px rgba(0,0,0,0.35);
-  cursor:          pointer;
-  pointer-events:  all;   /* re-enable on the bubble */
-
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-}
-
-.orbit-icon-bubble:hover {
-  transform:    scale(1.28);
-  box-shadow:   0 0 28px var(--accent-glow), 0 4px 16px rgba(0,0,0,0.5);
-  border-color: var(--accent);
-  color:        var(--accent);
-}
-
-/* ── Icon SVG size ── */
-.orbit-icon-svg {
-  width:  calc(var(--icon-sz) * 0.43);
-  height: calc(var(--icon-sz) * 0.43);
-  stroke-width: 2px;
-  flex-shrink: 0;
-}
-
-/* ── Profile card sizing ── */
-.orbit-profile-card {
-  width:  var(--card-sz);
-  height: var(--card-sz);
-}
-
-/* ── Reduced motion: freeze everything ── */
-@media (prefers-reduced-motion: reduce) {
-  .orbit-icon-arm,
-  .orbit-icon-bubble {
-    animation: none !important;
-  }
-}
-

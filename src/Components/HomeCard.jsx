@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import myImg from "../assets/personal.png";
 import { FiBookOpen, FiCpu, FiMapPin, FiDownload, FiFileText } from "react-icons/fi";
 import { FiGithub, FiLinkedin, FiTwitter } from "react-icons/fi";
@@ -22,41 +22,13 @@ const roles = [
 
 /* ─── HomeCard ─── */
 const HomeCard = () => {
-  const [roleIndex,    setRoleIndex]    = useState(0);
-  const [orbitPaused,  setOrbitPaused]  = useState(false);
-  const cardRef = useRef(null);
+  const [roleIndex, setRoleIndex] = useState(0);
 
   /* Rotate roles every 2.5 s */
   useEffect(() => {
     const id = setInterval(() => setRoleIndex(p => (p + 1) % roles.length), 2500);
     return () => clearInterval(id);
   }, []);
-
-  /* ── 3-D tilt handlers ── */
-  const handleMouseMove = (e) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const { left, top, width, height } = card.getBoundingClientRect();
-    const x = e.clientX - left, y = e.clientY - top;
-    const tiltX = ((height / 2 - y) / (height / 2)) * 10;
-    const tiltY = ((x - width  / 2) / (width  / 2)) * 10;
-    card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02,1.02,1.02)`;
-    card.style.boxShadow = "0 30px 60px -15px var(--accent-glow), 0 0 50px var(--accent-glow-soft)";
-    card.style.setProperty("--mouse-x", `${x}px`);
-    card.style.setProperty("--mouse-y", `${y}px`);
-  };
-  const handleCardEnter = () => { if (cardRef.current) cardRef.current.style.transition = "none"; };
-  const handleCardLeave = () => {
-    const card = cardRef.current;
-    if (card) {
-      card.style.transition = "all 0.5s cubic-bezier(0.25,1,0.5,1)";
-      card.style.transform  = "rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
-      card.style.boxShadow  = "0 15px 35px -10px var(--accent-glow-soft)";
-    }
-  };
-
-  /* animation play state string */
-  const playState = orbitPaused ? "paused" : "running";
 
   return (
     <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 justify-between items-center min-h-[85vh] pt-24 pb-12 mb-20 lg:mb-36">
@@ -67,14 +39,13 @@ const HomeCard = () => {
           {/* Available badge */}
           <div className="flex items-center gap-2 mb-2 w-fit">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-light)] opacity-75" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]" />
             </span>
             <span className="text-sm text-[var(--accent-light)] font-semibold">Available for work</span>
           </div>
 
-          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight theme-text"
-              style={{ textShadow: "0 0 22px var(--name-glow)" }}>
+          <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight theme-text">
             Hi, I'm <span className="theme-highlight">Mehul Arora</span>
           </h1>
 
@@ -109,13 +80,13 @@ const HomeCard = () => {
             href="/resume/Mehul_Arora_Resume.pdf"
             download="Mehul_Arora_Resume.pdf"
             target="_blank" rel="noopener noreferrer"
-            className="theme-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 hover:shadow-[0_0_20px_var(--accent-glow)]"
+            className="theme-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 transition-all duration-200"
           >
-            <FiDownload className="text-lg animate-bounce" style={{ animationDuration: "2s" }} />
+            <FiDownload className="text-lg" />
             Download Resume
           </a>
           <Link to="/resume"
-            className="theme-icon-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 hover:shadow-[0_0_15px_var(--accent-glow-soft)]"
+            className="theme-icon-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 transition-all duration-200"
           >
             <FiFileText className="text-lg" /> View Resume
           </Link>
@@ -129,7 +100,7 @@ const HomeCard = () => {
             { icon: FiMapPin,   label: "Base Location",  value: "Faridabad, India"   },
           ].map(({ icon: Icon, label, value }) => (
             <div key={label}
-              className="glass-card p-5 rounded-2xl flex flex-col gap-3 hover:-translate-y-1 hover:shadow-[0_0_15px_var(--accent-glow-soft)] transition-all duration-300 relative group overflow-hidden border-[var(--card-border)] bg-[var(--card-bg)]"
+              className="glass-card p-5 rounded-2xl flex flex-col gap-3 hover:-translate-y-1 transition-all duration-300 relative group overflow-hidden"
             >
               <div className="flex items-center justify-center w-10 h-10 rounded-xl theme-icon-box">
                 <Icon className="text-lg" />
@@ -143,108 +114,45 @@ const HomeCard = () => {
         </div>
       </div>
 
-      {/* ── Right: Profile + Orbit ── */}
+      {/* ── Right: Profile Image ── */}
       <div data-aos="fade-left"
-        className="w-full lg:w-[40%] flex justify-center items-center"
-        style={{ perspective: "1200px" }}
+        className="w-full lg:w-[40%] flex flex-col justify-center items-center gap-5"
       >
-        {/*
-          ╔══════════════════════════════════════════════════════╗
-          ║  ORBIT STAGE                                         ║
-          ║  • Uses CSS custom props --orbit-r, --card-sz,       ║
-          ║    --stage-sz, --icon-sz set in index.css per bp.    ║
-          ║  • overflow:visible so icons are never clipped.      ║
-          ║  • onMouseEnter/Leave pauses all icon animations.    ║
-          ╚══════════════════════════════════════════════════════╝
-        */}
+        {/* Profile Card — static, no tilt, no orbit */}
         <div
-          className="orbit-stage"
-          onMouseEnter={() => setOrbitPaused(true)}
-          onMouseLeave={() => setOrbitPaused(false)}
+          className="w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] lg:w-[290px] lg:h-[290px] group relative glass-card rounded-[2.5rem] flex items-center justify-center hover:-translate-y-2 transition-all duration-300 overflow-hidden"
+          style={{ boxShadow: "var(--card-shadow)" }}
         >
-
-          {/* Dashed orbit ring (decorative) */}
-          <div className="orbit-ring-deco" aria-hidden="true" />
-
-          {/*
-            Each icon sits at its initial angle (0°, 120°, 240°) on the ring.
-            The icon itself has:
-              • a CSS rotation to place it on the circle: rotate(Ndeg) translateY(-var(--orbit-r))
-              • socialOrbit animation to spin the whole circle
-              • socialOrbitReverse to counter-spin the icon bubble so it stays upright
-          */}
-          {SOCIAL_LINKS.map(({ href, icon: Icon, label }, i) => {
-            /* Negative delay staggers icons 120° apart around the ring:
-               icon 0 → 0s delay (starts at top)
-               icon 1 → -4.67s delay (starts 120° = 1/3 through the animation)
-               icon 2 → -9.33s delay (starts 240° = 2/3 through the animation) */
-            const delay = `${-((14 / 3) * i).toFixed(2)}s`;
-            return (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                title={label}
-                className="orbit-icon-arm"
-                style={{
-                  animationDelay:      delay,
-                  animationPlayState:  playState,
-                }}
-              >
-                <span
-                  className="orbit-icon-bubble"
-                  style={{
-                    animationDelay:     delay,
-                    animationPlayState: playState,
-                  }}
-                >
-                  <Icon className="orbit-icon-svg" />
-                </span>
-              </a>
-            );
-          })}
-
-          {/* Profile Card */}
-          <div
-            ref={cardRef}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={handleCardEnter}
-            onMouseLeave={handleCardLeave}
-            className="orbit-profile-card group relative glass-card rounded-[2.5rem] flex items-center justify-center cursor-pointer border-[var(--card-border)] bg-[var(--card-bg)]"
-            style={{
-              transform:      "rotateX(0deg) rotateY(0deg) scale3d(1,1,1)",
-              transition:     "all 0.5s cubic-bezier(0.25,1,0.5,1)",
-              transformStyle: "preserve-3d",
-              boxShadow:      "0 15px 35px -10px var(--accent-glow-soft)",
-              overflow:       "hidden",
-              zIndex:         2,
-              padding:        "1rem",
-            }}
-          >
-            {/* Spotlight */}
-            <div
-              className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
-              style={{ background: "radial-gradient(200px circle at var(--mouse-x,50%) var(--mouse-y,50%), var(--accent-glow-soft), transparent 80%)" }}
-            />
-            {/* Image */}
-            <div className="w-full h-full rounded-[2rem] overflow-hidden relative"
-                 style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}>
-              <img src={myImg} alt="Mehul Arora" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-            </div>
-            {/* Status badge */}
-            <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full border bg-black/40 border-white/10 backdrop-blur-md"
-                 style={{ transform: "translateZ(50px)" }}>
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="text-[10px] text-emerald-300 font-mono uppercase tracking-wider font-bold">Open for projects</span>
-            </div>
+          {/* Image */}
+          <div className="w-full h-full rounded-[2rem] overflow-hidden relative">
+            <img src={myImg} alt="Mehul Arora" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
           </div>
+          {/* Status badge */}
+          <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full border bg-black/40 border-white/10 backdrop-blur-md">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]" />
+            </span>
+            <span className="text-[10px] text-[var(--text-secondary)] font-mono uppercase tracking-wider font-bold">Open for projects</span>
+          </div>
+        </div>
 
+        {/* Social links row — plain flex, no orbit */}
+        <div className="flex items-center gap-3 mt-2">
+          {SOCIAL_LINKS.map(({ href, icon: Icon, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              title={label}
+              className="theme-icon-btn flex items-center justify-center w-10 h-10 rounded-xl text-lg hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+            >
+              <Icon />
+            </a>
+          ))}
         </div>
       </div>
 

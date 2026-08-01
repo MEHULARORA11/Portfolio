@@ -16,10 +16,7 @@ export default function CyberpunkLoaderWrapper({
 }) {
   return (
     <div
-      className={`relative w-full overflow-hidden rounded-[32px] border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-6 sm:p-8 flex flex-col justify-between shadow-2xl ${className}`}
-      style={{
-        boxShadow: "inset 0 0 30px rgba(16, 185, 129, 0.05)",
-      }}
+      className={`relative w-full overflow-hidden rounded-[32px] border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-6 sm:p-8 flex flex-col justify-between shadow-md ${className}`}
     >
       {/* Laser Scanning Line */}
       <motion.div
@@ -30,26 +27,21 @@ export default function CyberpunkLoaderWrapper({
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-light)] to-transparent opacity-40 blur-[1px] pointer-events-none z-10"
+        className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--card-hover-border)] to-transparent opacity-30 pointer-events-none z-10"
       />
 
-      {/* Cyberpunk Tech Corner Brackets */}
+      {/* Corner Brackets — subtle structural indicators */}
       {/* Top Left */}
-      <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-[var(--accent-light)] opacity-70 pointer-events-none" />
+      <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-[var(--card-border)] opacity-50 pointer-events-none" />
       {/* Top Right */}
-      <div className="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-[var(--accent-light)] opacity-70 pointer-events-none" />
+      <div className="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-[var(--card-border)] opacity-50 pointer-events-none" />
       {/* Bottom Left */}
-      <div className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-[var(--accent-light)] opacity-70 pointer-events-none" />
+      <div className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-[var(--card-border)] opacity-50 pointer-events-none" />
       {/* Bottom Right */}
-      <div className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-[var(--accent-light)] opacity-70 pointer-events-none" />
+      <div className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-[var(--card-border)] opacity-50 pointer-events-none" />
 
-      {/* Grid Pattern Mesh Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[linear-gradient(rgba(16,185,129,0.3)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.3)_1px,transparent_1px)] bg-[size:20px_20px]" 
-      />
 
-      {/* Header Diagnostic Line */}
-      <div className="relative flex justify-between items-center text-[10px] sm:text-xs font-mono tracking-widest text-[var(--accent-light)] border-b border-[var(--card-border)] pb-3 mb-6 select-none opacity-80">
+      <div className="relative flex justify-between items-center text-[10px] sm:text-xs font-mono tracking-widest text-[var(--text-muted)] border-b border-[var(--card-border)] pb-3 mb-6 select-none opacity-70">
         <div className="flex items-center gap-2">
           {/* Pulsing indicator */}
           <span className="relative flex h-2 w-2">

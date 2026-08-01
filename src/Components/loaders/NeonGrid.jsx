@@ -6,7 +6,7 @@ import { useReducedMotion } from "framer-motion";
  * Renders a GPU-accelerated 3D scrolling perspective grid using HTML5 Canvas.
  * Automatically halts animation if reduced motion is enabled or components are unmounted.
  */
-export default function NeonGrid({ speed = 1.2, gridColor = "#10b981", className = "" }) {
+export default function NeonGrid({ speed = 1.2, gridColor = "rgba(255,255,255,0.08)", className = "" }) {
   const canvasRef = useRef(null);
   const shouldReduce = useReducedMotion();
 
@@ -52,9 +52,9 @@ export default function NeonGrid({ speed = 1.2, gridColor = "#10b981", className
         const endX = vanishingX + ratio * (width * 1.5); // spread out at bottom
 
         const grad = ctx.createLinearGradient(startX, horizonY, endX, height);
-        grad.addColorStop(0, "rgba(16, 185, 129, 0)");
-        grad.addColorStop(0.5, "rgba(16, 185, 129, 0.22)");
-        grad.addColorStop(1, "rgba(16, 185, 129, 0.55)");
+        grad.addColorStop(0, "rgba(255, 255, 255, 0)");
+        grad.addColorStop(0.5, "rgba(255, 255, 255, 0.04)");
+        grad.addColorStop(1, "rgba(255, 255, 255, 0.1)");
 
         ctx.strokeStyle = grad;
         ctx.beginPath();
@@ -74,8 +74,8 @@ export default function NeonGrid({ speed = 1.2, gridColor = "#10b981", className
         const y = horizonY + Math.pow(depth, 2) * (height - horizonY);
 
         // Fading intensity based on depth (closer to camera = brighter)
-        const opacity = Math.pow(depth, 1.5) * 0.6;
-        ctx.strokeStyle = `rgba(16, 185, 129, ${opacity})`;
+        const opacity = Math.pow(depth, 1.5) * 0.15;
+        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
         ctx.lineWidth = depth * 1.5;
 
         // Draw horizontal line
@@ -105,7 +105,7 @@ export default function NeonGrid({ speed = 1.2, gridColor = "#10b981", className
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute inset-0 w-full h-full pointer-events-none opacity-40 mix-blend-screen ${className}`}
+      className={`absolute inset-0 w-full h-full pointer-events-none opacity-60 ${className}`}
     />
   );
 }

@@ -27,15 +27,7 @@ export default function ComingSoon({
       {/* Futuristic Scanner Bracket Visual */}
       <div className="relative w-24 h-24 mx-auto mb-8 flex items-center justify-center">
         <motion.div
-          animate={{
-            rotate: 360,
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 10,
-            ease: "linear",
-          }}
-          className="absolute inset-0 border-2 border-dashed border-[var(--accent-border)] rounded-full opacity-60"
+          className="absolute inset-0 border border-dashed border-[var(--card-border)] rounded-full opacity-40"
         />
 
         <motion.div
@@ -83,7 +75,7 @@ export default function ComingSoon({
       </p>
 
       {/* Mini Cyberpunk Log Terminal */}
-      <div className="mt-8 mx-auto w-full max-w-md bg-black/50 border border-[var(--card-border)] rounded-xl p-4 text-left font-mono text-[10.5px] text-emerald-400/90 shadow-[inset_0_1px_8px_rgba(0,0,0,0.6)]">
+      <div className="mt-8 mx-auto w-full max-w-md bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-4 text-left font-mono text-[10.5px] text-[var(--text-secondary)] shadow-[inset_0_1px_8px_rgba(0,0,0,0.3)]">
         <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-[var(--card-border)] text-zinc-500">
           <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
           <span className="w-2 h-2 rounded-full bg-[#febc2e]" />

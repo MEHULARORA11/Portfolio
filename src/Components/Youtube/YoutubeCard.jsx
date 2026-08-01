@@ -56,7 +56,7 @@ export default function YoutubeCard({
           </div>
 
           {/* Static Pill overlays */}
-          <div className="absolute bottom-3 left-3 bg-[#03140e]/80 border border-[var(--card-border)] backdrop-blur-md rounded-lg px-2.5 py-1 text-[10px] sm:text-xs font-mono font-medium text-[var(--accent-light)] flex items-center gap-1.5 shadow-md">
+          <div className="absolute bottom-3 left-3 bg-black/60 border border-[var(--card-border)] backdrop-blur-md rounded-lg px-2.5 py-1 text-[10px] sm:text-xs font-mono font-medium text-[var(--accent-light)] flex items-center gap-1.5 shadow-md">
             <Clock className="w-3.5 h-3.5" />
             {duration}
           </div>

@@ -15,63 +15,19 @@ import {
   SiPostgresql,
 } from "react-icons/si";
 
+/* ─── Brand icon colors kept (informative), per-tech glow shadows removed ─── */
 const skillDetails = {
-  redis: {
-    icon: SiRedis,
-    color: "text-[#DC382D]",
-
-glow: "hover:shadow-[0_0_20px_rgba(220,56,45,0.45)] hover:border-[#DC382D]/40",
-  },
-  reactjs: {
-    icon: FaReact,
-    color: "text-[#61DAFB]",
-    glow: "hover:shadow-[0_0_20px_rgba(97,218,251,0.45)] hover:border-[#61DAFB]/40",
-  },
-  express: {
-    icon: SiExpress,
-    color: "text-[var(--text-secondary)]",
-    glow: "hover:shadow-[0_0_20px_var(--accent-glow-soft)] hover:border-[var(--accent-border)]",
-  },
-  nodejs: {
-    icon: FaNodeJs,
-    color: "text-[#68A063]",
-    glow: "hover:shadow-[0_0_20px_rgba(104,160,99,0.45)] hover:border-[#68A063]/40",
-  },
-  postgres: {
-    icon: SiPostgresql,
-    color: "text-[#336791]",
-    glow: "hover:shadow-[0_0_20px_rgba(51,103,145,0.45)] hover:border-[#336791]/40",
-  },
-  mongodb: {
-    icon: SiMongodb,
-    color: "text-[#47A248]",
-    glow: "hover:shadow-[0_0_20px_rgba(71,162,72,0.45)] hover:border-[#47A248]/40",
-  },
-  sql: {
-    icon: FaDatabase,
-    color: "text-[#007ACC]",
-    glow: "hover:shadow-[0_0_20px_rgba(0,122,252,0.45)] hover:border-[#007ACC]/40",
-  },
-  javascript: {
-    icon: SiJavascript,
-    color: "text-[#F7DF1E]",
-    glow: "hover:shadow-[0_0_20px_rgba(247,223,30,0.45)] hover:border-[#F7DF1E]/40",
-  },
-  "tailwind css": {
-    icon: SiTailwindcss,
-    color: "text-[#38BDF8]",
-    glow: "hover:shadow-[0_0_20px_rgba(56,189,248,0.45)] hover:border-[#38BDF8]/40",
-  },
-  html: {
-    icon: FaHtml5,
-    color: "text-[#E34C26]",
-    glow: "hover:shadow-[0_0_20px_rgba(227,76,38,0.45)] hover:border-[#E34C26]/40",
-  },
-  css: {
-    icon: FaCss3Alt,
-    color: "text-[#264DE4]",
-    glow: "hover:shadow-[0_0_20px_rgba(38,77,228,0.45)] hover:border-[#264DE4]/40",
-  },
+  redis:         { icon: SiRedis,       color: "text-[#DC382D]" },
+  reactjs:       { icon: FaReact,       color: "text-[#61DAFB]" },
+  express:       { icon: SiExpress,     color: "text-[var(--text-secondary)]" },
+  nodejs:        { icon: FaNodeJs,      color: "text-[#68A063]" },
+  postgres:      { icon: SiPostgresql,  color: "text-[#336791]" },
+  mongodb:       { icon: SiMongodb,     color: "text-[#47A248]" },
+  sql:           { icon: FaDatabase,    color: "text-[#007ACC]" },
+  javascript:    { icon: SiJavascript,  color: "text-[#F7DF1E]" },
+  "tailwind css":{ icon: SiTailwindcss, color: "text-[#38BDF8]" },
+  html:          { icon: FaHtml5,       color: "text-[#E34C26]" },
+  css:           { icon: FaCss3Alt,     color: "text-[#264DE4]" },
 };
 
 const SkillsCard = ({ title }) => {
@@ -79,21 +35,20 @@ const SkillsCard = ({ title }) => {
   const detail = skillDetails[normTitle] || {
     icon: FaDatabase,
     color: "text-[var(--accent-light)]",
-    glow: "hover:shadow-[0_0_20px_var(--accent-glow)] hover:border-[var(--accent-border)]",
   };
 
   const IconComponent = detail.icon;
 
   return (
     <div
-      className={`group theme-shimmer relative flex items-center gap-4 p-4 rounded-2xl glass-card transition-all duration-300 hover:-translate-y-1.5 ${detail.glow} overflow-hidden`}
+      className="group theme-shimmer relative flex items-center gap-4 p-4 rounded-2xl glass-card skill-inner-shadow transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
     >
       <div className="relative z-10 flex-shrink-0">
         <IconComponent className={`text-4xl ${detail.color} transition-transform duration-300 group-hover:scale-110`} />
       </div>
 
       <div className="relative z-10">
-        <h3 className="font-semibold text-base theme-text group-hover:text-[var(--accent-light)] transition-colors duration-300">
+        <h3 className="font-semibold text-base theme-text transition-colors duration-300">
           {title}
         </h3>
       </div>

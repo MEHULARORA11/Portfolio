@@ -35,7 +35,7 @@ export default function VideoLoader() {
       className="min-h-[500px]"
     >
       {/* Immersive Background Nodes & Neon Grid */}
-      <NeonGrid speed={0.9} gridColor="#10b981" />
+      <NeonGrid speed={0.9} />
       <FloatingParticles count={25} />
 
       <div className="flex flex-col lg:flex-row items-center justify-around gap-8 py-4 relative z-10">
@@ -53,7 +53,7 @@ export default function VideoLoader() {
               ease: "easeInOut",
             }}
             style={{ transformStyle: "preserve-3d" }}
-            className="w-full h-full rounded-2xl border border-[var(--accent-light)] bg-[var(--accent-muted)] backdrop-blur-md flex flex-col justify-between p-4 shadow-[0_0_30px_rgba(16,185,129,0.2)]"
+            className="w-full h-full rounded-2xl border border-[var(--accent-light)] bg-[var(--accent-muted)] backdrop-blur-md flex flex-col justify-between p-4"
           >
             {/* Holographic Play Button Accent */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ transform: "translateZ(30px)" }}>

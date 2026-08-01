@@ -36,7 +36,7 @@ export default function ProjectLoader() {
       className="min-h-[500px]"
     >
       {/* 3D Scrolling Perspective Grid and Constellation Nodes */}
-      <NeonGrid speed={1.1} gridColor="#10b981" />
+      <NeonGrid speed={1.1} />
       <FloatingParticles count={28} />
 
       <div className="flex flex-col lg:flex-row items-center justify-around gap-10 py-6 relative z-10">
@@ -55,10 +55,10 @@ export default function ProjectLoader() {
               ease: "easeInOut",
             }}
             style={{ transformStyle: "preserve-3d" }}
-            className="w-full h-full rounded-2xl border border-[var(--accent-light)] bg-[var(--accent-muted)] backdrop-blur-md p-4 flex flex-col justify-between shadow-[0_0_30px_rgba(16,185,129,0.22)] relative overflow-hidden"
+            className="w-full h-full rounded-2xl border border-[var(--accent-muted)] bg-[var(--card-bg)] backdrop-blur-md p-4 flex flex-col justify-between relative overflow-hidden"
           >
             {/* Blueprint Grid Lines Overlay */}
-            <div className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] bg-[size:10px_10px] opacity-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:10px_10px] opacity-20 pointer-events-none" />
 
             <div className="flex justify-between items-center text-[9px] font-mono text-[var(--accent-light)]">
               <span className="flex items-center gap-1">

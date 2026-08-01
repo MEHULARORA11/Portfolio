@@ -151,13 +151,13 @@ const GithubContributionsSection = () => {
       <style>{`
         .gh-graph-root {
           --cell-empty: rgba(255,255,255,0.05);
-          --cell-empty-border: rgba(16,185,129,0.14);
-          --cell-l2: rgba(16,185,129,0.42);
+          --cell-empty-border: rgba(99,102,241,0.15);
+          --cell-l2: rgba(99,102,241,0.42);
         }
         [data-theme="light"] .gh-graph-root {
-          --cell-empty: rgba(11,108,83,0.07);
-          --cell-empty-border: rgba(11,108,83,0.18);
-          --cell-l2: rgba(11,108,83,0.38);
+          --cell-empty: rgba(99,102,241,0.06);
+          --cell-empty-border: rgba(99,102,241,0.18);
+          --cell-l2: rgba(79,70,229,0.38);
         }
       `}</style>
 

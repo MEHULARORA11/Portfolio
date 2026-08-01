@@ -145,11 +145,11 @@ export default function BlogsSection() {
                 alt={activeBlog.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#03140e] via-[#03140e]/30 to-black/60 opacity-95" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/60 opacity-95" />
               
               {/* Header Title Metadata overlay */}
               <div className="absolute bottom-5 left-5 right-5 z-10 text-white">
-                <div className="flex items-center gap-3 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-emerald-300 mb-2">
+                <div className="flex items-center gap-3 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[var(--text-muted)] mb-2">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />
                     {activeBlog.date}

@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import Tilt from "react-parallax-tilt";
+import React from "react";
 import { ExternalLink, Award } from "lucide-react";
 import { motion } from "framer-motion";
 import Highlight from "../search/Highlight";
@@ -17,45 +16,11 @@ export default function CertificateCard({
   credentialLink,
   searchQuery = "",
 }) {
-  const cardRef = useRef(null);
-
-  // Spotlights tracking mouse position
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
-    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
-  };
-
   return (
-    <Tilt
-      glareEnable={true}
-      glareMaxOpacity={0.12}
-      glareColor="var(--accent-light)"
-      glarePosition="all"
-      tiltMaxAngleX={8}
-      tiltMaxAngleY={8}
-      scale={1.02}
-      transitionSpeed={1200}
-      className="h-full w-full"
+    <div
+      className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 transition-all duration-300 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:-translate-y-1"
+      style={{ boxShadow: "var(--card-shadow)" }}
     >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 transition-all duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:shadow-[0_0_30px_var(--accent-glow-soft)]"
-        style={{
-          boxShadow: "var(--card-shadow)",
-        }}
-      >
-        {/* Spotlight Follower Layer */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), var(--accent-glow-soft), transparent 80%)`,
-          }}
-        />
 
         {/* Thumbnail Layer */}
         <div>
@@ -68,7 +33,7 @@ export default function CertificateCard({
             />
             {/* Visual Glass Tint */}
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-gradient)]/80 via-transparent to-transparent opacity-60" />
-            <div className="absolute top-3 left-3 bg-[#03140e]/70 border border-[var(--card-border)] backdrop-blur-md rounded-xl p-2 text-[var(--accent-light)] flex items-center justify-center">
+            <div className="absolute top-3 left-3 bg-black/60 border border-[var(--card-border)] backdrop-blur-md rounded-xl p-2 text-[var(--accent-light)] flex items-center justify-center">
               <Award className="w-5 h-5" />
             </div>
           </div>
@@ -107,14 +72,13 @@ export default function CertificateCard({
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05, y: -1 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold py-1.5 px-4 rounded-xl border border-[var(--accent-border)] text-[var(--accent-light)] bg-transparent hover:bg-[var(--accent)] hover:text-[var(--button-text)] hover:shadow-[0_0_12px_var(--accent-glow)] transition-all duration-300"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold py-1.5 px-4 rounded-xl border border-[var(--accent-border)] text-[var(--accent-light)] bg-transparent hover:bg-[var(--accent)] hover:text-[var(--button-text)] transition-all duration-300"
             >
               Verify Credential
               <ExternalLink className="w-3 h-3" />
             </motion.a>
           </div>
         )}
-      </div>
-    </Tilt>
+    </div>
   );
 }

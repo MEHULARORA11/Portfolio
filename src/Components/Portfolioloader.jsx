@@ -173,51 +173,51 @@ const useProgress = (duration, isControlled, controlledProgress) => {
 // ─── pure theme generator helper ───
 const getThemeStyles = (isDark) => {
   const fb = {
-    bg1: isDark ? "#030303" : "#f4f9f5",
-    bg2: isDark ? "#08080a" : "#e2ede6",
-    border: isDark ? "rgba(16, 185, 129, 0.15)" : "rgba(11, 108, 83, 0.12)",
-    accent: isDark ? "#00ff66" : "#0b6c53",
-    glow: isDark ? "rgba(0, 255, 102, 0.3)" : "rgba(11, 108, 83, 0.15)",
+    bg1: isDark ? "#030303" : "#fafafa",
+    bg2: isDark ? "#0a0a0a" : "#f0f0f0",
+    border: isDark ? "rgba(99, 102, 241, 0.15)" : "rgba(99, 102, 241, 0.12)",
+    accent: isDark ? "#6366f1" : "#4f46e5",
+    glow: isDark ? "rgba(99, 102, 241, 0.2)" : "rgba(99, 102, 241, 0.1)",
   };
 
   const editor = isDark
     ? {
-        panel: "#08080a",
+        panel: "#0a0a0a",
         gutter: "rgba(0,0,0,0.22)",
-        tabActive: "#0f0f13",
+        tabActive: "#111114",
         chromeText: "#52525b",
       }
     : {
         panel: "#ffffff",
         gutter: "rgba(0,0,0,0.035)",
-        tabActive: "#f4f9f5",
+        tabActive: "#fafafa",
         chromeText: "#6e7781",
       };
 
   const syn = isDark
     ? {
         comment: "#52525b",
-        keyword: "#00ff66",
+        keyword: "#6366f1",
         variable: "#a1a1aa",
-        property: "#34d399",
-        string: "#10b981",
+        property: "#a5b4fc",
+        string: "#93c5fd",
         punct: "#71717a",
-        func: "#6ee7b7",
-        tag: "#34d399",
+        func: "#c7d2fe",
+        tag: "#a5b4fc",
         plain: "#e4e4e7",
-        success: "#00ff66",
+        success: "#6366f1",
       }
     : {
         comment: "#8b949e",
-        keyword: "#0b6c53",
+        keyword: "#4f46e5",
         variable: "#1f6feb",
-        property: "#0d9488",
-        string: "var(--accent, #0d9488)",
+        property: "#6366f1",
+        string: "#4f46e5",
         punct: "#57606a",
-        func: "#b35900",
-        tag: "#cf222e",
+        func: "#7c3aed",
+        tag: "#6366f1",
         plain: "#1f2328",
-        success: "#1a7f37",
+        success: "#4f46e5",
       };
 
   return { fb, editor, syn };

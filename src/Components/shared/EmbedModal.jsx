@@ -49,7 +49,7 @@ export default function EmbedModal({ isOpen, onClose, title, children }) {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 220 }}
-            className="relative w-full max-w-4xl glass-card rounded-3xl overflow-hidden shadow-2xl z-10 border border-[var(--card-hover-border)] bg-[#03140e]/95"
+            className="relative w-full max-w-4xl glass-card rounded-3xl overflow-hidden shadow-2xl z-10 border border-[var(--card-hover-border)] bg-[var(--card-bg)]"
             role="dialog"
             aria-modal="true"
             aria-label={title}

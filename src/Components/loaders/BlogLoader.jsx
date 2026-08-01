@@ -47,10 +47,10 @@ export default function BlogLoader() {
     const ypos = Array(cols).fill(0);
 
     const drawMatrix = () => {
-      ctx.fillStyle = "rgba(3, 20, 14, 0.15)"; // matches dark background with alpha
+      ctx.fillStyle = "rgba(10, 10, 10, 0.15)"; // matches near-black background with alpha
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "rgba(16, 185, 129, 0.25)"; // dim emerald
+      ctx.fillStyle = "rgba(255, 255, 255, 0.08)"; // dim neutral white
       ctx.font = "10px monospace";
 
       ypos.forEach((y, ind) => {
@@ -113,7 +113,7 @@ export default function BlogLoader() {
               ease: "easeInOut",
             }}
             style={{ transformStyle: "preserve-3d" }}
-            className="w-full h-full rounded-2xl border border-[var(--accent-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 flex flex-col justify-between shadow-[0_0_25px_rgba(16,185,129,0.15)]"
+            className="w-full h-full rounded-2xl border border-[var(--accent-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 flex flex-col justify-between"
           >
             {/* Holographic lines */}
             <div className="flex justify-between items-center text-[9px] font-mono text-[var(--accent-light)]">

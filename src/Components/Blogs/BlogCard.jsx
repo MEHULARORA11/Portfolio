@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import Tilt from "react-parallax-tilt";
+import React from "react";
 import { BookOpen, Calendar, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import Highlight from "../search/Highlight";
@@ -18,49 +17,15 @@ export default function BlogCard({
   onClick,
   searchQuery = "",
 }) {
-  const cardRef = useRef(null);
-
-  // Spotlight coordinates interpolation
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
-    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
-  };
-
   return (
-    <Tilt
-      glareEnable={true}
-      glareMaxOpacity={0.12}
-      glareColor="var(--accent-light)"
-      glarePosition="all"
-      tiltMaxAngleX={8}
-      tiltMaxAngleY={8}
-      scale={1.02}
-      transitionSpeed={1200}
-      className="h-full w-full"
+    <div
+      onClick={onClick}
+      onKeyDown={(e) => e.key === "Enter" && onClick()}
+      role="button"
+      tabIndex={0}
+      className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 transition-all duration-300 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:-translate-y-1 cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+      style={{ boxShadow: "var(--card-shadow)" }}
     >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onClick={onClick}
-        onKeyDown={(e) => e.key === "Enter" && onClick()}
-        role="button"
-        tabIndex={0}
-        className="group relative h-full flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-md p-5 transition-all duration-500 hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:shadow-[0_0_30px_var(--accent-glow-soft)] cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-        style={{
-          boxShadow: "var(--card-shadow)",
-        }}
-      >
-        {/* Spotlight Follower Layer */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), var(--accent-glow-soft), transparent 80%)`,
-          }}
-        />
 
         {/* Thumbnail & Badges */}
         <div>
@@ -73,7 +38,7 @@ export default function BlogCard({
             />
             {/* Visual Glass Vignette */}
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-gradient)]/80 via-transparent to-transparent opacity-60" />
-            <div className="absolute top-3 left-3 bg-[#03140e]/70 border border-[var(--card-border)] backdrop-blur-md rounded-xl p-2 text-[var(--accent-light)] flex items-center justify-center">
+            <div className="absolute top-3 left-3 bg-black/60 border border-[var(--card-border)] backdrop-blur-md rounded-xl p-2 text-[var(--accent-light)] flex items-center justify-center">
               <BookOpen className="w-5 h-5" />
             </div>
           </div>
@@ -121,7 +86,6 @@ export default function BlogCard({
           <span>READ_ARTICLE &rarr;</span>
           <span className="w-2 h-2 rounded-full bg-[var(--accent)] group-hover:scale-125 transition-transform duration-300" />
         </div>
-      </div>
-    </Tilt>
+    </div>
   );
 }

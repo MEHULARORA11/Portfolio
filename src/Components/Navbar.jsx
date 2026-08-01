@@ -132,7 +132,7 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
         <Link
           ref={logoRef}
           to="/"
-          className="w-10 h-10 rounded-xl flex items-center justify-center font-bold font-mono cursor-pointer select-none shrink-0 border border-[var(--card-border)] shadow-[0_0_12px_var(--accent-glow-soft)] transition-all duration-300 hover:shadow-[0_0_18px_var(--accent-glow)]"
+          className="w-10 h-10 rounded-xl flex items-center justify-center font-bold font-mono cursor-pointer select-none shrink-0 border border-[var(--card-border)] shadow-sm transition-all duration-300"
           style={{ background: "var(--accent)", color: "var(--button-text)" }}
           onClick={(e) => handleNavClick("home", e)}
         >
@@ -154,7 +154,7 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
               {activeSection === item.id && (
                 <motion.span
                   layoutId="activeNavTab"
-                  className="absolute inset-0 rounded-xl -z-10 shadow-[0_0_15px_var(--accent-glow)]"
+                  className="absolute inset-0 rounded-xl -z-10"
                   style={{ backgroundColor: "var(--accent)" }}
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />

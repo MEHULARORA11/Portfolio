@@ -4,8 +4,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Lenis from "lenis";
 import Navbar from "./Navbar";
+
 import Footer from "./Footer";
-import FloatingTechBackground from "./FloatingTechBackground";
 import PortfolioLoader from "./Portfolioloader";
 
 const AiChatBot = lazy(() => import("./AiChatBot"));
@@ -99,7 +99,6 @@ export default function Layout({ children }) {
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden relative min-h-screen flex flex-col transition-colors duration-500">
         <div className="absolute inset-0 grid-overlay pointer-events-none -z-10" />
-        <FloatingTechBackground />
         
         <Navbar 
           logoRef={logoRef} 

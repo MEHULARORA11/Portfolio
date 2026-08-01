@@ -7,8 +7,8 @@ import { useReducedMotion } from "framer-motion";
  */
 export default function FloatingParticles({
   count = 35,
-  particleColor = "rgba(52, 211, 153, 0.4)",
-  lineColor = "rgba(16, 185, 129, 0.12)",
+  particleColor = "rgba(165, 180, 252, 0.35)",
+  lineColor = "rgba(99, 102, 241, 0.1)",
   maxDistance = 90,
   className = "",
 }) {
@@ -105,8 +105,8 @@ export default function FloatingParticles({
         // Draw glow accent on larger particles
         if (p.size > 2.2) {
           ctx.shadowBlur = 10;
-          ctx.shadowColor = "rgba(16, 185, 129, 0.6)";
-          ctx.fillStyle = "rgba(110, 231, 183, 0.7)";
+          ctx.shadowColor = "rgba(99, 102, 241, 0.5)";
+          ctx.fillStyle = "rgba(165, 180, 252, 0.65)";
           ctx.beginPath();
           ctx.arc(displayX, displayY, p.size - 0.5, 0, Math.PI * 2);
           ctx.fill();

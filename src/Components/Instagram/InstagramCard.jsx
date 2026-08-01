@@ -1,5 +1,4 @@
 import React from "react";
-import Tilt from "react-parallax-tilt";
 import { Smartphone, Sparkles } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -19,27 +18,14 @@ export default function InstagramCard({
   searchQuery = "",
 }) {
   return (
-    <Tilt
-      glareEnable={true}
-      glareMaxOpacity={0.15}
-      glareColor="var(--accent-light)"
-      glarePosition="all"
-      tiltMaxAngleX={10}
-      tiltMaxAngleY={10}
-      scale={1.03}
-      transitionSpeed={1500}
-      className="h-full w-full"
+    <div
+      onClick={onClick}
+      onKeyDown={(e) => e.key === "Enter" && onClick()}
+      role="button"
+      tabIndex={0}
+      className="group relative w-full h-[400px] flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-gradient-to-b from-[var(--card-bg)] to-transparent backdrop-blur-md transition-all duration-300 hover:border-[var(--card-hover-border)] hover:-translate-y-1 cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+      style={{ boxShadow: "var(--card-shadow)" }}
     >
-      <div
-        onClick={onClick}
-        onKeyDown={(e) => e.key === "Enter" && onClick()}
-        role="button"
-        tabIndex={0}
-        className="group relative w-full h-[400px] flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--card-border)] bg-gradient-to-b from-[var(--card-bg)] to-transparent backdrop-blur-md transition-all duration-500 hover:border-[var(--card-hover-border)] cursor-pointer text-left outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-        style={{
-          boxShadow: "var(--card-shadow)",
-        }}
-      >
         {/* Animated Gradient Border Glow */}
         <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-[var(--accent)] to-indigo-500 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none" />
 
@@ -57,7 +43,7 @@ export default function InstagramCard({
 
         {/* Card Header (Icon tags) */}
         <div className="relative z-10 p-5 flex items-center justify-between select-none">
-          <div className="bg-[#03140e]/80 border border-[var(--card-border)] backdrop-blur-md rounded-xl p-2 text-pink-400 flex items-center justify-center shadow-lg">
+          <div className="bg-black/60 border border-[var(--card-border)] backdrop-blur-md rounded-xl p-2 text-pink-400 flex items-center justify-center shadow-lg">
             <FaInstagram className="w-5 h-5" />
           </div>
           <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-black/60 border border-white/10 text-white/80">
@@ -108,7 +94,6 @@ export default function InstagramCard({
             )}
           </div>
         </div>
-      </div>
-    </Tilt>
+    </div>
   );
 }
