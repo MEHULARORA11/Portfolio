@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 /* ─── Social links ─── */
 const SOCIAL_LINKS = [
   { href: "https://github.com/MEHULARORA11",     icon: FiGithub,   label: "GitHub"   },
-  { href: "https://linkedin.com/in/mehul-arora", icon: FiLinkedin, label: "LinkedIn" },
-  { href: "https://twitter.com/mehularora",       icon: FiTwitter,  label: "X"        },
+  { href: "https://www.linkedin.com/in/mehul-arora-32674b238/", icon: FiLinkedin, label: "LinkedIn" },
+  { href: "https://x.com/MehulArora121",       icon: FiTwitter,  label: "X"        },
 ];
 
 /* ─── Roles ─── */
