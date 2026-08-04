@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-   "dev:server": "bun --watch index.js",
-  "dev:worker": "bun --watch emailQueue/worker.js",
-  "start": "bun --parallel dev:server dev:worker",
+    "dev:server": "bun --watch index.js",
+    "dev:worker": "bun --watch emailQueue/worker.js",
+    "start": "bun --parallel dev:server dev:worker",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@mistralai/mistralai": "^2.5.0",
+    "@vercel/analytics": "^2.0.1",
     "aos": "^3.0.0-beta.6",
     "bullmq": "^5.81.2",
     "clsx": "^2.1.1",

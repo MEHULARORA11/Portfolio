@@ -9,6 +9,9 @@ import Blogs from "./Pages/Blogs";
 import Reels from "./Pages/Reels";
 import Videos from "./Pages/Videos";
 import Resume from "./Pages/Resume";
+import { inject } from '@vercel/analytics';
+ 
+inject();
 
 /**
  * Animated route renderer. Wraps Routes with AnimatePresence, using the current
