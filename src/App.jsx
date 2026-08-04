@@ -9,9 +9,8 @@ import Blogs from "./Pages/Blogs";
 import Reels from "./Pages/Reels";
 import Videos from "./Pages/Videos";
 import Resume from "./Pages/Resume";
-import { inject } from '@vercel/analytics';
+import { Analytics } from '@vercel/analytics/react';
  
-inject();
 
 /**
  * Animated route renderer. Wraps Routes with AnimatePresence, using the current
@@ -21,6 +20,7 @@ function AnimatedRoutes() {
   const location = useLocation();
 
   return (
+    <>
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
@@ -34,6 +34,8 @@ function AnimatedRoutes() {
         <Route path="/resume" element={<Resume />} />
       </Routes>
     </AnimatePresence>
+    <Analytics/>
+    </>
   );
 }
 
