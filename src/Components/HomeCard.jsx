@@ -66,10 +66,10 @@ const HomeCard = () => {
         </div>
 
         <div className="flex flex-col gap-4 text-base sm:text-lg lg:text-xl leading-relaxed">
-          <p className="theme-text-secondary">
+          <p className="theme-text-secondary max-w-[65ch]">
             I design and develop Full Stack Applications with a strong focus on backend engineering, scalability, security, and performance-driven architectures. I enjoy building reliable systems that combine efficient server-side logic with modern, immersive user experiences.
           </p>
-          <p className="theme-text-secondary">
+          <p className="theme-text-secondary max-w-[65ch]">
             Currently pursuing my first year of B.Tech in Faridabad, India, I continuously explore modern web technologies, APIs, databases, authentication systems, and high-performance application workflows to craft fast, scalable, and production-ready digital solutions.
           </p>
         </div>
@@ -80,13 +80,13 @@ const HomeCard = () => {
             href="/resume/Mehul_Arora_Resume.pdf"
             download="Mehul_Arora_Resume.pdf"
             target="_blank" rel="noopener noreferrer"
-            className="theme-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 transition-all duration-200"
+            className="theme-btn btn-inner-shadow flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 transition-all duration-200"
           >
             <FiDownload className="text-lg" />
             Download Resume
           </a>
           <Link to="/resume"
-            className="theme-icon-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 transition-all duration-200"
+            className="theme-icon-btn flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm sm:text-base active:scale-95 transition-all duration-200 border-dashed hover:border-[var(--accent-border)]"
           >
             <FiFileText className="text-lg" /> View Resume
           </Link>
@@ -138,7 +138,7 @@ const HomeCard = () => {
           </div>
         </div>
 
-        {/* Social links row — plain flex, no orbit */}
+        {/* Social links row — icon always visible, label slides in on hover */}
         <div className="flex items-center gap-3 mt-2">
           {SOCIAL_LINKS.map(({ href, icon: Icon, label }) => (
             <a
@@ -148,9 +148,12 @@ const HomeCard = () => {
               rel="noopener noreferrer"
               aria-label={label}
               title={label}
-              className="theme-icon-btn flex items-center justify-center w-10 h-10 rounded-xl text-lg hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+              className="group theme-icon-btn flex items-center gap-0 hover:gap-2 w-10 hover:w-auto overflow-hidden px-2.5 h-10 rounded-xl text-lg hover:-translate-y-0.5 transition-all duration-300 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] whitespace-nowrap"
             >
-              <Icon />
+              <Icon className="flex-shrink-0" />
+              <span className="max-w-0 group-hover:max-w-[5rem] overflow-hidden text-[10px] font-mono font-semibold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
+                {label}
+              </span>
             </a>
           ))}
         </div>

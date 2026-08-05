@@ -12,7 +12,7 @@ export default function SectionHeading({ title, subtitle }) {
     <div className="mb-10 lg:mb-14 flex flex-col items-start relative select-none">
       {subtitle && (
         <span className="text-xs font-mono uppercase tracking-[0.2em] text-[var(--accent-light)] mb-2">
-          {subtitle}
+          <span className="opacity-40 mr-1 select-none">//</span>{subtitle}
         </span>
       )}
       <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold gradient-text pb-2">

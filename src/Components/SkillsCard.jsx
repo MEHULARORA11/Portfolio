@@ -41,10 +41,10 @@ const SkillsCard = ({ title }) => {
 
   return (
     <div
-      className="group theme-shimmer relative flex items-center gap-4 p-4 rounded-2xl glass-card skill-inner-shadow transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
+      className="group theme-shimmer relative flex items-center gap-4 p-4 rounded-2xl glass-card skill-inner-shadow transition-all duration-300 hover:-translate-y-1 overflow-hidden"
     >
       <div className="relative z-10 flex-shrink-0">
-        <IconComponent className={`text-4xl ${detail.color} transition-transform duration-300 group-hover:scale-110`} />
+        <IconComponent className={`text-4xl ${detail.color} transition-transform duration-200 group-hover:scale-[1.08]`} />
       </div>
 
       <div className="relative z-10">

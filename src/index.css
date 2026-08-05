@@ -436,3 +436,75 @@ body {
     linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }
+
+/* ─── Route-level page transition (blur-fade in on route change) ─── */
+@keyframes routeFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.route-fade-in {
+  animation: routeFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes routeFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .route-fade-in {
+    animation-duration: 0.15s;
+  }
+}
+
+/* ─── Status bar footer ─── */
+.status-bar {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--card-border);
+  border-radius: 0.875rem;
+  background-color: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.status-bar:hover {
+  border-color: var(--card-hover-border);
+}
+
+.status-segment {
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 1rem;
+  border-right: 1px solid var(--divider);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.status-segment:last-child {
+  border-right: none;
+}
+
+.status-segment-grow {
+  flex: 1;
+  border-right: 1px solid var(--divider);
+}
+
+/* ─── Dashed secondary button border ─── */
+.border-dashed-secondary {
+  border-style: dashed;
+}
+

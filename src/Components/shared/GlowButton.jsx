@@ -19,7 +19,7 @@ export default function GlowButton({
 
   const variants = {
     primary:
-      "theme-btn font-medium cursor-pointer shadow-[var(--button-shadow)] hover:shadow-[var(--button-shadow-hover)]",
+      "theme-btn btn-inner-shadow font-medium cursor-pointer shadow-[var(--button-shadow)] hover:shadow-[var(--button-shadow-hover)]",
     secondary:
       "bg-[var(--accent-muted)] border border-[var(--accent-border)] text-[var(--accent-light)] hover:bg-[var(--accent-glow-soft)] hover:border-[var(--accent-light)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]",
     outline:

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FiArrowUp } from "react-icons/fi";
 
 /**
- * Minimalist and professional footer aligned with the portfolio design system.
- * Automatically adapts to light/dark themes.
+ * Statusline-style footer: a segmented strip with a live clock,
+ * mode indicator, copyright, and back-to-top control.
+ * Adapts to light/dark themes via existing CSS custom properties.
  */
 const scrollToTop = () => {
   if (window.lenis) {
@@ -13,28 +14,84 @@ const scrollToTop = () => {
   }
 };
 
-export default function Footer() {
-  return (
-    <footer className="w-full py-8 mt-10 border-t theme-divider grid grid-cols-1 sm:grid-cols-3 items-center gap-4 text-xs tracking-wider uppercase font-semibold">
-      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2">
-        <span className="theme-text-muted">© {new Date().getFullYear()}</span>
-        <span className="theme-text font-bold">Mehul Arora</span>
-        <span className="theme-text-muted">·</span>
-        <span className="theme-text-secondary">All Rights Reserved</span>
-      </div>
+function useLiveClock() {
+  const [time, setTime] = useState(() => {
+    const now = new Date();
+    return now.toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  });
 
-      <div className="flex justify-center">
+  useEffect(() => {
+    const tick = setInterval(() => {
+      const now = new Date();
+      setTime(
+        now.toLocaleTimeString("en-US", {
+          hour12: false,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        })
+      );
+    }, 1000);
+    return () => clearInterval(tick);
+  }, []);
+
+  return time;
+}
+
+export default function Footer() {
+  const time = useLiveClock();
+
+  return (
+    <footer className="w-full py-8 mt-10">
+      <div className="status-bar">
+
+        {/* Segment 1 — Mode indicator */}
+        <div className="status-segment gap-2 shrink-0">
+          <span
+            className="inline-flex h-2 w-2 rounded-full shrink-0"
+            style={{ backgroundColor: "var(--accent)" }}
+          />
+          <span
+            className="text-[10px] font-mono font-bold uppercase tracking-widest"
+            style={{ color: "var(--accent-light)" }}
+          >
+            MA
+          </span>
+        </div>
+
+        {/* Segment 2 — Live clock */}
+        <div className="status-segment gap-1.5 shrink-0" title="Local time">
+          <span className="theme-text-muted tabular-nums">{time}</span>
+        </div>
+
+        {/* Segment 3 — Copyright (flex-grow, takes remaining space) */}
+        <div className="status-segment status-segment-grow justify-center gap-1.5 min-w-0">
+          <span className="theme-text-muted truncate">
+            © {new Date().getFullYear()}
+          </span>
+          <span className="theme-text font-bold truncate">Mehul Arora</span>
+          <span className="theme-text-muted hidden sm:inline">·</span>
+          <span className="theme-text-secondary hidden sm:inline truncate">
+            All Rights Reserved
+          </span>
+        </div>
+
+        {/* Segment 4 — Back to top */}
         <button
           onClick={scrollToTop}
-          className="group theme-icon-btn flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300"
+          className="status-segment gap-2 shrink-0 cursor-pointer theme-text-secondary hover:text-[var(--accent-light)] hover:bg-[var(--card-hover-bg)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--accent)]"
           aria-label="Scroll to top of the page"
         >
-          <span>Back to Top</span>
-          <FiArrowUp className="text-sm group-hover:-translate-y-1 transition-transform duration-300" />
+          <span className="hidden sm:inline">Back to top</span>
+          <FiArrowUp className="text-sm transition-transform duration-300 group-hover:-translate-y-1" />
         </button>
-      </div>
 
-      <div className="hidden sm:block" />
+      </div>
     </footer>
   );
 }

@@ -132,7 +132,7 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
         <Link
           ref={logoRef}
           to="/"
-          className="w-10 h-10 rounded-xl flex items-center justify-center font-bold font-mono cursor-pointer select-none shrink-0 border border-[var(--card-border)] shadow-sm transition-all duration-300"
+          className="w-10 h-10 rounded-xl flex items-center justify-center font-bold font-mono cursor-pointer select-none shrink-0 border border-[var(--card-border)] shadow-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           style={{ background: "var(--accent)", color: "var(--button-text)" }}
           onClick={(e) => handleNavClick("home", e)}
         >
@@ -146,7 +146,7 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
               key={item.id}
               to={item.id === "home" ? "/" : `/${item.id}`}
               onClick={(e) => handleNavClick(item.id, e)}
-              className={`relative py-2 px-4 rounded-xl transition-colors duration-300 z-10 ${
+              className={`relative py-2 px-4 rounded-xl transition-colors duration-300 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 ${
                 activeSection === item.id ? "text-[var(--button-text)]" : "theme-text-secondary hover:text-[var(--accent-light)]"
               }`}
             >
@@ -165,7 +165,9 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
 
         {/* Desktop Theme Toggle Integration */}
         <div className="hidden lg:flex items-center gap-4">
-          <EyeViewCounter count={viewsCount} loading={loading} size={36} layout="horizontal" />
+          <div title="Live visitor count">
+            <EyeViewCounter count={viewsCount} loading={loading} size={36} layout="horizontal" />
+          </div>
           <ThemeToggle
             theme={theme}
             onToggle={toggleTheme}
@@ -176,7 +178,9 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
 
         {/* Mobile Navigation Interface (Theme Toggle + Hamburger) */}
         <div className="flex lg:hidden items-center gap-3">
-          <EyeViewCounter count={viewsCount} loading={loading} size={32} layout="horizontal" />
+          <div title="Live visitor count">
+            <EyeViewCounter count={viewsCount} loading={loading} size={32} layout="horizontal" />
+          </div>
           <ThemeToggle
             theme={theme}
             onToggle={toggleTheme}
@@ -185,7 +189,7 @@ function Navbar({ logoRef, theme, toggleTheme, isChatOpen }) {
           />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="w-10 h-10 rounded-xl flex items-center justify-center border theme-icon-btn text-xl transition-all duration-300 active:scale-95"
+            className="w-10 h-10 rounded-xl flex items-center justify-center border theme-icon-btn text-xl transition-all duration-300 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? <FiX /> : <FiMenu />}

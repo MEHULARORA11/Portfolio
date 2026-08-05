@@ -108,7 +108,7 @@ export default function Layout({ children }) {
         />
 
         {/* Global Main Content Section */}
-        <main className="flex-grow w-full">
+        <main key={location.pathname} className="flex-grow w-full route-fade-in">
           {children}
         </main>
 

@@ -56,7 +56,8 @@ const ProjectCard = ({
           href={liveDemo || githubLink || "#"}
           target="_blank"
           rel="noopener noreferrer"
-          className="block overflow-hidden h-44 sm:h-48 relative border-b border-[var(--card-border)] group-hover:border-[var(--card-hover-border)] transition-colors duration-300"
+          aria-label={`View project ${title}`}
+          className="block overflow-hidden h-44 sm:h-48 relative border-b border-[var(--card-border)] group-hover:border-[var(--card-hover-border)] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--accent)]"
         >
           <img
             src={imgSrc}
@@ -97,7 +98,7 @@ const ProjectCard = ({
                 return (
                   <span
                     key={idx}
-                    className={`inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-mono font-semibold px-3 py-1 rounded-full border theme-text-secondary bg-[var(--card-bg)] border-[var(--card-border)] transition-all duration-200 hover:scale-105 cursor-default group-hover/techs:opacity-60 hover:!opacity-100 ${TAG_HOVER}`}
+                    className={`inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-mono font-semibold px-3 py-1 rounded-full border theme-text-secondary bg-[var(--card-bg)] border-[var(--card-border)] transition-all duration-200 hover:scale-[1.03] cursor-default group-hover/techs:opacity-60 hover:!opacity-100 ${TAG_HOVER}`}
                   >
                     <IconComp className="text-xs sm:text-sm" />
                     <span>{tech}</span>
@@ -116,9 +117,10 @@ const ProjectCard = ({
             href={githubLink}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, y: -0.5 }}
+            aria-label="View GitHub repository"
+            whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.98 }}
-            className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-xl"
+            className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
             title="GitHub Repository"
           >
             <AiFillGithub />
@@ -129,9 +131,10 @@ const ProjectCard = ({
             href={liveDemo}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, y: -0.5 }}
+            aria-label="Open live demo"
+            whileHover={{ scale: 1.05, x: 2 }}
             whileTap={{ scale: 0.98 }}
-            className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-lg"
+            className="theme-icon-btn flex items-center justify-center w-9 h-9 rounded-xl text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
             title="Live Demo"
           >
             <HiGlobeAlt />

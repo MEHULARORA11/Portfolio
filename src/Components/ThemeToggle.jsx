@@ -19,7 +19,8 @@ const ThemeToggle = ({
     >
       <button
         onClick={onToggle}
-        className="theme-toggle-glow relative flex items-center gap-1 p-1 sm:p-1.5 rounded-full cursor-pointer select-none"
+        aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        className="theme-toggle-glow relative flex items-center gap-1 p-1 sm:p-1.5 rounded-full cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
         style={{
           backgroundColor: "var(--toggle-track)",
           border: "1px solid var(--card-border)",
