@@ -6,6 +6,15 @@ import { getViewsCount } from "@/lib/backend/db-helper";
 let localViewsFallback = 1;
 
 export async function GET(req: Request) {
+  // Prevent access from API clients (Postman, curl, etc.)
+  // Browsers automatically send sec-fetch-site or referer, API clients do not by default.
+  const secFetchSite = req.headers.get("sec-fetch-site");
+  const referer = req.headers.get("referer");
+  
+  if (!secFetchSite && !referer) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   try {
     const { searchParams } = new URL(req.url);
     const incrParam = searchParams.get("incr");
