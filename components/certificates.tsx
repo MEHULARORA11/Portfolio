@@ -9,11 +9,11 @@ export function Certificates() {
   return (
     <section id="certificates" className="pt-24 pb-12 border-t border-border/15">
       <FadeIn>
-        <div className="flex flex-col gap-2 mb-12">
+        <div className="flex flex-col items-center text-center gap-2 mb-12">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
             Certifications
           </h2>
-          <p className="text-muted-foreground max-w-lg text-lg">
+          <p className="text-muted-foreground max-w-lg text-lg mx-auto">
             Continuous learning and official recognitions from industry programs and hackathons.
           </p>
         </div>

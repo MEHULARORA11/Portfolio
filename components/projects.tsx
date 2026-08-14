@@ -17,11 +17,11 @@ export function Projects() {
   return (
     <section id="projects" className="pt-24 pb-12">
       <FadeIn>
-        <div className="flex flex-col gap-2 mb-16 md:mb-24">
+        <div className="flex flex-col items-center text-center gap-2 mb-16 md:mb-24">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
             Selected Work
           </h2>
-          <p className="text-muted-foreground max-w-lg text-lg">
+          <p className="text-muted-foreground max-w-lg text-lg mx-auto">
             A collection of my recent projects ranging from AI agents to real-time high-concurrency systems.
           </p>
         </div>

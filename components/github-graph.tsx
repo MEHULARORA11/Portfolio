@@ -174,11 +174,11 @@ export function GitHubGraph() {
   return (
     <section className="space-y-4">
       <FadeIn>
-        <div className="flex flex-col gap-2 mb-12">
+        <div className="flex flex-col items-center text-center gap-2 mb-12">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
             Activity
           </h2>
-          <p className="text-muted-foreground max-w-lg text-lg">
+          <p className="text-muted-foreground max-w-lg text-lg mx-auto">
             {data.totalContributions.toLocaleString()} contributions in the past year across open-source and personal projects.
           </p>
         </div>

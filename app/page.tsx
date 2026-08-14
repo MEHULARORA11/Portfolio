@@ -17,11 +17,11 @@ export default function Home() {
       <main className="mx-auto w-full max-w-5xl px-6 md:px-12 pb-24">
         <Hero />
         <About />
-        <Projects />
-        <Certificates />
-        <Videos />
-        <GitHubGraph />
         <Skills />
+        <GitHubGraph />
+        <Projects />
+        <Videos />
+        <Certificates />
         <Contact />
       </main>
 
