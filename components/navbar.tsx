@@ -6,12 +6,13 @@ import { useEffect, useState, useCallback } from "react";
 import { Moon, Sun } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useActiveSection } from "@/hooks/use-active-section";
 
 const navLinks = [
-  { label: "Projects", href: "/#projects" },
-  { label: "Videos", href: "/#videos" },
-  { label: "Skills", href: "/#skills" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Projects", href: "#projects" },
+  { label: "Videos", href: "#videos" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Navbar() {
@@ -19,6 +20,9 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // This hook will automatically update window.location.hash on scroll
+  const activeSection = useActiveSection(["projects", "videos", "skills", "contact"]);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 20);
@@ -49,6 +53,18 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [toggleTheme]);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const id = href.replace("#", "");
+    const element = document.getElementById(id);
+    if (element) {
+      // Force scroll regardless of current URL hash
+      element.scrollIntoView({ behavior: "smooth" });
+      // Explicitly set hash
+      window.history.pushState(null, "", href);
+    }
+  };
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -65,6 +81,13 @@ export function Navbar() {
         <div className="flex items-center gap-8">
           <Link
             href="/"
+            onClick={(e) => {
+              if (window.location.pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                window.history.pushState(null, "", "/");
+              }
+            }}
             className="group flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground transition-colors"
           >
             <div className="flex size-7 items-center justify-center rounded-md bg-foreground text-background font-bold font-mono transition-transform group-hover:scale-105">
@@ -74,13 +97,19 @@ export function Navbar() {
           </Link>
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={cn(
+                  "text-sm font-medium transition-colors duration-200 hover:text-foreground",
+                  activeSection === link.href.replace("#", "") 
+                    ? "text-foreground" 
+                    : "text-muted-foreground"
+                )}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </div>
         </div>

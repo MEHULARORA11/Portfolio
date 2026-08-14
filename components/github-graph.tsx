@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -55,6 +55,19 @@ export function GitHubGraph() {
   const [error, setError] = useState(false);
   const [tooltip, setTooltip] = useState<Day | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to the rightmost edge when data finishes loading
+  useEffect(() => {
+    if (data && scrollContainerRef.current) {
+      // Small delay ensures the DOM has fully painted the flex items
+      setTimeout(() => {
+        if (scrollContainerRef.current) {
+          scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth;
+        }
+      }, 50);
+    }
+  }, [data]);
 
   useEffect(() => {
     let mounted = true;
@@ -228,7 +241,7 @@ export function GitHubGraph() {
         </div>
 
         {/* Grid */}
-        <div className="w-full overflow-x-auto">
+        <div ref={scrollContainerRef} className="w-full overflow-x-auto pb-4 scroll-smooth">
           <div className="flex justify-start">
             <div>
               {/* Month labels */}
