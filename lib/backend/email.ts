@@ -6,7 +6,7 @@ export const sendEmailToMehul = async (name: string, email: string, message: str
   try {
     const response = await resend.emails.send({
       from: "contact@mehularora.dev",
-      to: process.env.EMAIL_TO || "mehularora505@gmail.com",
+      to: process.env.EMAIL_TO || "mehularora506@gmail.com",
       replyTo: email,
       subject: "Portfolio Interaction",
       html: `
