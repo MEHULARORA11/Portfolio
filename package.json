@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:resume": "node scripts/generate-resume.js"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -44,6 +45,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
+    "puppeteer": "^25.7.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

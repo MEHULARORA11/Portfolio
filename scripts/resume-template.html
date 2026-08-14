@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mehul Arora - Resume</title>
+  <style>
+    :root {
+      --primary: #128a52; /* A shade of green matching the PDF */
+      --text-main: #111111;
+      --text-muted: #333333;
+      --bg: #ffffff;
+      --font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--text-main);
+      background: var(--bg);
+      font-size: 11px;
+      line-height: 1.5;
+      padding: 40px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #0b1a2e; /* dark navy/black */
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .contact-info {
+      font-size: 10px;
+      color: var(--text-muted);
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    .contact-info a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--primary);
+      padding-bottom: 4px;
+      margin-top: 14px;
+    }
+
+    p {
+      margin-bottom: 6px;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-bottom: 6px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* Skills */
+    .skills p {
+      margin-bottom: 4px;
+    }
+    
+    .skills span {
+      font-weight: bold;
+    }
+
+    /* Projects */
+    .project-header {
+      margin-bottom: 4px;
+      font-size: 11px;
+    }
+    .project-title {
+      font-weight: bold;
+      font-size: 12px;
+    }
+    .project-tech {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .project-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .project-item {
+      margin-bottom: 10px;
+    }
+    .project-item ul {
+      margin-bottom: 0;
+    }
+
+    /* Education & Certs */
+    .edu-header, .cert-header {
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+    .edu-title, .cert-title {
+      font-weight: bold;
+    }
+    .edu-meta, .cert-meta {
+      color: var(--text-muted);
+    }
+    .edu-date, .cert-link {
+      font-weight: bold;
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Mehul Arora</h1>
+    <div class="subtitle">Software Engineer</div>
+    <div class="contact-info">
+      Faridabad, India | <a href="mailto:mehularora505@gmail.com">mehularora505@gmail.com</a> | <a href="https://github.com/MEHULARORA11">GitHub</a> | <a href="https://twitter.com/MehulArora121">Twitter</a> | <a href="https://www.linkedin.com/in/mehul-arora-32674b238/">LinkedIn</a> | <a href="https://youtube.com">YouTube</a> | <a href="https://mehularora.dev">mehularora.dev</a>
+    </div>
+  </header>
+
+  <section class="summary">
+    <h2>Professional Summary</h2>
+    <p>Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets while optimizing database queries for high efficiency.</p>
+  </section>
+
+  <section class="skills">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li><span>Languages:</span> JavaScript (ES6+), SQL, HTML5, CSS3</li>
+      <li><span>Backend & Tools:</span> Node.js, Express, Redis, WebSockets, REST APIs, Git, npm</li>
+      <li><span>Frontend:</span> React.js, Tailwind CSS, HTML, CSS</li>
+      <li><span>Databases:</span> PostgreSQL, MongoDB</li>
+    </ul>
+  </section>
+
+  <section class="projects">
+    <h2>Projects</h2>
+    
+    <div class="project-item">
+      <div class="project-header">
+        <span class="project-title">Arbiter</span> | <span class="project-tech">PostgreSQL, Node.js, NextJS, OAuth, OpenAI, Gemini SDK</span> <span class="project-links"><a href="#">[GitHub]</a> <a href="#">[Live]</a></span>
+      </div>
+      <ul>
+        <li>Architected a multi-model Self-Consistency LLM Agent that evaluates responses across diverse AI engines to generate optimized user answers.</li>
+        <li>Implemented completely isolated contextual conversational history threads, ensuring distinct memory boundaries per active session.</li>
+      </ul>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <span class="project-title">Personic</span> | <span class="project-tech">OpenAI Agent SDK, HTML5, CSS3, JavaScript</span> <span class="project-links"><a href="#">[Live]</a> <a href="#">[GitHub]</a></span>
+      </div>
+      <ul>
+        <li>Built responsive, interactive web games using vanilla JavaScript, engineering localized algorithms for win-path validation and optimized engine loops.</li>
+        <li>Designed UI architecture leveraging dynamic CSS custom properties and flexible grids for multi-platform device alignment.</li>
+      </ul>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <span class="project-title">TalwinderCSS</span> | <span class="project-tech">NPM Engine, HTML5, CSS3, JavaScript</span> <span class="project-links"><a href="#">[Live]</a> <a href="#">[GitHub]</a> <a href="#">[NPM]</a></span>
+      </div>
+      <ul>
+        <li>Engineered a highly customized, humor-infused open-source functional utility CSS tool published directly onto the public NPM dependency registry.</li>
+        <li>Mapped customized utility structures using explicit alias classes targeting cross-browser style components.</li>
+      </ul>
+    </div>
+
+    <div class="project-item">
+      <div class="project-header">
+        <span class="project-title">1 Million Checkboxes</span> | <span class="project-tech">React, Node, Express, Redis, WebSockets</span> <span class="project-links"><a href="#">[GitHub]</a> <a href="#">[Live Demo]</a></span>
+      </div>
+      <ul>
+        <li>Scaled a collaborative real-time grid application supporting 1 million checkboxes concurrently with sub-millisecond updates.</li>
+        <li>Integrated Redis for memory-efficient state management, pub-sub messaging, and rapid atomic key-value operations.</li>
+        <li>Architected WebSockets connection pooling and broadcast pipelines to manage thousands of concurrent client updates with minimal latency.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="education">
+    <h2>Education</h2>
+    <div class="edu-header">
+      <span class="edu-title">JC Bose UST (YMCA)</span> | <span class="edu-meta">Bachelor of Technology (B.Tech) in CSE</span> <span class="edu-date">[Expected Graduation: June 2029]</span>
+    </div>
+    <p class="edu-meta" style="margin-top: 4px;">Faridabad, India | First-year coursework focuses on Computer Science foundations, database engineering, and algorithms.</p>
+  </section>
+
+  <section class="certifications">
+    <h2>Certifications & Achievements</h2>
+    <div class="cert-header">
+      <span class="cert-title">Zenith 5.0 Hackathon Certificate</span> | <span class="cert-meta">unstop.com</span> <span class="cert-link"><a href="#">[Verify Credential]</a></span>
+    </div>
+    <p style="margin-top: 4px;">Participated in the Zenith 5.0 hackathon at JC Bose UST, building real-time collaboration tools.</p>
+  </section>
+
+</body>
+</html>
