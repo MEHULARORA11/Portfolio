@@ -127,6 +127,11 @@ export function GitHubGraph() {
         }
       }
     });
+    // Remove the first header if it matches the last header's month (the 1-year wrap around bug)
+    if (headers.length > 1 && headers[0].monthName === headers[headers.length - 1].monthName) {
+      headers.shift();
+    }
+
     return headers;
   }, [data]);
 

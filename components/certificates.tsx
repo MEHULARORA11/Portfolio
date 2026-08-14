@@ -34,11 +34,6 @@ export function Certificates() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 
-                {/* Date Badge */}
-                <div className="absolute top-3 right-3 px-3 py-1.5 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-mono font-medium text-white/90 shadow-sm border border-white/10">
-                  {cert.date}
-                </div>
-
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-background/0 group-hover:bg-background/10 transition-colors duration-500" />
               </div>
@@ -47,6 +42,9 @@ export function Certificates() {
               <div className="flex flex-col flex-1">
                 <div className="flex items-start justify-between gap-4">
                   <div>
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1.5">
+                      {cert.date}
+                    </div>
                     <h3 className="text-lg font-bold text-foreground transition-colors line-clamp-1">
                       {cert.title}
                     </h3>
