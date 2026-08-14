@@ -58,18 +58,25 @@ export function GitHubGraph() {
 
   useEffect(() => {
     let mounted = true;
-    fetch(`${API_URL}/api/github-contributions`, { cache: "no-store" })
-      .then((r) => r.json())
-      .then((d) => {
+    const fetchContributions = async () => {
+      try {
+        const res = await fetch("/api/github-contributions", { cache: "no-store" });
+        const d = await res.json();
         if (mounted && !d.error && d.weeks) {
           setData(d);
         } else if (mounted) {
           setError(true);
         }
-      })
-      .catch(() => { if (mounted) setError(true); })
-      .finally(() => { if (mounted) setLoading(false); });
-    return () => { mounted = false; };
+      } catch (err) {
+        if (mounted) setError(true);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+    fetchContributions();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const currentStreak = useMemo(() => {

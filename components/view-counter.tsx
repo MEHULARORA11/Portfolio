@@ -1,29 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Eye } from "lucide-react";
 
 export function ViewCounter() {
   const [views, setViews] = useState<number | null>(null);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     let mounted = true;
-    const fetchViews = async () => {
+
+    async function fetchViews() {
       try {
-        const res = await fetch("http://localhost:4000/api/views", {
+        // 1. Check sessionStorage — only increment on the FIRST load of this browser session
+        const hasIncremented = sessionStorage.getItem("viewedThisSession");
+        const incrParam = hasIncremented ? "false" : "true";
+
+        // 2. Set it immediately so reloads never increment again
+        sessionStorage.setItem("viewedThisSession", "true");
+
+        // 3. Force fetch to bypass browser cache
+        const res = await fetch(`/api/views?incr=${incrParam}`, {
           cache: "no-store",
         });
+
         if (!res.ok) throw new Error("Failed to fetch views");
+
         const data = await res.json();
-        if (mounted && data.views !== undefined) {
+        if (mounted) {
           setViews(data.views);
+          setLoading(false);
         }
       } catch (err) {
-        console.error("Failed to fetch views:", err);
-        // Fallback for when backend is off
-        if (mounted) setViews(1337); 
+        console.error("Error fetching visitor counter:", err);
+        // If everything fails, show at least a baseline so it's never stuck at '...'
+        if (mounted) {
+          setViews(1);
+          setLoading(false);
+        }
       }
-    };
+    }
+
     fetchViews();
     return () => {
       mounted = false;
@@ -38,7 +54,7 @@ export function ViewCounter() {
       </div>
       <Eye className="w-3.5 h-3.5 text-muted-foreground" />
       <span className="text-xs font-mono font-medium text-foreground tabular-nums">
-        {views !== null ? views.toLocaleString() : "..."}
+        {loading ? "..." : views !== null ? views.toLocaleString() : "..."}
       </span>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { ArrowUpRight, Download } from "lucide-react";
 import { ViewCounter } from "@/components/view-counter";
@@ -12,6 +13,23 @@ export function Hero() {
 
       <div className="flex flex-col items-center text-center gap-8 relative z-10">
         
+        {/* Profile Picture */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-border/50 shadow-xl mb-2"
+        >
+          <Image
+            src="/pfp.png"
+            alt="Mehul Arora"
+            fill
+            sizes="(max-width: 768px) 112px, 128px"
+            priority
+            className="object-cover"
+          />
+        </motion.div>
+
         {/* Status Pill */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
