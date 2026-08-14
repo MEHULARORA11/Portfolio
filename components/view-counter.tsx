@@ -19,7 +19,7 @@ export function ViewCounter() {
         sessionStorage.setItem("viewedThisSession", "true");
 
         // 3. Force fetch to bypass browser cache
-        const res = await fetch(`/api/views?incr=${incrParam}&view_count_secret=${process.env.VIEW_COUNT_SECRET}`, {
+        const res = await fetch(`/api/views?incr=${incrParam}`, {
           cache: "no-store",
         });
 

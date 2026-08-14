@@ -7,7 +7,7 @@ const corsOptions = {
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
 };
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   // Only apply this to API routes
   if (request.nextUrl.pathname.startsWith("/api")) {
     const origin = request.headers.get("origin") ?? "";
