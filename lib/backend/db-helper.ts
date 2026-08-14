@@ -1,4 +1,5 @@
 import { prisma } from './db';
+import { redis } from './redis';
 
 export async function updateViewsCount() {
   try {
@@ -31,6 +32,23 @@ export async function getViewsCount() {
     return existing ? existing.viewsCount : 0;
   } catch (error) {
     console.error('Error fetching views count:', error);
+    throw error;
+  }
+}
+
+/**
+ * Reads the current view count from Postgres and writes it to Redis.
+ * Call this AFTER updateViewsCount() so Redis always reflects the
+ * authoritative DB value — not just a locally-incremented counter.
+ */
+export async function syncRedis(): Promise<number> {
+  try {
+    const count = await getViewsCount();   // source of truth → Postgres
+    await redis.set('viewer', count);       // overwrite Redis with real value
+    console.log('[syncRedis] Redis synced to DB value:', count);
+    return count;
+  } catch (error) {
+    console.error('[syncRedis] Failed to sync Redis from DB:', error);
     throw error;
   }
 }

@@ -1,6 +1,6 @@
 import { inngest } from "./client";
 import { sendEmailToMehul } from "../email";
-import { updateViewsCount } from "../db-helper";
+import { updateViewsCount, syncRedis } from "../db-helper";
 
 export const sendEmail = inngest.createFunction(
   {
@@ -40,10 +40,21 @@ export const incrementViews = inngest.createFunction(
     },
   },
   async ({ event, step }) => {
-    await step.run("update-views", async () => {
-      const updatedCount = await updateViewsCount();
-      return updatedCount;
+    // Step 1 — persist the increment to Postgres (source of truth)
+    const updatedCount = await step.run("update-views-in-db", async () => {
+      return await updateViewsCount();
     });
-    return { success: true, message: "Views count updated successfully" };
+
+    // Step 2 — overwrite Redis with the authoritative DB count so they
+    //           never drift apart (runs only after Step 1 succeeds)
+    await step.run("sync-redis-from-db", async () => {
+      return await syncRedis();
+    });
+
+    return {
+      success: true,
+      message: "Views count updated and Redis synced",
+      newCount: updatedCount,
+    };
   }
 );
