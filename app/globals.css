@@ -189,11 +189,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: rgba(150, 150, 150, 0.3);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
+  background: rgba(150, 150, 150, 0.5);
 }
 
 /* ── Layer base ────────────────────────────────────── */

@@ -73,7 +73,7 @@ export function Projects() {
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-10">
-                  {project.techStack.slice(0, 4).map((tech) => (
+                  {project.techStack.map((tech) => (
                     <span
                       key={tech}
                       className="px-3 py-1.5 bg-background border border-border rounded-md text-xs font-medium text-foreground"
@@ -81,11 +81,6 @@ export function Projects() {
                       {tech}
                     </span>
                   ))}
-                  {project.techStack.length > 4 && (
-                    <span className="px-3 py-1.5 bg-transparent text-xs font-medium text-muted-foreground">
-                      +{project.techStack.length - 4} more
-                    </span>
-                  )}
                 </div>
 
                 <div className="flex items-center gap-4">

@@ -12,7 +12,9 @@ export function useActiveSection(sectionIds: string[]) {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
             // Silently update URL without triggering scroll jump
-            if (entry.target.id) {
+            if (entry.target.id === "hero") {
+              window.history.replaceState(null, "", window.location.pathname);
+            } else if (entry.target.id) {
               window.history.replaceState(null, "", `#${entry.target.id}`);
             } else {
               window.history.replaceState(null, "", window.location.pathname);
@@ -21,8 +23,8 @@ export function useActiveSection(sectionIds: string[]) {
         });
       },
       {
-        rootMargin: "-20% 0px -60% 0px", // Trigger when section is near top of screen
-        threshold: 0.1,
+        rootMargin: "-20% 0px -80% 0px", // Trigger when section is near top of screen
+        threshold: 0,
       }
     );
 
