@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "bunx prisma generate && next start",
     "lint": "eslint",
     "build:resume": "node scripts/generate-resume.js"
   },
