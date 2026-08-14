@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mehul Arora - Developer Portfolio
+
+A premium, highly-interactive developer portfolio built with Next.js 16, React 19, and Tailwind CSS v4. Designed with a focus on modern aesthetics, glassmorphism, fluid animations (Framer Motion), and real-time backend integrations.
+
+## Features
+
+- **Premium UI/UX:** Clean, dark-mode focused aesthetic with glassmorphic elements, subtle gradients, and scroll-driven animations using Framer Motion.
+- **Dynamic View Counter:** Real-time page view tracking powered by a high-performance Redis cache layer, automatically synced to a PostgreSQL database via Inngest background jobs to prevent database bottlenecks.
+- **Live GitHub Activity:** Fetches and displays a live 1-year contribution heatmap directly from the GitHub GraphQL API, complete with streak calculations.
+- **Automated Resume Generation:** A custom programmatic PDF generation pipeline. Edit the resume layout in pure HTML/CSS and run a script to automatically compile it into a beautifully styled PDF using headless Chromium (Puppeteer).
+- **Responsive Layouts:** Bento-box style project cards and content sections perfectly optimized for all viewports.
+- **Mistral AI Integration (Planned):** Configured for a custom AI persona chatbot powered by the Mistral AI API.
+
+## Tech Stack
+
+- **Frontend:** Next.js 16 (App Router), React 19, Tailwind CSS v4, Framer Motion, Lucide Icons, shadcn/ui.
+- **Backend:** Node.js, Next.js API Routes, Inngest (Background Jobs).
+- **Database & Caching:** PostgreSQL (Neon), Prisma ORM, Redis (Upstash/Docker).
+- **Tooling:** Bun, TypeScript, Puppeteer (PDF Generation).
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+You will need [Bun](https://bun.sh/) installed locally, as well as a local or remote Redis instance and a PostgreSQL database.
+
+### 1. Clone & Install
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/MEHULARORA11/portfolio_2.git
+cd portfolio_2
+bun install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Environment Variables
+Create a `.env.local` file in the root directory and configure the following variables:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+NODE_ENV=development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Database & Cache
+DATABASE_URL="postgresql://user:password@host/db"
+REDIS_CONNECTION_STRING="redis://localhost:6379"
+REDIS_PASSWORD="your-redis-password"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# APIs
+GITHUB_TOKEN="your_github_personal_access_token"
+RESEND_API_KEY="your_resend_api_key"
+MISTRALAI_API_KEY="your_mistral_api_key"
+EMAIL_TO="your_email@domain.com"
+```
 
-## Learn More
+### 3. Database Setup (Prisma)
+The Prisma client is configured to generate into a custom `lib/generate` directory.
+```bash
+# Generate the custom Prisma Client
+bunx prisma generate
 
-To learn more about Next.js, take a look at the following resources:
+# Push the schema to your database
+bunx prisma db push
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Run the Development Server
+```bash
+# Starts the Next.js app and the Inngest dev server for background jobs
+bun run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Custom Scripts
 
-## Deploy on Vercel
+### Automated Resume Generation
+Instead of manually exporting PDFs from design software, this portfolio includes a programmatic resume generator.
+To edit the resume content, modify `scripts/resume-template.html`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To compile the updated HTML into the live `public/Mehul_Arora_Resume.pdf` file, run:
+```bash
+bun run build:resume
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Production Build
+The production `start` script is wired to ensure the Prisma client is always generated before booting the server:
+```bash
+bun run build
+bun run start
+```
+
+## License
+
+Designed and built by [Mehul Arora](https://mehularora.dev). All rights reserved.
