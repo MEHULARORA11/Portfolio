@@ -22,12 +22,12 @@ export function Videos() {
         </div>
       </FadeIn>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="flex flex-wrap justify-center gap-8">
         {youtubeVideos.map((video, idx) => (
-          <FadeIn key={video.id} delay={idx * 100}>
+          <FadeIn key={video.id} delay={idx * 100} className="w-full md:w-[calc(50%-1rem)] max-w-xl">
             <div className="group cursor-pointer space-y-4" onClick={() => setActiveVideo(video.videoUrl)}>
               {/* Thumbnail Container */}
-              <div className="relative aspect-video rounded-2xl overflow-hidden bg-muted border border-border shadow-sm">
+              <div className="relative aspect-[5/4] rounded-2xl overflow-hidden bg-muted border border-border shadow-sm">
                 <Image
                   src={video.thumbnail}
                   alt={video.title}

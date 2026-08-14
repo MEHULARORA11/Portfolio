@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section id="hero" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[300px] bg-primary/20 blur-[120px] rounded-full pointer-events-none opacity-50 dark:opacity-20" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-primary/5 to-transparent pointer-events-none opacity-50 dark:opacity-20" />
 
       <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12 relative z-10 max-w-5xl mx-auto">
         

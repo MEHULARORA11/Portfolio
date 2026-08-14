@@ -19,9 +19,9 @@ export function Certificates() {
         </div>
       </FadeIn>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="flex flex-wrap justify-center gap-8">
         {certificates.map((cert, idx) => (
-          <FadeIn key={cert.id} delay={idx * 100}>
+          <FadeIn key={cert.id} delay={idx * 100} className="w-full md:w-[calc(50%-1rem)] max-w-xl">
             <div className="group relative flex flex-col justify-between h-full space-y-4">
               {/* Thumbnail Container */}
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted border border-border/50 shadow-sm">

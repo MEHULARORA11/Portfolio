@@ -27,30 +27,26 @@ export function Projects() {
         </div>
       </FadeIn>
 
-      <div className="flex flex-col gap-24 md:gap-40">
+      <div className="flex flex-wrap justify-center gap-8 md:gap-12">
         {projects.map((project, idx) => (
-          <FadeIn key={project.title} delay={100} className="group">
-            <div
-              className={`flex flex-col md:flex-row gap-8 md:gap-16 items-center ${
-                idx % 2 === 1 ? "md:flex-row-reverse" : ""
-              }`}
-            >
+          <FadeIn key={project.title} delay={100} className="w-full md:w-[calc(50%-1.5rem)] max-w-xl group">
+            <div className="flex flex-col h-full space-y-6">
               {/* Image Side */}
-              <div className="w-full md:w-[60%] relative aspect-[16/10] rounded-2xl overflow-hidden bg-muted/30 border border-border/40 shadow-sm">
+              <div className="w-full relative aspect-[16/10] rounded-2xl overflow-hidden bg-muted/30 border border-border/40 shadow-sm">
                 <Image
                   src={project.thumbnail}
                   alt={project.title}
                   fill
                   priority={idx === 0}
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 60vw"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
               {/* Text Side */}
-              <div className="w-full md:w-[40%] flex flex-col items-start">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/50 bg-muted/30 text-[10px] font-mono font-medium uppercase tracking-wider text-muted-foreground mb-6">
+              <div className="flex flex-col flex-1 items-start">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border/50 bg-muted/30 text-[10px] font-mono font-medium uppercase tracking-wider text-muted-foreground mb-4">
                   {project.status === "live" ? (
                     <>
                       <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
@@ -64,26 +60,26 @@ export function Projects() {
                   )}
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4 tracking-tight">
+                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-tight line-clamp-1">
                   {project.title}
                 </h3>
                 
-                <p className="text-muted-foreground leading-relaxed mb-8">
+                <p className="text-muted-foreground leading-relaxed mb-6 line-clamp-3">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-10">
+                <div className="flex flex-wrap gap-2 mb-8 mt-auto">
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1.5 bg-background border border-border rounded-md text-xs font-medium text-foreground"
+                      className="px-3 py-1.5 bg-background border border-border rounded-md text-[10px] font-medium text-foreground"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 border-t border-border/40 pt-4 w-full">
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
