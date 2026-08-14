@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import { ArrowUpRight, Download } from "lucide-react";
+import { ArrowUpRight, FileText } from "lucide-react";
 import { ViewCounter } from "@/components/view-counter";
 
 export function Hero() {
@@ -79,11 +79,12 @@ export function Hero() {
           </a>
           <a
             href="/Mehul_Arora_Resume.pdf"
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="group flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card/50 hover:bg-muted text-foreground font-semibold hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-sm"
           >
             Resume
-            <Download className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+            <FileText className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
           </a>
         </motion.div>
       </div>

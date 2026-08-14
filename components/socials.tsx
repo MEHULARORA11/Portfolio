@@ -115,7 +115,7 @@ export function Socials() {
               <TooltipTrigger
                 render={
                   <a
-                    href={`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/resume/Mehul_Arora_Resume.pdf`}
+                    href="/Mehul_Arora_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg px-3 text-xs font-medium text-muted-foreground border border-border transition-all duration-200 hover:text-foreground hover:border-foreground/20 hover:bg-muted active:scale-95"
@@ -125,7 +125,7 @@ export function Socials() {
                 }
               />
               <TooltipContent side="bottom" className="text-xs" sideOffset={6}>
-                Download Resume PDF
+                View Resume PDF
               </TooltipContent>
             </Tooltip>
           </motion.div>
