@@ -10,7 +10,6 @@ const corsOptions = {
 export function middleware(request: NextRequest) {
   // Only apply this to API routes
   if (request.nextUrl.pathname.startsWith("/api")) {
-    console.log("hulla")
     const origin = request.headers.get("origin") ?? "";
     const host = request.headers.get("host"); // e.g., localhost:3000
 

@@ -10,10 +10,21 @@ export async function GET(req: Request) {
   // Browsers automatically send sec-fetch-site or referer, API clients do not by default.
   const secFetchSite = req.headers.get("sec-fetch-site");
   const referer = req.headers.get("referer");
-  
-  if (!secFetchSite && !referer) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
+
+   const authHeader = req.headers.get("authorization")?.replace("Bearer ", "");
+    const cronHeader = req.headers.get("x-cron-secret");
+
+  const { searchParams } = new URL(req.url);
+   
+    const cronQuery = searchParams.get("view_count_secret");
+    const expectedSecret = process.env.VIEW_COUNT_SECRET;
+
+     const isBrowser = Boolean(secFetchSite || referer);
+    const isCron = Boolean(expectedSecret && (authHeader === expectedSecret || cronHeader === expectedSecret || cronQuery === expectedSecret));
+
+    if (!isBrowser || !isCron) {
+        return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
   try {
     const { searchParams } = new URL(req.url);

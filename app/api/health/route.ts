@@ -9,6 +9,7 @@ export function GET(req: Request){
     const cronHeader = req.headers.get("x-cron-secret");
     
     const { searchParams } = new URL(req.url);
+   
     const cronQuery = searchParams.get("cron_secret");
 
     const expectedSecret = process.env.CRON_SECRET;
