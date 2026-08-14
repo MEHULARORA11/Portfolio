@@ -10,6 +10,7 @@ import { useActiveSection } from "@/hooks/use-active-section";
 
 const navLinks = [
   { label: "Projects", href: "#projects" },
+  { label: "Certificates", href: "#certificates" },
   { label: "Videos", href: "#videos" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
@@ -22,7 +23,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // This hook will automatically update window.location.hash on scroll
-  const activeSection = useActiveSection(["projects", "videos", "skills", "contact"]);
+  const activeSection = useActiveSection(["projects", "certificates", "videos", "skills", "contact"]);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 20);

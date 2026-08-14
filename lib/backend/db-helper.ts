@@ -45,7 +45,6 @@ export async function syncRedis(): Promise<number> {
   try {
     const count = await getViewsCount();   // source of truth → Postgres
     await redis.set('viewer', count);       // overwrite Redis with real value
-    console.log('[syncRedis] Redis synced to DB value:', count);
     return count;
   } catch (error) {
     console.error('[syncRedis] Failed to sync Redis from DB:', error);

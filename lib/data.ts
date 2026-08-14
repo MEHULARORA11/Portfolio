@@ -144,3 +144,35 @@ export const youtubeVideos: Video[] = [
   },
 ];
 
+// ─── Certificates ─────────────────────────────────────────────────────────────
+
+export interface Certificate {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  tags: string[];
+  thumbnail: string;
+  credentialLink: string;
+}
+
+export const certificates: Certificate[] = [
+  {
+    id: "cert-1",
+    title: "Zenith 5.0",
+    issuer: "unstop.com",
+    date: "May 2026",
+    tags: ["Zenith 5.0", "hackathon", "jcbust"],
+    thumbnail: "https://images.unsplash.com/photo-1782038793351-ee4fed3b14a4?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    credentialLink: "https://unstop.com/certificate-preview/0716ff08-88eb-4294-b510-6e150945774c?utm_campaign=site-emails&utm_medium=d2c-automated&utm_source=wow-look-at-your-certificate-zenith-50",
+  },
+  {
+    id: "cert-2",
+    title: "Web Dev Cohort 2026",
+    issuer: "chaicode.com",
+    date: "May 2026",
+    tags: ["development", "web dev", "coding", "chaicode", "chai aur code"],
+    thumbnail: "https://images.pexels.com/photos/38577281/pexels-photo-38577281.jpeg?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    credentialLink: "https://images.pexels.com/photos/38577281/pexels-photo-38577281.jpeg?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];

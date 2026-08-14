@@ -17,15 +17,6 @@ function createRedisClient() {
     ? new Redis(REDIS_CONNECTION_STRING, options)
     : new Redis(options);
 
-  client.on('connect', () => {
-    console.log('Redis: connecting...');
-  });
-  client.on('ready', () => {
-    console.log('Redis: ready');
-  });
-  client.on('end', () => {
-    console.log('Redis: connection closed');
-  });
   client.on('error', (err) => {
     console.error('Redis Client Error:', err.message || err);
   });

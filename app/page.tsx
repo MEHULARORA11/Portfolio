@@ -2,6 +2,7 @@ import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { About } from "@/components/about";
 import { Projects } from "@/components/projects";
+import { Certificates } from "@/components/certificates";
 import { Videos } from "@/components/videos";
 import { GitHubGraph } from "@/components/github-graph";
 import { Skills } from "@/components/skills";
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <About />
         <Projects />
+        <Certificates />
         <Videos />
         <GitHubGraph />
         <Skills />
