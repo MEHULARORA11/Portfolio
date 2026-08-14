@@ -17,7 +17,7 @@ export function GET(req: Request){
     // Only validate cron if the secret is actually configured in the environment
     const isCron = Boolean(expectedSecret && (authHeader === expectedSecret || cronHeader === expectedSecret || cronQuery === expectedSecret));
 
-    if (!isBrowser && !isCron) {
+    if (!isBrowser || !isCron) {
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
