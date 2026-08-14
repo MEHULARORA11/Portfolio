@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FadeIn } from "@/components/ui/fade-in";
 import { GITHUB_USERNAME } from "@/lib/data";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
@@ -147,19 +148,18 @@ export function GitHubGraph() {
 
   return (
     <section className="space-y-4">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-      >
-        <h2 className="text-lg font-semibold tracking-tight text-foreground">GitHub Activity</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {data.totalContributions.toLocaleString()} contributions in the past year.
-        </p>
-      </motion.div>
+      <FadeIn>
+        <div className="flex flex-col gap-2 mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
+            Activity
+          </h2>
+          <p className="text-muted-foreground max-w-lg text-lg">
+            {data.totalContributions.toLocaleString()} contributions in the past year across open-source and personal projects.
+          </p>
+        </div>
+      </FadeIn>
 
-      <div className="rounded-xl border border-border bg-card p-4 sm:p-5 overflow-hidden">
+      <FadeIn delay={100} className="rounded-xl border border-border bg-card p-4 sm:p-5 overflow-hidden">
         {/* Stats row */}
         <div className="flex flex-wrap items-center gap-5 mb-5 pb-4 border-b border-border">
           <div className="flex flex-col">
@@ -313,7 +313,7 @@ export function GitHubGraph() {
             <ExternalLink size={10} />
           </a>
         </div>
-      </div>
+      </FadeIn>
     </section>
   );
 }

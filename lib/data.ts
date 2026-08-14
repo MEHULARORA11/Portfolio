@@ -133,7 +133,7 @@ export interface Video {
 
 export const youtubeVideos: Video[] = [
   {
-    id: "yt-1",
+    id: "ZRYxrHojqDE",
     title: "How I Made My Own Persona Bot",
     description:
       "In this video I explain how I approached building a Persona Bot that talks exactly like Hitesh Sir and Piyush Sir. I also discuss why I used Manual GuardRails over OpenAI Agentic SDK's built-in guardrails.",

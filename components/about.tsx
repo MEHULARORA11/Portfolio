@@ -1,57 +1,42 @@
 "use client";
 
-import { motion } from "motion/react";
-import { BookOpen, Cpu, MapPin } from "lucide-react";
-
-const stats = [
-  { icon: BookOpen, label: "Education", value: "B.Tech · First Year" },
-  { icon: Cpu, label: "Specialization", value: "Backend & Scaling" },
-  { icon: MapPin, label: "Location", value: "Faridabad, India" },
-];
+import { FadeIn } from "@/components/ui/fade-in";
 
 export function About() {
   return (
-    <motion.section
-      className="space-y-4"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-    >
-      <div className="space-y-3">
-        <p className="text-[15px] leading-relaxed text-foreground/90">
-          I design and build full-stack applications with a strong focus on backend
-          engineering, scalability, security, and performance. I care about systems
-          that are not just functional — but robust and production-ready.
-        </p>
-        <p className="text-[15px] leading-relaxed text-foreground/90">
-          Currently in my first year of B.Tech, I continuously explore modern web
-          technologies, APIs, databases, authentication systems, and high-performance
-          workflows to craft fast, scalable digital solutions.
-        </p>
-      </div>
+    <section id="about" className="pt-16 pb-8 border-t border-border/15">
+      <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 md:gap-16">
+        
+        {/* Sticky Title Column */}
+        <FadeIn>
+          <div className="md:sticky md:top-24">
+            <h2 className="text-sm font-semibold tracking-widest uppercase text-muted-foreground">
+              About Me
+            </h2>
+            <div className="w-12 h-1 bg-primary/40 mt-4 rounded-full" />
+          </div>
+        </FadeIn>
 
-      {/* Bento stats */}
-      <div className="grid grid-cols-3 gap-3 pt-1">
-        {stats.map(({ icon: Icon, label, value }, i) => (
-          <motion.div
-            key={label}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 + i * 0.06, ease: "easeOut" }}
-            className="flex flex-col gap-2 rounded-xl border border-border bg-card p-3 hover:-translate-y-0.5 transition-transform duration-200"
-          >
-            <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-muted">
-              <Icon className="size-3.5 text-muted-foreground" strokeWidth={1.5} />
-            </div>
-            <div>
-              <p className="text-[9px] uppercase tracking-widest font-mono font-semibold text-muted-foreground/60">
-                {label}
-              </p>
-              <p className="text-xs font-semibold text-foreground mt-0.5 leading-tight">{value}</p>
-            </div>
-          </motion.div>
-        ))}
+        {/* Editorial Content Column */}
+        <FadeIn delay={100} className="space-y-8">
+          <p className="text-2xl md:text-3xl font-medium tracking-tight text-foreground leading-snug">
+            I am a full-stack developer based in India, obsessed with building high-performance software.
+          </p>
+          
+          <div className="space-y-6 text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p>
+              My journey started with a fascination for how systems scale. I don't just build UI; I architect complete solutions—from robust Node.js backends and real-time WebSockets to fluid, beautiful React frontends.
+            </p>
+            <p>
+              I recently built a system handling <strong className="text-foreground font-semibold">1 Million real-time checkboxes</strong> using Redis, and an AI Agent (<strong className="text-foreground font-semibold">Arbiter</strong>) that cross-validates LLM responses for accuracy. 
+            </p>
+            <p>
+              When I'm not coding, I'm usually diving into system design patterns, playing video games, or making content about software engineering on YouTube.
+            </p>
+          </div>
+        </FadeIn>
+
       </div>
-    </motion.section>
+    </section>
   );
 }

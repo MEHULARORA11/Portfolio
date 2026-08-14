@@ -1,54 +1,32 @@
 "use client";
 
-import { motion } from "motion/react";
+import { FadeIn } from "@/components/ui/fade-in";
 import { skillCategories } from "@/lib/data";
 
 export function Skills() {
-  return (
-    <section id="skills" className="space-y-5">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-      >
-        <h2 className="text-xl font-semibold tracking-tight text-foreground">Skills</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Technologies I work with day-to-day.
-        </p>
-      </motion.div>
+  // Flatten all skills for a fluid, organic cloud look
+  const allSkills = Array.from(new Set(skillCategories.flatMap((cat) => cat.skills)));
 
-      <div className="space-y-5">
-        {skillCategories.map((category, catIdx) => (
-          <motion.div
-            key={category.label}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: catIdx * 0.07, ease: "easeOut" }}
-          >
-            <p className="mb-2 text-xs font-medium text-muted-foreground/70">
-              {category.label}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {category.skills.map((skill, skillIdx) => (
-                <motion.span
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0.93 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.25,
-                    delay: catIdx * 0.07 + skillIdx * 0.035,
-                    ease: "easeOut",
-                  }}
-                  className="rounded-lg border border-border bg-card px-3 py-1.5 text-[12px] font-medium text-foreground/80 transition-colors duration-150 hover:bg-muted hover:text-foreground cursor-default"
-                >
-                  {skill}
-                </motion.span>
-              ))}
+  return (
+    <section id="skills" className="pt-24 pb-12 border-t border-border/15">
+      <div className="flex flex-col items-center text-center gap-6 mb-16">
+        <FadeIn>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
+            Capabilities
+          </h2>
+          <p className="text-muted-foreground mt-4 max-w-2xl text-lg">
+            A comprehensive toolkit for building robust, scalable applications.
+          </p>
+        </FadeIn>
+      </div>
+
+      <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-3 md:gap-4">
+        {allSkills.map((skill, idx) => (
+          <FadeIn key={skill} delay={idx * 40}>
+            <div className="px-5 py-3 md:px-6 md:py-4 rounded-full border border-border/60 bg-background/50 hover:bg-muted/80 backdrop-blur-sm text-foreground md:text-lg font-medium tracking-tight transition-all duration-300 hover:scale-105 hover:border-foreground/30 shadow-sm">
+              {skill}
             </div>
-          </motion.div>
+          </FadeIn>
         ))}
       </div>
     </section>
