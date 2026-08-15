@@ -3,40 +3,45 @@
 import { useState } from "react";
 import { Send, ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
+import { useMutation } from "@tanstack/react-query";
+import { MUTATION_KEYS } from "@/lib/query-keys";
 
 export function Contact() {
-  const [formState, setFormState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!name.trim() || !email.trim() || !message.trim()) return;
-
-    setFormState("loading");
-    try {
+  const mutation = useMutation({
+    mutationKey: MUTATION_KEYS.contactForm,
+    mutationFn: async (data: { name: string; email: string; message: string }) => {
       const res = await fetch("/api/post", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify(data),
       });
+      if (!res.ok) throw new Error("Failed to send message");
+      return res.json();
+    },
+    onSuccess: () => {
+      setName("");
+      setEmail("");
+      setMessage("");
+      setTimeout(() => mutation.reset(), 4000);
+    },
+    onError: () => {
+      setTimeout(() => mutation.reset(), 4000);
+    },
+  });
 
-      if (res.ok) {
-        setFormState("success");
-        setName("");
-        setEmail("");
-        setMessage("");
-        setTimeout(() => setFormState("idle"), 4000);
-      } else {
-        setFormState("error");
-        setTimeout(() => setFormState("idle"), 4000);
-      }
-    } catch {
-      setFormState("error");
-      setTimeout(() => setFormState("idle"), 4000);
-    }
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !message.trim()) return;
+    mutation.mutate({ name, email, message });
   }
+
+  const isPending = mutation.isPending;
+  const isSuccess = mutation.isSuccess;
+  const isError = mutation.isError;
 
   return (
     <section id="contact" className="pt-32 pb-24 border-t border-border/15">
@@ -78,7 +83,7 @@ export function Contact() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                disabled={formState === "loading"}
+                disabled={isPending}
                 className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-foreground transition-colors"
               />
             </div>
@@ -92,7 +97,7 @@ export function Contact() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                disabled={formState === "loading"}
+                disabled={isPending}
                 className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-foreground transition-colors"
               />
             </div>
@@ -106,21 +111,21 @@ export function Contact() {
                 rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                disabled={formState === "loading"}
+                disabled={isPending}
                 className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-foreground transition-colors resize-none"
               />
             </div>
 
             <button
               type="submit"
-              disabled={formState === "loading" || formState === "success"}
+              disabled={isPending || isSuccess}
               className="mt-6 flex items-center justify-between w-full p-4 rounded-2xl bg-foreground text-background font-bold text-lg hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100"
             >
-              {formState === "loading" ? "Sending..." : formState === "success" ? "Sent Successfully!" : "Send Message"}
-              {formState !== "loading" && formState !== "success" && <ArrowRight className="w-5 h-5" />}
+              {isPending ? "Sending..." : isSuccess ? "Sent Successfully!" : "Send Message"}
+              {(!isPending && !isSuccess) && <ArrowRight className="w-5 h-5" />}
             </button>
 
-            {formState === "error" && (
+            {isError && (
               <p className="text-sm font-medium text-destructive text-center mt-2">
                 Failed to send. Is the backend running?
               </p>

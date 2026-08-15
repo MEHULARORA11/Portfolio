@@ -2,10 +2,12 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { useQuery } from "@tanstack/react-query";
 import { ExternalLink } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FadeIn } from "@/components/ui/fade-in";
 import { GITHUB_USERNAME } from "@/lib/data";
+import { QUERY_KEYS } from "@/lib/query-keys";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
@@ -50,12 +52,20 @@ function formatDate(dateStr: string) {
 }
 
 export function GitHubGraph() {
-  const [data, setData] = useState<ContribData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [tooltip, setTooltip] = useState<Day | null>(null);
   const shouldReduceMotion = useReducedMotion();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const { data, isPending: loading, isError: error } = useQuery<ContribData>({
+    queryKey: QUERY_KEYS.githubContributions,
+    queryFn: async () => {
+      const res = await fetch("/api/github-contributions");
+      if (!res.ok) throw new Error("Failed to fetch");
+      const d = await res.json();
+      if (d.error || !d.weeks) throw new Error("Invalid data");
+      return d;
+    },
+  });
 
   // Auto-scroll to the rightmost edge when data finishes loading
   useEffect(() => {
@@ -68,29 +78,6 @@ export function GitHubGraph() {
       }, 50);
     }
   }, [data]);
-
-  useEffect(() => {
-    let mounted = true;
-    const fetchContributions = async () => {
-      try {
-        const res = await fetch("/api/github-contributions", { cache: "no-store" });
-        const d = await res.json();
-        if (mounted && !d.error && d.weeks) {
-          setData(d);
-        } else if (mounted) {
-          setError(true);
-        }
-      } catch (err) {
-        if (mounted) setError(true);
-      } finally {
-        if (mounted) setLoading(false);
-      }
-    };
-    fetchContributions();
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   const currentStreak = useMemo(() => {
     if (!data?.weeks) return 0;
