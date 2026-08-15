@@ -67,7 +67,7 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
-export function Socials() {
+export function Socials({ hideResume = false }: { hideResume?: boolean } = {}) {
   return (
     <motion.section
       initial={{ opacity: 0, y: 16 }}
@@ -110,25 +110,27 @@ export function Socials() {
           })}
 
           {/* Resume link */}
-          <motion.div variants={item}>
-            <Tooltip>
-              <TooltipTrigger
-                render={
-                  <a
-                    href="/Mehul_Arora_Resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg px-3 text-xs font-medium text-muted-foreground border border-border transition-all duration-200 hover:text-foreground hover:border-foreground/20 hover:bg-muted active:scale-95"
-                  >
-                    Resume
-                  </a>
-                }
-              />
-              <TooltipContent side="bottom" className="text-xs" sideOffset={6}>
-                View Resume PDF
-              </TooltipContent>
-            </Tooltip>
-          </motion.div>
+          {!hideResume && (
+            <motion.div variants={item}>
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <a
+                      href="/Mehul_Arora_Resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg px-3 text-xs font-medium text-muted-foreground border border-border transition-all duration-200 hover:text-foreground hover:border-foreground/20 hover:bg-muted active:scale-95"
+                    >
+                      Resume
+                    </a>
+                  }
+                />
+                <TooltipContent side="bottom" className="text-xs" sideOffset={6}>
+                  View Resume PDF
+                </TooltipContent>
+              </Tooltip>
+            </motion.div>
+          )}
         </motion.div>
       </TooltipProvider>
     </motion.section>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { ViewCounter } from "@/components/view-counter";
+import { Socials } from "@/components/socials";
 
 export function Hero() {
   return (
@@ -91,6 +92,7 @@ export function Hero() {
               </span>
             </div>
             <ViewCounter />
+            <Socials hideResume />
           </motion.div>
         </div>
       </div>
