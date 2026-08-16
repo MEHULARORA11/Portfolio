@@ -25,7 +25,7 @@ export function ViewCounter() {
       const data = await res.json();
       return data.views as number;
     },
-    staleTime: 30 * 1000, // refetch every 30 seconds
+    staleTime: 30 * 1000, // refetch every 30 seconds // by this we can set custum stale time , so it will ignore the one from query provider .
   });
 
   const displayViews = loading ? "..." : (views !== undefined ? views : 1).toLocaleString();
