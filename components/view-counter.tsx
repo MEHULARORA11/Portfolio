@@ -25,7 +25,7 @@ export function ViewCounter() {
       const data = await res.json();
       return data.views as number;
     },
-    staleTime: Infinity, // Don't refetch on window focus
+    staleTime: 30 * 1000, // refetch every 30 seconds
   });
 
   const displayViews = loading ? "..." : (views !== undefined ? views : 1).toLocaleString();
