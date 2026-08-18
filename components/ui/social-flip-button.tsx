@@ -67,7 +67,6 @@ const SocialFlipNode = ({
         <Wrapper
             {...wrapperProps}
             className={cn("relative h-10 w-10 cursor-pointer", itemClassName)}
-            style={{ perspective: "1000px" }}
             onMouseEnter={() => setTooltipIndex(index)}
             onMouseLeave={() => setTooltipIndex(null)}
         >
@@ -75,10 +74,10 @@ const SocialFlipNode = ({
                 {isHovered && tooltipIndex === index && (
                     <motion.div
                         initial={{ opacity: 0, y: 10, scale: 0.8, x: "-50%" }}
-                        animate={{ opacity: 1, y: -50, scale: 1, x: "-50%" }}
+                        animate={{ opacity: 1, y: -45, scale: 1, x: "-50%" }}
                         exit={{ opacity: 0, y: 10, scale: 0.8, x: "-50%" }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute left-1/2 z-50 whitespace-nowrap rounded-lg bg-neutral-900 px-3 py-1.5 text-xs font-semibold text-white shadow-xl dark:bg-white dark:text-neutral-900"
+                        className="absolute left-1/2 z-50 whitespace-nowrap rounded-lg bg-neutral-900 px-3 py-1.5 text-xs font-semibold text-white shadow-xl dark:bg-white dark:text-neutral-900 pointer-events-none"
                     >
                         {item.label}
                         {/* Arrow */}
@@ -87,45 +86,63 @@ const SocialFlipNode = ({
                 )}
             </AnimatePresence>
 
-            <motion.div
-                className="relative h-full w-full"
-                initial={false}
-                animate={{ rotateY: isHovered ? 180 : 0 }}
-                transition={{
-                    duration: 0.8,
-                    type: "spring",
-                    stiffness: 120,
-                    damping: 15,
-                    delay: index * 0.08,
-                }}
-                style={{ transformStyle: "preserve-3d" }}
-            >
-                {/* Front - Letter */}
-                <div
+            {/* --- DESKTOP VIEW: Flips from Letter to Icon --- */}
+            <div className="hidden md:block w-full h-full relative" style={{ perspective: "1000px" }}>
+                <motion.div
+                    className="relative h-full w-full"
+                    initial={false}
+                    animate={{ rotateY: isHovered ? 180 : 0 }}
+                    transition={{
+                        duration: 0.8,
+                        type: "spring",
+                        stiffness: 120,
+                        damping: 15,
+                        delay: index * 0.08,
+                    }}
+                    style={{ transformStyle: "preserve-3d" }}
+                >
+                    {/* Front - Letter */}
+                    <div
+                        className={cn(
+                            "absolute inset-0 flex items-center justify-center rounded-lg bg-neutral-100 text-lg font-bold text-neutral-800 shadow-sm dark:bg-neutral-900 dark:text-neutral-200",
+                            frontClassName
+                        )}
+                        style={{ backfaceVisibility: "hidden" }}
+                    >
+                        {item.letter}
+                    </div>
+
+                    {/* Back - Icon */}
+                    <div
+                        className={cn(
+                            "absolute inset-0 flex items-center justify-center rounded-lg bg-black text-lg text-white dark:bg-white dark:text-black",
+                            backClassName
+                        )}
+                        style={{
+                            backfaceVisibility: "hidden",
+                            transform: "rotateY(180deg)",
+                        }}
+                    >
+                        {item.icon}
+                    </div>
+                </motion.div>
+            </div>
+
+            {/* --- MOBILE VIEW: Directly shows Icon --- */}
+            <div className="md:hidden w-full h-full relative">
+                <motion.div
                     className={cn(
-                        "absolute inset-0 flex items-center justify-center rounded-lg bg-neutral-100 text-lg font-bold text-neutral-800 shadow-sm dark:bg-neutral-900 dark:text-neutral-200",
+                        "relative h-full w-full flex items-center justify-center rounded-lg bg-neutral-100 text-lg text-neutral-800 shadow-sm dark:bg-neutral-900 dark:text-neutral-200 transition-colors",
+                        "hover:bg-foreground hover:text-background",
                         frontClassName
                     )}
-                    style={{ backfaceVisibility: "hidden" }}
-                    
-                >
-                    {item.letter}
-                </div>
-
-                {/* Back - Icon */}
-                <div
-                    className={cn(
-                        "absolute inset-0 flex items-center justify-center rounded-lg bg-black text-lg text-white dark:bg-white dark:text-black",
-                        backClassName
-                    )}
-                    style={{
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                     {item.icon}
-                </div>
-            </motion.div>
+                </motion.div>
+            </div>
         </Wrapper>
     );
 };

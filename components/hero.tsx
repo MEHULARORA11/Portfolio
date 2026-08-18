@@ -23,7 +23,7 @@ export function Hero() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+    <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-primary/5 to-transparent pointer-events-none opacity-50 dark:opacity-20" />
 
