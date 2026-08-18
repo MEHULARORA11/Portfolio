@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import {
     FaGithub,
     FaTwitter,
-    FaFacebook,
+    FaYoutube,
     FaInstagram,
     FaLinkedin,
     FaEnvelope,
@@ -30,13 +30,13 @@ interface SocialFlipButtonProps {
 }
 
 const defaultItems: SocialItem[] = [
-    { letter: "C", icon: <FaGithub />, label: "Github", href: "#" },
-    { letter: "O", icon: <FaTwitter />, label: "Twitter", href: "#" },
-    { letter: "N", icon: <FaLinkedin />, label: "LinkedIn", href: "#" },
-    { letter: "T", icon: <FaInstagram />, label: "Instagram", href: "#" },
-    { letter: "A", icon: <FaFacebook />, label: "Facebook", href: "#" },
-    { letter: "C", icon: <FaEnvelope />, label: "Email", href: "#" },
-    { letter: "T", icon: <FaDiscord />, label: "Discord", href: "#" },
+    { letter: "C", icon: <FaGithub />, label: "Github", href: "https://github.com/MEHULARORA11" },
+    { letter: "O", icon: <FaLinkedin />, label: "LinkedIn", href: "https://www.linkedin.com/in/mehul-arora-32674b238" },
+    { letter: "N", icon: <FaTwitter />, label: "Twitter", href: "https://x.com/MehulArora121" },
+    { letter: "N", icon: <FaInstagram />, label: "Instagram", href: "https://www.instagram.com/mehularora505/" },
+    { letter: "E", icon: <FaYoutube />, label: "YouTube", href: "https://www.youtube.com/@Mehul_Arora" },
+    { letter: "C", icon: <FaDiscord />, label: "Discord", href: "https://discord.com/users/mehularora0243" },
+    { letter: "T", icon: <FaEnvelope />, label: "Email", href: "mailto:mehularora505@gmail.com" },
 ];
 
 const SocialFlipNode = ({

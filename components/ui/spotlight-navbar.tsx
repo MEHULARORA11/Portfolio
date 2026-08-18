@@ -113,9 +113,48 @@ export function SpotlightNavbar({
         }
     }, [activeIndex]);
 
+    // Handle intersection observer to update active index on scroll
+    useEffect(() => {
+        const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const id = `#${entry.target.id}`;
+                    const index = items.findIndex((item) => item.href === id);
+                    if (index !== -1 && index !== activeIndex) {
+                        setActiveIndex(index);
+                        // Update URL without jumping
+                        window.history.replaceState(null, "", id);
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleIntersect, {
+            rootMargin: "-30% 0px -70% 0px",
+        });
+
+        items.forEach((item) => {
+            if (item.href.startsWith("#")) {
+                const el = document.querySelector(item.href);
+                if (el) observer.observe(el);
+            }
+        });
+
+        return () => observer.disconnect();
+    }, [items, activeIndex]);
+
     const handleItemClick = (item: NavItem, index: number) => {
         setActiveIndex(index);
         onItemClick?.(item, index);
+        
+        if (item.href.startsWith("#")) {
+            const el = document.querySelector(item.href);
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
+                // Update URL to match
+                window.history.pushState(null, "", item.href);
+            }
+        }
     };
 
     return (

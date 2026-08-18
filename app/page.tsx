@@ -16,6 +16,8 @@ export default function Home() {
       <div className="fixed top-0 left-0 right-0 z-50 pointer-events-auto">
         <SpotlightNavbar 
           items={[
+            { label: "Home", href: "#home" },
+            { label: "About", href: "#about" },
             { label: "Skills", href: "#skills" },
             { label: "Projects", href: "#projects" },
             { label: "Videos", href: "#videos" },

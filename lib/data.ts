@@ -78,7 +78,7 @@ export const socials: Social[] = [
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/mehul-arora-32674b238/",
+    url: "https://www.linkedin.com/in/mehul-arora-32674b238",
     icon: "linkedin",
   },
   {
@@ -87,8 +87,23 @@ export const socials: Social[] = [
     icon: "twitter",
   },
   {
+    name: "Instagram",
+    url: "https://www.instagram.com/mehularora505/",
+    icon: "instagram",
+  },
+  {
+    name: "YouTube",
+    url: "https://www.youtube.com/@Mehul_Arora",
+    icon: "youtube",
+  },
+  {
+    name: "Discord",
+    url: "https://discord.com/users/mehularora0243",
+    icon: "discord",
+  },
+  {
     name: "Email",
-    url: "mailto:mehularora506@gmail.com",
+    url: "mailto:mehularora505@gmail.com",
     icon: "mail",
   },
 ];
