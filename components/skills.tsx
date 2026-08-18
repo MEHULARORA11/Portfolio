@@ -71,8 +71,33 @@ export function Skills() {
         </FadeIn>
       </div>
 
-      <FadeIn delay={200} className="w-full flex justify-center mt-12 md:mt-20">
+      {/* --- DESKTOP VIEW: Solar System --- */}
+      <FadeIn delay={200} className="w-full hidden md:flex justify-center mt-12 md:mt-20">
         <SolarSystem orbits={CUSTOM_ORBITS} />
+      </FadeIn>
+
+      {/* --- MOBILE VIEW: Clean Minimalist Grid --- */}
+      <FadeIn delay={200} className="md:hidden mt-8 w-full flex flex-col gap-6">
+        {CUSTOM_ORBITS.map((orbit) => (
+          <div key={orbit.id} className="flex flex-col items-center gap-4">
+            <h3 className="text-xs font-bold tracking-widest uppercase text-muted-foreground">
+              {orbit.name}
+            </h3>
+            <div className="flex flex-wrap justify-center gap-3">
+              {orbit.items.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full border border-border/40 bg-card/50 backdrop-blur-sm shadow-sm"
+                >
+                  <span style={{ color: item.color }}>{item.svg}</span>
+                  <span className="text-sm font-semibold text-foreground">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </FadeIn>
     </section>
   );

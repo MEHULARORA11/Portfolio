@@ -169,54 +169,27 @@ export default function SocialFlipButton({
     }, []);
 
     return (
-        <div className={cn("flex items-center justify-center gap-4 p-4", className)}>
-            <div
-                className="group relative flex items-center justify-center gap-2 rounded-2xl glass-border bg-white p-4 shadow-sm dark:bg-black"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => {
-                    setIsHovered(false);
-                    setTooltipIndex(null);
-                }}
-            >
-                {/* Border Lines Container - Clipped */}
-                <div className="absolute -inset-[1px] overflow-hidden rounded-2xl pointer-events-none">
-                    {/* Animated Top Border Line */}
-                    <motion.div
-                        className="absolute top-0 left-0 h-[1px] w-full bg-gradient-to-r from-transparent via-black/50 to-transparent dark:via-white/50"
-                        animate={{ x: ["-100%", "100%"] }}
-                        transition={{
-                            duration: 2.5,
-                            repeat: Infinity,
-                            ease: "linear",
-                        }}
-                    />
-
-                    {/* Animated Bottom Border Line */}
-                    <motion.div
-                        className="absolute bottom-0 left-0 h-[1px] w-full bg-gradient-to-r from-transparent via-black/50 to-transparent dark:via-white/50"
-                        animate={{ x: ["100%", "-100%"] }}
-                        transition={{
-                            duration: 2.5,
-                            repeat: Infinity,
-                            ease: "linear",
-                        }}
-                    />
-                </div>
-
-                {items.map((item, index) => (
-                    <SocialFlipNode
-                        key={index}
-                        item={item}
-                        index={index}
-                        isHovered={isHovered}
-                        setTooltipIndex={setTooltipIndex}
-                        tooltipIndex={tooltipIndex}
-                        itemClassName={itemClassName}
-                        frontClassName={frontClassName}
-                        backClassName={backClassName}
-                    />
-                ))}
-            </div>
+        <div 
+            className={cn("flex flex-wrap items-center justify-start gap-2 sm:gap-4", className)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => {
+                setIsHovered(false);
+                setTooltipIndex(null);
+            }}
+        >
+            {items.map((item, index) => (
+                <SocialFlipNode
+                    key={index}
+                    item={item}
+                    index={index}
+                    isHovered={isHovered}
+                    setTooltipIndex={setTooltipIndex}
+                    tooltipIndex={tooltipIndex}
+                    itemClassName={itemClassName}
+                    frontClassName={frontClassName}
+                    backClassName={backClassName}
+                />
+            ))}
         </div>
     );
 }
