@@ -38,14 +38,14 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-4 max-w-3xl"
           >
-            <div className="h-[120px] md:h-[150px] lg:h-[180px] flex flex-col justify-end md:justify-start">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[1.1]">
+            <div className="min-h-[120px] md:min-h-[140px] flex flex-col justify-end md:justify-start">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.2]">
                 <FlipText key={headlineIndex} className="text-foreground">
                   {headlines[headlineIndex]}
                 </FlipText>
               </h1>
             </div>
-            <p className="text-lg md:text-xl text-muted-foreground font-medium mt-6">
+            <p className="text-lg md:text-xl text-muted-foreground font-medium mt-2">
               Hi, I'm <span className="text-foreground">Mehul Arora</span>. I build production-grade web applications, highly concurrent systems, and AI-driven agents.
             </p>
           </motion.div>
