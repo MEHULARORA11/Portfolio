@@ -1,12 +1,27 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight, FileText } from "lucide-react";
 import { ViewCounter } from "@/components/view-counter";
 import { Socials } from "@/components/socials";
+import { FlipText } from "@/components/ui/flip-text";
 
 export function Hero() {
+  const headlines = [
+    "Building scalable systems & agents.",
+    "Architecting full-stack solutions.",
+    "Crafting intelligent AI agents."
+  ];
+  const [headlineIndex, setHeadlineIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeadlineIndex((prev) => (prev + 1) % headlines.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section id="hero" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
       {/* Background Glow */}
@@ -23,11 +38,13 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-4 max-w-3xl"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[1.1]">
-              Building scalable
-              <br className="hidden md:block" />
-              <span className="text-muted-foreground"> systems & agents.</span>
-            </h1>
+            <div className="h-[120px] md:h-[150px] lg:h-[180px] flex flex-col justify-end md:justify-start">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-foreground leading-[1.1]">
+                <FlipText key={headlineIndex} className="text-foreground">
+                  {headlines[headlineIndex]}
+                </FlipText>
+              </h1>
+            </div>
             <p className="text-lg md:text-xl text-muted-foreground font-medium mt-6">
               Hi, I'm <span className="text-foreground">Mehul Arora</span>. I build production-grade web applications, highly concurrent systems, and AI-driven agents.
             </p>

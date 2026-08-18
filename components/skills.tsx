@@ -1,12 +1,63 @@
 "use client";
 
 import { FadeIn } from "@/components/ui/fade-in";
-import { skillCategories } from "@/lib/data";
+import { SolarSystem } from "@/components/ui/solar-system";
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTailwindcss, 
+  SiTypescript, 
+  SiNodedotjs, 
+  SiExpress, 
+  SiPostgresql, 
+  SiRedis, 
+  SiDocker, 
+  SiVercel 
+} from "react-icons/si";
+import { Bot } from "lucide-react";
+
+const CUSTOM_ORBITS = [
+  {
+    id: "inner",
+    name: "Frontend",
+    radiusClass: "var(--radius-inner)",
+    radiusPx: 175,
+    speed: 20,
+    items: [
+      { id: "react", label: "React", color: "#61DAFB", svg: <SiReact className="w-5 h-5" /> },
+      { id: "nextjs", label: "Next.js", color: "#ffffff", svg: <SiNextdotjs className="w-5 h-5" /> },
+      { id: "tailwind", label: "Tailwind CSS", color: "#06B6D4", svg: <SiTailwindcss className="w-5 h-5" /> },
+      { id: "typescript", label: "TypeScript", color: "#3178C6", svg: <SiTypescript className="w-5 h-5" /> },
+    ],
+  },
+  {
+    id: "mid",
+    name: "Backend & DB",
+    radiusClass: "var(--radius-mid)",
+    radiusPx: 285,
+    speed: 32,
+    items: [
+      { id: "nodejs", label: "Node.js", color: "#339933", svg: <SiNodedotjs className="w-5 h-5" /> },
+      { id: "express", label: "Express", color: "#ffffff", svg: <SiExpress className="w-5 h-5" /> },
+      { id: "postgresql", label: "PostgreSQL", color: "#4169E1", svg: <SiPostgresql className="w-5 h-5" /> },
+      { id: "redis", label: "Redis", color: "#DC382D", svg: <SiRedis className="w-5 h-5" /> },
+    ],
+  },
+  {
+    id: "outer",
+    name: "AI & Tools",
+    radiusClass: "var(--radius-outer)",
+    radiusPx: 395,
+    speed: 48,
+    items: [
+      { id: "openai", label: "OpenAI SDK", color: "#412991", svg: <Bot className="w-5 h-5" /> },
+      { id: "docker", label: "Docker", color: "#2496ED", svg: <SiDocker className="w-5 h-5" /> },
+      { id: "vercel", label: "Vercel", color: "#ffffff", svg: <SiVercel className="w-5 h-5" /> },
+    ],
+  },
+];
 
 export function Skills() {
-  // Flatten all skills for a fluid, organic cloud look
-  const allSkills = Array.from(new Set(skillCategories.flatMap((cat) => cat.skills)));
-
   return (
     <section id="skills" className="pt-24 pb-12 border-t border-border/15">
       <div className="flex flex-col items-center text-center gap-6 mb-16">
@@ -20,15 +71,9 @@ export function Skills() {
         </FadeIn>
       </div>
 
-      <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-3 md:gap-4">
-        {allSkills.map((skill, idx) => (
-          <FadeIn key={skill} delay={idx * 40}>
-            <div className="px-5 py-3 md:px-6 md:py-4 rounded-full border border-border/60 bg-background/50 hover:bg-muted/80 backdrop-blur-sm text-foreground md:text-lg font-medium tracking-tight transition-all duration-300 hover:scale-105 hover:border-foreground/30 shadow-sm">
-              {skill}
-            </div>
-          </FadeIn>
-        ))}
-      </div>
+      <FadeIn delay={200} className="w-full flex justify-center mt-12 md:mt-20">
+        <SolarSystem orbits={CUSTOM_ORBITS} />
+      </FadeIn>
     </section>
   );
 }

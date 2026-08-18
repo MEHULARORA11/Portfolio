@@ -5,6 +5,7 @@ import { Send, ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { useMutation } from "@tanstack/react-query";
 import { MUTATION_KEYS } from "@/lib/query-keys";
+import SocialFlipButton from "@/components/ui/social-flip-button";
 
 export function Contact() {
   const [name, setName] = useState("");
@@ -65,6 +66,10 @@ export function Contact() {
             <span className="text-sm font-semibold tracking-widest uppercase text-foreground">
               Currently accepting new projects
             </span>
+          </div>
+
+          <div className="mt-8">
+            <SocialFlipButton />
           </div>
         </FadeIn>
 
