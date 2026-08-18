@@ -1,12 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Manrope, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/features/providers/theme-provider";
 import { QueryProvider } from "@/features/providers/query-provider";
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("h-full antialiased", inter.variable, geistMono.variable)}
+      className={cn("h-full antialiased", manrope.variable, geistMono.variable)}
     >
       <body
         className="min-h-full flex flex-col bg-background text-foreground"

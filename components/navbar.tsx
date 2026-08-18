@@ -106,17 +106,6 @@ export function Navbar() {
           </Link>
 
           <div className="flex items-center gap-3">
-            {mounted && (
-              <button
-                type="button"
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border/50 bg-background/50 text-muted-foreground transition-all duration-200 hover:text-foreground hover:bg-muted active:scale-95 backdrop-blur-sm"
-              >
-                {resolvedTheme === "dark" ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
-              </button>
-            )}
-            
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -154,6 +143,28 @@ export function Navbar() {
                   {link.label}
                 </a>
               ))}
+              
+              <div className="h-px w-full bg-border/50 my-2" />
+              
+              {mounted && (
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors duration-200 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground"
+                >
+                  {resolvedTheme === "dark" ? (
+                    <>
+                      <Sun size={16} strokeWidth={2} />
+                      <span>Switch to Light Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <Moon size={16} strokeWidth={2} />
+                      <span>Switch to Dark Mode</span>
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </motion.div>
         )}
