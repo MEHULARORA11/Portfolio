@@ -247,17 +247,19 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
         <style dangerouslySetInnerHTML={{ __html: `
           /* CUSTOMIZE ORBIT DIAMETER SIZES HERE */
           :root {
-            --radius-inner: 175px;
-            --radius-mid: 285px;
-            --radius-outer: 395px;
+            --radius-inner: 180px;
+            --radius-mid: 280px;
+            --radius-outer: 380px;
+            --radius-outermost: 480px;
           }
 
           /* Tablet Responsive Adjustments */
-          @media (max-width: 768px) {
+          @media (max-width: 1024px) {
             :root {
-              --radius-inner: 100px;
-              --radius-mid: 165px;
-              --radius-outer: 230px;
+              --radius-inner: 140px;
+              --radius-mid: 220px;
+              --radius-outer: 300px;
+              --radius-outermost: 380px;
             }
           }
 
@@ -267,6 +269,7 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
               --radius-inner: 70px;
               --radius-mid: 115px;
               --radius-outer: 160px;
+              --radius-outermost: 205px;
             }
           }
 
@@ -424,7 +427,7 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
             Loops through custom rings configuration to build the structure.
             ======================================================================
           */}
-          {orbits.map((orbit) => {
+          {orbits.map((orbit, orbitIdx) => {
             return (
               <React.Fragment key={orbit.id}>
                 {/* Visual Dashed Ring Line representing this orbit level */}
@@ -441,7 +444,9 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
                 {/* Orbit Items / Planet Cards */}
                 {orbit.items.map((item, idx, arr) => {
                   // Distribute nodes evenly along the orbit circumference
-                  const delayValue = -(orbit.speed / arr.length) * idx;
+                  // Add a phase shift per ring so they don't line up at 0deg
+                  const ringPhaseShift = orbitIdx * (orbit.speed * 0.2); 
+                  const delayValue = -(orbit.speed / arr.length) * idx - ringPhaseShift;
                   const durationValue = orbit.speed / speedMultiplier;
                   const isHovered = hoveredId === item.id;
 
