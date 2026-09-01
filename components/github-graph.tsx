@@ -159,7 +159,7 @@ export function GitHubGraph() {
   }
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-4 pt-24 md:pt-40">
       <FadeIn>
         <div className="flex flex-col items-center text-center gap-2 mb-12">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">

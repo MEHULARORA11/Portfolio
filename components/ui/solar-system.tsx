@@ -232,7 +232,7 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
       <div
         ref={ref}
         className={cn(
-          "relative flex items-center justify-center w-full max-w-[1200px] h-[320px] md:h-[750px] perspective-[1200px] select-none overflow-visible",
+          "relative flex items-center justify-center w-full max-w-[960px] h-[360px] md:h-[880px] select-none overflow-visible",
           className
         )}
         {...props}
@@ -245,26 +245,16 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
           ======================================================================
         */}
         <style dangerouslySetInnerHTML={{ __html: `
-          /* CUSTOMIZE ORBIT DIAMETER SIZES HERE */
+          /* FLAT orbital system — no 3D tilt, items never hide behind each other */
           :root {
-            --radius-inner: 200px;
-            --radius-mid: 320px;
-            --radius-outer: 440px;
-            --radius-outermost: 560px;
-          }
-
-          /* Tablet Responsive Adjustments */
-          @media (max-width: 1024px) {
-            :root {
-              --radius-inner: 140px;
-              --radius-mid: 220px;
-              --radius-outer: 300px;
-              --radius-outermost: 380px;
-            }
+            --radius-inner: 120px;
+            --radius-mid: 210px;
+            --radius-outer: 300px;
+            --radius-outermost: 390px;
           }
 
           /* Mobile Responsive Adjustments */
-          @media (max-width: 480px) {
+          @media (max-width: 768px) {
             :root {
               --radius-inner: 70px;
               --radius-mid: 115px;
@@ -273,23 +263,23 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
             }
           }
 
-          /* Orbit revolutions */
+          /* Flat orbit revolutions — no 3D transform, purely 2D */
           @keyframes custom-orbitMove {
             0% {
-              transform: translate(-50%, -50%) rotateZ(0deg) translateX(var(--orbit-radius));
+              transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius));
             }
             100% {
-              transform: translate(-50%, -50%) rotateZ(-360deg) translateX(var(--orbit-radius));
+              transform: translate(-50%, -50%) rotate(-360deg) translateX(var(--orbit-radius));
             }
           }
 
-          /* Billboard counter-rotation (cancels the 50deg X-tilt and 10deg Y-tilt) */
+          /* Counter-rotate labels so they always face up (since the container has no tilt, this is a simple Z counter-rotation) */
           @keyframes custom-billboardCancel {
             0% {
-              transform: translate(-50%, -50%) rotateZ(0deg) rotateY(10deg) rotateX(-50deg);
+              transform: translate(-50%, -50%) rotate(0deg);
             }
             100% {
-              transform: translate(-50%, -50%) rotateZ(360deg) rotateY(10deg) rotateX(-50deg);
+              transform: translate(-50%, -50%) rotate(360deg);
             }
           }
 
@@ -299,14 +289,14 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
             100% { transform: scale(1.1); opacity: 1; }
           }
 
-          /* Sun ring accessory speeds */
+          /* Sun ring spin */
           @keyframes custom-spin-clockwise {
-            0% { transform: rotateX(50deg) rotateY(-10deg) rotateZ(0deg); }
-            100% { transform: rotateX(50deg) rotateY(-10deg) rotateZ(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
           }
           @keyframes custom-spin-counter {
-            0% { transform: rotateX(50deg) rotateY(-10deg) rotateZ(0deg); }
-            100% { transform: rotateX(50deg) rotateY(-10deg) rotateZ(-360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
           }
 
           .animate-custom-orbit {
@@ -334,48 +324,40 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
             top: 50%;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 0.45rem 0.95rem;
-            background: rgba(10, 10, 12, 0.65);
+            gap: 6px;
+            padding: 0.35rem 0.8rem;
+            background: rgba(10, 10, 12, 0.75);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 100px;
             font-weight: 600;
+            font-size: 11px;
             color: #ffffff;
             white-space: nowrap;
             user-select: none;
             cursor: pointer;
             pointer-events: auto;
-            /* Transition scale independently to prevent transform overriding conflicts */
-            transition: border-color 0.3s, color 0.3s, background 0.3s, box-shadow 0.3s, scale 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s, scale 0.3s;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
           }
         `}} />
 
-        {/* Tiltable Orbit Container (handles 3D tilt coordinates) */}
+        {/* Flat orbit container — no 3D tilt */}
         <div 
-          className="absolute w-[360px] h-[360px] md:w-[1200px] md:h-[1200px] flex items-center justify-center"
-          style={{
-            transform: "rotateX(50deg) rotateY(-10deg)",
-            transformStyle: "preserve-3d",
-          }}
+          className="absolute w-[360px] h-[360px] md:w-[900px] md:h-[900px] flex items-center justify-center"
+          style={{ transformStyle: "preserve-3d" }}
         >
           {/* 
             ======================================================================
             CENTRAL SUN CORE ENGINE
-            Customized via "centerLogo" prop. Defaults to lucide Orbit icon.
             ======================================================================
           */}
           <div 
-            className="absolute w-[100px] h-[100px] md:w-[130px] md:h-[130px] flex items-center justify-center z-20 pointer-events-none"
-            style={{
-              transform: "rotateY(10deg) rotateX(-50deg)",
-              transformStyle: "preserve-3d",
-            }}
+            className="absolute w-[80px] h-[80px] md:w-[100px] md:h-[100px] flex items-center justify-center z-20 pointer-events-none"
           >
             {/* Glowing aura */}
-            <div className="absolute w-[90px] h-[90px] md:w-[120px] md:h-[120px] rounded-full filter blur-md animate-custom-sun-pulse z-10 bg-teal-500/20" />
+            <div className="absolute w-[80px] h-[80px] md:w-[100px] md:h-[100px] rounded-full filter blur-md animate-custom-sun-pulse z-10 bg-teal-500/20" />
             
             {/* Sun Core Logo Render */}
             {centerLogo ? (
@@ -463,7 +445,6 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
                         ["--orbit-play-state" as any]: isPaused ? "paused" : "running",
                         ["--hover-color" as any]: item.color,
                         zIndex: isHovered ? 30 : 10,
-                        transformStyle: "preserve-3d", // Crucial: preserves 3D context so children can billboard cancel correctly
                       }}
                     >
                       {/* Laser beam connecting sun center with planet (activates on hover) */}
