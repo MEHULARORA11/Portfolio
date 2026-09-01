@@ -219,20 +219,20 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
 
     // Cosmic dust particle animations coordinates
     const dustItems = [
-      { delay: "-4s", radius: "165px", color: "#00f5d4" },
-      { delay: "-11s", radius: "260px", color: "#a855f7" },
-      { delay: "-19s", radius: "340px", color: "#3b82f6" },
-      { delay: "-28s", radius: "395px", color: "#00f5d4" },
-      { delay: "-7s", radius: "200px", color: "#ec4899" },
-      { delay: "-15s", radius: "365px", color: "#eab308" },
-      { delay: "-23s", radius: "430px", color: "#a855f7" },
+      { delay: "-4s", radius: "185px", color: "#00f5d4" },
+      { delay: "-11s", radius: "300px", color: "#a855f7" },
+      { delay: "-19s", radius: "400px", color: "#3b82f6" },
+      { delay: "-28s", radius: "510px", color: "#00f5d4" },
+      { delay: "-7s", radius: "240px", color: "#ec4899" },
+      { delay: "-15s", radius: "430px", color: "#eab308" },
+      { delay: "-23s", radius: "530px", color: "#a855f7" },
     ];
 
     return (
       <div
         ref={ref}
         className={cn(
-          "relative flex items-center justify-center w-full max-w-[940px] h-[320px] md:h-[550px] perspective-[1200px] select-none overflow-visible",
+          "relative flex items-center justify-center w-full max-w-[1200px] h-[320px] md:h-[750px] perspective-[1200px] select-none overflow-visible",
           className
         )}
         {...props}
@@ -247,10 +247,10 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
         <style dangerouslySetInnerHTML={{ __html: `
           /* CUSTOMIZE ORBIT DIAMETER SIZES HERE */
           :root {
-            --radius-inner: 180px;
-            --radius-mid: 280px;
-            --radius-outer: 380px;
-            --radius-outermost: 480px;
+            --radius-inner: 200px;
+            --radius-mid: 320px;
+            --radius-outer: 440px;
+            --radius-outermost: 560px;
           }
 
           /* Tablet Responsive Adjustments */
@@ -283,13 +283,13 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
             }
           }
 
-          /* Billboard counter-rotation (cancels the 65deg X-tilt and 10deg Y-tilt) */
+          /* Billboard counter-rotation (cancels the 50deg X-tilt and 10deg Y-tilt) */
           @keyframes custom-billboardCancel {
             0% {
-              transform: translate(-50%, -50%) rotateZ(0deg) rotateY(10deg) rotateX(-65deg);
+              transform: translate(-50%, -50%) rotateZ(0deg) rotateY(10deg) rotateX(-50deg);
             }
             100% {
-              transform: translate(-50%, -50%) rotateZ(360deg) rotateY(10deg) rotateX(-65deg);
+              transform: translate(-50%, -50%) rotateZ(360deg) rotateY(10deg) rotateX(-50deg);
             }
           }
 
@@ -301,12 +301,12 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
 
           /* Sun ring accessory speeds */
           @keyframes custom-spin-clockwise {
-            0% { transform: rotateX(65deg) rotateY(-10deg) rotateZ(0deg); }
-            100% { transform: rotateX(65deg) rotateY(-10deg) rotateZ(360deg); }
+            0% { transform: rotateX(50deg) rotateY(-10deg) rotateZ(0deg); }
+            100% { transform: rotateX(50deg) rotateY(-10deg) rotateZ(360deg); }
           }
           @keyframes custom-spin-counter {
-            0% { transform: rotateX(65deg) rotateY(-10deg) rotateZ(0deg); }
-            100% { transform: rotateX(65deg) rotateY(-10deg) rotateZ(-360deg); }
+            0% { transform: rotateX(50deg) rotateY(-10deg) rotateZ(0deg); }
+            100% { transform: rotateX(50deg) rotateY(-10deg) rotateZ(-360deg); }
           }
 
           .animate-custom-orbit {
@@ -355,9 +355,9 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
 
         {/* Tiltable Orbit Container (handles 3D tilt coordinates) */}
         <div 
-          className="absolute w-[360px] h-[360px] md:w-[940px] md:h-[940px] flex items-center justify-center"
+          className="absolute w-[360px] h-[360px] md:w-[1200px] md:h-[1200px] flex items-center justify-center"
           style={{
-            transform: "rotateX(65deg) rotateY(-10deg)",
+            transform: "rotateX(50deg) rotateY(-10deg)",
             transformStyle: "preserve-3d",
           }}
         >
@@ -370,7 +370,7 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
           <div 
             className="absolute w-[100px] h-[100px] md:w-[130px] md:h-[130px] flex items-center justify-center z-20 pointer-events-none"
             style={{
-              transform: "rotateY(10deg) rotateX(-65deg)",
+              transform: "rotateY(10deg) rotateX(-50deg)",
               transformStyle: "preserve-3d",
             }}
           >

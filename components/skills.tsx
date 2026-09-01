@@ -29,7 +29,7 @@ const CUSTOM_ORBITS = [
     id: "inner",
     name: "Frontend Core",
     radiusClass: "var(--radius-inner)",
-    radiusPx: 180,
+    radiusPx: 200,
     speed: 30,
     items: [
       { id: "react", label: "React", color: "#61DAFB", svg: <SiReact className="w-5 h-5" /> },
@@ -43,7 +43,7 @@ const CUSTOM_ORBITS = [
     id: "mid1",
     name: "State & Fullstack",
     radiusClass: "var(--radius-mid)",
-    radiusPx: 280,
+    radiusPx: 320,
     speed: 40,
     items: [
       { id: "zustand", label: "Zustand", color: "#8b5cf6", svg: <Zap className="w-5 h-5" /> },
@@ -58,7 +58,7 @@ const CUSTOM_ORBITS = [
     id: "mid2",
     name: "Databases",
     radiusClass: "var(--radius-outer)",
-    radiusPx: 380,
+    radiusPx: 440,
     speed: 50,
     items: [
       { id: "postgresql", label: "PostgreSQL", color: "#4169E1", svg: <SiPostgresql className="w-5 h-5" /> },
@@ -73,7 +73,7 @@ const CUSTOM_ORBITS = [
     id: "outer",
     name: "AI & Infrastructure",
     radiusClass: "var(--radius-outermost)",
-    radiusPx: 480,
+    radiusPx: 560,
     speed: 60,
     items: [
       { id: "openai", label: "OpenAI SDK", color: "#412991", svg: <Bot className="w-5 h-5" /> },
@@ -104,7 +104,7 @@ export function Skills() {
       </div>
 
       {/* --- DESKTOP VIEW: Solar System --- */}
-      <FadeIn delay={200} className="w-full hidden md:flex justify-center mt-12 md:mt-20 md:mb-32">
+      <FadeIn delay={200} className="w-full hidden md:flex justify-center mt-12 md:mt-20 md:mb-48">
         <SolarSystem orbits={CUSTOM_ORBITS} />
       </FadeIn>
 
