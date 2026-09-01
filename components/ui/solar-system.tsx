@@ -232,7 +232,7 @@ export const SolarSystem = React.forwardRef<HTMLDivElement, SolarSystemProps>(
       <div
         ref={ref}
         className={cn(
-          "relative flex items-center justify-center w-full max-w-[940px] h-[320px] md:h-[450px] perspective-[1200px] select-none overflow-visible",
+          "relative flex items-center justify-center w-full max-w-[940px] h-[320px] md:h-[550px] perspective-[1200px] select-none overflow-visible",
           className
         )}
         {...props}

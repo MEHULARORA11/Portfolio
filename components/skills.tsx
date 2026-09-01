@@ -104,7 +104,7 @@ export function Skills() {
       </div>
 
       {/* --- DESKTOP VIEW: Solar System --- */}
-      <FadeIn delay={200} className="w-full hidden md:flex justify-center mt-12 md:mt-20">
+      <FadeIn delay={200} className="w-full hidden md:flex justify-center mt-12 md:mt-20 md:mb-32">
         <SolarSystem orbits={CUSTOM_ORBITS} />
       </FadeIn>
 
