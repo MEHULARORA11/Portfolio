@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
+import posthog from "posthog-js";
 import { cn } from "@/lib/utils";
 import {
     FaGithub,
@@ -17,6 +18,7 @@ export interface SocialItem {
     letter: string;
     icon: React.ReactNode;
     label: string;
+    platform: string;
     href?: string;
     onClick?: () => void;
 }
@@ -30,13 +32,13 @@ interface SocialFlipButtonProps {
 }
 
 const defaultItems: SocialItem[] = [
-    { letter: "C", icon: <FaGithub />, label: "Github", href: "https://github.com/MEHULARORA11" },
-    { letter: "O", icon: <FaLinkedin />, label: "LinkedIn", href: "https://www.linkedin.com/in/mehul-arora-32674b238" },
-    { letter: "N", icon: <FaTwitter />, label: "Twitter", href: "https://x.com/MehulArora121" },
-    { letter: "N", icon: <FaInstagram />, label: "Instagram", href: "https://www.instagram.com/mehularora505/" },
-    { letter: "E", icon: <FaYoutube />, label: "YouTube", href: "https://www.youtube.com/@Mehul_Arora" },
-    { letter: "C", icon: <FaDiscord />, label: "Discord", href: "https://discord.com/users/mehularora0243" },
-    { letter: "T", icon: <FaEnvelope />, label: "Email", href: "mailto:mehularora505@gmail.com" },
+    { letter: "C", icon: <FaGithub />, label: "Github", platform: "github", href: "https://github.com/MEHULARORA11" },
+    { letter: "O", icon: <FaLinkedin />, label: "LinkedIn", platform: "linkedin", href: "https://www.linkedin.com/in/mehul-arora-32674b238" },
+    { letter: "N", icon: <FaTwitter />, label: "Twitter", platform: "twitter", href: "https://x.com/MehulArora121" },
+    { letter: "N", icon: <FaInstagram />, label: "Instagram", platform: "instagram", href: "https://www.instagram.com/mehularora505/" },
+    { letter: "E", icon: <FaYoutube />, label: "YouTube", platform: "youtube", href: "https://www.youtube.com/@Mehul_Arora" },
+    { letter: "C", icon: <FaDiscord />, label: "Discord", platform: "discord", href: "https://discord.com/users/mehularora0243" },
+    { letter: "T", icon: <FaEnvelope />, label: "Email", platform: "mail", href: "mailto:mehularora505@gmail.com" },
 ];
 
 const SocialFlipNode = ({
@@ -60,7 +62,12 @@ const SocialFlipNode = ({
 }) => {
     const Wrapper = item.href ? "a" : "div";
     const wrapperProps = item.href
-        ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
+        ? {
+            href: item.href,
+            target: "_blank",
+            rel: "noopener noreferrer",
+            onClick: () => posthog.capture("social_link_clicked", { platform: item.platform }),
+        }
         : { onClick: item.onClick };
 
     return (

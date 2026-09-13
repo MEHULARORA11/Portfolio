@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { projects } from "@/lib/data";
+import posthog from "posthog-js";
 
 function GitHubIcon({ size = 16 }: { size?: number }) {
   return (
@@ -85,6 +86,7 @@ export function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => posthog.capture("project_live_link_clicked", { project_title: project.title })}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:opacity-70 transition-opacity"
                     >
                       Visit Live <ArrowUpRight className="w-4 h-4" />
@@ -95,6 +97,7 @@ export function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => posthog.capture("project_source_link_clicked", { project_title: project.title })}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors"
                     >
                       Source Code <GitHubIcon size={16} />

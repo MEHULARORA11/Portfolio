@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { certificates } from "@/lib/data";
+import posthog from "posthog-js";
 
 export function Certificates() {
   return (
@@ -58,6 +59,7 @@ export function Certificates() {
                       href={cert.credentialLink}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => posthog.capture("certificate_credential_opened", { certificate_id: cert.id })}
                       className="shrink-0 p-2 rounded-full bg-muted/50 text-muted-foreground hover:bg-foreground hover:text-background transition-all duration-300"
                       aria-label="View Credential"
                     >

@@ -6,6 +6,7 @@ import { FadeIn } from "@/components/ui/fade-in";
 import { useMutation } from "@tanstack/react-query";
 import { MUTATION_KEYS } from "@/lib/query-keys";
 import SocialFlipButton from "@/components/ui/social-flip-button";
+import posthog from "posthog-js";
 
 export function Contact() {
   const [name, setName] = useState("");
@@ -24,6 +25,7 @@ export function Contact() {
       return res.json();
     },
     onSuccess: () => {
+      posthog.capture("contact_form_submitted");
       setName("");
       setEmail("");
       setMessage("");

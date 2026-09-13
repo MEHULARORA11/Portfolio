@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Play } from "lucide-react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { youtubeVideos } from "@/lib/data";
+import posthog from "posthog-js";
 
 export function Videos() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
@@ -25,7 +26,13 @@ export function Videos() {
       <div className="flex flex-wrap justify-center gap-8">
         {youtubeVideos.map((video, idx) => (
           <FadeIn key={video.id} delay={idx * 100} className="w-full md:w-[calc(50%-1rem)] max-w-xl">
-            <div className="group cursor-pointer space-y-4" onClick={() => setActiveVideo(video.videoUrl)}>
+            <div
+              className="group cursor-pointer space-y-4"
+              onClick={() => {
+                posthog.capture("video_opened", { video_id: video.id });
+                setActiveVideo(video.videoUrl);
+              }}
+            >
               {/* Thumbnail Container */}
               <div className="relative aspect-[5/4] rounded-2xl overflow-hidden bg-muted border border-border shadow-sm">
                 <Image

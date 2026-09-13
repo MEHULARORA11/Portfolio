@@ -7,6 +7,7 @@ import { ArrowUpRight, FileText } from "lucide-react";
 import { ViewCounter } from "@/components/view-counter";
 import SocialFlipButton from "@/components/ui/social-flip-button";
 import { FlipText } from "@/components/ui/flip-text";
+import posthog from "posthog-js";
 
 export function Hero() {
   const headlines = [
@@ -68,6 +69,7 @@ export function Hero() {
               href="/Mehul_Arora_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => posthog.capture("resume_opened", { source: "hero" })}
               className="group flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card/50 hover:bg-muted text-foreground font-semibold hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-sm"
             >
               Resume
