@@ -21,7 +21,7 @@ export const projects: Project[] = [
     description: "A Self-Consistency Agent that cross-validates AI responses for higher accuracy.",
     longDescription:
       "Arbiter is a self-consistency agent that queries multiple AI models (OpenAI, Claude, Gemini) in parallel and uses a voting mechanism to surface the most accurate response.\n\nBuilt with Next.js on the frontend and Node.js on the backend, it uses PostgreSQL via Prisma for persistence and supports streaming responses for a real-time feel.\n\nThe core idea: rather than trusting a single model, Arbiter runs the same query across multiple models and reconciles the outputs — reducing hallucinations and increasing confidence.",
-    thumbnail: "/projects/arbiter.png",
+    thumbnail: "/projects/arbiter-updated.png",
     githubUrl: "https://github.com/MEHULARORA11/Arbiter",
     liveUrl: "https://arbiter.mehularora.dev/",
     techStack: ["Next.js", "Node.js", "PostgreSQL", "OpenAI", "TypeScript"],
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     description: "An AI agent that talks exactly like Hitesh Sir and Piyush Sir.",
     longDescription:
       "Personic is a fine-tuned AI agent trained on transcripts, interviews, and YouTube content from two of India's most popular programming educators — Hitesh Choudhary and Piyush Garg.\n\nIt mimics their exact communication style, vocabulary, and teaching approach. Powered by the OpenAI SDK with a custom system prompt engineering pipeline.\n\nA fun experiment in persona-engineering and LLM customization.",
-    thumbnail: "/projects/personic.png",
+    thumbnail: "/projects/personic-updated.png",
     githubUrl: "https://github.com/MEHULARORA11/PersonicAi",
     liveUrl: "https://personic.mehularora.dev/",
     techStack: ["OpenAI SDK", "Node.js", "JavaScript"],
@@ -43,21 +43,21 @@ export const projects: Project[] = [
     description: "A custom CSS utility framework inspired by Tailwind CSS, with some fun classes.",
     longDescription:
       "TalwinderCSS is a lightweight custom CSS utility framework built from scratch. Inspired by the architecture of Tailwind CSS but with opinionated additions — including fun utility classes that Tailwind doesn't ship.\n\nIt's a pure HTML, CSS, and JavaScript project designed to demonstrate how utility-first frameworks work under the hood.\n\nA great tool for learning — and a fun way to build personal projects without reaching for a 3MB dependency.",
-    thumbnail: "/projects/talwinder.png",
+    thumbnail: "/projects/talwindercss.png",
     githubUrl: "https://github.com/MEHULARORA11/TalwinderCSS",
     liveUrl: "https://talwinder.mehularora.dev/",
     techStack: ["HTML", "CSS", "JavaScript"],
     status: "live",
   },
   {
-    title: "1 Million Checkboxes",
-    description: "A full-stack app scaled smoothly to 1 Million real-time synced checkboxes.",
+    title: "QuarkAI",
+    description: "A streaming AI chat app with persistent conversations and per-thread model overrides.",
     longDescription:
-      "Inspired by the viral \"One Million Checkboxes\" concept, this is a production-grade implementation built to actually handle the load.\n\nThe backend uses Redis for in-memory state and WebSocket (via Socket.io) for real-time bidirectional sync. State is persisted to avoid loss on restart.\n\nThe frontend renders 1,000,000 checkboxes using virtualization — only the visible ones are in the DOM at any time. Clicking a checkbox updates it for every connected user in real time.",
-    thumbnail: "/projects/checkboxes.png",
-    githubUrl: "https://github.com/MEHULARORA11/1-Million-CheckBoxes",
-    liveUrl: "https://checkboxes.mehularora.dev/",
-    techStack: ["React", "Node.js", "Express", "Redis", "WebSocket"],
+      "QuarkAI is a ChatGPT-style interface built on Next.js 16 where every message is streamed token-by-token from an OpenAI model and persisted to Postgres as it arrives.\n\nIt features per-conversation model and system prompt overrides, authenticated by Clerk, with a robust conversation management system for organizing chats.\n\nThe architecture relies on the Vercel AI SDK for streaming responses, ensuring the assistant's reply renders as it's generated without waiting for the full completion.",
+    thumbnail: "/projects/quarkai.png",
+    githubUrl: "https://github.com/MEHULARORA11/QuarkAI.git",
+    liveUrl: "https://quarkai.mehularora.dev",
+    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "OpenAI"],
     status: "live",
   },
 ];
@@ -118,7 +118,7 @@ export interface SkillCategory {
 export const skillCategories: SkillCategory[] = [
   {
     label: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS"],
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS", "Zod"],
   },
   {
     label: "Backend",
@@ -126,11 +126,11 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     label: "Databases",
-    skills: ["PostgreSQL", "Redis", "Prisma", "Neon"],
+    skills: ["PostgreSQL", "Redis", "Prisma", "Neon", "Cloudflare R2"],
   },
   {
     label: "AI & Tools",
-    skills: ["OpenAI SDK", "Mistral AI", "Git", "Docker", "Vercel", "Render"],
+    skills: ["OpenAI SDK", "Mistral AI", "LangChain", "PostHog", "Git", "Docker", "Vercel", "Render"],
   },
 ];
 
@@ -174,15 +174,24 @@ export interface Certificate {
 export const certificates: Certificate[] = [
   {
     id: "cert-1",
-    title: "Zenith 5.0",
-    issuer: "unstop.com",
-    date: "May 2026",
-    tags: ["Zenith 5.0", "hackathon", "jcbust"],
-    thumbnail: "https://images.unsplash.com/photo-1782038793351-ee4fed3b14a4?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    credentialLink: "https://unstop.com/certificate-preview/0716ff08-88eb-4294-b510-6e150945774c?utm_campaign=site-emails&utm_medium=d2c-automated&utm_source=wow-look-at-your-certificate-zenith-50",
+    title: "GenAI Cohort 2026",
+    issuer: "chaicode.com",
+    date: "2026",
+    tags: ["GenAI", "chaicode" , "chai aur code" ,  "cohort", "2026"],
+    thumbnail: "https://images.unsplash.com/photo-1789646780994-86275bd84f1a?q=80&w=1120&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    credentialLink: "https://images.unsplash.com/photo-1789646780994-86275bd84f1a?q=80&w=1120&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: "cert-2",
+    title: "Codefusion Hackathon 2026",
+    issuer: "Codeverse",
+    date: "2026",
+    tags: ["hackathon", "codefusion", "2026"],
+    thumbnail: "https://images.unsplash.com/photo-1789647269607-33d45cd9a1ad?q=80&w=1124&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    credentialLink: "https://images.unsplash.com/photo-1789647269607-33d45cd9a1ad?q=80&w=1124&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: "cert-3",
     title: "Web Dev Cohort 2026",
     issuer: "chaicode.com",
     date: "May 2026",

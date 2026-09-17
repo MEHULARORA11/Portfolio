@@ -33,13 +33,13 @@ export function Projects() {
           <FadeIn key={project.title} delay={100} className="w-full md:w-[calc(50%-1.5rem)] max-w-xl group">
             <div className="flex flex-col h-full space-y-6">
               {/* Image Side */}
-              <div className="w-full relative aspect-[16/10] rounded-2xl overflow-hidden bg-muted/30 border border-border/40 shadow-sm">
+              <div className="w-full relative aspect-video rounded-2xl overflow-hidden bg-muted/30 border border-border/40 shadow-sm">
                 <Image
                   src={project.thumbnail}
                   alt={project.title}
                   fill
                   priority={idx === 0}
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

@@ -21,7 +21,11 @@ import {
   SiGithub,
   SiGit,
   SiSocketdotio,
-  SiQdrant
+  SiQdrant,
+  SiZod,
+  SiCloudflare,
+  SiLangchain,
+  SiPosthog
 } from "react-icons/si";
 import { Bot, Zap, Key, Brain, Wand2, Rocket, DatabaseZap, Activity, Pin } from "lucide-react";
 
@@ -38,6 +42,7 @@ const CUSTOM_ORBITS = [
       { id: "tailwind", label: "Tailwind CSS", color: "#06B6D4", svg: <SiTailwindcss className="w-4 h-4" /> },
       { id: "typescript", label: "TypeScript", color: "#3178C6", svg: <SiTypescript className="w-4 h-4" /> },
       { id: "tanstack", label: "TanStack Query", color: "#FF4154", svg: <SiReactquery className="w-4 h-4" /> },
+      { id: "zod", label: "Zod", color: "#3E67B1", svg: <SiZod className="w-4 h-4" /> },
     ],
   },
   {
@@ -53,6 +58,7 @@ const CUSTOM_ORBITS = [
       { id: "express", label: "Express", color: "#ffffff", svg: <SiExpress className="w-4 h-4" /> },
       { id: "better-auth", label: "Better-Auth", color: "#4F46E5", svg: <Key className="w-4 h-4" /> },
       { id: "vercel", label: "Vercel", color: "#ffffff", svg: <SiVercel className="w-4 h-4" /> },
+      { id: "posthog", label: "PostHog", color: "#F54E00", svg: <SiPosthog className="w-4 h-4" /> },
     ],
   },
   {
@@ -70,6 +76,7 @@ const CUSTOM_ORBITS = [
       { id: "mongoose", label: "Mongoose", color: "#880000", svg: <SiMongoose className="w-4 h-4" /> },
       { id: "qdrant", label: "Qdrant", color: "#DC143C", svg: <SiQdrant className="w-4 h-4" /> },
       { id: "pinecone", label: "Pinecone", color: "#00C4A0", svg: <Pin className="w-4 h-4" /> },
+      { id: "cloudflare-r2", label: "Cloudflare R2", color: "#F38020", svg: <SiCloudflare className="w-4 h-4" /> },
     ],
   },
   {
@@ -88,6 +95,7 @@ const CUSTOM_ORBITS = [
       { id: "bullmq", label: "BullMQ", color: "#FF4154", svg: <DatabaseZap className="w-4 h-4" /> },
       { id: "inngest", label: "Inngest", color: "#ffffff", svg: <Activity className="w-4 h-4" /> },
       { id: "cicd", label: "CI/CD Pipelines", color: "#E91E63", svg: <Rocket className="w-4 h-4" /> },
+      { id: "langchain", label: "LangChain", color: "#121212", svg: <SiLangchain className="w-4 h-4" /> },
     ],
   },
 ];

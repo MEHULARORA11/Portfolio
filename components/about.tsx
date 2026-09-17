@@ -28,7 +28,7 @@ export function About() {
               My journey started with a fascination for how systems scale. I don't just build UI; I architect complete solutions—from robust Node.js backends and real-time WebSockets to fluid, beautiful React frontends.
             </p>
             <p>
-              I recently built a system handling <strong className="text-foreground font-semibold">1 Million real-time checkboxes</strong> using Redis, and an AI Agent (<strong className="text-foreground font-semibold">Arbiter</strong>) that cross-validates LLM responses for accuracy. 
+              I recently built a streaming AI chat app (<strong className="text-foreground font-semibold">QuarkAI</strong>) using Next.js and Postgres, and an AI Agent (<strong className="text-foreground font-semibold">Arbiter</strong>) that cross-validates LLM responses for accuracy. 
             </p>
             <p>
               When I'm not coding, I'm usually diving into system design patterns, playing video games, or making content about software engineering on YouTube.
