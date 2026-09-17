@@ -108,31 +108,6 @@ export const socials: Social[] = [
   },
 ];
 
-// ─── Skills ───────────────────────────────────────────────────────────────────
-
-export interface SkillCategory {
-  label: string;
-  skills: string[];
-}
-
-export const skillCategories: SkillCategory[] = [
-  {
-    label: "Frontend",
-    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS", "Zod"],
-  },
-  {
-    label: "Backend",
-    skills: ["Node.js", "Express", "REST APIs", "WebSocket", "Inngest"],
-  },
-  {
-    label: "Databases",
-    skills: ["PostgreSQL", "Redis", "Prisma", "Neon", "Cloudflare R2"],
-  },
-  {
-    label: "AI & Tools",
-    skills: ["OpenAI SDK", "Mistral AI", "LangChain", "PostHog", "Git", "Docker", "Vercel", "Render"],
-  },
-];
 
 // ─── Videos ───────────────────────────────────────────────────────────────────
 
