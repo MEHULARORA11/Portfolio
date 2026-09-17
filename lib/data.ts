@@ -18,46 +18,84 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "Arbiter",
-    description: "A Self-Consistency Agent that cross-validates AI responses for higher accuracy.",
+    description:
+      "Multi-model LLM orchestrator that fans a single prompt out to five providers in parallel and synthesizes one answer through a dedicated evaluator model.",
     longDescription:
-      "Arbiter is a self-consistency agent that queries multiple AI models (OpenAI, Claude, Gemini) in parallel and uses a voting mechanism to surface the most accurate response.\n\nBuilt with Next.js on the frontend and Node.js on the backend, it uses PostgreSQL via Prisma for persistence and supports streaming responses for a real-time feel.\n\nThe core idea: rather than trusting a single model, Arbiter runs the same query across multiple models and reconciles the outputs — reducing hallucinations and increasing confidence.",
+      "Arbiter runs the same prompt across OpenAI, Anthropic Claude, Google Gemini, Mistral, and DeepSeek simultaneously, streams every model's output live over Server-Sent Events, and can optionally reconcile all five responses into a single synthesized answer via a separate evaluator model — rather than trusting any one model's first response.\n\nBuilt on Next.js 16 (App Router) and React 19, with Drizzle ORM over PostgreSQL persisting full multi-turn conversation history per session. Auth is Google OAuth with PKCE and short-lived JWT sessions; user-supplied provider API keys (BYOK) are encrypted at rest with AES-256-GCM rather than stored in plaintext. Every run tracks token usage and cost per model against a maintained pricing table, and an in-app documentation site (built with React Flow diagrams) walks through the architecture.",
     thumbnail: "/projects/arbiter-updated.png",
     githubUrl: "https://github.com/MEHULARORA11/Arbiter",
     liveUrl: "https://arbiter.mehularora.dev/",
-    techStack: ["Next.js", "Node.js", "PostgreSQL", "OpenAI", "TypeScript"],
+    techStack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Drizzle ORM",
+      "PostgreSQL",
+      "Google OAuth (PKCE)",
+      "Server-Sent Events",
+      "Zod",
+    ],
     status: "live",
   },
   {
     title: "Personic",
-    description: "An AI agent that talks exactly like Hitesh Sir and Piyush Sir.",
+    description:
+      "A persona-grounded AI mentor agent that channels the teaching styles of two well-known coding educators, built on the OpenAI Agents SDK with a custom guardrail layer.",
     longDescription:
-      "Personic is a fine-tuned AI agent trained on transcripts, interviews, and YouTube content from two of India's most popular programming educators — Hitesh Choudhary and Piyush Garg.\n\nIt mimics their exact communication style, vocabulary, and teaching approach. Powered by the OpenAI SDK with a custom system prompt engineering pipeline.\n\nA fun experiment in persona-engineering and LLM customization.",
+      "Personic runs two named agents whose responses are grounded in system prompts and reference material modeled on two popular Indian programming educators — not a fine-tuned model, but careful prompt engineering plus a custom Zod-validated guardrail agent that screens every incoming query before it reaches the persona agent.\n\nThe agents can call tools mid-conversation: looking up relevant YouTube videos, pulling a weather report, and dispatching email via Resend. The Express 5 backend streams raw model output to the client as it's generated. The frontend is a React 19 + Vite + TanStack Router app with a dual-theme, CSS-variable-driven UI and an interactive Three.js scene.",
     thumbnail: "/projects/personic-updated.png",
     githubUrl: "https://github.com/MEHULARORA11/PersonicAi",
     liveUrl: "https://personic.mehularora.dev/",
-    techStack: ["OpenAI SDK", "Node.js", "JavaScript"],
+    techStack: [
+      "OpenAI Agents SDK",
+      "Express",
+      "React 19",
+      "Vite",
+      "TanStack Router",
+      "Tailwind CSS",
+      "Three.js",
+      "Zod",
+    ],
     status: "live",
   },
   {
     title: "TalwinderCSS",
-    description: "A custom CSS utility framework inspired by Tailwind CSS, with some fun classes.",
+    description:
+      "A zero-dependency CSS utility engine published to npm with a Hindi-inspired class-naming convention, packaged with an interactive documentation and playground site.",
     longDescription:
-      "TalwinderCSS is a lightweight custom CSS utility framework built from scratch. Inspired by the architecture of Tailwind CSS but with opinionated additions — including fun utility classes that Tailwind doesn't ship.\n\nIt's a pure HTML, CSS, and JavaScript project designed to demonstrate how utility-first frameworks work under the hood.\n\nA great tool for learning — and a fun way to build personal projects without reaching for a 3MB dependency.",
+      "The engine (published to npm as talwinder-ji-ki-css) parses custom utility class tokens — like bg-laal-500 or chaiPad-p-4 — via a single-pass DOM scan and injects the matching atomic CSS at runtime, with zero dependencies and no build step or framework requirement.\n\nThis repo is the companion documentation and playground site: a React 19 + Vite + TanStack Router app with a live sandbox for building and previewing utility-class combinations in real time, styled with Tailwind CSS and featuring an interactive Three.js scene.",
     thumbnail: "/projects/talwindercss.png",
     githubUrl: "https://github.com/MEHULARORA11/TalwinderCSS",
     liveUrl: "https://talwinder.mehularora.dev/",
-    techStack: ["HTML", "CSS", "JavaScript"],
+    techStack: [
+      "JavaScript",
+      "npm Package",
+      "React 19",
+      "Vite",
+      "TanStack Router",
+      "Tailwind CSS",
+      "Three.js",
+    ],
     status: "live",
   },
   {
     title: "QuarkAI",
-    description: "A streaming AI chat app with persistent conversations and per-thread model overrides.",
+    description:
+      "A streaming AI chat app with token-by-token rendering, durable Postgres-backed history, and per-conversation model and system-prompt overrides.",
     longDescription:
-      "QuarkAI is a ChatGPT-style interface built on Next.js 16 where every message is streamed token-by-token from an OpenAI model and persisted to Postgres as it arrives.\n\nIt features per-conversation model and system prompt overrides, authenticated by Clerk, with a robust conversation management system for organizing chats.\n\nThe architecture relies on the Vercel AI SDK for streaming responses, ensuring the assistant's reply renders as it's generated without waiting for the full completion.",
+      "QuarkAI is a ChatGPT-style interface built on Next.js 16 where every reply streams token-by-token via the Vercel AI SDK and is persisted to Postgres both as it arrives and once it completes, so a dropped connection never loses a reply mid-stream.\n\nEach conversation supports its own model and system-prompt override, with full conversation management — rename, pin, archive, delete — implemented as ownership-checked server actions. Auth is handled by Clerk, data access by Prisma 7 with the pg adapter, and the UI is built with shadcn/ui, Tailwind CSS v4, and TanStack Query.",
     thumbnail: "/projects/quarkai.png",
-    githubUrl: "https://github.com/MEHULARORA11/QuarkAI.git",
+    githubUrl: "https://github.com/MEHULARORA11/QuarkAI",
     liveUrl: "https://quarkai.mehularora.dev",
-    techStack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "OpenAI"],
+    techStack: [
+      "Next.js 16",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma 7",
+      "Clerk",
+      "Vercel AI SDK",
+      "TanStack Query",
+    ],
     status: "live",
   },
 ];
