@@ -149,24 +149,26 @@
 
   <header>
     <h1>Mehul Arora</h1>
-    <div class="subtitle">Software Engineer</div>
+    <div class="subtitle">Full-Stack Engineer | Agentic AI Systems</div>
     <div class="contact-info">
-      Faridabad, India | <a href="mailto:mehularora505@gmail.com">mehularora505@gmail.com</a> | <a href="https://github.com/MEHULARORA11">GitHub</a> | <a href="https://twitter.com/MehulArora121">Twitter</a> | <a href="https://www.linkedin.com/in/mehul-arora-32674b238/">LinkedIn</a> | <a href="https://youtube.com">YouTube</a> | <a href="https://mehularora.dev">mehularora.dev</a>
+      Faridabad, India | <a href="mailto:mehularora505@gmail.com">mehularora505@gmail.com</a> | <a href="https://github.com/MEHULARORA11">GitHub</a> | <a href="https://x.com/MehulArora121">X (Twitter)</a> | <a href="https://www.linkedin.com/in/mehul-arora-32674b238/">LinkedIn</a> | <a href="https://www.youtube.com/@Mehul_Arora">YouTube</a> | <a href="https://mehularora.dev">mehularora.dev</a>
     </div>
   </header>
 
   <section class="summary">
     <h2>Professional Summary</h2>
-    <p>Full Stack Developer specializing in backend engineering, scalable systems, and real-time architectures. Experienced in building high-performance web applications using Node.js, Express, Redis, and WebSockets while optimizing database queries for high efficiency.</p>
+    <p>Full-stack engineer specializing in agentic AI systems, multi-model LLM orchestration, and real-time streaming architectures. Builds production-grade TypeScript applications end-to-end — from Next.js and React interfaces to Node.js and Express services — with hands-on experience integrating five LLM providers (OpenAI, Anthropic Claude, Google Gemini, Mistral, and DeepSeek) behind a single orchestration layer, implementing OAuth-based authentication with AES-256-GCM credential encryption, and building Server-Sent Events streaming pipelines for real-time token delivery. Designed, built, and published an open-source npm package.</p>
   </section>
 
   <section class="skills">
     <h2>Technical Skills</h2>
     <ul>
-      <li><span>Languages:</span> JavaScript (ES6+), SQL, HTML5, CSS3</li>
-      <li><span>Backend & Tools:</span> Node.js, Express, Redis, WebSockets, REST APIs, Git, npm</li>
-      <li><span>Frontend:</span> React.js, Tailwind CSS, HTML, CSS</li>
-      <li><span>Databases:</span> PostgreSQL, MongoDB</li>
+      <li><span>Languages:</span> TypeScript, JavaScript (ES6+), SQL, HTML5, CSS3</li>
+      <li><span>Frontend:</span> React, Next.js, Tailwind CSS, TanStack Query, Zod, Zustand</li>
+      <li><span>Backend & Real-Time:</span> Node.js, Express, WebSockets, REST APIs, Better-Auth</li>
+      <li><span>Databases & Storage:</span> PostgreSQL, MongoDB, Redis, Prisma, Drizzle ORM, Mongoose, Qdrant, Pinecone, Cloudflare R2</li>
+      <li><span>AI / LLM Integration:</span> OpenAI SDK, Vercel AI SDK, LangChain, Multi-Provider Orchestration</li>
+      <li><span>DevOps & Tooling:</span> Docker, Git, GitHub API (Octokit), CI/CD Pipelines, Vercel, BullMQ, Inngest, PostHog</li>
     </ul>
   </section>
 
@@ -175,42 +177,41 @@
     
     <div class="project-item">
       <div class="project-header">
-        <span class="project-title">Arbiter</span> | <span class="project-tech">PostgreSQL, Node.js, NextJS, OAuth, OpenAI, Gemini SDK</span> <span class="project-links"><a href="#">[GitHub]</a> <a href="#">[Live]</a></span>
+        <span class="project-title">Arbiter</span> | <span class="project-tech">Next.js, React, TypeScript, Drizzle ORM, PostgreSQL</span> <span class="project-links"><a href="https://github.com/MEHULARORA11/Arbiter">[GitHub]</a> <a href="https://arbiter.mehularora.dev/">[Live]</a></span>
       </div>
       <ul>
-        <li>Architected a multi-model Self-Consistency LLM Agent that evaluates responses across diverse AI engines to generate optimized user answers.</li>
-        <li>Implemented completely isolated contextual conversational history threads, ensuring distinct memory boundaries per active session.</li>
+        <li>Built a multi-model LLM orchestrator that fans a single prompt out to five providers — OpenAI, Anthropic Claude, Google Gemini, Mistral, and DeepSeek — in parallel and streams every response live over Server-Sent Events.</li>
+        <li>Implemented Google OAuth (PKCE) authentication with short-lived JWT sessions and AES-256-GCM encrypted storage for user-supplied API keys, plus an evaluator model that synthesizes one final answer from all five responses.</li>
       </ul>
     </div>
 
     <div class="project-item">
       <div class="project-header">
-        <span class="project-title">Personic</span> | <span class="project-tech">OpenAI Agent SDK, HTML5, CSS3, JavaScript</span> <span class="project-links"><a href="#">[Live]</a> <a href="#">[GitHub]</a></span>
+        <span class="project-title">Personic</span> | <span class="project-tech">OpenAI Agents SDK, Express, React, Vite, TanStack Router</span> <span class="project-links"><a href="https://personic.mehularora.dev/">[Live]</a> <a href="https://github.com/MEHULARORA11/PersonicAi">[GitHub]</a></span>
       </div>
       <ul>
-        <li>Built responsive, interactive web games using vanilla JavaScript, engineering localized algorithms for win-path validation and optimized engine loops.</li>
-        <li>Designed UI architecture leveraging dynamic CSS custom properties and flexible grids for multi-platform device alignment.</li>
+        <li>Built a persona-grounded AI mentor agent on the OpenAI Agents SDK with a custom Zod-validated guardrail agent that screens every query before it reaches the model.</li>
+        <li>Added tool-calling for YouTube video lookups, weather reports, and automated email dispatch (Resend), with raw token streaming from an Express 5 backend to a React 19/Vite frontend.</li>
       </ul>
     </div>
 
     <div class="project-item">
       <div class="project-header">
-        <span class="project-title">TalwinderCSS</span> | <span class="project-tech">NPM Engine, HTML5, CSS3, JavaScript</span> <span class="project-links"><a href="#">[Live]</a> <a href="#">[GitHub]</a> <a href="#">[NPM]</a></span>
+        <span class="project-title">TalwinderCSS</span> | <span class="project-tech">JavaScript, npm, React, Vite, TanStack Router</span> <span class="project-links"><a href="https://talwinder.mehularora.dev/">[Live]</a> <a href="https://github.com/MEHULARORA11/TalwinderCSS">[GitHub]</a> <a href="https://www.npmjs.com/package/talwinder-ji-ki-css">[NPM]</a></span>
       </div>
       <ul>
-        <li>Engineered a highly customized, humor-infused open-source functional utility CSS tool published directly onto the public NPM dependency registry.</li>
-        <li>Mapped customized utility structures using explicit alias classes targeting cross-browser style components.</li>
+        <li>Designed and published a zero-dependency, framework-agnostic CSS utility engine to the public npm registry, parsing custom class-name tokens and injecting atomic styles via a single-pass DOM scan.</li>
+        <li>Built a companion documentation and playground site (React 19, Vite, TanStack Router) with a live sandbox for constructing and previewing utility-class combinations in real time.</li>
       </ul>
     </div>
 
     <div class="project-item">
       <div class="project-header">
-        <span class="project-title">QuarkAI</span> | <span class="project-tech">Next.js, TypeScript, PostgreSQL, Prisma, OpenAI</span> <span class="project-links"><a href="#">[GitHub]</a> <a href="#">[Live Demo]</a></span>
+        <span class="project-title">QuarkAI</span> | <span class="project-tech">Next.js, TypeScript, PostgreSQL, Prisma, Clerk</span> <span class="project-links"><a href="https://github.com/MEHULARORA11/QuarkAI">[GitHub]</a> <a href="https://quarkai.mehularora.dev">[Live Demo]</a></span>
       </div>
       <ul>
-        <li>Built a streaming AI chat application with durable message history and per-thread model overrides.</li>
-        <li>Implemented Vercel AI SDK for token-by-token streaming responses to ensure minimal perceived latency.</li>
-        <li>Architected a Postgres database via Prisma to seamlessly persist chat threads and manage conversational history.</li>
+        <li>Built a streaming AI chat app (Vercel AI SDK) with token-by-token rendering and durable Postgres-backed history via Prisma 7, so a dropped connection never loses a reply mid-stream.</li>
+        <li>Implemented per-conversation model/system-prompt overrides, Clerk authentication, and full conversation management (rename, pin, archive, delete) as ownership-checked server actions.</li>
       </ul>
     </div>
   </section>
@@ -226,12 +227,17 @@
   <section class="certifications">
     <h2>Certifications & Achievements</h2>
     <div class="cert-header">
-      <span class="cert-title">GenAI Cohort 2026 Certificate</span> | <span class="cert-meta">GenAI</span> <span class="cert-link"><a href="#">[Verify Credential]</a></span>
+      <span class="cert-title">GenAI Cohort 2026</span> | <span class="cert-meta">chaicode.com</span>
     </div>
-    <p style="margin-top: 4px; margin-bottom: 8px;">Completed the GenAI Cohort 2026, gaining expertise in generative AI models and prompt engineering.</p>
-    
+    <p style="margin-top: 4px; margin-bottom: 8px;">Completed a cohort-based program on generative AI models and prompt engineering.</p>
+
     <div class="cert-header">
-      <span class="cert-title">Codefusion Hackathon 2026</span> | <span class="cert-meta">Codefusion</span> <span class="cert-link"><a href="#">[Verify Credential]</a></span>
+      <span class="cert-title">Web Dev Cohort 2026</span> | <span class="cert-meta">chaicode.com</span>
+    </div>
+    <p style="margin-top: 4px; margin-bottom: 8px;">Completed a cohort-based full-stack web development program.</p>
+
+    <div class="cert-header">
+      <span class="cert-title">Codefusion Hackathon 2026</span> | <span class="cert-meta">Codeverse</span>
     </div>
     <p style="margin-top: 4px;">Participated in the Codefusion Hackathon 2026, building scalable software solutions.</p>
   </section>
