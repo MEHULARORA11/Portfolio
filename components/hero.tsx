@@ -88,7 +88,7 @@ export function Hero() {
             className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-border/50 shadow-xl"
           >
             <Image
-              src="/pfp.png"
+              src="/light.jpg"
               alt="Mehul Arora"
               fill
               sizes="(max-width: 768px) 128px, 192px"
