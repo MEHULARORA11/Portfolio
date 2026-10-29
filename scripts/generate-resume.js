@@ -19,10 +19,23 @@ const outputPath = path.join(__dirname, '..', 'public', 'Mehul_Arora_Resume.pdf'
 
   let browser;
   try {
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    try {
+      browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      });
+    } catch (launchErr) {
+      // Fallback to system-installed Chrome if cached puppeteer browser is missing
+      try {
+        browser = await puppeteer.launch({
+          headless: true,
+          channel: 'chrome',
+          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        });
+      } catch {
+        throw launchErr;
+      }
+    }
 
     const page = await browser.newPage();
 
