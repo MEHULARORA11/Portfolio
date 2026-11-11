@@ -26,7 +26,7 @@ export function Hero() {
   return (
     <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32">
       {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/20 via-primary/5 to-transparent pointer-events-none opacity-50 dark:opacity-20" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-season-accent/25 via-season-accent/5 to-transparent pointer-events-none opacity-60 dark:opacity-30 transition-colors duration-500" />
 
       <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12 relative z-10 max-w-5xl mx-auto">
         
@@ -60,7 +60,7 @@ export function Hero() {
           >
             <a
               href="#projects"
-              className="group flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold hover:scale-105 active:scale-95 transition-all duration-300"
+              className="group flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold ring-2 ring-season-accent/35 hover:ring-season-accent/80 hover:scale-105 active:scale-95 transition-all duration-300"
             >
               View Work
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -70,7 +70,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => posthog.capture("resume_opened", { source: "hero" })}
-              className="group flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card/50 hover:bg-muted text-foreground font-semibold hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-sm"
+              className="group flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card/50 hover:bg-muted hover:border-season-accent/60 text-foreground font-semibold hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-sm"
             >
               Resume
               <FileText className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
@@ -85,7 +85,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-border/50 shadow-xl"
+            className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-season-accent/45 shadow-xl transition-colors duration-500"
           >
             <Image
               src="/light.jpg"
@@ -104,8 +104,8 @@ export function Hero() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center gap-3"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 bg-background/50 backdrop-blur-md shadow-sm">
-              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-season-accent/30 bg-background/50 backdrop-blur-md shadow-sm transition-colors duration-500">
+              <div className="w-2 h-2 rounded-full bg-season-accent animate-pulse" />
               <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Available for work
               </span>

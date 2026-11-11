@@ -5,6 +5,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/features/providers/theme-provider";
 import { QueryProvider } from "@/features/providers/query-provider";
+import { SeasonProvider, SeasonalEffects } from "@/features/providers/season";
+
+
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -42,16 +45,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="min-h-full flex flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
-        <QueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </QueryProvider>
+        <SeasonProvider>
+          <SeasonalEffects />
+          <QueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </QueryProvider>
+        </SeasonProvider>
       </body>
     </html>
   );

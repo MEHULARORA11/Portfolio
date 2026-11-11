@@ -66,7 +66,7 @@ export function Navbar() {
               onClick={toggleTheme}
               aria-label="Toggle theme"
               title="Toggle theme (press D)"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-background/50 text-muted-foreground transition-all duration-200 hover:text-foreground hover:bg-muted active:scale-95 backdrop-blur-sm"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-background/50 text-muted-foreground transition-all duration-200 hover:text-foreground hover:border-season-accent/50 hover:bg-muted active:scale-95 backdrop-blur-sm"
             >
               {resolvedTheme === "dark" ? <Sun size={18} strokeWidth={2} /> : <Moon size={18} strokeWidth={2} />}
             </button>
@@ -99,7 +99,7 @@ export function Navbar() {
             }}
             className="group flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground transition-colors"
           >
-            <div className="flex size-7 items-center justify-center rounded-md bg-foreground text-background font-bold font-mono transition-transform group-hover:scale-105">
+            <div className="flex size-7 items-center justify-center rounded-md bg-foreground text-background font-bold font-mono ring-1 ring-season-accent/50 transition-transform group-hover:scale-105">
               M
             </div>
             <span>Mehul Arora</span>
@@ -136,7 +136,7 @@ export function Navbar() {
                   className={cn(
                     "flex items-center px-4 py-3 text-sm font-medium transition-colors duration-200 rounded-md hover:bg-muted",
                     activeSection === link.href.replace("#", "") 
-                      ? "text-foreground bg-muted/50" 
+                      ? "text-foreground bg-muted/50 border-l-2 border-season-accent" 
                       : "text-muted-foreground"
                   )}
                 >

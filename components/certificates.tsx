@@ -25,7 +25,7 @@ export function Certificates() {
           <FadeIn key={cert.id} delay={idx * 100} className="w-full md:w-[calc(50%-1rem)] max-w-xl">
             <div className="group relative flex flex-col justify-between h-full space-y-4">
               {/* Thumbnail Container */}
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted border border-border/50 shadow-sm">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted border border-border/50 group-hover:border-season-accent/50 transition-colors duration-300 shadow-sm">
                 <Image
                   src={cert.thumbnail}
                   alt={cert.title}
@@ -60,7 +60,7 @@ export function Certificates() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => posthog.capture("certificate_credential_opened", { certificate_id: cert.id })}
-                      className="shrink-0 p-2 rounded-full bg-muted/50 text-muted-foreground hover:bg-foreground hover:text-background transition-all duration-300"
+                      className="shrink-0 p-2 rounded-full bg-muted/50 border border-transparent text-muted-foreground hover:border-season-accent hover:bg-foreground hover:text-background transition-all duration-300"
                       aria-label="View Credential"
                     >
                       <ExternalLink className="w-4 h-4" />

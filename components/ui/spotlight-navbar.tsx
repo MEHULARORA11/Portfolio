@@ -233,14 +233,14 @@ export function SpotlightNavbar({
       */}
             <style jsx>{`
         nav {
-          /* Light Mode Colors: Dark Gray/Black lights */
-          --spotlight-color: rgba(0,0,0,0.08);
-          --ambience-color: rgba(0,0,0,0.8);
+          /* Light Mode Colors: Season-tinted spotlight & ambience */
+          --spotlight-color: color-mix(in srgb, var(--season-accent) 18%, transparent);
+          --ambience-color: var(--season-accent);
         }
         :global(.dark) nav {
-          /* Dark Mode Colors: White lights */
-          --spotlight-color: rgba(255,255,255,0.15);
-          --ambience-color: rgba(255,255,255,1);
+          /* Dark Mode Colors: Season-tinted spotlight & ambience */
+          --spotlight-color: color-mix(in srgb, var(--season-accent) 22%, transparent);
+          --ambience-color: var(--season-accent);
         }
       `}</style>
         </div>

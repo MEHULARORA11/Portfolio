@@ -29,6 +29,8 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-season-accent: var(--season-accent);
+  --color-season-accent-muted: var(--season-accent-muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -73,6 +75,8 @@
 
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
+  --season-accent: var(--primary);
+  --season-accent-muted: var(--muted);
 
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -154,6 +158,28 @@
   --contrib-4: #39d353;
 }
 
+/* ── Seasonal Accent Palettes ──────────────────────── */
+
+html[data-season="winter"] {
+  --season-accent: #9CC9E8;
+  --season-accent-muted: #355C77;
+}
+
+html[data-season="spring"] {
+  --season-accent: #E7A8BC;
+  --season-accent-muted: #6E3E4F;
+}
+
+html[data-season="summer"] {
+  --season-accent: #E8C170;
+  --season-accent-muted: #6B5424;
+}
+
+html[data-season="autumn"] {
+  --season-accent: #D9822B;
+  --season-accent-muted: #6E3E12;
+}
+
 /* ── Base ──────────────────────────────────────────── */
 
 * {
@@ -172,11 +198,11 @@ body {
 }
 
 ::selection {
-  background: hsl(220 60% 50% / 0.15);
+  background: color-mix(in srgb, var(--season-accent) 22%, transparent);
 }
 
 .dark ::selection {
-  background: hsl(220 60% 60% / 0.2);
+  background: color-mix(in srgb, var(--season-accent) 25%, transparent);
 }
 
 /* ── Scrollbar ─────────────────────────────────────── */

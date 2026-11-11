@@ -33,7 +33,7 @@ export function Projects() {
           <FadeIn key={project.title} delay={100} className="w-full md:w-[calc(50%-1.5rem)] max-w-xl group">
             <div className="flex flex-col h-full space-y-6">
               {/* Image Side */}
-              <div className="w-full relative aspect-video rounded-2xl overflow-hidden bg-muted/30 border border-border/40 shadow-sm">
+              <div className="w-full relative aspect-video rounded-2xl overflow-hidden bg-muted/30 border border-border/40 group-hover:border-season-accent/50 transition-colors duration-300 shadow-sm">
                 <Image
                   src={project.thumbnail}
                   alt={project.title}
@@ -87,7 +87,7 @@ export function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => posthog.capture("project_live_link_clicked", { project_title: project.title })}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:opacity-70 transition-opacity"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:underline decoration-season-accent underline-offset-4 transition-colors"
                     >
                       Visit Live <ArrowUpRight className="w-4 h-4" />
                     </a>

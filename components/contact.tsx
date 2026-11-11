@@ -62,8 +62,8 @@ export function Contact() {
           
           <div className="mt-12 inline-flex items-center gap-3">
             <span className="flex h-3 w-3 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-season-accent opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-season-accent"></span>
             </span>
             <span className="text-sm font-semibold tracking-widest uppercase text-foreground">
               Currently accepting new projects
@@ -91,7 +91,7 @@ export function Contact() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={isPending}
-                className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-foreground transition-colors"
+                className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-season-accent transition-colors"
               />
             </div>
 
@@ -105,7 +105,7 @@ export function Contact() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isPending}
-                className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-foreground transition-colors"
+                className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-season-accent transition-colors"
               />
             </div>
 
@@ -119,14 +119,14 @@ export function Contact() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 disabled={isPending}
-                className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-foreground transition-colors resize-none"
+                className="w-full bg-transparent border-b border-border/50 py-3 text-lg font-medium text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:border-season-accent transition-colors resize-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={isPending || isSuccess}
-              className="mt-6 flex items-center justify-between w-full p-4 rounded-2xl bg-foreground text-background font-bold text-lg hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100"
+              className="mt-6 flex items-center justify-between w-full p-4 rounded-2xl bg-foreground text-background font-bold text-lg ring-1 ring-season-accent/35 hover:ring-season-accent/80 hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100"
             >
               {isPending ? "Sending..." : isSuccess ? "Sent Successfully!" : "Send Message"}
               {(!isPending && !isSuccess) && <ArrowRight className="w-5 h-5" />}

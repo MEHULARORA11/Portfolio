@@ -13,7 +13,7 @@ export function About() {
             <h2 className="text-sm font-semibold tracking-widest uppercase text-muted-foreground">
               About Me
             </h2>
-            <div className="w-12 h-1 bg-primary/40 mt-4 rounded-full" />
+            <div className="w-12 h-1 bg-season-accent mt-4 rounded-full transition-colors duration-500" />
           </div>
         </FadeIn>
 

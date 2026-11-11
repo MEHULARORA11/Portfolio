@@ -34,7 +34,7 @@ export function Videos() {
               }}
             >
               {/* Thumbnail Container */}
-              <div className="relative aspect-[5/4] rounded-2xl overflow-hidden bg-muted border border-border shadow-sm">
+              <div className="relative aspect-[5/4] rounded-2xl overflow-hidden bg-muted border border-border group-hover:border-season-accent/50 transition-colors duration-300 shadow-sm">
                 <Image
                   src={video.thumbnail}
                   alt={video.title}
@@ -59,7 +59,7 @@ export function Videos() {
 
               {/* Video Info (Outside the box) */}
               <div>
-                <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
+                <h3 className="text-lg font-bold text-foreground dark:group-hover:text-season-accent group-hover:underline decoration-season-accent underline-offset-4 transition-colors line-clamp-1">
                   {video.title}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
