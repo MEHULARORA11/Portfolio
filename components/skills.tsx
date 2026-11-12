@@ -105,7 +105,7 @@ export function Skills() {
     <section id="skills" className="pt-24 pb-12 border-t border-border/15">
       <div className="flex flex-col items-center text-center gap-6 mb-16">
         <FadeIn>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-foreground">
             Capabilities
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl text-lg">

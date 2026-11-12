@@ -19,7 +19,7 @@ export function About() {
 
         {/* Editorial Content Column */}
         <FadeIn delay={100} className="space-y-8">
-          <p className="text-2xl md:text-3xl font-medium tracking-tight text-foreground leading-snug">
+          <p className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-foreground leading-[1.25]">
             I am a full-stack developer based in India, obsessed with building high-performance software.
           </p>
           

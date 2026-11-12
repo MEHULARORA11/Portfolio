@@ -11,7 +11,7 @@ export function Certificates() {
     <section id="certificates" className="pt-24 pb-12 border-t border-border/15">
       <FadeIn>
         <div className="flex flex-col items-center text-center gap-2 mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-foreground">
             Certifications
           </h2>
           <p className="text-muted-foreground max-w-lg text-lg mx-auto">
@@ -46,7 +46,7 @@ export function Certificates() {
                     <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1.5">
                       {cert.date}
                     </div>
-                    <h3 className="text-lg font-bold text-foreground transition-colors line-clamp-1">
+                    <h3 className="text-lg font-semibold tracking-[-0.015em] text-foreground transition-colors line-clamp-1">
                       {cert.title}
                     </h3>
                     <p className="text-sm font-medium text-muted-foreground mt-0.5">

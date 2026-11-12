@@ -19,7 +19,7 @@ export function Projects() {
     <section id="projects" className="pt-24 pb-12">
       <FadeIn>
         <div className="flex flex-col items-center text-center gap-2 mb-16 md:mb-24">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-foreground">
             Selected Work
           </h2>
           <p className="text-muted-foreground max-w-lg text-lg mx-auto">
@@ -61,7 +61,7 @@ export function Projects() {
                   )}
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-tight line-clamp-1">
+                <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-3 tracking-[-0.02em] line-clamp-1">
                   {project.title}
                 </h3>
                 

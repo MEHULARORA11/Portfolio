@@ -52,7 +52,7 @@ export function Contact() {
         
         {/* Massive CTA Column */}
         <FadeIn className="flex flex-col gap-6">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground leading-[1.1]">
+          <h2 className="text-5xl md:text-7xl font-semibold tracking-[-0.02em] text-foreground leading-[1.08]">
             Let's build <br />
             <span className="text-muted-foreground">something great.</span>
           </h2>

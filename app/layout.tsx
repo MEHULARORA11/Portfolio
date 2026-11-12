@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Manrope, Geist_Mono } from "next/font/google";
+import { Outfit, Geist_Mono } from "next/font/google";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/features/providers/theme-provider";
@@ -9,7 +10,7 @@ import { SeasonProvider, SeasonalEffects } from "@/features/providers/season";
 
 
 
-const manrope = Manrope({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
@@ -39,12 +40,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("h-full antialiased", manrope.variable, geistMono.variable)}
+      className={cn("h-full antialiased", outfit.className, outfit.variable, geistMono.variable)}
     >
       <body
         className="min-h-full flex flex-col bg-background text-foreground"
         suppressHydrationWarning
       >
+        <ScrollProgress />
         <SeasonProvider>
           <SeasonalEffects />
           <QueryProvider>

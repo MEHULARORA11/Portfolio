@@ -15,10 +15,10 @@ export interface SeasonLayerSpec {
 
 export const SEASON_LAYERS: Record<SeasonKey, readonly SeasonLayerSpec[]> = {
   winter: [
-    { id: "snowfall", baseCount: 120 },
+    { id: "snowfall", baseCount: 50 },
     { id: "tsparticles-flakes", baseCount: 15 },
   ],
-  spring: [{ id: "seasonalfx-petals", baseCount: 60 }],
+  spring: [{ id: "seasonalfx-petals", baseCount: 30 }],
   summer: [{ id: "tsparticles-summer", baseCount: 40 }],
   autumn: [
     { id: "leaves-primary", baseCount: 15 },

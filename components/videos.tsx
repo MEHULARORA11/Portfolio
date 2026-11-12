@@ -14,7 +14,7 @@ export function Videos() {
     <section id="videos" className="pt-24 pb-12 border-t border-border/15">
       <FadeIn>
         <div className="flex flex-col items-center text-center gap-2 mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-foreground">
             Content
           </h2>
           <p className="text-muted-foreground max-w-lg text-lg mx-auto">
@@ -59,7 +59,7 @@ export function Videos() {
 
               {/* Video Info (Outside the box) */}
               <div>
-                <h3 className="text-lg font-bold text-foreground dark:group-hover:text-season-accent group-hover:underline decoration-season-accent underline-offset-4 transition-colors line-clamp-1">
+                <h3 className="text-lg font-semibold tracking-[-0.015em] text-foreground dark:group-hover:text-season-accent group-hover:underline decoration-season-accent underline-offset-4 transition-colors line-clamp-1">
                   {video.title}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1 line-clamp-2">

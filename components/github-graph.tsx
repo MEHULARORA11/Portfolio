@@ -162,7 +162,7 @@ export function GitHubGraph() {
     <section className="space-y-4 pt-24 md:pt-40">
       <FadeIn>
         <div className="flex flex-col items-center text-center gap-2 mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tighter text-foreground">
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.02em] text-foreground">
             Activity
           </h2>
           <p className="text-muted-foreground max-w-lg text-lg mx-auto">

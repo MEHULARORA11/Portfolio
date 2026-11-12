@@ -40,14 +40,14 @@ export function Hero() {
             className="space-y-4 max-w-3xl"
           >
             <div className="min-h-[120px] md:min-h-[140px] flex flex-col justify-end md:justify-start">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.2]">
-                <FlipText key={headlineIndex} className="text-foreground">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.02em] text-foreground leading-[1.15]">
+                <FlipText key={headlineIndex} className="text-foreground font-semibold tracking-[-0.02em]">
                   {headlines[headlineIndex]}
                 </FlipText>
               </h1>
             </div>
             <p className="text-lg md:text-xl text-muted-foreground font-medium mt-2">
-              Hi, I'm <span className="text-foreground">Mehul Arora</span>. I build production-grade web applications, highly concurrent systems, and AI-driven agents.
+              Hi, I'm <span className="text-foreground">Mehul Arora</span>. I build production-grade Web,Mobile and AI applications, highly concurrent systems, and AI-driven agents.
             </p>
           </motion.div>
 
@@ -79,39 +79,58 @@ export function Hero() {
         </div>
 
         {/* Right Side: Profile & Status */}
-        <div className="flex flex-col items-center gap-6 shrink-0">
+        <div className="flex flex-col items-center gap-5 shrink-0">
           {/* Profile Picture */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-season-accent/45 shadow-xl transition-colors duration-500"
+            className="relative w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-season-accent/45 shadow-xl transition-colors duration-500"
           >
             <Image
               src="/light.jpg"
               alt="Mehul Arora"
               fill
-              sizes="(max-width: 768px) 128px, 192px"
+              sizes="(max-width: 768px) 128px, 176px"
               priority
               className="object-cover"
             />
           </motion.div>
 
-          {/* Status Pill */}
+          {/* Name Display */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center"
+          >
+            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground/70 font-medium mb-1">
+              Full Stack Developer
+            </p>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-[-0.02em] text-foreground leading-none">
+              <span className="text-season-accent transition-colors duration-500">Mehul</span>
+              {" "}
+              <span>Arora</span>
+            </h2>
+          </motion.div>
+
+          {/* Status: Available pill + views + socials */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center gap-3"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-season-accent/30 bg-background/50 backdrop-blur-md shadow-sm transition-colors duration-500">
-              <div className="w-2 h-2 rounded-full bg-season-accent animate-pulse" />
-              <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Available for work
-              </span>
+            <SocialFlipButton />
+            <div className="flex items-center gap-2 flex-wrap justify-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-season-accent/30 bg-background/50 backdrop-blur-md shadow-sm transition-colors duration-500">
+                <div className="w-2 h-2 rounded-full bg-season-accent animate-pulse" />
+                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Available for work
+                </span>
+              </div>
+              <ViewCounter />
             </div>
-            <ViewCounter />
-            <SocialFlipButton className="md:translate-x-4 translate-x-2" />
           </motion.div>
         </div>
       </div>

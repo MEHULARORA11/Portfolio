@@ -16,7 +16,7 @@ import { useEffectsPolicy } from "./useEffectsPolicy";
 
 const BASE_SPRING_COUNT =
   SEASON_LAYERS.spring.find((l) => l.id === "seasonalfx-petals")?.baseCount ??
-  60;
+  30;
 
 /** seasonalfx fixes particle counts per intensity tier (10 / 30 / 60 / 100). */
 function countToIntensity(count: number): Intensity {
@@ -31,16 +31,6 @@ const SEASON_PRESETS: Partial<Record<Season, SeasonConfig>> = {
   summer: { variant: "sunDust", intensity: "subtle" },
   autumn: { variant: "maple", intensity: "subtle" },
 };
-
-const INTENSITY_DOWNGRADE: Record<Intensity, Intensity> = {
-  bold: "moderate",
-  moderate: "subtle",
-  subtle: "minimal",
-  minimal: "minimal",
-};
-
-const FPS_CHECK_DELAY_MS = 3000;
-const MIN_ACCEPTABLE_FPS = 24;
 
 export interface SeasonalFxLayerProps {
   seasonOverride?: Extract<Season, "spring" | "summer" | "autumn">;
@@ -101,29 +91,7 @@ export default function SeasonalFxLayer({
       fx.pause();
     }
 
-    const fpsTimer = window.setTimeout(() => {
-      if (
-        document.visibilityState === "hidden" ||
-        typeof fx.getMetrics !== "function"
-      ) {
-        return;
-      }
-      const metrics = fx.getMetrics();
-      if (metrics.fps > 0 && metrics.fps < MIN_ACCEPTABLE_FPS) {
-        const downgraded = INTENSITY_DOWNGRADE[intensityRef.current];
-        if (downgraded !== intensityRef.current) {
-          intensityRef.current = downgraded;
-          fx.updateConfig({
-            season: targetSeason,
-            intensity: downgraded,
-            seasonConfig: buildSeasonConfig(targetSeason, downgraded),
-          });
-        }
-      }
-    }, FPS_CHECK_DELAY_MS);
-
     return () => {
-      window.clearTimeout(fpsTimer);
       fx.destroy();
       fxRef.current = null;
     };
