@@ -9,6 +9,7 @@ import {
   type SeasonConfig,
 } from "seasonalfx";
 import { useSeason } from "../useSeason";
+import { SEASONALFX_SPEED_MULTIPLIER } from "./motion.config";
 import { useDocumentVisible } from "./particlesEngine";
 import { useEffectsPolicy } from "./useEffectsPolicy";
 
@@ -76,6 +77,7 @@ export default function SeasonalFxLayer({
       maxFPS: 30,
       disableOnMobile: false,
       respectReducedMotion: true,
+      particleCustomization: { speedMultiplier: SEASONALFX_SPEED_MULTIPLIER },
       seasonConfig: buildSeasonConfig(targetSeason, initialIntensity),
     });
 

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { FallingLeaves } from "falling-leaves";
 import { SEASONS } from "../seasons";
+import { LEAVES_PRIMARY_MOTION } from "./motion.config";
 import { applyParticleBudget, SEASON_LAYERS } from "./layers.config";
 import { useDocumentVisible } from "./particlesEngine";
 import { useEffectsPolicy } from "./useEffectsPolicy";
@@ -28,12 +29,12 @@ export default function LeavesPrimaryLayer() {
       count: initialCountRef.current,
       shapes: ["maple", "oak", "ginkgo", "birch"],
       colors: [...SEASONS.autumn.particles],
-      size: [14, 24],
-      speed: [0.5, 1.1],
-      wind: [-0.25, 0.55],
-      sway: [0.4, 1.2],
-      rotationSpeed: [-1.2, 1.2],
-      opacity: 0.85,
+      size: [...LEAVES_PRIMARY_MOTION.size],
+      speed: [...LEAVES_PRIMARY_MOTION.speed],
+      wind: [...LEAVES_PRIMARY_MOTION.wind],
+      sway: [...LEAVES_PRIMARY_MOTION.sway],
+      rotationSpeed: [...LEAVES_PRIMARY_MOTION.rotationSpeed],
+      opacity: LEAVES_PRIMARY_MOTION.opacity,
       respectReducedMotion: true,
       autoStart: initialVisibleRef.current,
     });

@@ -10,6 +10,7 @@ import {
   useCoarsePointer,
   useDocumentVisible,
 } from "./particlesEngine";
+import { TS_FLAKES_MOTION } from "./motion.config";
 import { useEffectsPolicy } from "./useEffectsPolicy";
 
 const BASE_FLAKES_COUNT =
@@ -66,15 +67,14 @@ export default function TsFlakesLayer() {
         move: {
           enable: true,
           direction: "bottom",
-          speed: { min: 0.35, max: 0.9 },
+          speed: { ...TS_FLAKES_MOTION.fallSpeed },
           size: true,
-          drift: { min: -0.25, max: 0.25 },
           outModes: { default: "out" },
         },
         wobble: {
           enable: true,
-          distance: 10,
-          speed: { angle: 10, move: 3 },
+          distance: TS_FLAKES_MOTION.wobble.distance,
+          speed: { ...TS_FLAKES_MOTION.wobble.speed },
         },
       },
       interactivity: {

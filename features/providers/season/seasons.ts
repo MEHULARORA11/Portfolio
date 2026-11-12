@@ -32,7 +32,7 @@ export const SEASONS: Record<SeasonKey, SeasonConfig> = {
   },
   autumn: {
     label: "Autumn",
-    months: [8, 9, 10],
+    months: [8, 9,10],
     accent: "#D9822B",
     accentMuted: "#6E3E12",
     particles: ["#D9822B", "#B5532A", "#C99A2E", "#8C3B1F"],

@@ -35,8 +35,29 @@ export function SeasonProvider({ children }: { children: ReactNode }) {
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // A tab left open across a season boundary: re-check at every local midnight.
+    let midnightTimer: number | undefined;
+    const scheduleMidnightCheck = () => {
+      const now = new Date();
+      const nextMidnight = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1,
+        0,
+        0,
+        5
+      );
+      midnightTimer = window.setTimeout(() => {
+        syncSeason();
+        scheduleMidnightCheck();
+      }, nextMidnight.getTime() - now.getTime());
+    };
+    scheduleMidnightCheck();
+
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.clearTimeout(midnightTimer);
     };
   }, []);
 

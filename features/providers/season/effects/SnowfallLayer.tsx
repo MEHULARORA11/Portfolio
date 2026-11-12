@@ -4,6 +4,7 @@ import Snowfall from "react-snowfall";
 import { SEASONS } from "../seasons";
 import { applyParticleBudget, SEASON_LAYERS } from "./layers.config";
 import { useDocumentVisible } from "./particlesEngine";
+import { SNOWFALL_MOTION } from "./motion.config";
 import { useEffectsPolicy } from "./useEffectsPolicy";
 
 const BASE_SNOWFLAKE_COUNT =
@@ -24,10 +25,10 @@ export default function SnowfallLayer() {
       color={SEASONS.winter.particles[1]}
       snowflakeCount={snowflakeCount}
       radius={[0.8, 2.5]}
-      speed={[0.35, 1.1]}
-      wind={[-0.25, 0.45]}
-      rotationSpeed={[-0.4, 0.4]}
-      opacity={[0.35, 0.75]}
+      speed={[...SNOWFALL_MOTION.speed]}
+      wind={[...SNOWFALL_MOTION.wind]}
+      rotationSpeed={[...SNOWFALL_MOTION.rotationSpeed]}
+      opacity={[0.35, 0.75]} 
       style={{
         position: "absolute",
         inset: 0,

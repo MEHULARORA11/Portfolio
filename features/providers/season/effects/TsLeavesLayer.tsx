@@ -9,6 +9,7 @@ import {
   useCoarsePointer,
   useDocumentVisible,
 } from "./particlesEngine";
+import { TS_LEAVES_MOTION } from "./motion.config";
 import { useEffectsPolicy } from "./useEffectsPolicy";
 
 const LEAF_IMAGES = [
@@ -92,27 +93,26 @@ export default function TsLeavesLayer() {
             image: LEAF_IMAGES,
           },
         },
-        opacity: { value: { min: 0.65, max: 0.9 } },
-        size: { value: { min: 7, max: 13 } },
+        opacity: { value: { ...TS_LEAVES_MOTION.opacity } },
+        size: { value: { ...TS_LEAVES_MOTION.size } },
         rotate: {
           value: { min: 0, max: 360 },
           direction: "random",
           animation: {
             enable: true,
-            speed: 6,
+            speed: TS_LEAVES_MOTION.rotateSpeed,
             sync: false,
           },
         },
         wobble: {
           enable: true,
-          distance: 16,
-          speed: { angle: 25, move: 6 },
+          distance: TS_LEAVES_MOTION.wobble.distance,
+          speed: { ...TS_LEAVES_MOTION.wobble.speed },
         },
         move: {
           enable: true,
           direction: "bottom",
-          speed: { min: 0.65, max: 1.35 },
-          drift: { min: -0.5, max: 0.5 },
+          speed: { ...TS_LEAVES_MOTION.fallSpeed },
           outModes: { default: "out" },
         },
       },
