@@ -9,9 +9,22 @@ import {
   type SeasonConfig,
 } from "seasonalfx";
 import { useSeason } from "../useSeason";
+import { applyParticleBudget, SEASON_LAYERS } from "./layers.config";
 import { SEASONALFX_SPEED_MULTIPLIER } from "./motion.config";
 import { useDocumentVisible } from "./particlesEngine";
 import { useEffectsPolicy } from "./useEffectsPolicy";
+
+const BASE_SPRING_COUNT =
+  SEASON_LAYERS.spring.find((l) => l.id === "seasonalfx-petals")?.baseCount ??
+  60;
+
+/** seasonalfx fixes particle counts per intensity tier (10 / 30 / 60 / 100). */
+function countToIntensity(count: number): Intensity {
+  if (count <= 20) return "minimal";
+  if (count <= 45) return "subtle";
+  if (count <= 80) return "moderate";
+  return "bold";
+}
 
 const SEASON_PRESETS: Partial<Record<Season, SeasonConfig>> = {
   spring: { variant: "softPetals", intensity: "subtle" },
@@ -59,7 +72,8 @@ export default function SeasonalFxLayer({
   const isVisible = useDocumentVisible();
 
   const targetSeason = seasonOverride ?? activeSeason;
-  const targetIntensity: Intensity = budget < 0.5 ? "minimal" : "subtle";
+  const count = applyParticleBudget(BASE_SPRING_COUNT, budget);
+  const targetIntensity = countToIntensity(count);
   const fxRef = useRef<ISeasonalFX | null>(null);
   const intensityRef = useRef<Intensity>(targetIntensity);
 

@@ -18,14 +18,14 @@ export const SEASONS: Record<SeasonKey, SeasonConfig> = {
   },
   spring: {
     label: "Spring",
-    months: [2, 3, 4],
+    months: [10,2, 3, 4],
     accent: "#E7A8BC",
     accentMuted: "#6E3E4F",
     particles: ["#F6C9D6", "#E7A8BC", "#F3DDE4"],
   },
   summer: {
     label: "Summer",
-    months: [10,5, 6, 7],
+    months: [5, 6, 7],
     accent: "#E8C170",
     accentMuted: "#6B5424",
     particles: ["#F2D98F", "#E8C170", "#F7EBC5"],
