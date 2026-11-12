@@ -48,7 +48,7 @@ function readPolicySnapshot(): EffectsPolicy {
   if (isCoarsePointer || isSmallViewport) {
     budget = 0.4;
   } else if (isLowConcurrency) {
-    budget = 0.7;
+    budget = 0.85;
   }
 
   if (cachedPolicy.enabled === enabled && cachedPolicy.budget === budget) {

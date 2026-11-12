@@ -19,10 +19,10 @@ export const SEASON_LAYERS: Record<SeasonKey, readonly SeasonLayerSpec[]> = {
     { id: "tsparticles-flakes", baseCount: 15 },
   ],
   spring: [{ id: "seasonalfx-petals", baseCount: 32 }],
-  summer: [{ id: "tsparticles-summer", baseCount: 45 }],
+  summer: [{ id: "tsparticles-summer", baseCount: 40 }],
   autumn: [
-    { id: "leaves-primary", baseCount: 26 },
-    { id: "tsparticles-leaves", baseCount: 16 },
+    { id: "leaves-primary", baseCount: 15 },
+    { id: "tsparticles-leaves", baseCount: 15 },
   ],
 };
 

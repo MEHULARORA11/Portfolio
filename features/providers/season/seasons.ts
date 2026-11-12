@@ -11,7 +11,7 @@ export interface SeasonConfig {
 export const SEASONS: Record<SeasonKey, SeasonConfig> = {
   winter: {
     label: "Winter",
-    months: [10, 11, 0, 1],
+    months: [ 11, 0, 1],
     accent: "#9CC9E8",
     accentMuted: "#355C77",
     particles: ["#FFFFFF", "#DCEBFA", "#B9D6F2"],
@@ -25,7 +25,7 @@ export const SEASONS: Record<SeasonKey, SeasonConfig> = {
   },
   summer: {
     label: "Summer",
-    months: [5, 6, 7],
+    months: [10,5, 6, 7],
     accent: "#E8C170",
     accentMuted: "#6B5424",
     particles: ["#F2D98F", "#E8C170", "#F7EBC5"],

@@ -11,7 +11,7 @@ import { useEffectsPolicy } from "./useEffectsPolicy";
 
 const BASE_SUMMER_COUNT =
   SEASON_LAYERS.summer.find((l) => l.id === "tsparticles-summer")?.baseCount ??
-  45;
+  90;
 
 /** Summer: warm golden motes drifting slowly upward and twinkling. */
 export default function TsSummerLayer() {

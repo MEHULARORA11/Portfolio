@@ -10,12 +10,12 @@
 /** falling-leaves: px per frame at 60fps. `wind` is constant drift, `sway` is a
  *  sideways velocity amplitude (ginkgo x2.2, birch x1.9 inside the library). */
 export const LEAVES_PRIMARY_MOTION = {
-  size: [14, 22],
+  size: [18, 30],
   speed: [0.45, 0.9],
   wind: [-0.015, 0.015],
   sway: [0.05, 0.1],
   rotationSpeed: [-0.35, 0.35],
-  opacity: 0.85,
+  opacity: 0.95,
 } as const;
 
 /** tsparticles leaves.
@@ -26,8 +26,8 @@ export const TS_LEAVES_MOTION = {
   fallSpeed: { min: 0.9, max: 1.6 },
   wobble: { distance: 26, speed: { angle: 7, move: 2 } },
   rotateSpeed: 3,
-  size: { min: 7, max: 13 },
-  opacity: { min: 0.65, max: 0.9 },
+  size: { min: 9, max: 16 },
+  opacity: { min: 0.8, max: 1 },
 } as const;
 
 /** tsparticles large background flakes (winter depth layer). Same rule: no drift. */
@@ -53,7 +53,7 @@ export const SEASONALFX_SPEED_MULTIPLIER = 0.55;
 export const TS_SUMMER_MOTION = {
   riseSpeed: { min: 0.25, max: 0.6 },
   wobble: { distance: 12, speed: { angle: 5, move: 1.5 } },
-  size: { min: 1.5, max: 4.5 },
-  opacity: { min: 0.25, max: 0.75 },
+  size: { min: 2, max: 5.5 },
+  opacity: { min: 0.4, max: 0.95 },
   twinkleSpeed: 0.4,
 } as const;
