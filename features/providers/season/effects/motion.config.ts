@@ -46,3 +46,14 @@ export const SNOWFALL_MOTION = {
 
 /** seasonalfx: scales particle velocity (library range 0.1 - 3.0). */
 export const SEASONALFX_SPEED_MULTIPLIER = 0.55;
+
+/** tsparticles summer motes (warm golden dust, floats UP). No `drift` here either.
+ *  The seasonalfx "sunDust" preset was nearly invisible (about 15 particles, 1-3px,
+ *  10-30% white), so summer uses this layer instead. */
+export const TS_SUMMER_MOTION = {
+  riseSpeed: { min: 0.25, max: 0.6 },
+  wobble: { distance: 12, speed: { angle: 5, move: 1.5 } },
+  size: { min: 1.5, max: 4.5 },
+  opacity: { min: 0.25, max: 0.75 },
+  twinkleSpeed: 0.4,
+} as const;

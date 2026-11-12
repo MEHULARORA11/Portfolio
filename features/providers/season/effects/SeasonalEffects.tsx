@@ -11,6 +11,7 @@ const TsFlakesLayer = lazy(() => import("./TsFlakesLayer"));
 const SeasonalFxLayer = lazy(() => import("./SeasonalFxLayer"));
 const LeavesPrimaryLayer = lazy(() => import("./LeavesPrimaryLayer"));
 const TsLeavesLayer = lazy(() => import("./TsLeavesLayer"));
+const TsSummerLayer = lazy(() => import("./TsSummerLayer"));
 
 function renderLayer(id: SeasonalLayerId) {
   switch (id) {
@@ -20,8 +21,8 @@ function renderLayer(id: SeasonalLayerId) {
       return <TsFlakesLayer />;
     case "seasonalfx-petals":
       return <SeasonalFxLayer seasonOverride="spring" />;
-    case "seasonalfx-dust":
-      return <SeasonalFxLayer seasonOverride="summer" />;
+    case "tsparticles-summer":
+      return <TsSummerLayer />;
     case "leaves-primary":
       return <LeavesPrimaryLayer />;
     case "tsparticles-leaves":
