@@ -2,7 +2,7 @@ services:
   redis:
     image: redis:7.2-alpine
     container_name: redis_server2
-    restart: always
+    restart: unless-stopped
     ports:
       - "6379:6379"
     command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
